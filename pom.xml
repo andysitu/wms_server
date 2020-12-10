@@ -9,10 +9,24 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wms</groupId>
+
 	<artifactId>wms_server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>wms_server</name>
 	<description>WMS using Spring Boot</description>
+
+	<!-- Spring Cloud GCP BOM - manages spring-cloud-gcp versions -->
+	<!-- <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-gcp-dependencies</artifactId>
+				<version>1.2.3.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement> -->
 
 	<properties>
 		<java.version>11</java.version>
@@ -38,6 +52,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>7.0.1</version>
 		</dependency>
 	</dependencies>
 
