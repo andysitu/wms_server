@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class FirebaseService {
-    public void getUsers() throws InterruptedException, ExecutionException{
+    public List<QueryDocumentSnapshot> getUsers() throws InterruptedException, ExecutionException{
         Firestore db = FirestoreClient.getFirestore();
 
         ApiFuture<QuerySnapshot> query = db.collection("users").get();
@@ -26,9 +26,10 @@ public class FirebaseService {
 
         QuerySnapshot querySnapspot = query.get();
         List<QueryDocumentSnapshot> documents = querySnapspot.getDocuments();
-        for (QueryDocumentSnapshot doc : documents) {
-            u = (User) doc.toObject(User.class);
-            System.out.println(u.getEmail());
-        }
+        // for (QueryDocumentSnapshot doc : documents) {
+        //     u = (User) doc.toObject(User.class);
+        //     System.out.println(u.getEmail());
+        // }
+        return documents;
     }
 }
