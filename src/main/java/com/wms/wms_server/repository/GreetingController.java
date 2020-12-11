@@ -13,23 +13,24 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 @RestController
 public class GreetingController {
 
-    @Autowired
-    FirebaseService firebaseService;
+    // @Autowired
+    // FirebaseService firebaseService;
 
     @GetMapping("/greeting")
     public String greeting() {
-        try {
-            List<QueryDocumentSnapshot> documents = firebaseService.getUsers();
-            String s = "";
-            User u = null;
-            for (QueryDocumentSnapshot doc : documents) {
-                u = (User) doc.toObject(User.class);
-                s += u.getEmail();
-            }
-            return "hello world! " + s;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }     
+        // try {
+        //     List<QueryDocumentSnapshot> documents = firebaseService.getUsers();
+        //     String s = "";
+        //     User u = null;
+        //     for (QueryDocumentSnapshot doc : documents) {
+        //         u = (User) doc.toObject(User.class);
+        //         s += u.getEmail();
+        //     }
+        //     return "hello world! " + s;
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        //     return null;
+        // }     
+        return "Greetings!";
     }
 }
