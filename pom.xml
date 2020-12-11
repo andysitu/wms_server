@@ -11,7 +11,7 @@
 
 	<groupId>com.wms</groupId>
 	<artifactId>wms_server</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>wms_server</name>
 	<description>WMS using Spring Boot</description>
 
