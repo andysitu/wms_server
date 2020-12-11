@@ -1,6 +1,8 @@
 runtime: java11
 instance_class: F4
 
+entrypoint: java -Xmx64m -jar /workspace/wms_server-0.0.2-SNAPSHOT.jar
+
 automatic_scaling:
   max_instances: 1
   min_instances: 1
