@@ -3,11 +3,8 @@ package com.wms.wms_server;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wms.wms_server.firebase.FirebaseService;
-
 import java.util.List;
 import com.wms.wms_server.model.User;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
 
 
 @RestController
