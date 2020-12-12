@@ -1,6 +1,1 @@
 runtime: java11
-instance_class: F4
-
-automatic_scaling:
-  max_instances: 1
-  min_instances: 1
