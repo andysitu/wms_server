@@ -23,4 +23,20 @@ public class Location {
         this.column = column;
         this.level = level;
     }
+
+    public String getArea() {
+        return this.area;
+    }
+    public String getLoc() {
+        return this.loc;
+    }
+    public int getRow() {
+        return this.row;
+    }
+    public int getColumn() {
+        return this.column;
+    }
+    public int getLevel() {
+        return this.level;
+    }
 }
