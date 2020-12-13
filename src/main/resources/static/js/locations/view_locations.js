@@ -52,9 +52,12 @@ var ModalMenu = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (ModalMenu.__proto__ || Object.getPrototypeOf(ModalMenu)).call(this, props));
 
     _this2.show_menu = function (menu_type) {
-      _this2.setState({ menu_type: "none" });
-      _this2.setState({ menu_type: menu_type });
-      $("#modalMenu").modal("show");
+      // Create a blank form to reset it, and then create actual menu
+      _this2.setState({ menu_type: "none" }, function () {
+        _this2.setState({ menu_type: menu_type }, function () {
+          $("#modalMenu").modal("show");
+        });
+      });
     };
 
     _this2.create_menu = function () {

@@ -27,9 +27,14 @@ class ModalMenu extends React.Component {
     };
   }
   show_menu = (menu_type) => {
-    this.setState({menu_type: "none"});
-    this.setState({menu_type: menu_type});
-    $("#modalMenu").modal("show");
+    // Create a blank form to reset it, and then create actual menu
+    this.setState({menu_type: "none"}, () => {
+      this.setState({menu_type: menu_type}, () => {
+        $("#modalMenu").modal("show");
+      });
+    });
+    
+    
   };
   create_menu = () => {
     if (this.state.menu_type == "none") {
