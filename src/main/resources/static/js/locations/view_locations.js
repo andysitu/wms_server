@@ -15,7 +15,7 @@ var LocationTable = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (LocationTable.__proto__ || Object.getPrototypeOf(LocationTable)).call(this, props));
 
     _this.show_menu = function () {
-      _this.modalMenu.current.show_menu("blank");
+      _this.modalMenu.current.show_menu("create_location");
     };
 
     _this.modalMenu = React.createRef();
@@ -60,13 +60,111 @@ var ModalMenu = function (_React$Component2) {
     _this2.create_menu = function () {
       if (_this2.state.menu_type == "none") {
         return React.createElement("div", null);
-      } else if (_this2.state.menu_type == "blank") {
+      } else if (_this2.state.menu_type == "create_location") {
         return React.createElement(
           "div",
           null,
-          "Blank"
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Location"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", name: "loc" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Area"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", name: "area" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Row"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", name: "row" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Column"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", name: "column" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Level"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", name: "level" })
+          )
         );
       }
+    };
+
+    _this2.get_data = function () {
+      var data = {};
+      if (_this2.state.additional_data) {
+        for (var k in _this2.state.additional_data) {
+          data[k] = _this2.state.additional_data[k];
+        }
+      }
+      var formData = new FormData($("#modalmenu-form")[0]);
+
+      if (_this2.state.type == "create_workitem") {
+        formData.set("handleit", formData.get("handleit") == "on" ? true : false);
+      }
+
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = formData.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var key = _step.value;
+
+          data[key] = formData.get(key);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    _this2.onSubmit = function (e) {
+      e.preventDefault();
+      console.log("submit");
+      var data = _this2.get_data();
+      console.log(data);
+      $("#modalMenu").modal("hide");
     };
 
     _this2.state = {
@@ -106,22 +204,26 @@ var ModalMenu = function (_React$Component2) {
               )
             ),
             React.createElement(
-              "div",
-              { className: "modal-body" },
-              this.create_menu()
-            ),
-            React.createElement(
-              "div",
-              { className: "modal-footer" },
+              "form",
+              { onSubmit: this.onSubmit, id: "modalmenu-form" },
               React.createElement(
-                "button",
-                { type: "button", className: "btn btn-primary" },
-                "Submit"
+                "div",
+                { className: "modal-body" },
+                this.create_menu()
               ),
               React.createElement(
-                "button",
-                { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
-                "Close"
+                "div",
+                { className: "modal-footer" },
+                React.createElement(
+                  "button",
+                  { type: "submit", className: "btn btn-primary" },
+                  "Submit"
+                ),
+                React.createElement(
+                  "button",
+                  { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+                  "Close"
+                )
               )
             )
           )
