@@ -1,4 +1,4 @@
-package com.wms.wms_server;
+package com.wms.wms_server.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
