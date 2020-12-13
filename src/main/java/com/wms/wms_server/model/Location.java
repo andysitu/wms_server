@@ -4,9 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Location {
-    private String loc;
     private String area;
-    private int area_number;
+    private String loc;
+    private int row;
+    private int column;
     private int level;
 
     private String type;
@@ -15,10 +16,11 @@ public class Location {
 
     }
 
-    public Location(String loc, String area, int area_number, int level) {
-        this.loc = loc;
+    public Location(String area, String loc, int row, int column, int level) {
         this.area = area;
-        this.area_number = area_number;
+        this.loc = loc;
+        this.row = row;
+        this.column = column;
         this.level = level;
     }
 }
