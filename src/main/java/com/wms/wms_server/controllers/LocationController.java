@@ -15,6 +15,11 @@ public class LocationController {
         return "Greetings!";
     }
 
+    @GetMapping(value={"/"})
+    public String view_index() {
+        return "index";
+    }
+
     @GetMapping(value={"/view_locations"})
     public String view_locations() {
         return "locations/view_locations";
