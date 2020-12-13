@@ -8,8 +8,13 @@ import com.wms.wms_server.model.User;
 
 import org.springframework.stereotype.Controller;
 
+import com.wms.wms_server.repository.LocationRepository;
+
 @Controller
 public class LocationController {
+    @Autowired
+    private LocationRepository locationRepository;
+
     @GetMapping("/locations")
     public String greeting() {
         return "Greetings!";
