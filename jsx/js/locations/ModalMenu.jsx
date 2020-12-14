@@ -31,23 +31,23 @@ class ModalMenu extends React.Component {
       <div>
         <div className="form-group">
           <label>Location</label>
-          <input type="text" className="form-control" name="loc"></input>
+          <input type="text" className="form-control" name="loc" required></input>
         </div>
         <div className="form-group">
           <label>Area</label>
-          <input type="text" className="form-control" name="area"></input>
+          <input type="text" className="form-control" name="area" required></input>
         </div>
         <div className="form-group">
           <label>Row</label>
-          <input type="number" className="form-control" name="row"></input>
+          <input type="number" className="form-control" name="row" required></input>
         </div>
         <div className="form-group">
           <label>Column</label>
-          <input type="number" className="form-control" name="column"></input>
+          <input type="number" className="form-control" name="column" required></input>
         </div>
         <div className="form-group">
           <label>Level</label>
-          <input type="number" className="form-control" name="level"></input>
+          <input type="number" className="form-control" name="level" required></input>
         </div>
       </div>);
     }
