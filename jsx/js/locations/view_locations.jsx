@@ -59,14 +59,7 @@ class LocationTable extends React.Component {
         <tbody>
           {this.state.locations.map((location) => {
             return (
-              <tr key={location.id}>
-                <td>{location.area}</td>
-                <td>{location.loc}</td>
-                <td>{location.row}</td>
-                <td>{location.column}</td>
-                <td>{location.level}</td>
-                <td>{location.shelf}</td>
-              </tr>
+              <LocationRow key={location.id} location={location} />
             );
           })}
         </tbody>
@@ -74,6 +67,26 @@ class LocationTable extends React.Component {
 
       <ModalMenu ref={this.modalMenu}/>
     </div>);
+  }
+}
+
+class LocationRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: this.props.location,
+    }
+  }
+  render() {
+    return (
+    <tr key={this.state.location.id}>
+      <td>{this.state.location.area}</td>
+      <td>{this.state.location.loc}</td>
+      <td>{this.state.location.row}</td>
+      <td>{this.state.location.column}</td>
+      <td>{this.state.location.level}</td>
+      <td>{this.state.location.shelf}</td>
+    </tr>)
   }
 }
 

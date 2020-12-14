@@ -113,40 +113,7 @@ var LocationTable = function (_React$Component) {
             "tbody",
             null,
             this.state.locations.map(function (location) {
-              return React.createElement(
-                "tr",
-                { key: location.id },
-                React.createElement(
-                  "td",
-                  null,
-                  location.area
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  location.loc
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  location.row
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  location.column
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  location.level
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  location.shelf
-                )
-              );
+              return React.createElement(LocationRow, { key: location.id, location: location });
             })
           )
         ),
@@ -156,6 +123,63 @@ var LocationTable = function (_React$Component) {
   }]);
 
   return LocationTable;
+}(React.Component);
+
+var LocationRow = function (_React$Component2) {
+  _inherits(LocationRow, _React$Component2);
+
+  function LocationRow(props) {
+    _classCallCheck(this, LocationRow);
+
+    var _this2 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
+
+    _this2.state = {
+      location: _this2.props.location
+    };
+    return _this2;
+  }
+
+  _createClass(LocationRow, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "tr",
+        { key: this.state.location.id },
+        React.createElement(
+          "td",
+          null,
+          this.state.location.area
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.location.loc
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.location.row
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.location.column
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.location.level
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.location.shelf
+        )
+      );
+    }
+  }]);
+
+  return LocationRow;
 }(React.Component);
 
 function loadReact() {
