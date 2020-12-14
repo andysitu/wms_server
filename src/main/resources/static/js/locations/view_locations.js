@@ -28,23 +28,29 @@ var LocationTable = function (_React$Component) {
       });
     };
 
+    _this.get_locations = function () {
+      var that = _this;
+      $.ajax({
+        type: "GET",
+        url: "./locations",
+        success: function success(locations) {
+          console.log(locations);
+          that.setState({
+            locations: locations
+          });
+        }
+      });
+    };
+
     _this.modalMenu = React.createRef();
+    _this.state = {
+      locations: []
+    };
     _this.get_locations();
     return _this;
   }
 
   _createClass(LocationTable, [{
-    key: "get_locations",
-    value: function get_locations() {
-      $.ajax({
-        type: "GET",
-        url: "./locations",
-        success: function success(data) {
-          console.log(data);
-        }
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -56,6 +62,88 @@ var LocationTable = function (_React$Component) {
             onClick: this.show_menu
           },
           "Create"
+        ),
+        React.createElement(
+          "table",
+          null,
+          React.createElement(
+            "thead",
+            null,
+            React.createElement(
+              "tr",
+              null,
+              React.createElement(
+                "th",
+                null,
+                "Area"
+              ),
+              React.createElement(
+                "th",
+                null,
+                "Loc"
+              ),
+              React.createElement(
+                "th",
+                null,
+                "Row"
+              ),
+              React.createElement(
+                "th",
+                null,
+                "Column"
+              ),
+              React.createElement(
+                "th",
+                null,
+                "Level"
+              ),
+              React.createElement(
+                "th",
+                null,
+                "Shelf"
+              )
+            )
+          ),
+          React.createElement(
+            "tbody",
+            null,
+            this.state.locations.map(function (location) {
+              return React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  location.area
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  location.loc
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  location.row
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  location.column
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  location.level
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  location.shelf
+                )
+              );
+            })
+          )
         ),
         React.createElement(ModalMenu, { ref: this.modalMenu })
       );

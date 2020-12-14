@@ -2,6 +2,9 @@ class LocationTable extends React.Component {
   constructor(props) {
     super(props);
     this.modalMenu = React.createRef();
+    this.state = {
+      locations: [],
+    }
     this.get_locations();
   }
 
@@ -19,12 +22,16 @@ class LocationTable extends React.Component {
     });
   };
 
-  get_locations() {
+  get_locations = () => {
+    var that = this;
     $.ajax({
       type: "GET",
       url: "./locations",
-      success: function(data) {
-        console.log(data);
+      success: function(locations) {
+        console.log(locations);
+        that.setState({
+          locations: locations,
+        });
       }
     });
   }
@@ -34,6 +41,33 @@ class LocationTable extends React.Component {
       <button className="btn btn-primary"
         onClick={this.show_menu}
       >Create</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Loc</th>
+            <th>Row</th>
+            <th>Column</th>
+            <th>Level</th>
+            <th>Shelf</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.locations.map((location) => {
+            return (
+              <tr>
+                <td>{location.area}</td>
+                <td>{location.loc}</td>
+                <td>{location.row}</td>
+                <td>{location.column}</td>
+                <td>{location.level}</td>
+                <td>{location.shelf}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
 
       <ModalMenu ref={this.modalMenu}/>
     </div>);

@@ -44,7 +44,6 @@ public class LocationController {
     @RequestMapping(path="/locations", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public LocationResponse create_location(@RequestBody LocationRequest lr) {
-        System.out.println(lr.area);
         Location location = locationService.buildLocation(lr);
         locationRepository.save(location);
         return locationService.convertLocation(location);
