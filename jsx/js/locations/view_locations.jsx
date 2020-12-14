@@ -56,7 +56,7 @@ class LocationTable extends React.Component {
         <tbody>
           {this.state.locations.map((location) => {
             return (
-              <tr>
+              <tr key={location.id}>
                 <td>{location.area}</td>
                 <td>{location.loc}</td>
                 <td>{location.row}</td>

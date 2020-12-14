@@ -110,7 +110,7 @@ var LocationTable = function (_React$Component) {
             this.state.locations.map(function (location) {
               return React.createElement(
                 "tr",
-                null,
+                { key: location.id },
                 React.createElement(
                   "td",
                   null,
