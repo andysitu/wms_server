@@ -10,13 +10,16 @@ class LocationTable extends React.Component {
 
   show_menu = () => {
     this.modalMenu.current.show_menu("create_location", (data)=> {
+      const that = this;
       $.ajax({
         type: "POST",
         url: "./locations",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function(responseData) {
-          console.log(responseData);
+          var locations = [...that.state.locations];
+          locations.push(responseData);
+          that.setState({locations: locations,});
         }
       });
     });
