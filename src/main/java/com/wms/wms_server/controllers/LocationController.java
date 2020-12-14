@@ -5,19 +5,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import com.wms.wms_server.model.User;
+import com.wms.wms_server.model.response.LocationResponse;
 
 import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.wms.wms_server.repository.LocationRepository;
+import com.wms.wms_server.services.LocationService;
+import com.wms.wms_server.model.Location;
+
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private LocationService locationService;
+
     @GetMapping("/locations")
-    public String greeting() {
-        return "Greetings!";
+    @ResponseBody
+    public List<LocationResponse> greeting() {
+        ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
+        for(Location loc : locationRepository.findAll())  {
+            locs.add(locationService.convertLocation(loc));
+        }
+        return locs;
     }
 
     @GetMapping(value={"/"})
