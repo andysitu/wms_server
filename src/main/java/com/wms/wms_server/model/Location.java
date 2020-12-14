@@ -2,8 +2,13 @@ package com.wms.wms_server.model;
 
 import org.springframework.stereotype.Component;
 
+import org.springframework.data.annotation.Id;
+
 @Component
 public class Location {
+    @Id
+    private String id;
+
     private String area;
     private String loc;
     private int row;
@@ -22,6 +27,10 @@ public class Location {
         this.row = row;
         this.column = column;
         this.level = level;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public String getArea() {

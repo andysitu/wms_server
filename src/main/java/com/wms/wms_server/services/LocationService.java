@@ -10,7 +10,7 @@ import com.wms.wms_server.model.request.LocationRequest;
 public class LocationService {
     public LocationResponse convertLocation(Location l) {
         return new LocationResponse(
-            l.getArea(), l.getLoc(), l.getRow(), l.getColumn(), l.getLevel()
+            l.getId(), l.getArea(), l.getLoc(), l.getRow(), l.getColumn(), l.getLevel()
         );
     }
 
