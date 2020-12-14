@@ -3,11 +3,15 @@ class ModalMenu extends React.Component {
     super(props);
     this.state = {
       menu_type: "none",
+      submit_handler: null,
     };
   }
-  show_menu = (menu_type) => {
+  show_menu = (menu_type, submit_handler= null) => {
     // Create a blank form to reset it, and then create actual menu
-    this.setState({menu_type: menu_type}, () => {
+    this.setState({
+      menu_type: menu_type,
+      submit_handler: submit_handler,
+    }, () => {
       $("#modalMenu").modal("show");
     });
   };
@@ -48,6 +52,7 @@ class ModalMenu extends React.Component {
       </div>);
     }
   };
+
   get_data = () => {
     var data = {};
     if (this.state.additional_data) {
@@ -70,7 +75,9 @@ class ModalMenu extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     var data = this.get_data();
-    console.log(data);
+    if (this.state.submit_handler) {
+      this.state.submit_handler(data);
+    }
     $("#modalMenu").modal("hide");
 
   };

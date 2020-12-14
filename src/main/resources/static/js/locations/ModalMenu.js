@@ -15,8 +15,13 @@ var ModalMenu = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ModalMenu.__proto__ || Object.getPrototypeOf(ModalMenu)).call(this, props));
 
     _this.show_menu = function (menu_type) {
+      var submit_handler = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
       // Create a blank form to reset it, and then create actual menu
-      _this.setState({ menu_type: menu_type }, function () {
+      _this.setState({
+        menu_type: menu_type,
+        submit_handler: submit_handler
+      }, function () {
         $("#modalMenu").modal("show");
       });
     };
@@ -126,12 +131,15 @@ var ModalMenu = function (_React$Component) {
     _this.onSubmit = function (e) {
       e.preventDefault();
       var data = _this.get_data();
-      console.log(data);
+      if (_this.state.submit_handler) {
+        _this.state.submit_handler(data);
+      }
       $("#modalMenu").modal("hide");
     };
 
     _this.state = {
-      menu_type: "none"
+      menu_type: "none",
+      submit_handler: null
     };
     return _this;
   }

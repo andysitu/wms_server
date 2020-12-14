@@ -15,7 +15,9 @@ var LocationTable = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (LocationTable.__proto__ || Object.getPrototypeOf(LocationTable)).call(this, props));
 
     _this.show_menu = function () {
-      _this.modalMenu.current.show_menu("create_location");
+      _this.modalMenu.current.show_menu("create_location", function (data) {
+        console.log(data);
+      });
     };
 
     _this.modalMenu = React.createRef();

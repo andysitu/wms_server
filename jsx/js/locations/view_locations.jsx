@@ -5,7 +5,9 @@ class LocationTable extends React.Component {
   }
 
   show_menu = () => {
-    this.modalMenu.current.show_menu("create_location");
+    this.modalMenu.current.show_menu("create_location", (data)=> {
+      console.log(data);
+    });
   };
 
   render () {
