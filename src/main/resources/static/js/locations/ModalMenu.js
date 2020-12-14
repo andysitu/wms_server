@@ -41,7 +41,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Area"
             ),
-            React.createElement("input", { type: "text", className: "form-control", name: "area", required: true })
+            React.createElement("input", { type: "text", className: "form-control", min: "0", name: "area", required: true })
           ),
           React.createElement(
             "div",
@@ -51,7 +51,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Location"
             ),
-            React.createElement("input", { type: "text", className: "form-control", name: "loc", required: true })
+            React.createElement("input", { type: "text", className: "form-control", min: "0", name: "loc", required: true })
           ),
           React.createElement(
             "div",
@@ -61,7 +61,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Row"
             ),
-            React.createElement("input", { type: "number", className: "form-control", name: "row", required: true })
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row", required: true })
           ),
           React.createElement(
             "div",
@@ -71,7 +71,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Column"
             ),
-            React.createElement("input", { type: "number", className: "form-control", name: "column", required: true })
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "column", required: true })
           ),
           React.createElement(
             "div",
@@ -81,7 +81,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Level"
             ),
-            React.createElement("input", { type: "number", className: "form-control", name: "level", required: true })
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "level", required: true })
           ),
           React.createElement(
             "div",
@@ -91,7 +91,7 @@ var ModalMenu = function (_React$Component) {
               null,
               "Shelf"
             ),
-            React.createElement("input", { type: "text", className: "form-control", name: "shelf", required: true })
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "shelf", required: true })
           )
         );
       }

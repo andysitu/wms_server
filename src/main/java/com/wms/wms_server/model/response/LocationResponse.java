@@ -7,9 +7,9 @@ public class LocationResponse {
     public int row;
     public int column;
     public int level;
-    public String shelf;
+    public int shelf;
 
-    public LocationResponse(String id, String area, String loc, int row, int column, int level, String shelf) {
+    public LocationResponse(String id, String area, String loc, int row, int column, int level, int shelf) {
         this.id = id;
         this.area = area;
         this.loc = loc;

@@ -6,9 +6,9 @@ public class LocationRequest {
     public int row;
     public int column;
     public int level;
-    public String shelf;
+    public int shelf;
 
-    public LocationRequest(String area, String loc, int row, int column, int level, String shelf) {
+    public LocationRequest(String area, String loc, int row, int column, int level, int shelf) {
         this.area = area;
         this.loc = loc;
         this.row = row;

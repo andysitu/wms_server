@@ -14,7 +14,7 @@ public class Location {
     private int row;
     private int column;
     private int level;
-    private String shelf;
+    private int shelf;
 
     private String type;
     
@@ -22,7 +22,7 @@ public class Location {
 
     }
 
-    public Location(String area, String loc, int row, int column, int level, String shelf) {
+    public Location(String area, String loc, int row, int column, int level, int shelf) {
         this.area = area;
         this.loc = loc;
         this.row = row;
@@ -49,7 +49,7 @@ public class Location {
     public int getLevel() {
         return this.level;
     }
-    public String getShelf() {
+    public int getShelf() {
         return this.shelf;
     }
 }
