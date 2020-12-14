@@ -7,13 +7,15 @@ public class LocationResponse {
     public int row;
     public int column;
     public int level;
+    public String shelf;
 
-    public LocationResponse(String id, String area, String loc, int row, int column, int level) {
+    public LocationResponse(String id, String area, String loc, int row, int column, int level, String shelf) {
         this.id = id;
         this.area = area;
         this.loc = loc;
         this.row = row;
         this.column = column;
         this.level = level;
+        this.shelf = shelf;
     }
 }

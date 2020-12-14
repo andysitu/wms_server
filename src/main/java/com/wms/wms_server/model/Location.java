@@ -14,6 +14,7 @@ public class Location {
     private int row;
     private int column;
     private int level;
+    private String shelf;
 
     private String type;
     
@@ -21,18 +22,18 @@ public class Location {
 
     }
 
-    public Location(String area, String loc, int row, int column, int level) {
+    public Location(String area, String loc, int row, int column, int level, String shelf) {
         this.area = area;
         this.loc = loc;
         this.row = row;
         this.column = column;
         this.level = level;
+        this.shelf = shelf;
     }
 
     public String getId() {
         return this.id;
     }
-
     public String getArea() {
         return this.area;
     }
@@ -47,5 +48,8 @@ public class Location {
     }
     public int getLevel() {
         return this.level;
+    }
+    public String getShelf() {
+        return this.shelf;
     }
 }

@@ -10,13 +10,13 @@ import com.wms.wms_server.model.request.LocationRequest;
 public class LocationService {
     public LocationResponse convertLocation(Location l) {
         return new LocationResponse(
-            l.getId(), l.getArea(), l.getLoc(), l.getRow(), l.getColumn(), l.getLevel()
+            l.getId(), l.getArea(), l.getLoc(), l.getRow(), l.getColumn(), l.getLevel(), l.getShelf()
         );
     }
 
     public Location buildLocation(LocationRequest locReq) {
         return new Location(
-            locReq.area, locReq.loc, locReq.row, locReq.column, locReq.level
+            locReq.area, locReq.loc, locReq.row, locReq.column, locReq.level, locReq.shelf
         );
     }
 }

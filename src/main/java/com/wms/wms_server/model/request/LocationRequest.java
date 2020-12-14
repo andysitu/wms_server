@@ -6,12 +6,14 @@ public class LocationRequest {
     public int row;
     public int column;
     public int level;
+    public String shelf;
 
-    public LocationRequest(String area, String loc, int row, int column, int level) {
+    public LocationRequest(String area, String loc, int row, int column, int level, String shelf) {
         this.area = area;
         this.loc = loc;
         this.row = row;
         this.column = column;
         this.level = level;
+        this.shelf = shelf;
     }
 }
