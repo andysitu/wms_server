@@ -39,9 +39,9 @@ var ModalMenu = function (_React$Component) {
             React.createElement(
               "label",
               null,
-              "Location"
+              "Area"
             ),
-            React.createElement("input", { type: "text", className: "form-control", name: "loc", required: true })
+            React.createElement("input", { type: "text", className: "form-control", name: "area", required: true })
           ),
           React.createElement(
             "div",
@@ -49,9 +49,9 @@ var ModalMenu = function (_React$Component) {
             React.createElement(
               "label",
               null,
-              "Area"
+              "Location"
             ),
-            React.createElement("input", { type: "text", className: "form-control", name: "area", required: true })
+            React.createElement("input", { type: "text", className: "form-control", name: "loc", required: true })
           ),
           React.createElement(
             "div",

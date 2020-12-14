@@ -30,12 +30,12 @@ class ModalMenu extends React.Component {
       return (
       <div>
         <div className="form-group">
-          <label>Location</label>
-          <input type="text" className="form-control" name="loc" required></input>
-        </div>
-        <div className="form-group">
           <label>Area</label>
           <input type="text" className="form-control" name="area" required></input>
+        </div>
+        <div className="form-group">
+          <label>Location</label>
+          <input type="text" className="form-control" name="loc" required></input>
         </div>
         <div className="form-group">
           <label>Row</label>
