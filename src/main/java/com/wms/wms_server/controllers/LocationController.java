@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import com.wms.wms_server.model.User;
 import com.wms.wms_server.model.response.LocationResponse;
+import com.wms.wms_server.model.request.LocationRequest;
 
 import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wms.wms_server.repository.LocationRepository;
 import com.wms.wms_server.services.LocationService;
@@ -34,6 +38,12 @@ public class LocationController {
             locs.add(locationService.convertLocation(loc));
         }
         return locs;
+    }
+
+    @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
+    public String create_location(@RequestBody LocationRequest lr) {
+        System.out.println(lr.area);
+        return "index";
     }
 
     @GetMapping(value={"/"})

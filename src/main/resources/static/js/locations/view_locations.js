@@ -17,6 +17,25 @@ var LocationTable = function (_React$Component) {
     _this.show_menu = function () {
       _this.modalMenu.current.show_menu("create_location", function (data) {
         console.log(data);
+        $.ajax({
+          type: "POST",
+          url: "./locations",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function success(responseData) {
+            console.log(responseData);
+          }
+        });
+        // const xhr = new XMLHttpRequest();
+
+        // xhr.open('POST', '/locations')
+        // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        // xhr.addEventListener('load', function(e){
+        //   // const taskdata = JSON.parse(this.responseText);
+        //   // taskcharts.graph(graph_type, taskdata);
+        //   console.log(his.responseText);
+        // });
+        // xhr.send(JSON.stringify(data));
       });
     };
 
