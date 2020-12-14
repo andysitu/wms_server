@@ -16,7 +16,6 @@ var LocationTable = function (_React$Component) {
 
     _this.show_menu = function () {
       _this.modalMenu.current.show_menu("create_location", function (data) {
-        console.log(data);
         $.ajax({
           type: "POST",
           url: "./locations",
@@ -26,24 +25,26 @@ var LocationTable = function (_React$Component) {
             console.log(responseData);
           }
         });
-        // const xhr = new XMLHttpRequest();
-
-        // xhr.open('POST', '/locations')
-        // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        // xhr.addEventListener('load', function(e){
-        //   // const taskdata = JSON.parse(this.responseText);
-        //   // taskcharts.graph(graph_type, taskdata);
-        //   console.log(his.responseText);
-        // });
-        // xhr.send(JSON.stringify(data));
       });
     };
 
     _this.modalMenu = React.createRef();
+    _this.get_locations();
     return _this;
   }
 
   _createClass(LocationTable, [{
+    key: "get_locations",
+    value: function get_locations() {
+      $.ajax({
+        type: "GET",
+        url: "./locations",
+        success: function success(data) {
+          console.log(data);
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(

@@ -2,11 +2,11 @@ class LocationTable extends React.Component {
   constructor(props) {
     super(props);
     this.modalMenu = React.createRef();
+    this.get_locations();
   }
 
   show_menu = () => {
     this.modalMenu.current.show_menu("create_location", (data)=> {
-      console.log(data);
       $.ajax({
         type: "POST",
         url: "./locations",
@@ -16,18 +16,18 @@ class LocationTable extends React.Component {
           console.log(responseData);
         }
       });
-      // const xhr = new XMLHttpRequest();
-
-      // xhr.open('POST', '/locations')
-      // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      // xhr.addEventListener('load', function(e){
-      //   // const taskdata = JSON.parse(this.responseText);
-      //   // taskcharts.graph(graph_type, taskdata);
-      //   console.log(his.responseText);
-      // });
-      // xhr.send(JSON.stringify(data));
     });
   };
+
+  get_locations() {
+    $.ajax({
+      type: "GET",
+      url: "./locations",
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }
 
   render () {
     return (<div>

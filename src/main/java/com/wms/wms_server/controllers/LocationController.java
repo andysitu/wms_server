@@ -32,7 +32,7 @@ public class LocationController {
 
     @GetMapping("/locations")
     @ResponseBody
-    public List<LocationResponse> greeting() {
+    public List<LocationResponse> get_locations() {
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
             locs.add(locationService.convertLocation(loc));
