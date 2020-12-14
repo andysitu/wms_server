@@ -49,6 +49,10 @@ class ModalMenu extends React.Component {
           <label>Level</label>
           <input type="number" className="form-control" name="level" required></input>
         </div>
+        <div className="form-group">
+          <label>Shelf</label>
+          <input type="text" className="form-control" name="shelf" required></input>
+        </div>
       </div>);
     }
   };

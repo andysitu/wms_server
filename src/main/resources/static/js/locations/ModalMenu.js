@@ -82,6 +82,16 @@ var ModalMenu = function (_React$Component) {
               "Level"
             ),
             React.createElement("input", { type: "number", className: "form-control", name: "level", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              null,
+              "Shelf"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", name: "shelf", required: true })
           )
         );
       }
