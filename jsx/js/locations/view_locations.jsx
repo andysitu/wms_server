@@ -6,7 +6,7 @@ class LocationTable extends React.Component {
 
   show_menu = () => {
     this.modalMenu.current.show_menu("create_location");
-  }
+  };
 
   render () {
     return (<div>
@@ -23,7 +23,6 @@ function loadReact() {
   ReactDOM.render((
     <div>
       <LocationTable />
-      
     </div>
   ), document.getElementById("content-container"));
 }

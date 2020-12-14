@@ -16,10 +16,8 @@ var ModalMenu = function (_React$Component) {
 
     _this.show_menu = function (menu_type) {
       // Create a blank form to reset it, and then create actual menu
-      _this.setState({ menu_type: "none" }, function () {
-        _this.setState({ menu_type: menu_type }, function () {
-          $("#modalMenu").modal("show");
-        });
+      _this.setState({ menu_type: menu_type }, function () {
+        $("#modalMenu").modal("show");
       });
     };
 
@@ -127,7 +125,6 @@ var ModalMenu = function (_React$Component) {
 
     _this.onSubmit = function (e) {
       e.preventDefault();
-      console.log("submit");
       var data = _this.get_data();
       console.log(data);
       $("#modalMenu").modal("hide");
@@ -140,6 +137,16 @@ var ModalMenu = function (_React$Component) {
   }
 
   _createClass(ModalMenu, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      // Blank out menu when it's hidden
+      $("#modalMenu").on("hidden.bs.modal", function () {
+        _this2.setState({ menu_type: "none" });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(

@@ -7,14 +7,18 @@ class ModalMenu extends React.Component {
   }
   show_menu = (menu_type) => {
     // Create a blank form to reset it, and then create actual menu
-    this.setState({menu_type: "none"}, () => {
-      this.setState({menu_type: menu_type}, () => {
-        $("#modalMenu").modal("show");
-      });
+    this.setState({menu_type: menu_type}, () => {
+      $("#modalMenu").modal("show");
     });
-    
-    
   };
+
+  componentDidMount() {
+    // Blank out menu when it's hidden
+    $("#modalMenu").on("hidden.bs.modal", () => {
+      this.setState({menu_type: "none"});
+    });
+  }
+
   create_menu = () => {
     if (this.state.menu_type == "none") {
       return (<div></div>);
@@ -65,10 +69,10 @@ class ModalMenu extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
     var data = this.get_data();
     console.log(data);
     $("#modalMenu").modal("hide");
+
   };
   render() {
     return (<div className="modal" tabIndex="-1" role="dialog" id="modalMenu">
