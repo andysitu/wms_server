@@ -23,6 +23,29 @@ class ModalMenu extends React.Component {
     });
   }
 
+  complete_and_check_data = (data) => {
+    if (this.state.menu_type == "create_location") {
+      // Complete the end values if they're blank
+      data.column_end = data.column_end ? data.column_end : data.column_start;
+      data.level_end = data.level_end ? data.level_end : data.level_start;
+      data.row_end = data.row_end ? data.row_end : data.row_start;
+      data.shelf_end = data.shelf_end ? data.shelf_end : data.row_start;
+
+      // Check that the end values are greater than then start values
+      if (parseInt(data.column_start) > parseInt(data.column_end) || 
+          parseInt(data.level_start) > parseInt(data.level_end) ||
+          parseInt(data.row_start) > parseInt(data.row_end) || 
+          parseInt(data.shelf_start) > parseInt(data.shelf_end)) {
+        return false;
+      } else {
+        return true;
+      }
+
+    } else {
+      return true;
+    }
+  }
+
   create_menu = () => {
     if (this.state.menu_type == "none") {
       return (<div></div>);
@@ -44,22 +67,40 @@ class ModalMenu extends React.Component {
           </div>
           <div className="form-group col-sm-6">
             <label>End Row</label>
-            <input type="number" className="form-control" min="0" name="row_end" required></input>
+            <input type="number" className="form-control" min="0" name="row_end"></input>
+          </div>
         </div>
+        <div className="form-row">
+          <div className="form-group col-sm-6">
+            <label>Start Column</label>
+            <input type="number" className="form-control" min="0" name="column_start" required></input>
+          </div>
+          <div className="form-group col-sm-6">
+            <label>Start Column</label>
+            <input type="number" className="form-control" min="0" name="column_end"></input>
+          </div>
         </div>
-        
-        <div className="form-group">
-          <label>Column</label>
-          <input type="number" className="form-control" min="0" name="column" required></input>
+
+        <div className="form-row">
+          <div className="form-group col-sm-6">
+            <label>Start Level</label>
+            <input type="number" className="form-control" min="0" name="level_start" required></input>
+          </div>
+          <div className="form-group col-sm-6">
+            <label>End Level</label>
+            <input type="number" className="form-control" min="0" name="level_end"></input>
+          </div>
         </div>
-        <div className="form-group">
-          <label>Level</label>
-          <input type="number" className="form-control" min="0" name="level" required></input>
-        </div>
-        <div className="form-group">
-          <label>Shelf</label>
-          <input type="number" className="form-control" min="0" name="shelf" required></input>
-        </div>
+        <div className="form-row">
+          <div className="form-group col-sm-6">
+            <label>Start Shelf</label>
+            <input type="number" className="form-control" min="0" name="shelf_start" required></input>
+          </div>
+          <div className="form-group col-sm-6">
+            <label>End Shelf</label>
+            <input type="number" className="form-control" min="0" name="shelf_end"></input>
+          </div>
+        </div>                                                                                                                                                                                                                                                                                                                          
       </div>);
     }
   };
@@ -86,7 +127,9 @@ class ModalMenu extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     var data = this.get_data();
-    if (this.state.submit_handler) {
+
+    var result = this.complete_and_check_data(data);
+    if (result && this.state.submit_handler) {
       this.state.submit_handler(data);
     }
     $("#modalMenu").modal("hide");
