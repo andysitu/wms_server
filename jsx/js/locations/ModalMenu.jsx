@@ -125,9 +125,9 @@ class ModalMenu extends React.Component {
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
         <div>
-          <button type="button" className="btn btn-primary"
+          <button type="button" className="btn btn-outline-primary"
             onClick={this.onClick_print_barcode}>Print</button>
-          <button type="button" className="btn btn-primary"
+          <button type="button" className="btn btn-outline-secondary"
             onClick={this.onClick_save_barcode}>Save</button>
         </div>
 

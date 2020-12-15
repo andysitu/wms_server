@@ -71,6 +71,9 @@ class LocationTable extends React.Component {
       <table className="table table-sm">
         <thead>
           <tr>
+            <th scope="col">
+              <input type="checkbox"></input>
+            </th>
             <th scope="col">Area</th>
             <th scope="col">Loc</th>
             <th scope="col">Row</th>
@@ -122,10 +125,21 @@ class LocationRow extends React.Component {
   onClick_show_barcode = () => {
     this.props.show_barcode( this.get_location_string() );
   };
+
+  onClick_checkbox = (e) => {
+    var $tr = $(e.target).closest("tr");
+    if (e.target.checked) {
+      $tr.addClass("checked-row");
+    } else {
+      $tr.removeClass("checked-row");
+    }
+  }
   
   render() {
     return (
     <tr key={this.state.location.id}>
+      <td><input type="checkbox" className="row-checkbox"
+            onChange={this.onClick_checkbox}></input></td>
       <td>{this.state.location.area}</td>
       <td>{this.state.location.loc}</td>
       <td>{this.state.location.row}</td>

@@ -104,6 +104,11 @@ var LocationTable = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
+                React.createElement("input", { type: "checkbox" })
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
                 "Area"
               ),
               React.createElement(
@@ -177,6 +182,15 @@ var LocationRow = function (_React$Component2) {
       _this3.props.show_barcode(_this3.get_location_string());
     };
 
+    _this3.onClick_checkbox = function (e) {
+      var $tr = $(e.target).closest("tr");
+      if (e.target.checked) {
+        $tr.addClass("checked-row");
+      } else {
+        $tr.removeClass("checked-row");
+      }
+    };
+
     _this3.state = {
       location: _this3.props.location
     };
@@ -195,6 +209,12 @@ var LocationRow = function (_React$Component2) {
       return React.createElement(
         "tr",
         { key: this.state.location.id },
+        React.createElement(
+          "td",
+          null,
+          React.createElement("input", { type: "checkbox", className: "row-checkbox",
+            onChange: this.onClick_checkbox })
+        ),
         React.createElement(
           "td",
           null,

@@ -196,13 +196,13 @@ var ModalMenu = function (_React$Component) {
             null,
             React.createElement(
               "button",
-              { type: "button", className: "btn btn-primary",
+              { type: "button", className: "btn btn-outline-primary",
                 onClick: _this.onClick_print_barcode },
               "Print"
             ),
             React.createElement(
               "button",
-              { type: "button", className: "btn btn-primary",
+              { type: "button", className: "btn btn-outline-secondary",
                 onClick: _this.onClick_save_barcode },
               "Save"
             )
