@@ -4,6 +4,7 @@ class ModalMenu extends React.Component {
     this.state = {
       menu_type: "none",
       submit_handler: null,
+      data: null,
     };
   }
   
@@ -12,8 +13,10 @@ class ModalMenu extends React.Component {
     this.setState({
         menu_type: menu_type,
         submit_handler: submit_handler,
+        data: data,
       }, () => {
       if (menu_type == "create_barcode") {
+        // Set the barcode after img element is set
         JsBarcode("#barcode", data.location);
       }
       $("#modalMenu").modal("show");
@@ -55,6 +58,13 @@ class ModalMenu extends React.Component {
     new_window.close();
     // new_window.onload = function() {window.print();}
   }
+  onClick_save_barcode = () => {
+    var link = document.createElement("a");
+    link.setAttribute("href", document.getElementById("barcode").src);
+    link.setAttribute("download", this.state.data.location.replaceAll(".", "-") + ".png");
+    link.click();
+  }
+
 
   create_menu = () => {
     if (this.state.menu_type == "none") {
@@ -117,6 +127,8 @@ class ModalMenu extends React.Component {
         <div>
           <button type="button" className="btn btn-primary"
             onClick={this.onClick_print_barcode}>Print</button>
+          <button type="button" className="btn btn-primary"
+            onClick={this.onClick_save_barcode}>Save</button>
         </div>
 
         <div id="barcode-container">

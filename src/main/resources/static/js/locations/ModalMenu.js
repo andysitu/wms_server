@@ -20,9 +20,11 @@ var ModalMenu = function (_React$Component) {
       // Create a blank form to reset it, and then create actual menu
       _this.setState({
         menu_type: menu_type,
-        submit_handler: submit_handler
+        submit_handler: submit_handler,
+        data: data
       }, function () {
         if (menu_type == "create_barcode") {
+          // Set the barcode after img element is set
           JsBarcode("#barcode", data.location);
         }
         $("#modalMenu").modal("show");
@@ -52,6 +54,13 @@ var ModalMenu = function (_React$Component) {
       new_window.print();
       new_window.close();
       // new_window.onload = function() {window.print();}
+    };
+
+    _this.onClick_save_barcode = function () {
+      var link = document.createElement("a");
+      link.setAttribute("href", document.getElementById("barcode").src);
+      link.setAttribute("download", _this.state.data.location.replaceAll(".", "-") + ".png");
+      link.click();
     };
 
     _this.create_menu = function () {
@@ -190,6 +199,12 @@ var ModalMenu = function (_React$Component) {
               { type: "button", className: "btn btn-primary",
                 onClick: _this.onClick_print_barcode },
               "Print"
+            ),
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-primary",
+                onClick: _this.onClick_save_barcode },
+              "Save"
             )
           ),
           React.createElement(
@@ -262,7 +277,8 @@ var ModalMenu = function (_React$Component) {
 
     _this.state = {
       menu_type: "none",
-      submit_handler: null
+      submit_handler: null,
+      data: null
     };
     return _this;
   }
