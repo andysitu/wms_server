@@ -8,21 +8,21 @@ class LocationTable extends React.Component {
     this.get_locations();
   }
 
-  show_menu = () => {
-    this.modalMenu.current.show_menu("create_location", (data)=> {
-      const that = this;
-      $.ajax({
-        type: "POST",
-        url: "./locations",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function(responseData) {
-          var locations = [...that.state.locations];
-          locations.push(responseData);
-          that.setState({locations: locations,});
-        }
-      });
+  create_location = (data) => {
+    const that = this;
+    $.ajax({
+      type: "POST",
+      url: "./locations",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function(new_locations) {
+        that.setState({locations: that.state.locations.concat(new_locations),});
+      }
     });
+  };
+
+  show_menu = () => {
+    this.modalMenu.current.show_menu("create_location", this.create_location);
   };
 
   get_locations = () => {

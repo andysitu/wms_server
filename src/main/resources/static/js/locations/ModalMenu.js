@@ -218,10 +218,15 @@ var ModalMenu = function (_React$Component) {
       var data = _this.get_data();
 
       var result = _this.complete_and_check_data(data);
-      if (result && _this.state.submit_handler) {
-        _this.state.submit_handler(data);
+      console.log(result, data);
+      if (result) {
+        if (_this.state.submit_handler) {
+          _this.state.submit_handler(data);
+        }
+        $("#modalMenu").modal("hide");
+      } else {
+        window.alert("Please check that the end values are greater than the start values");
       }
-      $("#modalMenu").modal("hide");
     };
 
     _this.state = {

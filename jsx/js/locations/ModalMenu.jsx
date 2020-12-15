@@ -40,7 +40,6 @@ class ModalMenu extends React.Component {
       } else {
         return true;
       }
-
     } else {
       return true;
     }
@@ -129,12 +128,17 @@ class ModalMenu extends React.Component {
     var data = this.get_data();
 
     var result = this.complete_and_check_data(data);
-    if (result && this.state.submit_handler) {
-      this.state.submit_handler(data);
+    console.log(result, data);
+    if (result) {
+      if (this.state.submit_handler) {
+        this.state.submit_handler(data);  
+      }
+      $("#modalMenu").modal("hide");
+    } else {
+      window.alert("Please check that the end values are greater than the start values");
     }
-    $("#modalMenu").modal("hide");
-
   };
+  
   render() {
     return (<div className="modal" tabIndex="-1" role="dialog" id="modalMenu">
       <div className="modal-dialog" role="document">

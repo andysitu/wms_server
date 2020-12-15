@@ -48,10 +48,13 @@ public class LocationController {
     // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
     @RequestMapping(path="/locations", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public LocationResponse create_location(@RequestBody LocationRequest lr) {
-        Location location = locationService.buildLocation(lr);
-        locationRepository.save(location);
-        return locationService.convertLocation(location);
+    public List<Location> create_location(@RequestBody LocationRequest lr) {
+        List<Location> locs = locationService.buildLocations(lr);
+        System.out.println(locs.size());
+        for (Location loc : locs) {
+            locationRepository.save(loc);
+        }
+        return locs;
     }
 
     @GetMapping(value={"/"})
