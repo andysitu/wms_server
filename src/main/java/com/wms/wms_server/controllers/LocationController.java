@@ -50,7 +50,6 @@ public class LocationController {
     @ResponseBody
     public List<Location> create_location(@RequestBody LocationRequest lr) {
         List<Location> locs = locationService.buildLocations(lr);
-        System.out.println(locs.size());
         for (Location loc : locs) {
             locationRepository.save(loc);
         }

@@ -17,6 +17,11 @@ public class LocationService {
         );
     }
 
+    /**
+     * Creates a list of locations specified by LocationRequest
+     * @param locReq : LocationRequest specifying the parameter range for Location
+     * @return ArrayList of location objects
+     */
     public List<Location> buildLocations(LocationRequest locReq) {
         ArrayList<Location> locs_list = new ArrayList<Location>();
         Location loc;

@@ -14,14 +14,17 @@ var ModalMenu = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ModalMenu.__proto__ || Object.getPrototypeOf(ModalMenu)).call(this, props));
 
-    _this.show_menu = function (menu_type) {
-      var submit_handler = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    _this.show_menu = function (menu_type, data) {
+      var submit_handler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
       // Create a blank form to reset it, and then create actual menu
       _this.setState({
         menu_type: menu_type,
         submit_handler: submit_handler
       }, function () {
+        if (menu_type == "create_barcode") {
+          JsBarcode("#barcode", data.location);
+        }
         $("#modalMenu").modal("show");
       });
     };
@@ -165,6 +168,14 @@ var ModalMenu = function (_React$Component) {
             )
           )
         );
+      } else if (_this.state.menu_type == "create_barcode") {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement("img", { id: "barcode" })
+        );
+      } else {
+        return;
       }
     };
 

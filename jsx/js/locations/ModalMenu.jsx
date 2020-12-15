@@ -6,12 +6,15 @@ class ModalMenu extends React.Component {
       submit_handler: null,
     };
   }
-  show_menu = (menu_type, submit_handler= null) => {
+  show_menu = (menu_type, data, submit_handler=null) => {
     // Create a blank form to reset it, and then create actual menu
     this.setState({
       menu_type: menu_type,
       submit_handler: submit_handler,
     }, () => {
+      if (menu_type == "create_barcode") {
+        JsBarcode("#barcode", data.location);
+      }
       $("#modalMenu").modal("show");
     });
   };
@@ -98,6 +101,12 @@ class ModalMenu extends React.Component {
           </div>
         </div>                                                                                                                                                                                                                                                                                                                          
       </div>);
+    } else if (this.state.menu_type == "create_barcode") {
+      return (<div>
+        <img id="barcode"></img>
+      </div>);
+    } else {
+      return ;
     }
   };
 

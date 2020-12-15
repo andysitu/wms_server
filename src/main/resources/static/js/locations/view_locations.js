@@ -27,8 +27,8 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.show_menu = function () {
-      _this.modalMenu.current.show_menu("create_location", _this.create_location);
+    _this.show_create_loc_menu = function () {
+      _this.modalMenu.current.show_menu("create_location", {}, _this.create_location);
     };
 
     _this.get_locations = function () {
@@ -37,7 +37,6 @@ var LocationTable = function (_React$Component) {
         type: "GET",
         url: "./locations",
         success: function success(locations) {
-          console.log(locations);
           that.setState({
             locations: locations
           });
@@ -59,7 +58,11 @@ var LocationTable = function (_React$Component) {
           that.setState({ locations: new_locations });
         }
       });
-      console.log(location_id);
+    };
+
+    _this.show_barcode = function (location_string) {
+      console.log(location_string);
+      _this.modalMenu.current.show_menu("create_barcode", { location: location_string });
     };
 
     _this.modalMenu = React.createRef();
@@ -82,7 +85,7 @@ var LocationTable = function (_React$Component) {
         null,
         React.createElement(
           "button",
-          { className: "btn btn-sm btn-primary", onClick: this.show_menu },
+          { className: "btn btn-sm btn-primary", onClick: this.show_create_loc_menu },
           React.createElement(
             "svg",
             { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-plus", viewBox: "0 0 16 16" },
@@ -141,6 +144,7 @@ var LocationTable = function (_React$Component) {
             this.state.locations.map(function (location) {
               return React.createElement(LocationRow, { key: location.id,
                 location: location,
+                show_barcode: _this2.show_barcode,
                 delete_location: _this2.delete_location
               });
             })
@@ -167,6 +171,10 @@ var LocationRow = function (_React$Component2) {
       if (result) {
         _this3.props.delete_location(_this3.state.location.id);
       }
+    };
+
+    _this3.onClick_show_barcode = function () {
+      _this3.props.show_barcode(_this3.get_location_string());
     };
 
     _this3.state = {
@@ -238,6 +246,15 @@ var LocationRow = function (_React$Component2) {
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
               React.createElement("path", { d: "M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" }),
               React.createElement("path", { fillRule: "evenodd", d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" })
+            )
+          ),
+          React.createElement(
+            "button",
+            { type: "button", className: "btn btn-sm btn-outline-dark", onClick: this.onClick_show_barcode },
+            React.createElement(
+              "svg",
+              { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
+              React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
             )
           )
         )

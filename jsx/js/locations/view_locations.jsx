@@ -21,8 +21,8 @@ class LocationTable extends React.Component {
     });
   };
 
-  show_menu = () => {
-    this.modalMenu.current.show_menu("create_location", this.create_location);
+  show_create_loc_menu = () => {
+    this.modalMenu.current.show_menu("create_location", {}, this.create_location);
   };
 
   get_locations = () => {
@@ -31,7 +31,6 @@ class LocationTable extends React.Component {
       type: "GET",
       url: "./locations",
       success: function(locations) {
-        console.log(locations);
         that.setState({
           locations: locations,
         });
@@ -54,12 +53,16 @@ class LocationTable extends React.Component {
         that.setState({locations: new_locations});
       },
     });
-    console.log(location_id);
-  }
+  };
+
+  show_barcode = (location_string) => {
+    console.log(location_string);
+    this.modalMenu.current.show_menu("create_barcode", {location: location_string,});
+  };
 
   render () {
     return (<div>
-      <button className="btn btn-sm btn-primary" onClick={this.show_menu}>
+      <button className="btn btn-sm btn-primary" onClick={this.show_create_loc_menu}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
         </svg>
@@ -81,7 +84,8 @@ class LocationTable extends React.Component {
           {this.state.locations.map((location) => {
             return (
               <LocationRow key={location.id} 
-                location={location} 
+                location={location}
+                show_barcode={this.show_barcode}
                 delete_location={this.delete_location}
                 />
             );
@@ -114,6 +118,10 @@ class LocationRow extends React.Component {
       this.props.delete_location(this.state.location.id);
     }
   }
+
+  onClick_show_barcode = () => {
+    this.props.show_barcode( this.get_location_string() );
+  }
   
   render() {
     return (
@@ -136,6 +144,11 @@ class LocationRow extends React.Component {
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
           </svg>
+        </button>
+        <button type="button" className="btn btn-sm btn-outline-dark" onClick={this.onClick_show_barcode}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
+          <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+        </svg>
         </button>
       </td>
     </tr>)
