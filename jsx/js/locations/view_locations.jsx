@@ -56,9 +56,18 @@ class LocationTable extends React.Component {
   };
 
   show_barcode = (location_string) => {
-    console.log(location_string);
     this.modalMenu.current.show_menu("create_barcode", {location: location_string,});
   };
+
+  onChange_top_checkbox = (e) => {
+    var is_checked = e.target.checked;
+    var checkboxes = document.getElementsByClassName("row-checkbox");
+    for (let i=0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked != is_checked) {
+        checkboxes[i].click();
+      }
+    }
+  }
 
   render () {
     return (<div>
@@ -72,7 +81,7 @@ class LocationTable extends React.Component {
         <thead>
           <tr>
             <th scope="col">
-              <input type="checkbox"></input>
+              <input type="checkbox" onChange={this.onChange_top_checkbox} />
             </th>
             <th scope="col">Area</th>
             <th scope="col">Loc</th>
@@ -126,7 +135,8 @@ class LocationRow extends React.Component {
     this.props.show_barcode( this.get_location_string() );
   };
 
-  onClick_checkbox = (e) => {
+  onChange_checkbox = (e) => {
+    console.log(e.target);
     var $tr = $(e.target).closest("tr");
     if (e.target.checked) {
       $tr.addClass("checked-row");
@@ -139,7 +149,7 @@ class LocationRow extends React.Component {
     return (
     <tr key={this.state.location.id}>
       <td><input type="checkbox" className="row-checkbox"
-            onChange={this.onClick_checkbox}></input></td>
+            onChange={this.onChange_checkbox}></input></td>
       <td>{this.state.location.area}</td>
       <td>{this.state.location.loc}</td>
       <td>{this.state.location.row}</td>

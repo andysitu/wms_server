@@ -61,8 +61,17 @@ var LocationTable = function (_React$Component) {
     };
 
     _this.show_barcode = function (location_string) {
-      console.log(location_string);
       _this.modalMenu.current.show_menu("create_barcode", { location: location_string });
+    };
+
+    _this.onChange_top_checkbox = function (e) {
+      var is_checked = e.target.checked;
+      var checkboxes = document.getElementsByClassName("row-checkbox");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked != is_checked) {
+          checkboxes[i].click();
+        }
+      }
     };
 
     _this.modalMenu = React.createRef();
@@ -104,7 +113,7 @@ var LocationTable = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                React.createElement("input", { type: "checkbox" })
+                React.createElement("input", { type: "checkbox", onChange: this.onChange_top_checkbox })
               ),
               React.createElement(
                 "th",
@@ -182,7 +191,8 @@ var LocationRow = function (_React$Component2) {
       _this3.props.show_barcode(_this3.get_location_string());
     };
 
-    _this3.onClick_checkbox = function (e) {
+    _this3.onChange_checkbox = function (e) {
+      console.log(e.target);
       var $tr = $(e.target).closest("tr");
       if (e.target.checked) {
         $tr.addClass("checked-row");
@@ -213,7 +223,7 @@ var LocationRow = function (_React$Component2) {
           "td",
           null,
           React.createElement("input", { type: "checkbox", className: "row-checkbox",
-            onChange: this.onClick_checkbox })
+            onChange: this.onChange_checkbox })
         ),
         React.createElement(
           "td",
