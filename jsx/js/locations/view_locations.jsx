@@ -38,7 +38,6 @@ class LocationTable extends React.Component {
       }
     });
   }
-
   delete_location = (location_id) => {
     console.log(location_id);
   }
@@ -88,8 +87,18 @@ class LocationRow extends React.Component {
     }
   }
 
+  get_location_string () {
+    var l = this.state.location;
+    return `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
+  }
+
+
   onClick_delete_btn = () => {
-    this.props.delete_location(this.state.location.id);
+    var result = window.confirm(
+      `Are you sure you want to delete ${this.get_location_string()}?`);
+    if (result) {
+      this.props.delete_location(this.state.location.id);
+    }
   }
   
   render() {

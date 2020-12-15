@@ -150,7 +150,10 @@ var LocationRow = function (_React$Component2) {
     var _this3 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
 
     _this3.onClick_delete_btn = function () {
-      _this3.props.delete_location(_this3.state.location.id);
+      var result = window.confirm("Are you sure you want to delete " + _this3.get_location_string() + "?");
+      if (result) {
+        _this3.props.delete_location(_this3.state.location.id);
+      }
     };
 
     _this3.state = {
@@ -160,6 +163,12 @@ var LocationRow = function (_React$Component2) {
   }
 
   _createClass(LocationRow, [{
+    key: "get_location_string",
+    value: function get_location_string() {
+      var l = this.state.location;
+      return l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
