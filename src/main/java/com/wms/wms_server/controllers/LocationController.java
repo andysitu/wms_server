@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.wms.wms_server.repository.LocationRepository;
 import com.wms.wms_server.services.LocationService;
 import com.wms.wms_server.model.Location;
+
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -52,6 +57,13 @@ public class LocationController {
     @GetMapping(value={"/"})
     public String view_index() {
         return "index";
+    }
+
+    @RequestMapping(path="/locations/{locationId}", produces="text/plain", method=RequestMethod.DELETE)
+    public ResponseEntity<String> delete_location(@PathVariable("locationId") String locationId) {
+        System.out.println("delete " + locationId);
+        locationRepository.deleteById(locationId);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
 
     @GetMapping(value={"/view_locations"})

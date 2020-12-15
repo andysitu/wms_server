@@ -48,6 +48,19 @@ var LocationTable = function (_React$Component) {
     };
 
     _this.delete_location = function (location_id) {
+      var that = _this;
+      $.ajax({
+        type: "DELETE",
+        url: "./locations/" + location_id,
+        success: function success(data) {
+          var new_locations = [],
+              l = that.state.locations;
+          for (var i = 0; i < l.length; i++) {
+            if (l[i].id != location_id) new_locations.push(Object.assign({}, l[i]));
+          }
+          that.setState({ locations: new_locations });
+        }
+      });
       console.log(location_id);
     };
 
@@ -58,6 +71,8 @@ var LocationTable = function (_React$Component) {
     _this.get_locations();
     return _this;
   }
+  // New Objects created are not deep copies (only use Object.assign)
+
 
   _createClass(LocationTable, [{
     key: "render",

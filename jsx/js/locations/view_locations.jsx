@@ -38,7 +38,22 @@ class LocationTable extends React.Component {
       }
     });
   }
+  // New Objects created are not deep copies (only use Object.assign)
   delete_location = (location_id) => {
+    var that = this;
+    $.ajax({
+      type: "DELETE",
+      url: "./locations/" + location_id,
+      success: function(data) {
+        var new_locations = [],
+            l = that.state.locations;
+        for (let i=0; i<l.length; i++) {
+          if (l[i].id != location_id)
+            new_locations.push(Object.assign({}, l[i]));
+        }
+        that.setState({locations: new_locations});
+      },
+    });
     console.log(location_id);
   }
 
@@ -91,7 +106,6 @@ class LocationRow extends React.Component {
     var l = this.state.location;
     return `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
   }
-
 
   onClick_delete_btn = () => {
     var result = window.confirm(
