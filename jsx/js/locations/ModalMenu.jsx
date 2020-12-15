@@ -6,12 +6,13 @@ class ModalMenu extends React.Component {
       submit_handler: null,
     };
   }
+  
   show_menu = (menu_type, data, submit_handler=null) => {
     // Create a blank form to reset it, and then create actual menu
     this.setState({
-      menu_type: menu_type,
-      submit_handler: submit_handler,
-    }, () => {
+        menu_type: menu_type,
+        submit_handler: submit_handler,
+      }, () => {
       if (menu_type == "create_barcode") {
         JsBarcode("#barcode", data.location);
       }
@@ -43,7 +44,7 @@ class ModalMenu extends React.Component {
     } else {
       return true;
     }
-  }
+  };
 
   create_menu = () => {
     if (this.state.menu_type == "none") {

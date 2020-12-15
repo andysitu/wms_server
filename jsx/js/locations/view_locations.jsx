@@ -1,7 +1,7 @@
 class LocationTable extends React.Component {
   constructor(props) {
     super(props);
-    this.modalMenu = React.createRef();
+    this.modalMenu = React.createRef();p
     this.state = {
       locations: [],
     }
@@ -36,7 +36,7 @@ class LocationTable extends React.Component {
         });
       }
     });
-  }
+  };
   // New Objects created are not deep copies (only use Object.assign)
   delete_location = (location_id) => {
     var that = this;
@@ -117,11 +117,11 @@ class LocationRow extends React.Component {
     if (result) {
       this.props.delete_location(this.state.location.id);
     }
-  }
+  };
 
   onClick_show_barcode = () => {
     this.props.show_barcode( this.get_location_string() );
-  }
+  };
   
   render() {
     return (
@@ -151,7 +151,7 @@ class LocationRow extends React.Component {
         </svg>
         </button>
       </td>
-    </tr>)
+    </tr>);
   }
 }
 

@@ -65,7 +65,7 @@ var LocationTable = function (_React$Component) {
       _this.modalMenu.current.show_menu("create_barcode", { location: location_string });
     };
 
-    _this.modalMenu = React.createRef();
+    _this.modalMenu = React.createRef();p;
     _this.state = {
       locations: []
     };
