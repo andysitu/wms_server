@@ -25,12 +25,21 @@ class LocationTable extends React.Component {
     this.modalMenu.current.show_menu("create_location", {}, this.create_location);
   };
 
+  // Changes location object to formatted data
+  convert_location(l) {
+    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
+  }
+
   get_locations = () => {
     var that = this;
     $.ajax({
       type: "GET",
       url: "./locations",
       success: function(locations) {
+        for(let l of locations) {
+          that.convert_location(l);
+        }
+        console.log(locations);
         that.setState({
           locations: locations,
         });
@@ -118,14 +127,9 @@ class LocationRow extends React.Component {
     }
   }
 
-  get_location_string () {
-    var l = this.state.location;
-    return `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
-  }
-
   onClick_delete_btn = () => {
     var result = window.confirm(
-      `Are you sure you want to delete ${this.get_location_string()}?`);
+      `Are you sure you want to delete ${this.location.location_string}?`);
     if (result) {
       this.props.delete_location(this.state.location.id);
     }

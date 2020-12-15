@@ -37,6 +37,32 @@ var LocationTable = function (_React$Component) {
         type: "GET",
         url: "./locations",
         success: function success(locations) {
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (var _iterator = locations[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var l = _step.value;
+
+              that.convert_location(l);
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
+          }
+
+          console.log(locations);
           that.setState({
             locations: locations
           });
@@ -181,7 +207,7 @@ var LocationRow = function (_React$Component2) {
     var _this3 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
 
     _this3.onClick_delete_btn = function () {
-      var result = window.confirm("Are you sure you want to delete " + _this3.get_location_string() + "?");
+      var result = window.confirm("Are you sure you want to delete " + _this3.location.location_string + "?");
       if (result) {
         _this3.props.delete_location(_this3.state.location.id);
       }
@@ -208,12 +234,6 @@ var LocationRow = function (_React$Component2) {
   }
 
   _createClass(LocationRow, [{
-    key: "get_location_string",
-    value: function get_location_string() {
-      var l = this.state.location;
-      return l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
