@@ -47,8 +47,8 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.onClick_delete_btn = function (e) {
-      console.log(e.target);
+    _this.delete_location = function (location_id) {
+      console.log(location_id);
     };
 
     _this.modalMenu = React.createRef();
@@ -128,7 +128,7 @@ var LocationTable = function (_React$Component) {
             this.state.locations.map(function (location) {
               return React.createElement(LocationRow, { key: location.id,
                 location: location,
-                onClick_delete_btn: _this2.onClick_delete_btn
+                delete_location: _this2.delete_location
               });
             })
           )
@@ -148,6 +148,10 @@ var LocationRow = function (_React$Component2) {
     _classCallCheck(this, LocationRow);
 
     var _this3 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
+
+    _this3.onClick_delete_btn = function () {
+      _this3.props.delete_location(_this3.state.location.id);
+    };
 
     _this3.state = {
       location: _this3.props.location
@@ -206,7 +210,7 @@ var LocationRow = function (_React$Component2) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-danger", onClick: this.props.onClick_delete_btn },
+            { type: "button", className: "btn btn-sm btn-outline-danger", onClick: this.onClick_delete_btn },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
