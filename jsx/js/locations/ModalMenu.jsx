@@ -46,6 +46,16 @@ class ModalMenu extends React.Component {
     }
   };
 
+  onClick_print_barcode = () => {
+    var new_window = window.open('', 'Print Barcode', "_blank");
+    new_window.document.write('<html><head><title>Print</title></head><body>');
+    new_window.document.write(document.getElementById("barcode-container").innerHTML);
+    new_window.document.write("</body></html>");
+    new_window.print();
+    new_window.close();
+    // new_window.onload = function() {window.print();}
+  }
+
   create_menu = () => {
     if (this.state.menu_type == "none") {
       return (<div></div>);
@@ -104,7 +114,15 @@ class ModalMenu extends React.Component {
       </div>);
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
-        <img id="barcode"></img>
+        <div>
+          <button type="button" className="btn btn-primary"
+            onClick={this.onClick_print_barcode}>Print</button>
+        </div>
+
+        <div id="barcode-container">
+          <img id="barcode"></img>
+        </div>
+        
       </div>);
     } else {
       return ;

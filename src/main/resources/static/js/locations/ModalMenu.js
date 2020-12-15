@@ -44,6 +44,16 @@ var ModalMenu = function (_React$Component) {
       }
     };
 
+    _this.onClick_print_barcode = function () {
+      var new_window = window.open('', 'Print Barcode', "_blank");
+      new_window.document.write('<html><head><title>Print</title></head><body>');
+      new_window.document.write(document.getElementById("barcode-container").innerHTML);
+      new_window.document.write("</body></html>");
+      new_window.print();
+      new_window.close();
+      // new_window.onload = function() {window.print();}
+    };
+
     _this.create_menu = function () {
       if (_this.state.menu_type == "none") {
         return React.createElement("div", null);
@@ -172,7 +182,21 @@ var ModalMenu = function (_React$Component) {
         return React.createElement(
           "div",
           null,
-          React.createElement("img", { id: "barcode" })
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-primary",
+                onClick: _this.onClick_print_barcode },
+              "Print"
+            )
+          ),
+          React.createElement(
+            "div",
+            { id: "barcode-container" },
+            React.createElement("img", { id: "barcode" })
+          )
         );
       } else {
         return;

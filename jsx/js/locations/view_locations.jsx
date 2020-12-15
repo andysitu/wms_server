@@ -1,7 +1,7 @@
 class LocationTable extends React.Component {
   constructor(props) {
     super(props);
-    this.modalMenu = React.createRef();p
+    this.modalMenu = React.createRef();
     this.state = {
       locations: [],
     }
@@ -36,7 +36,7 @@ class LocationTable extends React.Component {
         });
       }
     });
-  };
+  }
   // New Objects created are not deep copies (only use Object.assign)
   delete_location = (location_id) => {
     var that = this;
