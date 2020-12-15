@@ -37,10 +37,17 @@ class ModalMenu extends React.Component {
           <label>Location</label>
           <input type="text" className="form-control" min="0" name="loc" required></input>
         </div>
-        <div className="form-group">
-          <label>Row</label>
-          <input type="number" className="form-control" min="0" name="row" required></input>
+        <div className="form-row">
+          <div className="form-group col-sm-6">
+            <label>Start Row</label>
+            <input type="number" className="form-control" min="0" name="row_start" required></input>
+          </div>
+          <div className="form-group col-sm-6">
+            <label>End Row</label>
+            <input type="number" className="form-control" min="0" name="row_end" required></input>
         </div>
+        </div>
+        
         <div className="form-group">
           <label>Column</label>
           <input type="number" className="form-control" min="0" name="column" required></input>

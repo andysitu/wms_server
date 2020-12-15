@@ -55,13 +55,27 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            { className: "form-group" },
+            { className: "form-row" },
             React.createElement(
-              "label",
-              null,
-              "Row"
+              "div",
+              { className: "form-group col-sm-6" },
+              React.createElement(
+                "label",
+                null,
+                "Start Row"
+              ),
+              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_start", required: true })
             ),
-            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row", required: true })
+            React.createElement(
+              "div",
+              { className: "form-group col-sm-6" },
+              React.createElement(
+                "label",
+                null,
+                "End Row"
+              ),
+              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_end", required: true })
+            )
           ),
           React.createElement(
             "div",
