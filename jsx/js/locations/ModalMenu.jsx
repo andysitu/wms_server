@@ -137,6 +137,25 @@ class ModalMenu extends React.Component {
   };
   
   render() {
+    var footer;
+    if (this.state.submit_handler) {
+      footer = (
+        <div className="modal-footer">
+          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      );
+    } else {
+      footer = (
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      );
+    }
     return (<div className="modal" tabIndex="-1" role="dialog" id="modalMenu">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
@@ -150,12 +169,8 @@ class ModalMenu extends React.Component {
             <div className="modal-body">
               {this.create_menu()}
             </div>
-            <div className="modal-footer">
-              <button type="submit" className="btn btn-primary">Submit</button>
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">
-                Close
-              </button>
-            </div>
+            
+            {footer}
           </form>
         </div>
       </div>

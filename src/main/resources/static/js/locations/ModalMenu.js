@@ -245,6 +245,33 @@ var ModalMenu = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var footer;
+      if (this.state.submit_handler) {
+        footer = React.createElement(
+          "div",
+          { className: "modal-footer" },
+          React.createElement(
+            "button",
+            { type: "submit", className: "btn btn-primary" },
+            "Submit"
+          ),
+          React.createElement(
+            "button",
+            { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+            "Close"
+          )
+        );
+      } else {
+        footer = React.createElement(
+          "div",
+          { className: "modal-footer" },
+          React.createElement(
+            "button",
+            { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+            "Close"
+          )
+        );
+      }
       return React.createElement(
         "div",
         { className: "modal", tabIndex: "-1", role: "dialog", id: "modalMenu" },
@@ -280,20 +307,7 @@ var ModalMenu = function (_React$Component) {
                 { className: "modal-body" },
                 this.create_menu()
               ),
-              React.createElement(
-                "div",
-                { className: "modal-footer" },
-                React.createElement(
-                  "button",
-                  { type: "submit", className: "btn btn-primary" },
-                  "Submit"
-                ),
-                React.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
-                  "Close"
-                )
-              )
+              footer
             )
           )
         )
