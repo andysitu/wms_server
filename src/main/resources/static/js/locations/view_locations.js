@@ -62,6 +62,8 @@ var LocationTable = function (_React$Component) {
   _createClass(LocationTable, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return React.createElement(
         "div",
         null,
@@ -124,7 +126,10 @@ var LocationTable = function (_React$Component) {
             "tbody",
             null,
             this.state.locations.map(function (location) {
-              return React.createElement(LocationRow, { key: location.id, location: location });
+              return React.createElement(LocationRow, { key: location.id,
+                location: location,
+                onClick_delete_btn: _this2.onClick_delete_btn
+              });
             })
           )
         ),
@@ -142,12 +147,12 @@ var LocationRow = function (_React$Component2) {
   function LocationRow(props) {
     _classCallCheck(this, LocationRow);
 
-    var _this2 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
 
-    _this2.state = {
-      location: _this2.props.location
+    _this3.state = {
+      location: _this3.props.location
     };
-    return _this2;
+    return _this3;
   }
 
   _createClass(LocationRow, [{
@@ -201,7 +206,7 @@ var LocationRow = function (_React$Component2) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-danger" },
+            { type: "button", className: "btn btn-sm btn-outline-danger", onClick: this.props.onClick_delete_btn },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
