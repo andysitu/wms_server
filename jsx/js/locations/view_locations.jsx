@@ -172,7 +172,7 @@ class LocationRow extends React.Component {
 
   onClick_delete_btn = () => {
     var result = window.confirm(
-      `Are you sure you want to delete ${this.location.location_string}?`);
+      `Are you sure you want to delete ${this.state.location.location_string}?`);
     if (result) {
       this.props.delete_location(this.state.location.id);
     }

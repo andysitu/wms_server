@@ -286,7 +286,7 @@ var LocationRow = function (_React$Component2) {
     var _this3 = _possibleConstructorReturn(this, (LocationRow.__proto__ || Object.getPrototypeOf(LocationRow)).call(this, props));
 
     _this3.onClick_delete_btn = function () {
-      var result = window.confirm("Are you sure you want to delete " + _this3.location.location_string + "?");
+      var result = window.confirm("Are you sure you want to delete " + _this3.state.location.location_string + "?");
       if (result) {
         _this3.props.delete_location(_this3.state.location.id);
       }
