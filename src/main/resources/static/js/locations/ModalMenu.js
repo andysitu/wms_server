@@ -308,6 +308,10 @@ var ModalMenu = function (_React$Component) {
         _this2.setState({ menu_type: "none" });
       });
     }
+    // Print all the barcodes shown in the menu in new window
+
+    // Save multiple barcodes into png file
+
   }, {
     key: "render",
     value: function render() {

@@ -51,7 +51,7 @@ class ModalMenu extends React.Component {
       return true;
     }
   };
-
+  // Print all the barcodes shown in the menu in new window
   onClick_print_barcode = () => {
     var new_window = window.open('', 'Print Barcode', "_blank");
     new_window.document.write('<html><head><title>Print</title></head><body>');
@@ -61,6 +61,7 @@ class ModalMenu extends React.Component {
     new_window.close();
     // new_window.onload = function() {window.print();}
   }
+  // Save multiple barcodes into png file
   onClick_save_barcode = () => {
     let imgs = document.getElementsByClassName("barcode-img");
     var link, index;
@@ -145,11 +146,11 @@ class ModalMenu extends React.Component {
               return (
                 <div key={"barcode_div_" + index}>
                   <img key={"barcode_img_" + index} className="barcode-img"
-                    id={"barcode_"+index} index={index}></img></div>);
+                    id={"barcode_"+index} index={index} />
+                </div>);
             })
           }
         </div>
-        
       </div>);
     } else {
       return ;

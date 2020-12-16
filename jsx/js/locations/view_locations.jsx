@@ -151,10 +151,6 @@ class LocationRow extends React.Component {
     }
   };
 
-  // onClick_show_barcode = () => {
-  //   this.props.show_barcode( this.get_location_string() );
-  // };
-
   onChange_checkbox = (e) => {
     var $tr = $(e.target).closest("tr");
     if (e.target.checked) {

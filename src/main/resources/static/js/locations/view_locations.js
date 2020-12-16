@@ -277,10 +277,6 @@ var LocationRow = function (_React$Component2) {
     return _this3;
   }
 
-  // onClick_show_barcode = () => {
-  //   this.props.show_barcode( this.get_location_string() );
-  // };
-
   _createClass(LocationRow, [{
     key: "render",
     value: function render() {
