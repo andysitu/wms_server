@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import com.wms.wms_server.model.user.User;
+
 import com.wms.wms_server.model.response.LocationResponse;
 import com.wms.wms_server.model.request.LocationRequest;
 
