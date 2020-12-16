@@ -9,6 +9,7 @@ class ModalMenu extends React.Component {
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
+    console.log(data);
     // Create a blank form to reset it, and then create actual menu
     this.setState({
         menu_type: menu_type,
@@ -17,7 +18,9 @@ class ModalMenu extends React.Component {
       }, () => {
       if (menu_type == "create_barcode") {
         // Set the barcode after img element is set
-        JsBarcode("#barcode", data.location);
+        for (let i=0; i < this.state.data.location_strings.length; i++) {
+          JsBarcode("#barcode_" + i, data.location_strings[i]);
+        }
       }
       $("#modalMenu").modal("show");
     });
@@ -132,7 +135,12 @@ class ModalMenu extends React.Component {
         </div>
 
         <div id="barcode-container">
-          <img id="barcode"></img>
+          {this.state.data.location_strings.map(
+            (location_string, index) => {
+              return (<img key={"barcode_img_" + index}
+                id={"barcode_"+index}></img>);
+            })
+          }
         </div>
         
       </div>);

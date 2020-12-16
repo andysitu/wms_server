@@ -30,6 +30,11 @@ class LocationTable extends React.Component {
     l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
   }
 
+  // Changes location object to formatted data
+  convert_location(l) {
+    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
+  }
+
   get_locations = () => {
     var that = this;
     $.ajax({
@@ -64,8 +69,15 @@ class LocationTable extends React.Component {
     });
   };
 
-  show_barcode = (location_string) => {
-    this.modalMenu.current.show_menu("create_barcode", {location: location_string,});
+  show_barcodes = (location_string) => {
+    var checkboxes = document.querySelectorAll(".row-checkbox:checked");
+    var locations = [],
+        index;
+    for (let cbox of checkboxes) {
+      index = cbox.getAttribute("row_index");
+      locations.push(this.state.locations[index].location_string);
+    }
+    this.modalMenu.current.show_menu("create_barcode", {location_strings: locations,});
   };
 
   onChange_top_checkbox = (e) => {
@@ -85,6 +97,12 @@ class LocationTable extends React.Component {
           <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
         </svg>
       </button>
+      <button type="button" className="btn btn-sm btn-outline-dark" 
+          onClick={this.show_barcodes}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
+          <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+        </svg>
+      </button>
 
       <table className="table table-sm">
         <thead>
@@ -102,9 +120,10 @@ class LocationTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.locations.map((location) => {
+          {this.state.locations.map((location, index) => {
             return (
               <LocationRow key={location.id} 
+                index={index}
                 location={location}
                 show_barcode={this.show_barcode}
                 delete_location={this.delete_location}
@@ -135,12 +154,11 @@ class LocationRow extends React.Component {
     }
   };
 
-  onClick_show_barcode = () => {
-    this.props.show_barcode( this.get_location_string() );
-  };
+  // onClick_show_barcode = () => {
+  //   this.props.show_barcode( this.get_location_string() );
+  // };
 
   onChange_checkbox = (e) => {
-    console.log(e.target);
     var $tr = $(e.target).closest("tr");
     if (e.target.checked) {
       $tr.addClass("checked-row");
@@ -152,7 +170,7 @@ class LocationRow extends React.Component {
   render() {
     return (
     <tr key={this.state.location.id}>
-      <td><input type="checkbox" className="row-checkbox"
+      <td><input type="checkbox" className="row-checkbox" row_index={this.props.index}
             onChange={this.onChange_checkbox}></input></td>
       <td>{this.state.location.area}</td>
       <td>{this.state.location.loc}</td>
@@ -172,11 +190,6 @@ class LocationRow extends React.Component {
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
           </svg>
-        </button>
-        <button type="button" className="btn btn-sm btn-outline-dark" onClick={this.onClick_show_barcode}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
-          <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
-        </svg>
         </button>
       </td>
     </tr>);

@@ -86,8 +86,37 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.show_barcode = function (location_string) {
-      _this.modalMenu.current.show_menu("create_barcode", { location: location_string });
+    _this.show_barcodes = function (location_string) {
+      var checkboxes = document.querySelectorAll(".row-checkbox:checked");
+      var locations = [],
+          index;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = checkboxes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var cbox = _step2.value;
+
+          index = cbox.getAttribute("row_index");
+          locations.push(_this.state.locations[index].location_string);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      _this.modalMenu.current.show_menu("create_barcode", { location_strings: locations });
     };
 
     _this.onChange_top_checkbox = function (e) {
@@ -107,10 +136,26 @@ var LocationTable = function (_React$Component) {
     _this.get_locations();
     return _this;
   }
-  // New Objects created are not deep copies (only use Object.assign)
-
 
   _createClass(LocationTable, [{
+    key: "convert_location",
+
+
+    // Changes location object to formatted data
+    value: function convert_location(l) {
+      l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
+    }
+
+    // Changes location object to formatted data
+
+  }, {
+    key: "convert_location",
+    value: function convert_location(l) {
+      l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
+    }
+    // New Objects created are not deep copies (only use Object.assign)
+
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -125,6 +170,16 @@ var LocationTable = function (_React$Component) {
             "svg",
             { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-plus", viewBox: "0 0 16 16" },
             React.createElement("path", { fillRule: "evenodd", d: "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" })
+          )
+        ),
+        React.createElement(
+          "button",
+          { type: "button", className: "btn btn-sm btn-outline-dark",
+            onClick: this.show_barcodes },
+          React.createElement(
+            "svg",
+            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
+            React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
           )
         ),
         React.createElement(
@@ -181,8 +236,9 @@ var LocationTable = function (_React$Component) {
           React.createElement(
             "tbody",
             null,
-            this.state.locations.map(function (location) {
+            this.state.locations.map(function (location, index) {
               return React.createElement(LocationRow, { key: location.id,
+                index: index,
                 location: location,
                 show_barcode: _this2.show_barcode,
                 delete_location: _this2.delete_location
@@ -213,12 +269,7 @@ var LocationRow = function (_React$Component2) {
       }
     };
 
-    _this3.onClick_show_barcode = function () {
-      _this3.props.show_barcode(_this3.get_location_string());
-    };
-
     _this3.onChange_checkbox = function (e) {
-      console.log(e.target);
       var $tr = $(e.target).closest("tr");
       if (e.target.checked) {
         $tr.addClass("checked-row");
@@ -233,6 +284,10 @@ var LocationRow = function (_React$Component2) {
     return _this3;
   }
 
+  // onClick_show_barcode = () => {
+  //   this.props.show_barcode( this.get_location_string() );
+  // };
+
   _createClass(LocationRow, [{
     key: "render",
     value: function render() {
@@ -242,7 +297,7 @@ var LocationRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          React.createElement("input", { type: "checkbox", className: "row-checkbox",
+          React.createElement("input", { type: "checkbox", className: "row-checkbox", row_index: this.props.index,
             onChange: this.onChange_checkbox })
         ),
         React.createElement(
@@ -296,15 +351,6 @@ var LocationRow = function (_React$Component2) {
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
               React.createElement("path", { d: "M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" }),
               React.createElement("path", { fillRule: "evenodd", d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" })
-            )
-          ),
-          React.createElement(
-            "button",
-            { type: "button", className: "btn btn-sm btn-outline-dark", onClick: this.onClick_show_barcode },
-            React.createElement(
-              "svg",
-              { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
-              React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
             )
           )
         )

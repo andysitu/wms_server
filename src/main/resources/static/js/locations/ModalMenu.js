@@ -17,6 +17,7 @@ var ModalMenu = function (_React$Component) {
     _this.show_menu = function (menu_type, data) {
       var submit_handler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
+      console.log(data);
       // Create a blank form to reset it, and then create actual menu
       _this.setState({
         menu_type: menu_type,
@@ -25,7 +26,9 @@ var ModalMenu = function (_React$Component) {
       }, function () {
         if (menu_type == "create_barcode") {
           // Set the barcode after img element is set
-          JsBarcode("#barcode", data.location);
+          for (var i = 0; i < _this.state.data.location_strings.length; i++) {
+            JsBarcode("#barcode_" + i, data.location_strings[i]);
+          }
         }
         $("#modalMenu").modal("show");
       });
@@ -210,7 +213,10 @@ var ModalMenu = function (_React$Component) {
           React.createElement(
             "div",
             { id: "barcode-container" },
-            React.createElement("img", { id: "barcode" })
+            _this.state.data.location_strings.map(function (location_string, index) {
+              return React.createElement("img", { key: "barcode_img_" + index,
+                id: "barcode_" + index });
+            })
           )
         );
       } else {
