@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import com.wms.wms_server.model.User;
+import com.wms.wms_server.model.user.User;
 
 
 @RestController
