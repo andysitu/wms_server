@@ -4,7 +4,10 @@ class LocationTable extends React.Component {
     this.modalMenu = React.createRef();
     this.state = {
       locations: [],
+      
     }
+    this.prev_clicked_index = null;
+    this.prev_clicked_checked = null;
     this.get_locations();
   }
 
@@ -87,6 +90,29 @@ class LocationTable extends React.Component {
     }
   }
 
+  onClick_row_checkbox = (e) => {
+    var cur_row = parseInt(e.target.getAttribute("row_index"));
+    if (this.prev_clicked_index != null && e.shiftKey && 
+          cur_row != this.prev_clicked_index) {
+      // e.preventDefault();
+      var start, end, box;
+      if (cur_row > this.prev_clicked_index) {
+        [start, end] = [this.prev_clicked_index, cur_row];
+      } else {
+        [end, start] = [this.prev_clicked_index, cur_row];
+      }
+      
+      for (let i=start; i < end+1; i++) {
+        box = document.getElementById("row-checkbox-" + i);
+        if (box.checked != this.prev_clicked_checked) {
+          box.click();
+        }
+      }
+    }
+    this.prev_clicked_index = parseInt(e.target.getAttribute("row_index"));
+    this.prev_clicked_checked = e.target.checked;
+  }
+
   render () {
     return (<div>
       <button className="btn btn-sm btn-primary" onClick={this.show_create_loc_menu}>
@@ -123,6 +149,7 @@ class LocationTable extends React.Component {
                 index={index}
                 location={location}
                 show_barcode={this.show_barcode}
+                onClick_row_checkbox={this.onClick_row_checkbox}
                 delete_location={this.delete_location}
                 />
             );
@@ -151,6 +178,9 @@ class LocationRow extends React.Component {
     }
   };
 
+  onClick_checkbox = (e) => {
+    this.props.onClick_row_checkbox(e);
+  }
   onChange_checkbox = (e) => {
     var $tr = $(e.target).closest("tr");
     if (e.target.checked) {
@@ -164,7 +194,10 @@ class LocationRow extends React.Component {
     return (
     <tr key={this.state.location.id}>
       <td><input type="checkbox" className="row-checkbox" row_index={this.props.index}
-            onChange={this.onChange_checkbox}></input></td>
+            id={"row-checkbox-"+this.props.index} 
+            onClick={this.onClick_checkbox}
+            onChange={this.onChange_checkbox}
+            ></input></td>
       <td>{this.state.location.area}</td>
       <td>{this.state.location.loc}</td>
       <td>{this.state.location.row}</td>

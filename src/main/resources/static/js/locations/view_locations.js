@@ -130,10 +130,39 @@ var LocationTable = function (_React$Component) {
       }
     };
 
+    _this.onClick_row_checkbox = function (e) {
+      var cur_row = parseInt(e.target.getAttribute("row_index"));
+      if (_this.prev_clicked_index != null && e.shiftKey && cur_row != _this.prev_clicked_index) {
+        // e.preventDefault();
+        var start, end, box;
+        if (cur_row > _this.prev_clicked_index) {
+          var _ref = [_this.prev_clicked_index, cur_row];
+          start = _ref[0];
+          end = _ref[1];
+        } else {
+          var _ref2 = [_this.prev_clicked_index, cur_row];
+          end = _ref2[0];
+          start = _ref2[1];
+        }
+
+        for (var i = start; i < end + 1; i++) {
+          box = document.getElementById("row-checkbox-" + i);
+          if (box.checked != _this.prev_clicked_checked) {
+            box.click();
+          }
+        }
+      }
+      _this.prev_clicked_index = parseInt(e.target.getAttribute("row_index"));
+      _this.prev_clicked_checked = e.target.checked;
+    };
+
     _this.modalMenu = React.createRef();
     _this.state = {
       locations: []
+
     };
+    _this.prev_clicked_index = null;
+    _this.prev_clicked_checked = null;
     _this.get_locations();
     return _this;
   }
@@ -234,6 +263,7 @@ var LocationTable = function (_React$Component) {
                 index: index,
                 location: location,
                 show_barcode: _this2.show_barcode,
+                onClick_row_checkbox: _this2.onClick_row_checkbox,
                 delete_location: _this2.delete_location
               });
             })
@@ -262,6 +292,10 @@ var LocationRow = function (_React$Component2) {
       }
     };
 
+    _this3.onClick_checkbox = function (e) {
+      _this3.props.onClick_row_checkbox(e);
+    };
+
     _this3.onChange_checkbox = function (e) {
       var $tr = $(e.target).closest("tr");
       if (e.target.checked) {
@@ -287,7 +321,10 @@ var LocationRow = function (_React$Component2) {
           "td",
           null,
           React.createElement("input", { type: "checkbox", className: "row-checkbox", row_index: this.props.index,
-            onChange: this.onChange_checkbox })
+            id: "row-checkbox-" + this.props.index,
+            onClick: this.onClick_checkbox,
+            onChange: this.onChange_checkbox
+          })
         ),
         React.createElement(
           "td",
