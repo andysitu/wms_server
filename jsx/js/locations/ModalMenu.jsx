@@ -137,8 +137,10 @@ class ModalMenu extends React.Component {
         <div id="barcode-container">
           {this.state.data.location_strings.map(
             (location_string, index) => {
-              return (<img key={"barcode_img_" + index}
-                id={"barcode_"+index}></img>);
+              return (
+                <div>
+                  <img key={"barcode_img_" + index}
+                    id={"barcode_"+index}></img></div>);
             })
           }
         </div>

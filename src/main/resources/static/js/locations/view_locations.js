@@ -90,6 +90,7 @@ var LocationTable = function (_React$Component) {
       var checkboxes = document.querySelectorAll(".row-checkbox:checked");
       var locations = [],
           index;
+      if (checkboxes.length == 0) return;
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
@@ -142,14 +143,6 @@ var LocationTable = function (_React$Component) {
 
 
     // Changes location object to formatted data
-    value: function convert_location(l) {
-      l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
-    }
-
-    // Changes location object to formatted data
-
-  }, {
-    key: "convert_location",
     value: function convert_location(l) {
       l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
     }

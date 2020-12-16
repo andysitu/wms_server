@@ -30,11 +30,6 @@ class LocationTable extends React.Component {
     l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
   }
 
-  // Changes location object to formatted data
-  convert_location(l) {
-    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
-  }
-
   get_locations = () => {
     var that = this;
     $.ajax({
@@ -73,6 +68,8 @@ class LocationTable extends React.Component {
     var checkboxes = document.querySelectorAll(".row-checkbox:checked");
     var locations = [],
         index;
+    if (checkboxes.length == 0)
+      return;
     for (let cbox of checkboxes) {
       index = cbox.getAttribute("row_index");
       locations.push(this.state.locations[index].location_string);

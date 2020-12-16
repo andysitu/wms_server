@@ -214,8 +214,12 @@ var ModalMenu = function (_React$Component) {
             "div",
             { id: "barcode-container" },
             _this.state.data.location_strings.map(function (location_string, index) {
-              return React.createElement("img", { key: "barcode_img_" + index,
-                id: "barcode_" + index });
+              return React.createElement(
+                "div",
+                null,
+                React.createElement("img", { key: "barcode_img_" + index,
+                  id: "barcode_" + index })
+              );
             })
           )
         );
