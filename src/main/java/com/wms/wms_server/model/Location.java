@@ -1,10 +1,10 @@
 package com.wms.wms_server.model;
 
-import org.springframework.stereotype.Component;
-
 import org.springframework.data.annotation.Id;
 
-@Component
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="location")
 public class Location {
     @Id
     private String id;
@@ -15,9 +15,7 @@ public class Location {
     private int column;
     private int level;
     private int shelf;
-
-    private String type;
-    
+        
     public Location() {
 
     }
