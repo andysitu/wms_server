@@ -4,6 +4,11 @@ import org.springframework.data.annotation.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.util.Date;
+
 @Document(collection="location")
 public class Location {
     @Id
@@ -15,6 +20,11 @@ public class Location {
     private int column;
     private int level;
     private int shelf;
+
+    @CreatedDate
+    private Date createdDate;
+    @LastModifiedDate
+    private Date lastModifiedDate;
         
     public Location() {
 
