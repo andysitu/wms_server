@@ -60,10 +60,15 @@ var ModalMenu = function (_React$Component) {
     };
 
     _this.onClick_save_barcode = function () {
-      var link = document.createElement("a");
-      link.setAttribute("href", document.getElementById("barcode").src);
-      link.setAttribute("download", _this.state.data.location.replaceAll(".", "-") + ".png");
-      link.click();
+      var imgs = document.getElementsByClassName("barcode-img");
+      var link, index;
+      for (var i = 0; i < imgs.length; i++) {
+        index = imgs[i].getAttribute("index");
+        link = document.createElement("a");
+        link.setAttribute("href", imgs[i].src);
+        link.setAttribute("download", _this.state.data.location_strings[index].replaceAll(".", "-") + ".png");
+        link.click();
+      }
     };
 
     _this.create_menu = function () {
@@ -216,9 +221,9 @@ var ModalMenu = function (_React$Component) {
             _this.state.data.location_strings.map(function (location_string, index) {
               return React.createElement(
                 "div",
-                null,
-                React.createElement("img", { key: "barcode_img_" + index,
-                  id: "barcode_" + index })
+                { key: "barcode_div_" + index },
+                React.createElement("img", { key: "barcode_img_" + index, className: "barcode-img",
+                  id: "barcode_" + index, index: index })
               );
             })
           )

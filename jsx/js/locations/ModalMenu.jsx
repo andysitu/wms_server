@@ -62,10 +62,15 @@ class ModalMenu extends React.Component {
     // new_window.onload = function() {window.print();}
   }
   onClick_save_barcode = () => {
-    var link = document.createElement("a");
-    link.setAttribute("href", document.getElementById("barcode").src);
-    link.setAttribute("download", this.state.data.location.replaceAll(".", "-") + ".png");
-    link.click();
+    let imgs = document.getElementsByClassName("barcode-img");
+    var link, index;
+    for (let i=0; i<imgs.length; i++) {
+      index = imgs[i].getAttribute("index");
+      link = document.createElement("a");
+      link.setAttribute("href", imgs[i].src);
+      link.setAttribute("download", this.state.data.location_strings[index].replaceAll(".", "-") + ".png");
+      link.click();
+    }
   }
 
 
@@ -138,9 +143,9 @@ class ModalMenu extends React.Component {
           {this.state.data.location_strings.map(
             (location_string, index) => {
               return (
-                <div>
-                  <img key={"barcode_img_" + index}
-                    id={"barcode_"+index}></img></div>);
+                <div key={"barcode_div_" + index}>
+                  <img key={"barcode_img_" + index} className="barcode-img"
+                    id={"barcode_"+index} index={index}></img></div>);
             })
           }
         </div>
