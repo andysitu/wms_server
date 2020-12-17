@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.wms.wms_server.repository.LocationRepository;
+import com.wms.wms_server.repository.UserRepository;
 import com.wms.wms_server.services.LocationService;
 import com.wms.wms_server.model.Location;
 
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private LocationService locationService;
@@ -73,5 +76,17 @@ public class LocationController {
     @GetMapping(value={"/view_locations"})
     public String view_locations() {
         return "locations/view_locations";
+    }
+
+    @GetMapping(value={"/create_user"})
+    @ResponseBody
+    public String create_user() {
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            User u = new User("email@test.com", "usera", "password");
+            userRepository.save(u);
+            System.out.println("created user");
+        }
+        return "HELLO";
     }
 }
