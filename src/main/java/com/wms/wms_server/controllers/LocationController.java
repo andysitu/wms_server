@@ -41,6 +41,7 @@ public class LocationController {
     public List<LocationResponse> get_locations() {
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
+            System.out.println(loc.getCreatedDate());
             locs.add(locationService.convertLocation(loc));
         }
         return locs;

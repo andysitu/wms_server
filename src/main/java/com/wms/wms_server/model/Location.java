@@ -60,4 +60,10 @@ public class Location {
     public int getShelf() {
         return this.shelf;
     }
+    public Date getCreatedDate() {
+        return new Date(this.createdDate.getTime());
+    }
+    public Date getModifiedDate() {
+        return new Date(this.lastModifiedDate.getTime());
+    }
 }
