@@ -44,7 +44,6 @@ public class LocationController {
     public List<LocationResponse> get_locations() {
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
-            System.out.println(loc.getCreatedDate());
             locs.add(locationService.convertLocation(loc));
         }
         return locs;
@@ -61,10 +60,10 @@ public class LocationController {
         return locs;
     }
 
-    @GetMapping(value={"/"})
-    public String view_index() {
-        return "index";
-    }
+    // @GetMapping(value={"/"})
+    // public String view_index() {
+    //     return "index";
+    // }
 
     @RequestMapping(path="/locations/{locationId}", produces="text/plain", method=RequestMethod.DELETE)
     public ResponseEntity<String> delete_location(@PathVariable("locationId") String locationId) {
