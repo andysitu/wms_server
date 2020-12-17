@@ -1,31 +1,34 @@
 package com.wms.wms_server.model.user;
 
-import org.springframework.stereotype.Component;
-
 import org.springframework.data.annotation.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-// @Component
 public class User {
     @Id
     private String id;
     private String email;
     private String password;
-    private String user;
+    private String username;
 
     public User() {
         super();
     }
 
-    public User(String email, String password, String user) {
+    public User(String email, String username, String password) {
         this.email = email;
-        this.user = user;
+        this.username = username;
         this.password = password;
     }
 
     public String getEmail() {
         return email;
+    }
+    public String getPassword() {
+        return this.password;
+    }
+    public String getUsername() {
+        return this.username;
     }
 }
