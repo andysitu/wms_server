@@ -9,16 +9,22 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.Map;
+import java.util.HashMap;
+
+import com.wms.wms_server.services.OAuthUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootApplication
 @EnableMongoAuditing
 @RestController
 public class WmsServerApplication {
+	@Autowired
+	OAuthUserService oAuthUserService;
+	
 	@GetMapping("/user") 
 	public  Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-		return Collections.singletonMap("name", principal.getAttribute("name"));
+		return oAuthUserService.getUser(principal);
 	}
 
 	public static void main(String[] args) {
