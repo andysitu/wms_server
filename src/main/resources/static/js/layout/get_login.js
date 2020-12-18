@@ -1,6 +1,18 @@
+var log_helper = {
+  logout() {
+    $.ajax({
+      url: "/logout",
+      success: function() {
+        $(".unauthenticated").show()
+        $(".authenticated").hide()
+      },
+    });
+  }
+}
+
 window.onload = function() {
   $.ajax({
-    url: "../user",
+    url: "/user",
     type: "GET",
     success: function(data) {
       console.log(data);
@@ -12,7 +24,6 @@ window.onload = function() {
         $(".unauthenticated").show()
         $(".authenticated").hide()
       }
-
     },
   });
 };

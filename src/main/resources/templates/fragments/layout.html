@@ -17,12 +17,16 @@
           <a class="nav-link" href="/view_locations">Locs</a>
         </li>
       </ul>
-      <span class="navbar-text unauthenticated">
+      <div class="navbar-text unauthenticated">
         <a href="/oauth2/authorization/google">Login</a>
-      </span>
-      <span class="navbar-text authenticated">
-        Logged in as : <span id="username-span"></span>
-      </span>
+      </div>
+      <div class="authenticated">
+        <span class="navbar-text">
+          Logged in as : <span id="username-span"></span>
+        </span>
+        <button class="btn btn-primary btn-sm" onClick="log_helper.logout()">Logout</button>
+      </div>
+      
     </div>
   </nav>
 
