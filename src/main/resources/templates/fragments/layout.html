@@ -8,8 +8,8 @@
 </head>
 <body th:fragment="bodyFragment">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div className="collapse navbar-collapse">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
@@ -17,6 +17,9 @@
           <a class="nav-link" href="/view_locations">Locs</a>
         </li>
       </ul>
+      <span class="navbar-text">
+        <a href="/oauth2/authorization/google">Login</a>
+      </span>
     </div>
   </nav>
   
