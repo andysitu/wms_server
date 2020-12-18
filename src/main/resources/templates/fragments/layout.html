@@ -17,12 +17,16 @@
           <a class="nav-link" href="/view_locations">Locs</a>
         </li>
       </ul>
-      <span class="navbar-text">
+      <span class="navbar-text unauthenticated">
         <a href="/oauth2/authorization/google">Login</a>
+      </span>
+      <span class="navbar-text authenticated">
+        Logged in as : <span id="username-span"></span>
       </span>
     </div>
   </nav>
-  
+
+  <script src="/js/layout/get_login.js"></script>  
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
