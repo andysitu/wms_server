@@ -18,11 +18,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/", "/error", "/login").permitAll()
             .anyRequest().authenticated()
         )
-        .exceptionHandling( e-> {
-            System.out.println(e);
-            e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-        })
-        .oauth2Login()
-            .loginPage("/login");
+        .oauth2Login();
     }
 }
