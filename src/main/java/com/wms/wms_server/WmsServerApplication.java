@@ -3,7 +3,6 @@ package com.wms.wms_server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,7 +10,6 @@ import com.wms.wms_server.services.OAuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootApplication
-@EnableMongoAuditing
 @Controller
 public class WmsServerApplication {
 	@Autowired
