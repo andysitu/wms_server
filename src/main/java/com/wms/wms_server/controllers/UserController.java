@@ -24,4 +24,9 @@ public class UserController {
 		User u = oAuthUserService.getOrMakeUser(principal);
 		return new UserResponse(u.getSub(), u.getName(), u.getEmail());
 	}
+
+	@GetMapping("/view_users")
+	public String view_users(@AuthenticationPrincipal OAuth2User principal) {
+		return "users/view_users";
+	}
 }
