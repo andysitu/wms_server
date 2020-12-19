@@ -26,8 +26,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import com.wms.wms_server.services.OAuthUserService;
 
 @Controller
 public class LocationController {
@@ -35,13 +40,19 @@ public class LocationController {
     private LocationRepository locationRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+	OAuthUserService oAuthUserService;
 
     @Autowired
     private LocationService locationService;
 
     @GetMapping("/locations")
     @ResponseBody
-    public List<LocationResponse> get_locations() {
+    public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
+        Map<String, Object> u = oAuthUserService.getUser(principal);
+        for (Map.Entry<String, Object> entry : u.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
             locs.add(locationService.convertLocation(loc));
