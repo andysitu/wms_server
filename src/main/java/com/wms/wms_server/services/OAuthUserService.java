@@ -16,7 +16,7 @@ public class OAuthUserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUser(@AuthenticationPrincipal OAuth2User principal) {
+    public User getOrMakeUser(@AuthenticationPrincipal OAuth2User principal) {
         // Map<String, Object> h = new HashMap<String, Object>();
 		// h.put("name", principal.getAttribute("name"));
         // h.put("email", principal.getAttribute("email"));

@@ -21,6 +21,6 @@ public class UserController {
     @GetMapping("/user")
 	@ResponseBody
 	public  String user(@AuthenticationPrincipal OAuth2User principal) {
-		return oAuthUserService.getUser(principal).toString();
+		return oAuthUserService.getOrMakeUser(principal).toString();
 	}
 }
