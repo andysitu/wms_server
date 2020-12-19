@@ -46,10 +46,8 @@ public class LocationController {
     @ResponseBody
     public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
         // Test print out oauth user  unfo
-        Map<String, Object> u = oAuthUserService.getUser(principal);
-        for (Map.Entry<String, Object> entry : u.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
+        User u = oAuthUserService.getUser(principal);
+        System.out.println(u);
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
             System.out.println(loc.created);
