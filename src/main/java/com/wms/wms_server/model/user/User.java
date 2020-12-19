@@ -29,6 +29,9 @@ public class User {
     public String getName() {
         return name;
     }
+    public String getSub() {
+        return this.sub;
+    }
 
     public String toString() {
         return "Sub: " + this.sub + "\nEmail: " + this.email + "\nName " + this.name;

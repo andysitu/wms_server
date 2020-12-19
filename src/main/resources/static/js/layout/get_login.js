@@ -39,6 +39,7 @@ window.onload = function () {
     url: "/user",
     type: "GET",
     success: function success(data) {
+      console.log(data);
       if (data.name) {
         $("#username-span").text(data.email);
         $(".unauthenticated").hide();
