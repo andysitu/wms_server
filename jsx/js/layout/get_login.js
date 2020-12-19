@@ -1,4 +1,4 @@
-$.ajax({
+$.ajaxSetup({
   beforeSend: function(xhr, settings) {
     // Get CSRF token
     if (settings.type == "POST" || settings.type == "PUT" ||
@@ -26,6 +26,7 @@ var log_helper = {
   logout() {
     $.ajax({
       url: "/logout",
+      type: "POST",
       success: function() {
         $(".unauthenticated").show()
         $(".authenticated").hide()
@@ -39,7 +40,6 @@ window.onload = function() {
     url: "/user",
     type: "GET",
     success: function(data) {
-      console.log(data);
       if (data.name) {
         $("#username-span").text(data.email);
         $(".unauthenticated").hide();
