@@ -29,7 +29,6 @@ public class Location {
     public String created;
     @LastModifiedBy
     public String modified;
-
         
     public Location() {
 

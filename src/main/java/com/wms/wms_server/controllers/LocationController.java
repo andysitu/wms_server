@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.wms.wms_server.repository.LocationRepository;
-import com.wms.wms_server.repository.UserRepository;
 import com.wms.wms_server.services.LocationService;
 import com.wms.wms_server.model.Location;
 
@@ -37,8 +36,6 @@ import com.wms.wms_server.services.OAuthUserService;
 public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
 	OAuthUserService oAuthUserService;
 
