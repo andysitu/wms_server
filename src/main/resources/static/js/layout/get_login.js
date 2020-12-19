@@ -22,31 +22,31 @@ $.ajaxSetup({
 });
 
 var log_helper = {
-  logout() {
+  logout: function logout() {
     $.ajax({
       url: "/logout",
-      success: function() {
-        $(".unauthenticated").show()
-        $(".authenticated").hide()
-      },
+      type: "POST",
+      success: function success() {
+        $(".unauthenticated").show();
+        $(".authenticated").hide();
+      }
     });
   }
-}
+};
 
-window.onload = function() {
+window.onload = function () {
   $.ajax({
     url: "/user",
     type: "GET",
-    success: function(data) {
-      console.log(data);
+    success: function success(data) {
       if (data.name) {
         $("#username-span").text(data.email);
         $(".unauthenticated").hide();
         $(".authenticated").show();
       } else {
-        $(".unauthenticated").show()
-        $(".authenticated").hide()
+        $(".unauthenticated").show();
+        $(".authenticated").hide();
       }
-    },
+    }
   });
 };
