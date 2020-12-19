@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import com.wms.wms_server.repository.UserRepository;
 import com.wms.wms_server.model.user.User;
 
-import java.util.Map;
-import java.util.HashMap;
-
 @Service
 public class OAuthUserService {
     @Autowired
