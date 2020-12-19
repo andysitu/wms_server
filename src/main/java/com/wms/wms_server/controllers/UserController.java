@@ -20,7 +20,7 @@ public class UserController {
     
     @GetMapping("/user")
 	@ResponseBody
-	public  Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-		return oAuthUserService.getUser(principal);
+	public  String user(@AuthenticationPrincipal OAuth2User principal) {
+		return oAuthUserService.getUser(principal).toString();
 	}
 }
