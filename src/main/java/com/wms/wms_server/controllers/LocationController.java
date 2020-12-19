@@ -22,7 +22,6 @@ import com.wms.wms_server.repository.UserRepository;
 import com.wms.wms_server.services.LocationService;
 import com.wms.wms_server.model.Location;
 
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -49,12 +48,15 @@ public class LocationController {
     @GetMapping("/locations")
     @ResponseBody
     public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
+        // Test print out oauth user  unfo
         Map<String, Object> u = oAuthUserService.getUser(principal);
         for (Map.Entry<String, Object> entry : u.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
+            System.out.println(loc.created);
+            System.out.println(loc.modified);
             locs.add(locationService.convertLocation(loc));
         }
         return locs;
