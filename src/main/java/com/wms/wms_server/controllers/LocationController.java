@@ -90,15 +90,15 @@ public class LocationController {
         return "locations/view_locations";
     }
 
-    @GetMapping(value={"/create_user"})
-    @ResponseBody
-    public String create_user() {
-        List<User> users = userRepository.findAll();
-        if (users.isEmpty()) {
-            User u = new User("email@test.com", "usera", "password");
-            userRepository.save(u);
-            System.out.println("created user");
-        }
-        return "HELLO";
-    }
+    // @GetMapping(value={"/create_user"})
+    // @ResponseBody
+    // public String create_user() {
+    //     List<User> users = userRepository.findAll();
+    //     if (users.isEmpty()) {
+    //         User u = new User("email@test.com", "usera", "password");
+    //         userRepository.save(u);
+    //         System.out.println("created user");
+    //     }
+    //     return "HELLO";
+    // }
 }

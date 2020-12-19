@@ -9,26 +9,24 @@ public class User {
     @Id
     private String id;
     private String email;
-    private String password;
-    private String username;
+    private String name;
+
+    private String sub;
 
     public User() {
         super();
     }
 
-    public User(String email, String username, String password) {
+    public User(String email, String name, String sub) {
         this.email = email;
-        this.username = username;
-        this.password = password;
+        this.name = name;
+        this.sub = sub;
     }
 
     public String getEmail() {
         return email;
     }
-    public String getPassword() {
-        return this.password;
-    }
-    public String getUsername() {
-        return this.username;
+    public String getName() {
+        return name;
     }
 }
