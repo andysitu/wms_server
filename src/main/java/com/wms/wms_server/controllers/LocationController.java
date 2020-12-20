@@ -24,7 +24,6 @@ import com.wms.wms_server.model.Location;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
 import java.util.ArrayList;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
