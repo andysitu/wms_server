@@ -11,6 +11,12 @@ public class User {
     private String email;
     private String name;
 
+    private String[] roles;
+
+    public enum ROLES {
+        USER, ADMIN
+    }
+
     private String sub;
 
     public User() {
@@ -21,6 +27,7 @@ public class User {
         this.email = email;
         this.name = name;
         this.sub = sub;
+        this.roles = new String[]{"USER"};
     }
 
     public String getEmail() {
