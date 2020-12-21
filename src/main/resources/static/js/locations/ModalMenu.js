@@ -40,7 +40,7 @@ var ModalMenu = function (_React$Component) {
         data.column_end = data.column_end ? data.column_end : data.column_start;
         data.level_end = data.level_end ? data.level_end : data.level_start;
         data.row_end = data.row_end ? data.row_end : data.row_start;
-        data.shelf_end = data.shelf_end ? data.shelf_end : data.row_start;
+        data.shelf_end = data.shelf_end ? data.shelf_end : data.shelf_start;
 
         // Check that the end values are greater than then start values
         return parseInt(data.column_start) > parseInt(data.column_end) || parseInt(data.level_start) > parseInt(data.level_end) || parseInt(data.row_start) > parseInt(data.row_end) || parseInt(data.shelf_start) > parseInt(data.shelf_end) ? false : true;
