@@ -15,10 +15,10 @@ public class WmsServerApplication {
 	@Autowired
 	OAuthUserService oAuthUserService;
 
-	@GetMapping(value={"/error"})
-    public String view_error() {
-        return "error";
-	}
+	// @GetMapping(value={"/error"})
+    // public String view_error() {
+    //     return "error";
+	// }
 	@GetMapping(value={"/index"})
     public String view_index() {
         return "index";
