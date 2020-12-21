@@ -44,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             l.logoutSuccessUrl("/").permitAll();})
         .authorizeRequests(a -> a
             .antMatchers("/", "/error", "/login", "/js/**", "/css/**").permitAll()
-            .antMatchers("/view_users").hasRole("ADMIN")
             // .antMatchers("/view_users").permitAll()
             .anyRequest().authenticated()
             // .anyRequest().hasRole("ADMIN")
@@ -52,40 +51,41 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf(c -> c
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
-        .oauth2Login(oauth2 -> oauth2
-            .userInfoEndpoint(userInfo -> userInfo
-                // .userAuthoritiesMapper(this.userAuthoritiesMapper())
-                // .userService(this.oauth2UserService()
-                .oidcUserService(this.oidcUserService()
-            ))
-        );
+        // .oauth2Login(oauth2 -> oauth2
+        //     .userInfoEndpoint(userInfo -> userInfo
+        //         // .userAuthoritiesMapper(this.userAuthoritiesMapper())
+        //         .userService(this.oauth2UserService()
+        //         // .oidcUserService(this.oidcUserService()
+        //     ))
+        // );
         // .oauth2Login();
+        .oauth2Login().userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper());
         
     }
 
-    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
-        final OidcUserService delegate = new OidcUserService();
-        System.out.println("HIHI\n\n\n\n\n\n\n\n\n\n\n\n");
+    // private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
+    //     final OidcUserService delegate = new OidcUserService();
+    //     System.out.println("HIHI\n\n\n\n\n\n\n\n\n\n\n\n");
 
-        return (userRequest) -> {
-            System.out.println("BYEBYE\n\n\n\n\n\n\n\n\n\n\n\n");
-            // Delegate to the default implementation for loading a user
-            OidcUser oidcUser = delegate.loadUser(userRequest);
+    //     return (userRequest) -> {
+    //         System.out.println("BYEBYE\n\n\n\n\n\n\n\n\n\n\n\n");
+    //         // Delegate to the default implementation for loading a user
+    //         OidcUser oidcUser = delegate.loadUser(userRequest);
 
-            OAuth2AccessToken accessToken = userRequest.getAccessToken();
-            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+    //         OAuth2AccessToken accessToken = userRequest.getAccessToken();
+    //         Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
-            // TODO
-            // 1) Fetch the authority information from the protected resource using accessToken
-            // 2) Map the authority information to one or more GrantedAuthority's and add it to mappedAuthorities
+    //         // TODO
+    //         // 1) Fetch the authority information from the protected resource using accessToken
+    //         // 2) Map the authority information to one or more GrantedAuthority's and add it to mappedAuthorities
 
-            // 3) Create a copy of oidcUser but use the mappedAuthorities instead
-            oidcUser = new DefaultOidcUser(mappedAuthorities, 
-                oidcUser.getIdToken(), oidcUser.getUserInfo());
+    //         // 3) Create a copy of oidcUser but use the mappedAuthorities instead
+    //         oidcUser = new DefaultOidcUser(mappedAuthorities, 
+    //             oidcUser.getIdToken(), oidcUser.getUserInfo());
 
-            return oidcUser;
-        };
-    }
+    //         return oidcUser;
+    //     };
+    // }
 
     // @Bean
     // public PrincipalExtractor gPrincipalExtractor() {
@@ -98,39 +98,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //     return new GAuthoritiesExtractor();
     // }
 
-    // private GrantedAuthoritiesMapper userAuthoritiesMapper() {
-    //     System.out.println("g1");
-    //     return (authorities) -> {
-    //         System.out.println("g2");
-    //         Set<GrantedAuthority> mappedAuthorities = new HashSet();
-    //         authorities.forEach(authority -> {
-    //             OAuth2UserAuthority oauth2UserAuthority = (OAuth2UserAuthority)authority;
+    private GrantedAuthoritiesMapper userAuthoritiesMapper() {
+        System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        return (authorities) -> {
+            System.out.print("HIHIHIHIHIH\n\n\n\n\n\n\n\n\n\n\n");
+            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
-    //             Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
+            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-    //             // Map the attributes found in userAttributes
-    //             // to one or more GrantedAuthority's and add it to mappedAuthorities
-    //             GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
-    //         });
-
-    //         return mappedAuthorities;
-    //     };
-    // }
+            return mappedAuthorities;
+        };
+    }
 
     private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
-        final OAuth2UserService delegate = new DefaultOAuth2UserService();
+        final DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
+        System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         return (userRequest) -> {
             System.out.println("\n\n\n\n\n\nhihihi");
             OAuth2User oauth2User = delegate.loadUser(userRequest);
-            OAuth2AccessToken accessToken = userRequest.getAccessToken();
+            // OAuth2AccessToken accessToken = userRequest.getAccessToken();
 
-            GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
+            // GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
 
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
             // mappedAuthorities.add(auths);
 
-            System.out.println(oauth2User.getName());
+            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+            // System.out.println(oauth2User.getName());
 
             oauth2User = new DefaultOAuth2User(mappedAuthorities, 
                     oauth2User.getAttributes(), oauth2User.getName());

@@ -2,7 +2,7 @@ package com.wms.wms_server.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wms.wms_server.services.OAuthUserService;
 import com.wms.wms_server.model.user.User;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.wms.wms_server.model.response.UserResponse;
 import org.springframework.stereotype.Controller;
 
@@ -26,7 +29,9 @@ public class UserController {
 	}
 
 	@GetMapping("/view_users")
-	public String view_users(@AuthenticationPrincipal OAuth2User principal) {
+	@PreAuthorize("hasRole('ADMAIN')")
+	public String view_users(HttpServletRequest request) {
+		System.out.println(request.isUserInRole("ROLE_ADMIN"));
 		return "users/view_users";
 	}
 }
