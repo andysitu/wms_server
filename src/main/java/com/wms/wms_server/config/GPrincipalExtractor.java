@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 
 @Component
-public class GooglePrincipalExtractor implements PrincipalExtractor{
+public class GPrincipalExtractor implements PrincipalExtractor{
     @Autowired
     private UserService userService;
 
@@ -23,6 +23,7 @@ public class GooglePrincipalExtractor implements PrincipalExtractor{
     public Object extractPrincipal(Map<String, Object> map) {
         String id = (String) map.get("id");
         User user = userService.getBySub(id);
+        System.out.println("hu");
 
         if (user == null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -32,6 +33,6 @@ public class GooglePrincipalExtractor implements PrincipalExtractor{
             System.out.println("got");
             System.out.println(map.get("sub"));
         }
-        return null;
+        return map.get("name");
     }
 }
