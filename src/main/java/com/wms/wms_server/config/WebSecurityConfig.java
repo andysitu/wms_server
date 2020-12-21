@@ -51,15 +51,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf(c -> c
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
-        // .oauth2Login(oauth2 -> oauth2
-        //     .userInfoEndpoint(userInfo -> userInfo
-        //         // .userAuthoritiesMapper(this.userAuthoritiesMapper())
-        //         .userService(this.oauth2UserService()
-        //         // .oidcUserService(this.oidcUserService()
-        //     ))
-        // );
+        .oauth2Login(oauth2 -> oauth2
+            .userInfoEndpoint(userInfo -> userInfo
+                // .userAuthoritiesMapper(this.userAuthoritiesMapper())
+                .userService(this.oauth2UserService()
+                // .oidcUserService(this.oidcUserService()
+            ))
+        );
         // .oauth2Login();
-        .oauth2Login().userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper());
+        // .oauth2Login().userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper());
         
     }
 
@@ -98,17 +98,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //     return new GAuthoritiesExtractor();
     // }
 
-    private GrantedAuthoritiesMapper userAuthoritiesMapper() {
-        System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        return (authorities) -> {
-            System.out.print("HIHIHIHIHIH\n\n\n\n\n\n\n\n\n\n\n");
-            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+    // private GrantedAuthoritiesMapper userAuthoritiesMapper() {
+    //     System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    //     return (authorities) -> {
+    //         System.out.print("HIHIHIHIHIH\n\n\n\n\n\n\n\n\n\n\n");
+    //         Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
-            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    //         mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-            return mappedAuthorities;
-        };
-    }
+    //         return mappedAuthorities;
+    //     };
+    // }
 
     private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
         final DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
