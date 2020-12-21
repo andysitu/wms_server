@@ -19,8 +19,8 @@ public class GAuthoritiesExtractor implements AuthoritiesExtractor{
     private String asAuthorities(Map<String, Object> map) {
         List<String> authorities = new ArrayList<>();
         authorities.add("ADMIN");
-        List<LinkedHashMap<String, String>> a
-        = (List<LinkedHashMap<String, String>>) map.get("authorities");
+        List<LinkedHashMap<String, String>> a = 
+            (List<LinkedHashMap<String, String>>) map.get("authorities");
         for (LinkedHashMap<String, String> entry: a) {
             authorities.add(entry.get("authority"));
         }

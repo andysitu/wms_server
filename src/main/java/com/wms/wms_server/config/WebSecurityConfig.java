@@ -2,6 +2,8 @@ package com.wms.wms_server.config;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +18,18 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
+
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 
 import com.wms.wms_server.config.GPrincipalExtractor;
 
@@ -34,47 +44,97 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             l.logoutSuccessUrl("/").permitAll();})
         .authorizeRequests(a -> a
             .antMatchers("/", "/error", "/login", "/js/**", "/css/**").permitAll()
-            .antMatchers("/view_users").hasAuthority("ADMIN")
+            .antMatchers("/view_users").hasRole("ADMIN")
+            // .antMatchers("/view_users").permitAll()
             .anyRequest().authenticated()
+            // .anyRequest().hasRole("ADMIN")
         )
         .csrf(c -> c
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
-        .oauth2Login();
+        .oauth2Login(oauth2 -> oauth2
+            .userInfoEndpoint(userInfo -> userInfo
+                // .userAuthoritiesMapper(this.userAuthoritiesMapper())
+                // .userService(this.oauth2UserService()
+                .oidcUserService(this.oidcUserService()
+            ))
+        );
+        // .oauth2Login();
+        
     }
 
-        @Bean
-        public PrincipalExtractor gPrincipalExtractor() {
-            System.out.println("GET PRINCIPAL RIGHT NOW");
-            return new GPrincipalExtractor();
-        }
+    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
+        final OidcUserService delegate = new OidcUserService();
+        System.out.println("HIHI\n\n\n\n\n\n\n\n\n\n\n\n");
 
-        @Bean
-        public AuthoritiesExtractor gAuthoritiesExtractor() {
-            return new GAuthoritiesExtractor();
-        }
+        return (userRequest) -> {
+            System.out.println("BYEBYE\n\n\n\n\n\n\n\n\n\n\n\n");
+            // Delegate to the default implementation for loading a user
+            OidcUser oidcUser = delegate.loadUser(userRequest);
 
-        // .oauth2Login(oauth2 -> oauth2
-        //     .userInfoEndpoint(userInfo -> userInfo
-        //         .userService(this.oauth2UserService()
-        //     ))
-        // );
+            OAuth2AccessToken accessToken = userRequest.getAccessToken();
+            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
-    // private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
-    //     final OAuth2UserService delegate = new DefaultOAuth2UserService();
-    //     System.out.println("\n\n\n\n\n\nhihihi");
+            // TODO
+            // 1) Fetch the authority information from the protected resource using accessToken
+            // 2) Map the authority information to one or more GrantedAuthority's and add it to mappedAuthorities
 
-    //     return (userRequest) -> {
-    //         System.out.println("\n\n\n\n\n\nadfasfdsafsfs");
-    //         OAuth2User oauth2User = delegate.loadUser(userRequest);
-    //         OAuth2AccessToken accessToken = userRequest.getAccessToken();
-    //         Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+            // 3) Create a copy of oidcUser but use the mappedAuthorities instead
+            oidcUser = new DefaultOidcUser(mappedAuthorities, 
+                oidcUser.getIdToken(), oidcUser.getUserInfo());
 
-    //         System.out.println(oauth2User.getName());
+            return oidcUser;
+        };
+    }
 
-    //         oauth2User = new DefaultOAuth2User(mappedAuthorities, 
-    //                 oauth2User.getAttributes(), oauth2User.getName());
-    //         return oauth2User;
+    // @Bean
+    // public PrincipalExtractor gPrincipalExtractor() {
+    //     System.out.println("GET PRINCIPAL RIGHT NOW");
+    //     return new GPrincipalExtractor();
+    // }
+
+    // @Bean
+    // public AuthoritiesExtractor gAuthoritiesExtractor() {
+    //     return new GAuthoritiesExtractor();
+    // }
+
+    // private GrantedAuthoritiesMapper userAuthoritiesMapper() {
+    //     System.out.println("g1");
+    //     return (authorities) -> {
+    //         System.out.println("g2");
+    //         Set<GrantedAuthority> mappedAuthorities = new HashSet();
+    //         authorities.forEach(authority -> {
+    //             OAuth2UserAuthority oauth2UserAuthority = (OAuth2UserAuthority)authority;
+
+    //             Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
+
+    //             // Map the attributes found in userAttributes
+    //             // to one or more GrantedAuthority's and add it to mappedAuthorities
+    //             GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
+    //         });
+
+    //         return mappedAuthorities;
     //     };
     // }
+
+    private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
+        final OAuth2UserService delegate = new DefaultOAuth2UserService();
+
+        return (userRequest) -> {
+            System.out.println("\n\n\n\n\n\nhihihi");
+            OAuth2User oauth2User = delegate.loadUser(userRequest);
+            OAuth2AccessToken accessToken = userRequest.getAccessToken();
+
+            GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
+
+            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+            // mappedAuthorities.add(auths);
+
+            System.out.println(oauth2User.getName());
+
+            oauth2User = new DefaultOAuth2User(mappedAuthorities, 
+                    oauth2User.getAttributes(), oauth2User.getName());
+            return oauth2User;
+        };
+    }
 }
