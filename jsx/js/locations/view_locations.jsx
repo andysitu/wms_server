@@ -20,7 +20,7 @@ class LocationTable extends React.Component {
       data: JSON.stringify(data),
       success: function(new_locations) {
         that.setState({locations: that.state.locations.concat(new_locations),});
-      }
+      },
     });
   };
 
@@ -30,7 +30,7 @@ class LocationTable extends React.Component {
 
   // Changes location object to formatted data
   convert_location(l) {
-    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.column}.${l.level}.${l.shelf}`;
+    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.bay}.${l.level}.${l.shelf}`;
   }
 
   get_locations = () => {
@@ -136,7 +136,7 @@ class LocationTable extends React.Component {
             <th scope="col">Area</th>
             <th scope="col">Loc</th>
             <th scope="col">Row</th>
-            <th scope="col">Column</th>
+            <th scope="col">Bay</th>
             <th scope="col">Level</th>
             <th scope="col">Shelf</th>
             <th scope="col">Options</th>
@@ -201,7 +201,7 @@ class LocationRow extends React.Component {
       <td>{this.state.location.area}</td>
       <td>{this.state.location.loc}</td>
       <td>{this.state.location.row}</td>
-      <td>{this.state.location.column}</td>
+      <td>{this.state.location.bay}</td>
       <td>{this.state.location.level}</td>
       <td>{this.state.location.shelf}</td>
       <td>
