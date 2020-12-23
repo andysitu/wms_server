@@ -73,7 +73,7 @@ public class LocationController {
     // }
 
     @RequestMapping(path="/locations/{locationId}", produces="text/plain", method=RequestMethod.DELETE)
-    public ResponseEntity<String> delete_location(@PathVariable("locationId") String locationId) {
+    public ResponseEntity<String> delete_location(@PathVariable("locationId") Integer locationId) {
         System.out.println("delete " + locationId);
         locationRepository.deleteById(locationId);
         return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);

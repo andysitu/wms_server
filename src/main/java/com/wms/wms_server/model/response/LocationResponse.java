@@ -1,7 +1,7 @@
 package com.wms.wms_server.model.response;
 
 public class LocationResponse {
-    public String id;
+    public Integer id;
     public String area;
     public String loc;
     public int row;
@@ -9,7 +9,7 @@ public class LocationResponse {
     public int level;
     public int shelf;
 
-    public LocationResponse(String id, String area, String loc, int row, int column, int level, int shelf) {
+    public LocationResponse(Integer id, String area, String loc, int row, int column, int level, int shelf) {
         this.id = id;
         this.area = area;
         this.loc = loc;

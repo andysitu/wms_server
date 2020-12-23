@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.wms.wms_server.model.Location;
 
 @Repository
-public interface LocationRepository extends MongoRepository<Location, String> {
+public interface LocationRepository extends CrudRepository<Location, Integer> {
 }

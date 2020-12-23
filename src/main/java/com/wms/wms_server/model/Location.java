@@ -1,18 +1,23 @@
 package com.wms.wms_server.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+// import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
-@Document(collection="location")
+@Entity
 public class Location {
     @Id
-    private String id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
     private String area;
     private String loc;
@@ -34,16 +39,16 @@ public class Location {
 
     }
 
-    public Location(String area, String loc, int row, int column, int level, int shelf) {
+    public Location(String area, String loc, int row, int bay, int level, int shelf) {
         this.area = area;
         this.loc = loc;
         this.row = row;
-        this.column = column;
+        this.bay = bay;
         this.level = level;
         this.shelf = shelf;
     }
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
     public String getArea() {
@@ -55,8 +60,8 @@ public class Location {
     public int getRow() {
         return this.row;
     }
-    public int getColumn() {
-        return this.column;
+    public int getBay() {
+        return this.bay;
     }
     public int getLevel() {
         return this.level;
