@@ -13,7 +13,7 @@
 
 // import java.util.Collections;
 
-// import com.wms.wms_server.model.user.User;
+// import com.wms.wms_server.model.user.WMSUser;
 
 // @Component
 // public class WmsAuthenticationProvider implements AuthenticationProvider{
@@ -27,7 +27,7 @@
 
 //         final String password = (String) upAuthTok.getCredentials();
 
-//         User u = userRepository.findByUsername(name);
+//         WMSUser u = userRepository.findByUsername(name);
 //         String actual_password = u.getPassword();
 //         // System.out.println(name + " " + password + " " + actual_password);
 

@@ -6,14 +6,14 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.wms.wms_server.repository.UserRepository;
-import com.wms.wms_server.model.user.User;
+import com.wms.wms_server.model.user.WMSUser;
 
 @Service
 public class OAuthUserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getOrMakeUser(@AuthenticationPrincipal OAuth2User principal) {
+    public WMSUser getOrMakeUser(@AuthenticationPrincipal OAuth2User principal) {
         // Map<String, Object> h = new HashMap<String, Object>();
 		// h.put("name", principal.getAttribute("name"));
         // h.put("email", principal.getAttribute("email"));
@@ -23,9 +23,9 @@ public class OAuthUserService {
         //     System.out.println(entry.getKey() + " : " + entry.getValue());
         // }
 
-        User u = userRepository.findBySub(principal.getAttribute("sub"));
+        WMSUser u = userRepository.findBySub(principal.getAttribute("sub"));
         if (u == null) {
-            u = new User(
+            u = new WMSUser(
                     principal.getAttribute("email"), 
                     principal.getAttribute("name"), 
                     principal.getAttribute("sub"));

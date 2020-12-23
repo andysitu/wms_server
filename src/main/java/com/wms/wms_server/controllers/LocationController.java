@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import com.wms.wms_server.model.user.User;
+import com.wms.wms_server.model.user.WMSUser;
 
 import com.wms.wms_server.model.response.LocationResponse;
 import com.wms.wms_server.model.request.LocationRequest;
@@ -45,7 +45,7 @@ public class LocationController {
     @ResponseBody
     public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
         // Test print out oauth user  unfo
-        User u = oAuthUserService.getOrMakeUser(principal);
+        WMSUser u = oAuthUserService.getOrMakeUser(principal);
         System.out.println(u);
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
@@ -89,7 +89,7 @@ public class LocationController {
     // public String create_user() {
     //     List<User> users = userRepository.findAll();
     //     if (users.isEmpty()) {
-    //         User u = new User("email@test.com", "usera", "password");
+    //         WMSUser u = new User("email@test.com", "usera", "password");
     //         userRepository.save(u);
     //         System.out.println("created user");
     //     }

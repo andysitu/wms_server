@@ -1,13 +1,17 @@
 package com.wms.wms_server.model.user;
 
-import org.springframework.data.annotation.Id;
+// import org.springframework.data.annotation.Id;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Document
-public class User {
+@Entity
+public class WMSUser {
     @Id
-    private String id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
     private String email;
     private String name;
 
@@ -19,11 +23,11 @@ public class User {
 
     private String sub;
 
-    public User() {
+    public WMSUser() {
         super();
     }
 
-    public User(String email, String name, String sub) {
+    public WMSUser(String email, String name, String sub) {
         this.email = email;
         this.name = name;
         this.sub = sub;

@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wms.wms_server.services.OAuthUserService;
-import com.wms.wms_server.model.user.User;
+import com.wms.wms_server.model.user.WMSUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/user")
 	@ResponseBody
 	public UserResponse user(@AuthenticationPrincipal OAuth2User principal) {
-		User u = oAuthUserService.getOrMakeUser(principal);
+		WMSUser u = oAuthUserService.getOrMakeUser(principal);
 		return new UserResponse(u.getSub(), u.getName(), u.getEmail());
 	}
 

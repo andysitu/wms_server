@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 
-import com.wms.wms_server.model.user.User;
+import com.wms.wms_server.model.user.WMSUser;
 import com.wms.wms_server.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class GPrincipalExtractor implements PrincipalExtractor{
     @Override
     public Object extractPrincipal(Map<String, Object> map) {
         String id = (String) map.get("id");
-        User user = userService.getBySub(id);
+        WMSUser user = userService.getBySub(id);
         System.out.println("hu");
 
         if (user == null) {
