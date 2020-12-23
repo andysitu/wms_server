@@ -17,7 +17,7 @@ public class Location {
     private String area;
     private String loc;
     private int row;
-    private int column;
+    private int bay;
     private int level;
     private int shelf;
 

@@ -173,7 +173,7 @@ var LocationTable = function (_React$Component) {
 
     // Changes location object to formatted data
     value: function convert_location(l) {
-      l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.column + "." + l.level + "." + l.shelf;
+      l.location_string = l.area + "." + l.loc + "." + l.row + "." + l.bay + "." + l.level + "." + l.shelf;
     }
     // New Objects created are not deep copies (only use Object.assign)
 
@@ -236,7 +236,7 @@ var LocationTable = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                "Column"
+                "Bay"
               ),
               React.createElement(
                 "th",
@@ -344,7 +344,7 @@ var LocationRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.state.location.column
+          this.state.location.bay
         ),
         React.createElement(
           "td",

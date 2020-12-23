@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class LocationService {
     public LocationResponse convertLocation(Location l) {
         return new LocationResponse(
-            l.getId(), l.getArea(), l.getLoc(), l.getRow(), l.getColumn(), l.getLevel(), l.getShelf()
+            l.getId(), l.getArea(), l.getLoc(), l.getRow(), l.getBay(), l.getLevel(), l.getShelf()
         );
     }
 
@@ -26,11 +26,11 @@ public class LocationService {
         ArrayList<Location> locs_list = new ArrayList<Location>();
         Location loc;
         for (int row = locReq.row_start; row < locReq.row_end+1; row++ ) {
-            for (int col = locReq.column_start; col < locReq.column_end+1; col++ ) {
+            for (int bay = locReq.bay_start; bay < locReq.bay_end+1; bay++ ) {
                 for (int level = locReq.level_start; level < locReq.level_end+1; level++ ) {
                     for (int shelf = locReq.shelf_start; shelf < locReq.shelf_end+1; shelf++ ) {
                         loc = new Location(
-                            locReq.area, locReq.loc, row, col, level, shelf
+                            locReq.area, locReq.loc, row, bay, level, shelf
                         );
                         locs_list.add(loc);
                     }
