@@ -3,10 +3,10 @@ package com.wms.wms_server.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Configuration
-@EnableMongoAuditing(auditorAwareRef = "auditorProvider")
+@EnableJpaAuditing
 public class AuditingConfig {
     @Bean
     public AuditorAware<String> auditorProvider() {
