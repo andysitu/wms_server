@@ -45,12 +45,14 @@ public class LocationController {
     @ResponseBody
     public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
         // Test print out oauth user  unfo
-        WMSUser u = oAuthUserService.getOrMakeUser(principal);
-        System.out.println(u);
+        // WMSUser u = oAuthUserService.getOrMakeUser(principal);
+        // System.out.println(u);
+        System.out.println(principal);
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
-            System.out.println(loc.created);
-            System.out.println(loc.modified);
+            // System.out.println(loc.created);
+            // System.out.println(loc.modified);
+            System.out.println(loc.getCreatedDate());
             locs.add(locationService.convertLocation(loc));
         }
         return locs;

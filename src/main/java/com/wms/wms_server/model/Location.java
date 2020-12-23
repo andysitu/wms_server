@@ -70,9 +70,11 @@ public class Location {
         return this.shelf;
     }
     public Date getCreatedDate() {
-        return new Date(this.createdDate.getTime());
+        // return new Date(this.createdDate.getTime());
+        return this.createdDate;
     }
     public Date getModifiedDate() {
-        return new Date(this.lastModifiedDate.getTime());
+        // return new Date(this.lastModifiedDate.getTime());
+        return this.lastModifiedDate;
     }
 }
