@@ -5,16 +5,16 @@ public class LocationResponse {
     public String area;
     public String loc;
     public int row;
-    public int column;
+    public int bay;
     public int level;
     public int shelf;
 
-    public LocationResponse(Integer id, String area, String loc, int row, int column, int level, int shelf) {
+    public LocationResponse(Integer id, String area, String loc, int row, int bay, int level, int shelf) {
         this.id = id;
         this.area = area;
         this.loc = loc;
         this.row = row;
-        this.column = column;
+        this.bay = bay;
         this.level = level;
         this.shelf = shelf;
     }

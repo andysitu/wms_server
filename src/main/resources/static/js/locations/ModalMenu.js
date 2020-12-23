@@ -37,13 +37,13 @@ var ModalMenu = function (_React$Component) {
     _this.complete_and_check_data = function (data) {
       if (_this.state.menu_type == "create_location") {
         // Complete the end values if they're blank
-        data.column_end = data.column_end ? data.column_end : data.column_start;
+        data.bay_end = data.bay_end ? data.bay_end : data.bay_start;
         data.level_end = data.level_end ? data.level_end : data.level_start;
         data.row_end = data.row_end ? data.row_end : data.row_start;
         data.shelf_end = data.shelf_end ? data.shelf_end : data.shelf_start;
 
         // Check that the end values are greater than then start values
-        return parseInt(data.column_start) > parseInt(data.column_end) || parseInt(data.level_start) > parseInt(data.level_end) || parseInt(data.row_start) > parseInt(data.row_end) || parseInt(data.shelf_start) > parseInt(data.shelf_end) ? false : true;
+        return parseInt(data.bay_start) > parseInt(data.bay_end) || parseInt(data.level_start) > parseInt(data.level_end) || parseInt(data.row_start) > parseInt(data.row_end) || parseInt(data.shelf_start) > parseInt(data.shelf_end) ? false : true;
       } else {
         return true;
       }
@@ -131,9 +131,9 @@ var ModalMenu = function (_React$Component) {
               React.createElement(
                 "label",
                 null,
-                "Start Column"
+                "Start Bay"
               ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "column_start", required: true })
+              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_start", required: true })
             ),
             React.createElement(
               "div",
@@ -141,9 +141,9 @@ var ModalMenu = function (_React$Component) {
               React.createElement(
                 "label",
                 null,
-                "Start Column"
+                "End Bay"
               ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "column_end" })
+              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_end" })
             )
           ),
           React.createElement(

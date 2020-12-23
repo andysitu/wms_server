@@ -36,13 +36,13 @@ class ModalMenu extends React.Component {
   complete_and_check_data = (data) => {
     if (this.state.menu_type == "create_location") {
       // Complete the end values if they're blank
-      data.column_end = data.column_end ? data.column_end : data.column_start;
+      data.bay_end = data.bay_end ? data.bay_end : data.bay_start;
       data.level_end = data.level_end ? data.level_end : data.level_start;
       data.row_end = data.row_end ? data.row_end : data.row_start;
       data.shelf_end = data.shelf_end ? data.shelf_end : data.shelf_start;
 
       // Check that the end values are greater than then start values
-      return (parseInt(data.column_start) > parseInt(data.column_end) || 
+      return (parseInt(data.bay_start) > parseInt(data.bay_end) || 
           parseInt(data.level_start) > parseInt(data.level_end) ||
           parseInt(data.row_start) > parseInt(data.row_end) || 
           parseInt(data.shelf_start) > parseInt(data.shelf_end)) 
@@ -101,12 +101,12 @@ class ModalMenu extends React.Component {
         </div>
         <div className="form-row">
           <div className="form-group col-sm-6">
-            <label>Start Column</label>
-            <input type="number" className="form-control" min="0" name="column_start" required></input>
+            <label>Start Bay</label>
+            <input type="number" className="form-control" min="0" name="bay_start" required></input>
           </div>
           <div className="form-group col-sm-6">
-            <label>Start Column</label>
-            <input type="number" className="form-control" min="0" name="column_end"></input>
+            <label>End Bay</label>
+            <input type="number" className="form-control" min="0" name="bay_end"></input>
           </div>
         </div>
 
