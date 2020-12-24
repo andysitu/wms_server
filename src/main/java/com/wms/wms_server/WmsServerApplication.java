@@ -2,7 +2,6 @@ package com.wms.wms_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -23,10 +22,10 @@ public class WmsServerApplication {
     public String view_index() {
         return "index";
 	}
-	@GetMapping(value={"/login"})
-    public String view_login() {
-        return "login";
-    }
+	// @GetMapping(value={"/login"})
+    // public String view_login() {
+    //     return "login";
+    // }
 
 	public static void main(String[] args) {
 		SpringApplication.run(WmsServerApplication.class, args);
