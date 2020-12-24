@@ -1,9 +1,5 @@
 package com.wms.wms_server.config;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +27,11 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 
-import com.wms.wms_server.config.GPrincipalExtractor;
+// import com.wms.wms_server.config.GPrincipalExtractor;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,14 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .csrf(c -> c
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         )
-        .oauth2Login(oauth2 -> oauth2
-            .userInfoEndpoint(userInfo -> userInfo
-                // .userAuthoritiesMapper(this.userAuthoritiesMapper())
-                .userService(this.oauth2UserService()
-                // .oidcUserService(this.oidcUserService()
-            ))
-        );
-        // .oauth2Login();
+        // .oauth2Login(oauth2 -> oauth2
+        //     .userInfoEndpoint(userInfo -> userInfo
+        //         // .userAuthoritiesMapper(this.userAuthoritiesMapper())
+        //         .userService(this.oauth2UserService()
+        //         // .oidcUserService(this.oidcUserService()
+        //     ))
+        // );
+        .oauth2Login();
         // .oauth2Login().userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper());
         
     }
@@ -110,27 +106,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //     };
     // }
 
-    private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
-        final DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
-        System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    // private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
+    //     final DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
+    //     System.out.println("B\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-        return (userRequest) -> {
-            System.out.println("\n\n\n\n\n\nhihihi");
-            OAuth2User oauth2User = delegate.loadUser(userRequest);
-            // OAuth2AccessToken accessToken = userRequest.getAccessToken();
+    //     return (userRequest) -> {
+    //         System.out.println("\n\n\n\n\n\nhihihi");
+    //         OAuth2User oauth2User = delegate.loadUser(userRequest);
+    //         // OAuth2AccessToken accessToken = userRequest.getAccessToken();
 
-            // GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
+    //         // GrantedAuthority auths = new OAuth2UserAuthority("ADMIN", oauth2User.getAttributes());
 
-            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
-            // mappedAuthorities.add(auths);
+    //         Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+    //         // mappedAuthorities.add(auths);
 
-            mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    //         mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-            // System.out.println(oauth2User.getName());
+    //         // System.out.println(oauth2User.getName());
 
-            oauth2User = new DefaultOAuth2User(mappedAuthorities, 
-                    oauth2User.getAttributes(), oauth2User.getName());
-            return oauth2User;
-        };
-    }
+    //         oauth2User = new DefaultOAuth2User(mappedAuthorities, 
+    //                 oauth2User.getAttributes(), oauth2User.getName());
+    //         return oauth2User;
+    //     };
+    // }
 }

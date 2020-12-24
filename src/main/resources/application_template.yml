@@ -1,0 +1,22 @@
+# spring.datasource.url=mongodb://usera:password@localhost:27017/wms_server_development?authSource=admin
+# spring.data.mongodb.uri=mongodb://usera:password@localhost:27017/wms_server_development?authSource=admin
+
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: create-drop # Need to change, destroys any previous data
+        database-platform: org.hibernate.dialect.PostgreSQLDialect # Sets explicit error if Postgres server isn't up
+    datasource:
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/wms_server_development
+        username: usera
+        password: password
+    thymeleaf:
+        cache: false
+
+okta:
+    oauth2:
+        issuer: 
+        clientId: 
+        clientSecret: 
+    
