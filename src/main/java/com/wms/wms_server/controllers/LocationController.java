@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 import com.wms.wms_server.model.user.WMSUser;
 
 import com.wms.wms_server.model.response.LocationResponse;
@@ -48,6 +49,12 @@ public class LocationController {
         // WMSUser u = oAuthUserService.getOrMakeUser(principal);
         // System.out.println(u);
         System.out.println(principal);
+        var a = principal.getAttribute("groups");
+        System.out.println(a);
+        Map<String, Object> ats = principal.getAttributes();
+        for (Map.Entry<String, Object> entry : ats.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
         for(Location loc : locationRepository.findAll())  {
             // System.out.println(loc.created);

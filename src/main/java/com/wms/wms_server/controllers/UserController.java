@@ -29,7 +29,7 @@ public class UserController {
 	}
 
 	@GetMapping("/view_users")
-	@PreAuthorize("hasRole('ADMAIN')")
+	@PreAuthorize("hasAuthority('Admin')")
 	public String view_users(HttpServletRequest request) {
 		System.out.println(request.isUserInRole("ROLE_ADMIN"));
 		return "users/view_users";

@@ -19,4 +19,5 @@ okta:
         issuer: 
         clientId: 
         clientSecret: 
-    
+        audience: 
+        groupsClaim: 
