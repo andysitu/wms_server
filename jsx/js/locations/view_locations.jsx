@@ -19,6 +19,9 @@ class LocationTable extends React.Component {
       contentType: "application/json",
       data: JSON.stringify(data),
       success: function(new_locations) {
+        for (var i=0; i< new_locations.length; i++) {
+          that.convert_location(new_locations[i]);
+        }
         that.setState({locations: that.state.locations.concat(new_locations),});
       },
     });
@@ -42,7 +45,6 @@ class LocationTable extends React.Component {
         for(let l of locations) {
           that.convert_location(l);
         }
-        console.log(locations);
         that.setState({
           locations: locations,
         });
@@ -73,6 +75,7 @@ class LocationTable extends React.Component {
         index;
     if (checkboxes.length == 0)
       return;
+    console.log(this.state.locations);
     for (let cbox of checkboxes) {
       index = cbox.getAttribute("row_index");
       locations.push(this.state.locations[index].location_string);

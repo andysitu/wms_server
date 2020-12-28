@@ -22,6 +22,9 @@ var LocationTable = function (_React$Component) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function success(new_locations) {
+          for (var i = 0; i < new_locations.length; i++) {
+            that.convert_location(new_locations[i]);
+          }
           that.setState({ locations: that.state.locations.concat(new_locations) });
         }
       });
@@ -62,7 +65,6 @@ var LocationTable = function (_React$Component) {
             }
           }
 
-          console.log(locations);
           that.setState({
             locations: locations
           });
@@ -91,6 +93,7 @@ var LocationTable = function (_React$Component) {
       var locations = [],
           index;
       if (checkboxes.length == 0) return;
+      console.log(_this.state.locations);
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
