@@ -10,9 +10,20 @@ var ItemInfoApp = function (_React$Component) {
   _inherits(ItemInfoApp, _React$Component);
 
   function ItemInfoApp() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, ItemInfoApp);
 
-    return _possibleConstructorReturn(this, (ItemInfoApp.__proto__ || Object.getPrototypeOf(ItemInfoApp)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ItemInfoApp.__proto__ || Object.getPrototypeOf(ItemInfoApp)).call.apply(_ref, [this].concat(args))), _this), _this.onClick_search = function () {
+      var search_type = document.getElementById("item-search1-type-select").value,
+          search_value = document.getElementById("search-bar1-input").value;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(ItemInfoApp, [{
@@ -21,7 +32,27 @@ var ItemInfoApp = function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        "Hello Hello"
+        React.createElement(
+          "div",
+          { className: "input-group" },
+          React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input" }),
+          React.createElement(
+            "select",
+            { className: "custom-select", id: "item-search1-type-select" },
+            React.createElement(
+              "option",
+              { value: "name" },
+              "Name"
+            )
+          ),
+          React.createElement(
+            "button",
+            { className: "btn btn-outline-secondary",
+              onClick: this.onClick_search
+            },
+            "Search"
+          )
+        )
       );
     }
   }]);
