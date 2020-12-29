@@ -1,19 +1,45 @@
 package com.wms.wms_server.model.items;
 
-import javax.annotation.Generated;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.persistence.EntityListeners;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-// import org.springframework.data.annotation.Id;
-
-import org.springframework.stereotype.Component;
-
+import java.util.Date;
+import java.util.Set;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class ItemInfo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+
+    private String item_name;
+    private String description;
+    private float weight;
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ReceiveShipment> receiveShipments;
+
+    @CreatedDate
+    private Date createdDate;
+    @LastModifiedDate
+    private Date lastModifiedDate;
+    @CreatedBy
+    public String createdBy;
+    @LastModifiedBy
+    public String modifiedBy;
 }
