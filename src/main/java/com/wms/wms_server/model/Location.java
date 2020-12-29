@@ -34,13 +34,11 @@ public class Location {
     @LastModifiedDate
     private Date lastModifiedDate;
     @CreatedBy
-    public String created;
+    public String createdBy;
     @LastModifiedBy
-    public String modified;
+    public String modifiedBy;
         
-    public Location() {
-
-    }
+    public Location() {}
 
     public Location(String area, String loc, int row, int bay, int level, int shelf) {
         this.area = area;
@@ -79,5 +77,8 @@ public class Location {
     public Date getModifiedDate() {
         // return new Date(this.lastModifiedDate.getTime());
         return this.lastModifiedDate;
+    }
+    public String getCreatedBy() {
+        return this.createdBy;
     }
 }
