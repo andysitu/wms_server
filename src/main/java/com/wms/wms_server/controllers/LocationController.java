@@ -59,7 +59,7 @@ public class LocationController {
         for(Location loc : locationRepository.findAll())  {
             // System.out.println(loc.created);
             // System.out.println(loc.modified);
-            System.out.println(loc.getCreatedDate());
+            System.out.println(loc.getCreatedBy());
             locs.add(locationService.convertLocation(loc));
         }
         return locs;
