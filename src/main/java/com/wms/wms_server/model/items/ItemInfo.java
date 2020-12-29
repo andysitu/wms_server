@@ -42,4 +42,26 @@ public class ItemInfo {
     public String createdBy;
     @LastModifiedBy
     public String modifiedBy;
+
+    private ItemInfo(Builder builder) {
+        item_name = builder.item_name;
+        description = builder.description;
+        weight = builder.weight;
+    }
+
+    public static class Builder {
+        private final String item_name;
+        private final String description;
+        private final float weight;
+
+        public Builder(String item_name, String description, float weight) {
+            this.item_name = item_name;
+            this.description = description;
+            this.weight = weight;
+        }
+
+        public ItemInfo build() {
+            return new ItemInfo(this);
+        }
+    }
 }
