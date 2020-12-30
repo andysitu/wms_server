@@ -79,6 +79,10 @@ class ModalMenu extends React.Component {
       return (<div></div>);
     } else if (this.state.menu_type == "create_location") {
       return (<CreateLocationMenu />);
+    } else if (this.state.menu_type == "create_itemInfo") {
+      return (<div>
+        Item Info
+      </div>)
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
         <div>

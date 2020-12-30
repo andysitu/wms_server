@@ -76,6 +76,12 @@ var ModalMenu = function (_React$Component) {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
+      } else if (_this.state.menu_type == "create_itemInfo") {
+        return React.createElement(
+          "div",
+          null,
+          "Item Info"
+        );
       } else if (_this.state.menu_type == "create_barcode") {
         return React.createElement(
           "div",
