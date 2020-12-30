@@ -98,15 +98,18 @@ class ModalMenu extends React.Component {
       return (<div>
         <div className="form-group">
           <label htmlFor="item-name-input">Item Name</label>
-          <input type="text" className="form-control" id="item-name-input"></input>
+          <input type="text" className="form-control" 
+            name="name" id="item-name-input"></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-description-input">Description</label>
-          <input type="text" className="form-control" id="item-description-input"></input>
+          <input type="text" className="form-control" 
+            name="description" id="item-description-input"></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-weight-input">Weight</label>
-          <input type="number" className="form-control" id="item-weight-input"></input>
+          <input type="number" className="form-control" 
+            name="weight" id="item-weight-input"></input>
         </div>
       </div>)
     } else if (this.state.menu_type == "create_barcode") {
