@@ -9,18 +9,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ItemInfoApp = function (_React$Component) {
   _inherits(ItemInfoApp, _React$Component);
 
-  function ItemInfoApp() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function ItemInfoApp(props) {
     _classCallCheck(this, ItemInfoApp);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (ItemInfoApp.__proto__ || Object.getPrototypeOf(ItemInfoApp)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ItemInfoApp.__proto__ || Object.getPrototypeOf(ItemInfoApp)).call.apply(_ref, [this].concat(args))), _this), _this.onClick_search = function () {
+    _this.onClick_search = function () {
       var search_type = document.getElementById("item-search1-type-select").value,
           search_value = document.getElementById("search-bar1-input").value;
       $.ajax({
@@ -30,7 +24,14 @@ var ItemInfoApp = function (_React$Component) {
           console.log("GOT");
         }
       });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    };
+
+    _this.onClick_createItemInfo = function () {
+      _this.modalMenu.current.show_menu("create_item_info", {});
+    };
+
+    _this.modalMenu = React.createRef();
+    return _this;
   }
 
   _createClass(ItemInfoApp, [{
@@ -59,7 +60,19 @@ var ItemInfoApp = function (_React$Component) {
             },
             "Search"
           )
-        )
+        ),
+        React.createElement(
+          "div",
+          null,
+          React.createElement(
+            "button",
+            {
+              onClick: this.onClick_createItemInfo
+            },
+            "+"
+          )
+        ),
+        React.createElement(ModalMenu, { ref: this.modalMenu })
       );
     }
   }]);
@@ -68,11 +81,7 @@ var ItemInfoApp = function (_React$Component) {
 }(React.Component);
 
 function loadReact() {
-  ReactDOM.render(React.createElement(
-    "div",
-    null,
-    React.createElement(ItemInfoApp, null)
-  ), document.getElementById("content-container"));
+  ReactDOM.render(React.createElement(ItemInfoApp, null), document.getElementById("content-container"));
 }
 
 loadReact();

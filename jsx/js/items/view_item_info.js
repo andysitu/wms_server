@@ -1,4 +1,8 @@
 class ItemInfoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.modalMenu = React.createRef();
+  }
   onClick_search = () => {
     var search_type = document.getElementById("item-search1-type-select").value,
         search_value = document.getElementById("search-bar1-input").value;
@@ -9,6 +13,10 @@ class ItemInfoApp extends React.Component {
         console.log("GOT");
       }
     });
+  };
+
+  onClick_createItemInfo = () => {
+    this.modalMenu.current.show_menu("create_item_info", {});
   };
 
   render() {
@@ -22,15 +30,20 @@ class ItemInfoApp extends React.Component {
           onClick={this.onClick_search}
         >Search</button>
       </div>
+      <div>
+        <button
+          onClick={this.onClick_createItemInfo}
+        >+</button>
+      </div>
+
+      <ModalMenu ref={this.modalMenu} />
     </div>);
   }
 }
 
 function loadReact() {
   ReactDOM.render((
-    <div>
-      <ItemInfoApp />
-    </div>
+    <ItemInfoApp />
   ), document.getElementById("content-container"));
 }
 
