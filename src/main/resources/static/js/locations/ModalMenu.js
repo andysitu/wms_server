@@ -75,126 +75,7 @@ var ModalMenu = function (_React$Component) {
       if (_this.state.menu_type == "none") {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
-        return React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              null,
-              "Area"
-            ),
-            React.createElement("input", { type: "text", className: "form-control", min: "0", name: "area", required: true })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              null,
-              "Location"
-            ),
-            React.createElement("input", { type: "text", className: "form-control", min: "0", name: "loc", required: true })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "Start Row"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_start", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "End Row"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_end" })
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "Start Bay"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_start", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "End Bay"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_end" })
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "Start Level"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "level_start", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "End Level"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "level_end" })
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "Start Shelf"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "shelf_start", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-sm-6" },
-              React.createElement(
-                "label",
-                null,
-                "End Shelf"
-              ),
-              React.createElement("input", { type: "number", className: "form-control", min: "0", name: "shelf_end" })
-            )
-          )
-        );
+        return React.createElement(CreateLocationMenu, null);
       } else if (_this.state.menu_type == "create_barcode") {
         return React.createElement(
           "div",
@@ -386,4 +267,142 @@ var ModalMenu = function (_React$Component) {
   }]);
 
   return ModalMenu;
+}(React.Component);
+
+var CreateLocationMenu = function (_React$Component2) {
+  _inherits(CreateLocationMenu, _React$Component2);
+
+  function CreateLocationMenu() {
+    _classCallCheck(this, CreateLocationMenu);
+
+    return _possibleConstructorReturn(this, (CreateLocationMenu.__proto__ || Object.getPrototypeOf(CreateLocationMenu)).apply(this, arguments));
+  }
+
+  _createClass(CreateLocationMenu, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            null,
+            "Area"
+          ),
+          React.createElement("input", { type: "text", className: "form-control", min: "0", name: "area", required: true })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            null,
+            "Location"
+          ),
+          React.createElement("input", { type: "text", className: "form-control", min: "0", name: "loc", required: true })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "Start Row"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_start", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "End Row"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "row_end" })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "Start Bay"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_start", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "End Bay"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "bay_end" })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "Start Level"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "level_start", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "End Level"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "level_end" })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "Start Shelf"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "shelf_start", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-sm-6" },
+            React.createElement(
+              "label",
+              null,
+              "End Shelf"
+            ),
+            React.createElement("input", { type: "number", className: "form-control", min: "0", name: "shelf_end" })
+          )
+        )
+      );
+    }
+  }]);
+
+  return CreateLocationMenu;
 }(React.Component);
