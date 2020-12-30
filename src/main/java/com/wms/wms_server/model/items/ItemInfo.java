@@ -34,6 +34,12 @@ public class ItemInfo {
     public String getItemName() {
         return this.itemName;
     }
+    public String getDescription() {
+        return this.description;
+    }
+    public float getWeight() {
+        return this.weight;
+    }
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ReceiveShipment> receiveShipments;
