@@ -5,7 +5,21 @@ class ModalMenu extends React.Component {
       menu_type: "none",
       submit_handler: null,
       data: null,
+      title: null,
     };
+  }
+
+  get_title = (menu_type) => {
+    switch(menu_type) {
+      case "create_location":
+        return "Create Location";
+      case "create_item_info":
+        return "Create Item Info";
+      case "create_barcode":
+        return "Create Barcode";
+      default:
+        return "Title";
+    }
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
@@ -15,6 +29,7 @@ class ModalMenu extends React.Component {
         menu_type: menu_type,
         submit_handler: submit_handler,
         data: data,
+        title: this.get_title(menu_type),
       }, () => {
       if (menu_type == "create_barcode") {
         // Set the barcode after img element is set
@@ -91,7 +106,7 @@ class ModalMenu extends React.Component {
         </div>
         <div ClassName="form-group">
           <label htmlFor="item-weight-input">Weight</label>
-          <input type="text" className="form-control" id="item-weight-input"></input>
+          <input type="number" className="form-control" id="item-weight-input"></input>
         </div>
       </div>)
     } else if (this.state.menu_type == "create_barcode") {
@@ -179,7 +194,7 @@ class ModalMenu extends React.Component {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Title</h5>
+            <h5 className="modal-title">{this.state.title}</h5>
             <button type="button" className="close" data-dismiss="modal">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -14,6 +14,19 @@ var ModalMenu = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ModalMenu.__proto__ || Object.getPrototypeOf(ModalMenu)).call(this, props));
 
+    _this.get_title = function (menu_type) {
+      switch (menu_type) {
+        case "create_location":
+          return "Create Location";
+        case "create_item_info":
+          return "Create Item Info";
+        case "create_barcode":
+          return "Create Barcode";
+        default:
+          return "Title";
+      }
+    };
+
     _this.show_menu = function (menu_type, data) {
       var submit_handler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
@@ -22,7 +35,8 @@ var ModalMenu = function (_React$Component) {
       _this.setState({
         menu_type: menu_type,
         submit_handler: submit_handler,
-        data: data
+        data: data,
+        title: _this.get_title(menu_type)
       }, function () {
         if (menu_type == "create_barcode") {
           // Set the barcode after img element is set
@@ -108,7 +122,7 @@ var ModalMenu = function (_React$Component) {
               { htmlFor: "item-weight-input" },
               "Weight"
             ),
-            React.createElement("input", { type: "text", className: "form-control", id: "item-weight-input" })
+            React.createElement("input", { type: "number", className: "form-control", id: "item-weight-input" })
           )
         );
       } else if (_this.state.menu_type == "create_barcode") {
@@ -209,7 +223,8 @@ var ModalMenu = function (_React$Component) {
     _this.state = {
       menu_type: "none",
       submit_handler: null,
-      data: null
+      data: null,
+      title: null
     };
     return _this;
   }
@@ -273,7 +288,7 @@ var ModalMenu = function (_React$Component) {
               React.createElement(
                 "h5",
                 { className: "modal-title" },
-                "Title"
+                this.state.title
               ),
               React.createElement(
                 "button",
