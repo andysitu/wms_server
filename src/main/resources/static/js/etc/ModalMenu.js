@@ -76,7 +76,7 @@ var ModalMenu = function (_React$Component) {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
-      } else if (_this.state.menu_type == "create_itemInfo") {
+      } else if (_this.state.menu_type == "create_item_info") {
         return React.createElement(
           "div",
           null,
