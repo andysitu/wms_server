@@ -26,8 +26,12 @@ var ItemInfoApp = function (_React$Component) {
       });
     };
 
+    _this.create_itemInfo = function () {
+      console.log("create item info");
+    };
+
     _this.onClick_createItemInfo = function () {
-      _this.modalMenu.current.show_menu("create_item_info", {});
+      _this.modalMenu.current.show_menu("create_item_info", {}, _this.create_itemInfo);
     };
 
     _this.modalMenu = React.createRef();

@@ -80,7 +80,36 @@ var ModalMenu = function (_React$Component) {
         return React.createElement(
           "div",
           null,
-          "Item Info"
+          React.createElement(
+            "div",
+            { ClassName: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "item-name-input" },
+              "Item Name"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", id: "item-name-input" })
+          ),
+          React.createElement(
+            "div",
+            { ClassName: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "item-description-input" },
+              "Description"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", id: "item-description-input" })
+          ),
+          React.createElement(
+            "div",
+            { ClassName: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "item-weight-input" },
+              "Weight"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", id: "item-weight-input" })
+          )
         );
       } else if (_this.state.menu_type == "create_barcode") {
         return React.createElement(

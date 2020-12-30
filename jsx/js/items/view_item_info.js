@@ -15,8 +15,13 @@ class ItemInfoApp extends React.Component {
     });
   };
 
+  create_itemInfo = () => {
+    console.log("create item info");
+  }
+
   onClick_createItemInfo = () => {
-    this.modalMenu.current.show_menu("create_item_info", {});
+    this.modalMenu.current.show_menu(
+      "create_item_info", {}, this.create_itemInfo);
   };
 
   render() {

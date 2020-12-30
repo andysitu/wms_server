@@ -81,7 +81,18 @@ class ModalMenu extends React.Component {
       return (<CreateLocationMenu />);
     } else if (this.state.menu_type == "create_item_info") {
       return (<div>
-        Item Info
+        <div ClassName="form-group">
+          <label htmlFor="item-name-input">Item Name</label>
+          <input type="text" className="form-control" id="item-name-input"></input>
+        </div>
+        <div ClassName="form-group">
+          <label htmlFor="item-description-input">Description</label>
+          <input type="text" className="form-control" id="item-description-input"></input>
+        </div>
+        <div ClassName="form-group">
+          <label htmlFor="item-weight-input">Weight</label>
+          <input type="text" className="form-control" id="item-weight-input"></input>
+        </div>
       </div>)
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
