@@ -27,9 +27,13 @@ public class ItemInfo {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String item_name;
+    private String itemName;
     private String description;
     private float weight;
+
+    public String getItemName() {
+        return this.itemName;
+    }
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ReceiveShipment> receiveShipments;
@@ -43,19 +47,21 @@ public class ItemInfo {
     @LastModifiedBy
     public String modifiedBy;
 
+    private ItemInfo() {}
+
     private ItemInfo(Builder builder) {
-        this.item_name = builder.item_name;
+        this.itemName = builder.itemName;
         this.description = builder.description;
         this.weight = builder.weight;
     }
 
     public static class Builder {
-        private final String item_name;
+        private final String itemName;
         private final String description;
         private final float weight;
 
-        public Builder(String item_name, String description, float weight) {
-            this.item_name = item_name;
+        public Builder(String itemName, String description, float weight) {
+            this.itemName = itemName;
             this.description = description;
             this.weight = weight;
         }
