@@ -26,8 +26,15 @@ var ItemInfoApp = function (_React$Component) {
       });
     };
 
-    _this.create_itemInfo = function () {
-      console.log("create item info");
+    _this.create_itemInfo = function (data) {
+      $.ajax({
+        url: "../item_info",
+        type: "POST",
+        data: data,
+        success: function success(data) {
+          console.log(data);
+        }
+      });
     };
 
     _this.onClick_createItemInfo = function () {

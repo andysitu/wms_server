@@ -44,9 +44,9 @@ public class ItemInfo {
     public String modifiedBy;
 
     private ItemInfo(Builder builder) {
-        item_name = builder.item_name;
-        description = builder.description;
-        weight = builder.weight;
+        this.item_name = builder.item_name;
+        this.description = builder.description;
+        this.weight = builder.weight;
     }
 
     public static class Builder {

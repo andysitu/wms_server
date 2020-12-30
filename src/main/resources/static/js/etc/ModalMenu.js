@@ -103,7 +103,9 @@ var ModalMenu = function (_React$Component) {
               "Item Name"
             ),
             React.createElement("input", { type: "text", className: "form-control",
-              name: "name", id: "item-name-input" })
+              name: "name", id: "item-name-input",
+              required: true
+            })
           ),
           React.createElement(
             "div",
@@ -114,7 +116,9 @@ var ModalMenu = function (_React$Component) {
               "Description"
             ),
             React.createElement("input", { type: "text", className: "form-control",
-              name: "description", id: "item-description-input" })
+              name: "description", id: "item-description-input",
+              required: true
+            })
           ),
           React.createElement(
             "div",
@@ -126,7 +130,7 @@ var ModalMenu = function (_React$Component) {
             ),
             React.createElement("input", { type: "number", className: "form-control",
               name: "weight", id: "item-weight-input",
-              min: "0", step: "0.01"
+              min: "0", step: "0.01", required: true
             })
           )
         );

@@ -99,18 +99,22 @@ class ModalMenu extends React.Component {
         <div className="form-group">
           <label htmlFor="item-name-input">Item Name</label>
           <input type="text" className="form-control" 
-            name="name" id="item-name-input"></input>
+            name="name" id="item-name-input"
+            required
+          ></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-description-input">Description</label>
           <input type="text" className="form-control" 
-            name="description" id="item-description-input"></input>
+            name="description" id="item-description-input"
+            required
+          ></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-weight-input">Weight</label>
           <input type="number" className="form-control" 
             name="weight" id="item-weight-input"
-            min="0" step="0.01"
+            min="0" step="0.01" required
           ></input>
         </div>
       </div>)
