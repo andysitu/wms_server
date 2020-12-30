@@ -109,7 +109,9 @@ class ModalMenu extends React.Component {
         <div className="form-group">
           <label htmlFor="item-weight-input">Weight</label>
           <input type="number" className="form-control" 
-            name="weight" id="item-weight-input"></input>
+            name="weight" id="item-weight-input"
+            min="0" step="0.01"
+          ></input>
         </div>
       </div>)
     } else if (this.state.menu_type == "create_barcode") {

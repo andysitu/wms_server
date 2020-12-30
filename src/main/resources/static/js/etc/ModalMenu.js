@@ -125,7 +125,9 @@ var ModalMenu = function (_React$Component) {
               "Weight"
             ),
             React.createElement("input", { type: "number", className: "form-control",
-              name: "weight", id: "item-weight-input" })
+              name: "weight", id: "item-weight-input",
+              min: "0", step: "0.01"
+            })
           )
         );
       } else if (_this.state.menu_type == "create_barcode") {
