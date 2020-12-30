@@ -10,7 +10,7 @@ class ItemInfoApp extends React.Component {
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
       success: function(data) {
-        console.log("GOT");
+        console.log(data);
       }
     });
   };
