@@ -96,7 +96,7 @@ var ModalMenu = function (_React$Component) {
           null,
           React.createElement(
             "div",
-            { ClassName: "form-group" },
+            { className: "form-group" },
             React.createElement(
               "label",
               { htmlFor: "item-name-input" },
@@ -106,7 +106,7 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            { ClassName: "form-group" },
+            { className: "form-group" },
             React.createElement(
               "label",
               { htmlFor: "item-description-input" },
@@ -116,7 +116,7 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            { ClassName: "form-group" },
+            { className: "form-group" },
             React.createElement(
               "label",
               { htmlFor: "item-weight-input" },
