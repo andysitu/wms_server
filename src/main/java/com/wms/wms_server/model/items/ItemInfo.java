@@ -40,7 +40,7 @@ public class ItemInfo {
     public float getWeight() {
         return this.weight;
     }
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
