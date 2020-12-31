@@ -18,6 +18,8 @@ public class ItemInfoService {
     public List<ItemInfo> search_itemInfo(String type, String value) {
         if (type.equals("name")) {
             return itemInfoRepository.findByItemNameContainingIgnoreCase(value);
+        } else if (type.equals("description")) {
+            return itemInfoRepository.findByDescriptionContainingIgnoreCase(value);
         } else {
             return new ArrayList<>();
         }

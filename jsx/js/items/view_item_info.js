@@ -55,6 +55,7 @@ class ItemInfoApp extends React.Component {
         <input className="form-control" type="text" id="search-bar1-input"></input>
         <select className="custom-select" id="item-search1-type-select">
           <option value="name">Name</option>
+          <option value="description">Description</option>
         </select>
         <button className="btn btn-outline-secondary"
           onClick={this.onClick_search}

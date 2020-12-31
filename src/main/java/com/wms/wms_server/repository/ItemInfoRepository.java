@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ItemInfoRepository extends CrudRepository<ItemInfo, Integer>{
     List<ItemInfo> findByItemNameContainingIgnoreCase(String name);
+    List<ItemInfo> findByDescriptionContainingIgnoreCase(String name);
 }
