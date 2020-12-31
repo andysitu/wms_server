@@ -40,6 +40,9 @@ public class ItemInfo {
     public float getWeight() {
         return this.weight;
     }
+    public int getId() {
+        return this.id;
+    }
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ReceiveShipment> receiveShipments;
