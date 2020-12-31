@@ -53,4 +53,11 @@ public class ItemController {
         }
         return ItemInfoService.convert_list_to_response(items);
     }
+
+    @RequestMapping(path="/item_info", produces="text/plain;", method=RequestMethod.DELETE)
+    @ResponseBody
+    public String delete_itemInfos(@RequestParam("iteminfo_id") Integer iteminfo_id) {
+        itemInfoRepository.deleteById(iteminfo_id);
+        return "OK";
+    }
 }
