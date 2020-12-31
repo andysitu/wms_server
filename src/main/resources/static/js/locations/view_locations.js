@@ -93,7 +93,6 @@ var LocationTable = function (_React$Component) {
       var locations = [],
           index;
       if (checkboxes.length == 0) return;
-      console.log(_this.state.locations);
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;

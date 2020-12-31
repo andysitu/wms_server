@@ -75,7 +75,6 @@ class LocationTable extends React.Component {
         index;
     if (checkboxes.length == 0)
       return;
-    console.log(this.state.locations);
     for (let cbox of checkboxes) {
       index = cbox.getAttribute("row_index");
       locations.push(this.state.locations[index].location_string);
