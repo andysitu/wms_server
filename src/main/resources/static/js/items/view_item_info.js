@@ -43,10 +43,8 @@ var ItemInfoApp = function (_React$Component) {
       _this.modalMenu.current.show_menu("create_item_info", {}, _this.create_itemInfo);
     };
 
-    _this.onClick_deleteItemInfo = function (e) {
-      console.log(e.target);
-      var result = window.confirm("Are you sure you want to delete ?");
-      console.log(result);
+    _this.deleteItemInfo = function (row_index, itemInfo_id) {
+      console.log(row_index, itemInfo_id);
     };
 
     _this.state = {
@@ -59,6 +57,8 @@ var ItemInfoApp = function (_React$Component) {
   _createClass(ItemInfoApp, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return React.createElement(
         "div",
         null,
@@ -118,7 +118,10 @@ var ItemInfoApp = function (_React$Component) {
             "tbody",
             null,
             this.state.itemInfos.map(function (itemInfo, index) {
-              return React.createElement(ItemInfoRow, { data: itemInfo });
+              return React.createElement(ItemInfoRow, {
+                deleteItemInfo: _this2.deleteItemInfo,
+                row_index: index,
+                data: itemInfo });
             })
           )
         ),
@@ -151,9 +154,22 @@ var ItemInfoRow = function (_React$Component2) {
   _inherits(ItemInfoRow, _React$Component2);
 
   function ItemInfoRow() {
+    var _ref;
+
+    var _temp, _this3, _ret;
+
     _classCallCheck(this, ItemInfoRow);
 
-    return _possibleConstructorReturn(this, (ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.onClick_deleteItemInfo = function () {
+      var result = window.confirm("Are you sure you want to delete ?");
+      if (result) {
+        _this3.props.deleteItemInfo(_this3.props.row_index, _this3.props.data.id);
+      }
+    }, _temp), _possibleConstructorReturn(_this3, _ret);
   }
 
   _createClass(ItemInfoRow, [{
@@ -192,7 +208,8 @@ var ItemInfoRow = function (_React$Component2) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-danger" },
+            { type: "button", className: "btn btn-sm btn-outline-danger",
+              onClick: this.onClick_deleteItemInfo },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
