@@ -1,16 +1,21 @@
 class ItemInfoApp extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      itemInfos: [],
+    }
     this.modalMenu = React.createRef();
   }
   onClick_search = () => {
     var search_type = document.getElementById("item-search1-type-select").value,
         search_value = document.getElementById("search-bar1-input").value;
+    var that = this;
     $.ajax({
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
       success: function(data) {
         console.log(data);
+        that.setState({itemInfos: data});
       }
     });
   };
@@ -42,6 +47,24 @@ class ItemInfoApp extends React.Component {
           onClick={this.onClick_search}
         >Search</button>
       </div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.itemInfos.map((itemInfo) => {
+            return (<tr>
+              <td>{itemInfo.itemName}</td>
+              <td>{itemInfo.description}</td>
+              <td>{itemInfo.weight}</td>
+            </tr>);
+          })}
+        </tbody>
+      </table>
       <div>
         <button
           onClick={this.onClick_createItemInfo}

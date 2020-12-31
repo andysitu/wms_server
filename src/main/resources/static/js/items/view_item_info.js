@@ -17,11 +17,13 @@ var ItemInfoApp = function (_React$Component) {
     _this.onClick_search = function () {
       var search_type = document.getElementById("item-search1-type-select").value,
           search_value = document.getElementById("search-bar1-input").value;
+      var that = _this;
       $.ajax({
         url: "./item_info?type=" + search_type + "&value=" + search_value,
         type: "GET",
         success: function success(data) {
           console.log(data);
+          that.setState({ itemInfos: data });
         }
       });
     };
@@ -41,6 +43,9 @@ var ItemInfoApp = function (_React$Component) {
       _this.modalMenu.current.show_menu("create_item_info", {}, _this.create_itemInfo);
     };
 
+    _this.state = {
+      itemInfos: []
+    };
     _this.modalMenu = React.createRef();
     return _this;
   }
@@ -70,6 +75,58 @@ var ItemInfoApp = function (_React$Component) {
               onClick: this.onClick_search
             },
             "Search"
+          )
+        ),
+        React.createElement(
+          "table",
+          { className: "table" },
+          React.createElement(
+            "thead",
+            null,
+            React.createElement(
+              "tr",
+              null,
+              React.createElement(
+                "th",
+                { scope: "col" },
+                "Item Name"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
+                "Description"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
+                "Weight"
+              )
+            )
+          ),
+          React.createElement(
+            "tbody",
+            null,
+            this.state.itemInfos.map(function (itemInfo) {
+              return React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  itemInfo.itemName
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  itemInfo.description
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  itemInfo.weight
+                )
+              );
+            })
           )
         ),
         React.createElement(
