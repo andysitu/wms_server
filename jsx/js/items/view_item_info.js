@@ -62,7 +62,7 @@ class ItemInfoApp extends React.Component {
         </thead>
         <tbody>
           {this.state.itemInfos.map((itemInfo, index) => {
-            return (<ItemInfoRow 
+            return (<ItemInfoRow key={"itemInifo-" + index}
               deleteItemInfo={this.deleteItemInfo}
               row_index={index}
               data={itemInfo}/>);

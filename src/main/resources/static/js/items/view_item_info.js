@@ -118,7 +118,7 @@ var ItemInfoApp = function (_React$Component) {
             "tbody",
             null,
             this.state.itemInfos.map(function (itemInfo, index) {
-              return React.createElement(ItemInfoRow, {
+              return React.createElement(ItemInfoRow, { key: "itemInifo-" + index,
                 deleteItemInfo: _this2.deleteItemInfo,
                 row_index: index,
                 data: itemInfo });
