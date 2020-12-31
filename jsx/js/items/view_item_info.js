@@ -14,7 +14,6 @@ class ItemInfoApp extends React.Component {
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
       success: function(data) {
-        console.log(data);
         that.setState({itemInfos: data});
       }
     });
@@ -37,7 +36,17 @@ class ItemInfoApp extends React.Component {
   };
 
   deleteItemInfo = (row_index, itemInfo_id) => {
-    console.log(row_index, itemInfo_id);
+    var that = this;
+    $.ajax({
+      url: "../item_info?iteminfo_id=" + itemInfo_id,
+      type: "DELETE",
+      success: function(return_data) {
+        that.state.itemInfos.splice(row_index, 1)
+        that.setState({
+          itemInfos: that.state.itemInfos,
+        });
+      },
+    })
   }
 
   render() {

@@ -22,7 +22,6 @@ var ItemInfoApp = function (_React$Component) {
         url: "./item_info?type=" + search_type + "&value=" + search_value,
         type: "GET",
         success: function success(data) {
-          console.log(data);
           that.setState({ itemInfos: data });
         }
       });
@@ -44,7 +43,17 @@ var ItemInfoApp = function (_React$Component) {
     };
 
     _this.deleteItemInfo = function (row_index, itemInfo_id) {
-      console.log(row_index, itemInfo_id);
+      var that = _this;
+      $.ajax({
+        url: "../item_info?iteminfo_id=" + itemInfo_id,
+        type: "DELETE",
+        success: function success(return_data) {
+          that.state.itemInfos.splice(row_index, 1);
+          that.setState({
+            itemInfos: that.state.itemInfos
+          });
+        }
+      });
     };
 
     _this.state = {
