@@ -27,7 +27,7 @@ public class ItemInfoService {
         List<ItemInfoResponse> l = new ArrayList<>();
         ItemInfoResponse ir;
         for (ItemInfo i : items) {
-            ir = new ItemInfoResponse(i.getItemName(), i.getDescription(), i.getWeight());
+            ir = new ItemInfoResponse(i.getId(), i.getItemName(), i.getDescription(), i.getWeight());
             l.add(ir);
         }
         return l;
