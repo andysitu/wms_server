@@ -245,7 +245,7 @@ var ModalMenu = function (_React$Component) {
 
       // Blank out menu when it's hidden
       $("#modalMenu").on("hidden.bs.modal", function () {
-        _this2.setState({ menu_type: "none" });
+        _this2.setState({ menu_type: "none", data: {} });
       });
     }
     // Print all the barcodes shown in the menu in new window

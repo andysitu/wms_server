@@ -44,7 +44,7 @@ class ModalMenu extends React.Component {
   componentDidMount() {
     // Blank out menu when it's hidden
     $("#modalMenu").on("hidden.bs.modal", () => {
-      this.setState({menu_type: "none"});
+      this.setState({menu_type: "none", data: {}});
     });
   }
 
