@@ -10,6 +10,7 @@ import com.wms.wms_server.services.ItemInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,9 +55,9 @@ public class ItemController {
         return ItemInfoService.convert_list_to_response(items);
     }
 
-    @RequestMapping(path="/item_info", produces="text/plain;", method=RequestMethod.DELETE)
+    @RequestMapping(path="/item_info/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_itemInfo(@RequestParam("iteminfo_id") Integer iteminfo_id) {
+    public String delete_itemInfo(@PathVariable("iteminfo_id") Integer iteminfo_id) {
         itemInfoRepository.deleteById(iteminfo_id);
         return "OK";
     }

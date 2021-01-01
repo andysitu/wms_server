@@ -54,7 +54,7 @@ var ItemInfoApp = function (_React$Component) {
     _this.deleteItemInfo = function (row_index, itemInfo_id) {
       var that = _this;
       $.ajax({
-        url: "../item_info?iteminfo_id=" + itemInfo_id,
+        url: "../item_info/" + itemInfo_id,
         type: "DELETE",
         success: function success(return_data) {
           that.state.itemInfos.splice(row_index, 1);
