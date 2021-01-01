@@ -1,5 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -24,6 +26,13 @@ var ItemInfoApp = function (_React$Component) {
         success: function success(data) {
           that.setState({ itemInfos: data });
         }
+      });
+    };
+
+    _this.editItemInfo = function (row_index) {
+      _this.modalMenu.current.show_menu("edit_item_info", _this.state.itemInfos[row_index], function (data) {
+        console.log(data);
+        console.log(_this.state.itemInfos[row_index].id);
       });
     };
 
@@ -132,10 +141,12 @@ var ItemInfoApp = function (_React$Component) {
             "tbody",
             null,
             this.state.itemInfos.map(function (itemInfo, index) {
-              return React.createElement(ItemInfoRow, { key: "itemInifo-" + index,
+              return React.createElement(ItemInfoRow, _defineProperty({ key: "itemInifo-" + index,
                 deleteItemInfo: _this2.deleteItemInfo,
+                editItemInfo: _this2.editItemInfo,
                 row_index: index,
-                data: itemInfo });
+                data: itemInfo
+              }, "editItemInfo", _this2.editItemInfo));
             })
           )
         ),
@@ -178,7 +189,9 @@ var ItemInfoRow = function (_React$Component2) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.onClick_deleteItemInfo = function () {
+    return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.onClick_editItemInfo = function () {
+      _this3.props.editItemInfo(_this3.props.row_index);
+    }, _this3.onClick_deleteItemInfo = function () {
       var result = window.confirm("Are you sure you want to delete ?");
       if (result) {
         _this3.props.deleteItemInfo(_this3.props.row_index, _this3.props.data.id);
@@ -212,7 +225,8 @@ var ItemInfoRow = function (_React$Component2) {
           null,
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-warning" },
+            { type: "button", className: "btn btn-sm btn-outline-warning",
+              onClick: this.onClick_editItemInfo },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-pencil-square", viewBox: "0 0 16 16" },

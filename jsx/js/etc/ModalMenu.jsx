@@ -17,6 +17,8 @@ class ModalMenu extends React.Component {
         return "Create Item Info";
       case "create_barcode":
         return "Create Barcode";
+      case "edit_item_info":
+        return "Edit item Info";
       default:
         return "Title";
     }
@@ -94,20 +96,24 @@ class ModalMenu extends React.Component {
       return (<div></div>);
     } else if (this.state.menu_type == "create_location") {
       return (<CreateLocationMenu />);
-    } else if (this.state.menu_type == "create_item_info") {
+    } else if (this.state.menu_type == "create_item_info"
+        || this.state.menu_type == "edit_item_info") {
+      var item_name = this.state.data.itemName ? this.state.data.itemName : "",
+          description = this.state.data.description ? this.state.data.description : "",
+          weight = this.state.data.weight ? this.state.data.weight : "";
       return (<div>
         <div className="form-group">
           <label htmlFor="item-name-input">Item Name</label>
           <input type="text" className="form-control" 
             name="name" id="item-name-input"
-            required
+            defaultValue={item_name} required
           ></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-description-input">Description</label>
           <input type="text" className="form-control" 
             name="description" id="item-description-input"
-            required
+            defaultValue={description} required
           ></input>
         </div>
         <div className="form-group">
@@ -115,6 +121,7 @@ class ModalMenu extends React.Component {
           <input type="number" className="form-control" 
             name="weight" id="item-weight-input"
             min="0" step="0.01" required
+            defaultValue={weight} required
           ></input>
         </div>
       </div>)

@@ -56,8 +56,14 @@ public class ItemController {
 
     @RequestMapping(path="/item_info", produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_itemInfos(@RequestParam("iteminfo_id") Integer iteminfo_id) {
+    public String delete_itemInfo(@RequestParam("iteminfo_id") Integer iteminfo_id) {
         itemInfoRepository.deleteById(iteminfo_id);
+        return "OK";
+    }
+
+    @RequestMapping(path="/item_info", produces="text/plain;", method=RequestMethod.PATCH)
+    @ResponseBody
+    public String edit_itemInfo(@RequestParam("iteminfo_id") Integer iteminfo_id) {
         return "OK";
     }
 }

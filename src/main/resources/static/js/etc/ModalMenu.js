@@ -1,5 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -22,6 +24,8 @@ var ModalMenu = function (_React$Component) {
           return "Create Item Info";
         case "create_barcode":
           return "Create Barcode";
+        case "edit_item_info":
+          return "Edit item Info";
         default:
           return "Title";
       }
@@ -90,7 +94,10 @@ var ModalMenu = function (_React$Component) {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
-      } else if (_this.state.menu_type == "create_item_info") {
+      } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
+        var item_name = _this.state.data.itemName ? _this.state.data.itemName : "",
+            description = _this.state.data.description ? _this.state.data.description : "",
+            weight = _this.state.data.weight ? _this.state.data.weight : "";
         return React.createElement(
           "div",
           null,
@@ -104,7 +111,7 @@ var ModalMenu = function (_React$Component) {
             ),
             React.createElement("input", { type: "text", className: "form-control",
               name: "name", id: "item-name-input",
-              required: true
+              defaultValue: item_name, required: true
             })
           ),
           React.createElement(
@@ -117,7 +124,7 @@ var ModalMenu = function (_React$Component) {
             ),
             React.createElement("input", { type: "text", className: "form-control",
               name: "description", id: "item-description-input",
-              required: true
+              defaultValue: description, required: true
             })
           ),
           React.createElement(
@@ -128,10 +135,10 @@ var ModalMenu = function (_React$Component) {
               { htmlFor: "item-weight-input" },
               "Weight"
             ),
-            React.createElement("input", { type: "number", className: "form-control",
+            React.createElement("input", _defineProperty({ type: "number", className: "form-control",
               name: "weight", id: "item-weight-input",
-              min: "0", step: "0.01", required: true
-            })
+              min: "0", step: "0.01", required: true,
+              defaultValue: weight }, "required", true))
           )
         );
       } else if (_this.state.menu_type == "create_barcode") {
