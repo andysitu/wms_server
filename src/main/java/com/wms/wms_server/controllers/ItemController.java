@@ -52,7 +52,7 @@ public class ItemController {
         for (ItemInfo item : items) {
             System.out.println("name " + item.getItemName());
         }
-        return ItemInfoService.convert_list_to_response(items);
+        return ItemInfoService.convert_list_to_responses(items);
     }
 
     @RequestMapping(path="/item_info/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
@@ -62,9 +62,14 @@ public class ItemController {
         return "OK";
     }
 
-    @RequestMapping(path="/item_info", produces="text/plain;", method=RequestMethod.PATCH)
+    @RequestMapping(path="/item_info/{iteminfo_id}", produces="application/json;", method=RequestMethod.PATCH)
     @ResponseBody
-    public String edit_itemInfo(@RequestParam("iteminfo_id") Integer iteminfo_id) {
-        return "OK";
+    public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Integer iteminfo_id,
+            HttpServletRequest request) {
+        System.out.println(iteminfo_id);
+        System.out.println(request.getParameter("test"));
+        ItemInfo itemInfo = ItemInfoService.edit_itemInfo(iteminfo_id, request);
+
+        return ItemInfoService.convert_to_response(itemInfo);
     }
 }
