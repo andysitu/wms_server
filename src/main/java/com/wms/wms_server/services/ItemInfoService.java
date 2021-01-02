@@ -25,13 +25,18 @@ public class ItemInfoService {
         }
     }
 
-    public List<ItemInfoResponse> convert_list_to_response(List<ItemInfo> items) {
+    public List<ItemInfoResponse> convert_list_to_responses(List<ItemInfo> items) {
         List<ItemInfoResponse> l = new ArrayList<>();
         ItemInfoResponse ir;
-        for (ItemInfo i : items) {
-            ir = new ItemInfoResponse(i.getId(), i.getItemName(), i.getDescription(), i.getWeight());
+        for (ItemInfo item : items) {
+            ir = this.convert_to_response(item);
             l.add(ir);
         }
         return l;
+    }
+
+    public ItemInfoResponse convert_to_response(ItemInfo item) {
+        return new ItemInfoResponse(
+            item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
     }
 }
