@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.ArrayList;
 
 @Service
@@ -38,5 +42,25 @@ public class ItemInfoService {
     public ItemInfoResponse convert_to_response(ItemInfo item) {
         return new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
+    }
+
+    public ItemInfo edit_itemInfo(Integer id, HttpServletRequest request) {
+        Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
+        if (oItemInfo.isPresent()) {
+            ItemInfo itemInfo = oItemInfo.get();
+            if (request.getParameter("name") != null) {
+                itemInfo.setItemName(request.getParameter("name"));
+            }
+            if (request.getParameter("description") != null) {
+                itemInfo.setDescription(request.getParameter("description"));
+            }
+            if (request.getParameter("weight") != null) {
+                itemInfo.setWeight(Float.parseFloat(request.getParameter("weight")));
+            }
+            itemInfoRepository.save(itemInfo);
+            return itemInfo;
+        } else {
+            return null;
+        }
     }
 }
