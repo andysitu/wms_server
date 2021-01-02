@@ -58,12 +58,16 @@ var ItemInfoApp = function (_React$Component) {
     };
 
     _this.create_itemInfo = function (data) {
+      var that = _this;
       $.ajax({
         url: "../item_info",
         type: "POST",
         data: data,
         success: function success(item_data) {
-          console.log(item_data);
+          that.add_ref(item_data);
+          that.setState({
+            itemInfos: [].concat(_toConsumableArray(that.state.itemInfos), [item_data])
+          });
         }
       });
     };
