@@ -40,6 +40,9 @@ public class ItemInfoService {
     }
 
     public ItemInfoResponse convert_to_response(ItemInfo item) {
+        if (item == null) {
+            return null;
+        }
         return new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
     }
