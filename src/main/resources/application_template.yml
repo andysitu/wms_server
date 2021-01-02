@@ -4,7 +4,7 @@
 spring:
     jpa:
         hibernate:
-            ddl-auto: update # Need to change, destroys any previous data
+            ddl-auto: update 
         database-platform: org.hibernate.dialect.PostgreSQLDialect # Sets explicit error if Postgres server isn't up
     datasource:
         platform: postgres
