@@ -8,6 +8,7 @@ import java.util.Map;
 import com.wms.wms_server.model.user.WMSUser;
 
 import com.wms.wms_server.model.response.LocationResponse;
+import com.wms.wms_server.model.locations.Location;
 import com.wms.wms_server.model.request.LocationRequest;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.wms.wms_server.repository.LocationRepository;
 import com.wms.wms_server.services.LocationService;
-import com.wms.wms_server.model.Location;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

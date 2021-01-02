@@ -2,7 +2,7 @@ package com.wms.wms_server.services;
 
 import org.springframework.stereotype.Service;
 
-import com.wms.wms_server.model.Location;
+import com.wms.wms_server.model.locations.Location;
 import com.wms.wms_server.model.response.LocationResponse;
 import com.wms.wms_server.model.request.LocationRequest;
 
