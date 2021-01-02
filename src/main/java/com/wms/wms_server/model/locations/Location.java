@@ -2,9 +2,12 @@ package com.wms.wms_server.model.locations;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.CreatedBy;
@@ -21,13 +24,16 @@ public class Location {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String area;
     private String loc;
     private int row;
     private int bay;
     private int level;
     private int shelf;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area_id", nullable = false)
+    private Area area;
+    
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate
@@ -40,7 +46,7 @@ public class Location {
     public Location() {}
 
     public Location(String area, String loc, int row, int bay, int level, int shelf) {
-        this.area = area;
+        // this.area = area;
         this.loc = loc;
         this.row = row;
         this.bay = bay;
@@ -52,7 +58,8 @@ public class Location {
         return this.id;
     }
     public String getArea() {
-        return this.area;
+        return "A";
+        // return this.area;
     }
     public String getLoc() {
         return this.loc;
