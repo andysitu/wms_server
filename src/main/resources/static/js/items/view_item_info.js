@@ -2,6 +2,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -24,15 +26,34 @@ var ItemInfoApp = function (_React$Component) {
         url: "./item_info?type=" + search_type + "&value=" + search_value,
         type: "GET",
         success: function success(data) {
+          data.forEach(function (element) {
+            that.add_ref(element);
+          });
           that.setState({ itemInfos: data });
         }
       });
     };
 
+    _this.update_itemInfoRow = function (index) {
+      _this.state.itemInfos[index].ref.current.update_data(_this.state.itemInfos[index]);
+    };
+
     _this.editItemInfo = function (row_index) {
+      var that = _this;
       _this.modalMenu.current.show_menu("edit_item_info", _this.state.itemInfos[row_index], function (data) {
-        console.log(data);
-        console.log(_this.state.itemInfos[row_index].id);
+        $.ajax({
+          url: "../item_info/" + _this.state.itemInfos[row_index].id,
+          type: "PATCH",
+          data: data,
+          success: function success(new_data) {
+            that.setState(function (prevState) {
+              var new_itemInfos = prevState.itemInfos;
+              Object.assign(new_itemInfos[row_index], new_data);
+            }, function () {
+              that.update_itemInfoRow(row_index);
+            });
+          }
+        });
       });
     };
 
@@ -73,10 +94,28 @@ var ItemInfoApp = function (_React$Component) {
   }
 
   _createClass(ItemInfoApp, [{
+    key: "add_ref",
+    value: function add_ref(element) {
+      element.ref = React.createRef();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
+      var rows = [];
+      if (this.state.itemInfos.length > 0) {
+        rows = this.state.itemInfos.map(function (itemInfo, index) {
+          return React.createElement(ItemInfoRow, _defineProperty({ key: "itemInifo-" + itemInfo.id,
+            ref: itemInfo.ref,
+            deleteItemInfo: _this2.deleteItemInfo,
+            editItemInfo: _this2.editItemInfo,
+            row_index: index,
+            data: itemInfo,
+            itemName: itemInfo.itemName
+          }, "editItemInfo", _this2.editItemInfo));
+        });
+      }
       return React.createElement(
         "div",
         null,
@@ -140,14 +179,7 @@ var ItemInfoApp = function (_React$Component) {
           React.createElement(
             "tbody",
             null,
-            this.state.itemInfos.map(function (itemInfo, index) {
-              return React.createElement(ItemInfoRow, _defineProperty({ key: "itemInifo-" + index,
-                deleteItemInfo: _this2.deleteItemInfo,
-                editItemInfo: _this2.editItemInfo,
-                row_index: index,
-                data: itemInfo
-              }, "editItemInfo", _this2.editItemInfo));
-            })
+            rows
           )
         ),
         React.createElement(
@@ -189,13 +221,17 @@ var ItemInfoRow = function (_React$Component2) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.onClick_editItemInfo = function () {
+    return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.state = {
+      data: _this3.props.data
+    }, _this3.onClick_editItemInfo = function () {
       _this3.props.editItemInfo(_this3.props.row_index);
     }, _this3.onClick_deleteItemInfo = function () {
       var result = window.confirm("Are you sure you want to delete ?");
       if (result) {
         _this3.props.deleteItemInfo(_this3.props.row_index, _this3.props.data.id);
       }
+    }, _this3.update_data = function (new_data) {
+      _this3.setState({ data: new_data });
     }, _temp), _possibleConstructorReturn(_this3, _ret);
   }
 
@@ -204,21 +240,21 @@ var ItemInfoRow = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         "tr",
-        { key: "itemInfo-" + this.props.data.id },
+        { key: "itemInfo-" + this.state.data.id },
         React.createElement(
           "td",
           null,
-          this.props.data.itemName
+          this.state.data.itemName
         ),
         React.createElement(
           "td",
           null,
-          this.props.data.description
+          this.state.data.description
         ),
         React.createElement(
           "td",
           null,
-          this.props.data.weight
+          this.state.data.weight
         ),
         React.createElement(
           "td",

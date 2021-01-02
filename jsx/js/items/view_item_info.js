@@ -6,6 +6,11 @@ class ItemInfoApp extends React.Component {
     }
     this.modalMenu = React.createRef();
   }
+
+  add_ref(element) {
+    element.ref=React.createRef()
+  }
+
   onClick_search = () => {
     var search_type = document.getElementById("item-search1-type-select").value,
         search_value = document.getElementById("search-bar1-input").value;
@@ -14,18 +19,35 @@ class ItemInfoApp extends React.Component {
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
       success: function(data) {
+        data.forEach((element) => {
+          that.add_ref(element);
+        })
         that.setState({itemInfos: data});
       }
     });
   };
 
+  update_itemInfoRow = (index) => {
+    this.state.itemInfos[index].ref.current.update_data(this.state.itemInfos[index]);
+  }
+
   editItemInfo = (row_index) => {
+    var that = this;
     this.modalMenu.current.show_menu(
       "edit_item_info",
       this.state.itemInfos[row_index],
       (data) => {
-        console.log(data);
-        console.log(this.state.itemInfos[row_index].id)
+        $.ajax({
+          url: "../item_info/" + this.state.itemInfos[row_index].id,
+          type: "PATCH",
+          data: data,
+          success: function(new_data) {
+            that.setState(prevState => {
+              let new_itemInfos = prevState.itemInfos;
+              Object.assign(new_itemInfos[row_index], new_data);
+            }, ()=>{that.update_itemInfoRow(row_index)});
+          },
+        });
       }
     )
   };
@@ -57,10 +79,24 @@ class ItemInfoApp extends React.Component {
           itemInfos: that.state.itemInfos,
         });
       },
-    })
+    });
   }
 
   render() {
+    var rows = [];
+    if (this.state.itemInfos.length > 0) {
+      rows = this.state.itemInfos.map((itemInfo, index) => {
+        return (<ItemInfoRow key={"itemInifo-" + itemInfo.id}
+          ref={itemInfo.ref}
+          deleteItemInfo={this.deleteItemInfo}
+          editItemInfo={this.editItemInfo}
+          row_index={index}
+          data={itemInfo}
+          itemName={itemInfo.itemName}
+          editItemInfo = {this.editItemInfo}
+        />);
+      });   
+    }
     return (<div>
       <div className="input-group">
         <input className="form-control" type="text" id="search-bar1-input"></input>
@@ -82,15 +118,7 @@ class ItemInfoApp extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.itemInfos.map((itemInfo, index) => {
-            return (<ItemInfoRow key={"itemInifo-" + index}
-              deleteItemInfo={this.deleteItemInfo}
-              editItemInfo={this.editItemInfo}
-              row_index={index}
-              data={itemInfo}
-              editItemInfo = {this.editItemInfo}
-              />);
-          })}
+          {rows}
         </tbody>
       </table>
       <div>
@@ -113,6 +141,10 @@ function loadReact() {
 loadReact();
 
 class ItemInfoRow extends React.Component {
+  state = {
+    data: this.props.data,
+  }
+
   onClick_editItemInfo = () => {
     this.props.editItemInfo(this.props.row_index);
   }
@@ -123,11 +155,15 @@ class ItemInfoRow extends React.Component {
     }
   };
 
+  update_data =(new_data) => {
+    this.setState({data: new_data,})
+  }
+
   render() {
-    return (<tr key={"itemInfo-" + this.props.data.id}>
-    <td>{this.props.data.itemName}</td>
-    <td>{this.props.data.description}</td>
-    <td>{this.props.data.weight}</td>
+    return (<tr key={"itemInfo-" + this.state.data.id}>
+    <td>{this.state.data.itemName}</td>
+    <td>{this.state.data.description}</td>
+    <td>{this.state.data.weight}</td>
     <td>
     <button type="button" className="btn btn-sm btn-outline-warning"
       onClick={this.onClick_editItemInfo}>
