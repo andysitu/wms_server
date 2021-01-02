@@ -34,8 +34,17 @@ public class ItemInfo {
     public String getItemName() {
         return this.itemName;
     }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
     public String getDescription() {
         return this.description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
     public float getWeight() {
         return this.weight;
