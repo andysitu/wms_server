@@ -33,7 +33,7 @@ class LocationTable extends React.Component {
 
   // Changes location object to formatted data
   convert_location(l) {
-    l.location_string = `${l.area}.${l.row}.${l.bay}.${l.level}.${l.shelf}`;
+    l.location_string = `${l.area}-${l.row}-${l.bay}-${l.level}-${l.shelf}`;
   }
 
   get_locations = () => {
