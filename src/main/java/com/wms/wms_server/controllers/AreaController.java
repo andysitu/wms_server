@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 import com.wms.wms_server.model.locations.Area;
+import com.wms.wms_server.model.response.AreaResponse;
 
 @Controller
 public class AreaController {
@@ -18,11 +19,13 @@ public class AreaController {
     @RequestMapping(path="/areas", produces="application/json",
         method=RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, Long> get_areas() {
-        HashMap<String, Long> areaMap = new HashMap<>();
+    public ArrayList<AreaResponse> get_areas() {
+        ArrayList<AreaResponse> areaList = new ArrayList<>();
+        AreaResponse a;
         for(Area area: areaRepository.findAll()) {
-            areaMap.put(area.getArea(), area.getId());
+            a = new AreaResponse(area.getArea(), area.getId());
+            areaList.add(a);
         }
-        return areaMap;
+        return areaList;
     }
 }
