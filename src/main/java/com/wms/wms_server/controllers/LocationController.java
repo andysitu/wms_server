@@ -59,19 +59,11 @@ public class LocationController {
         for (Map.Entry<String, Object> entry : ats.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
-        for(Area area : AreaRepository.findAll()) {
-            System.out.println("area   area");
-            System.out.println(area.getArea());
+        ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
+        for(Location loc : locationRepository.findAll())  {
+            locs.add(locationService.convertLocation(loc));
         }
-        // ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
-        // for(Location loc : locationRepository.findAll())  {
-        //     // System.out.println(loc.created);
-        //     // System.out.println(loc.modified);
-        //     System.out.println(loc.getCreatedBy());
-        //     locs.add(locationService.convertLocation(loc));
-        // }
-        // return locs;
-        return new ArrayList<>();
+        return locs;
     }
 
     // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
