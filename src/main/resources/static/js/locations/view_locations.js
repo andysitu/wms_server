@@ -34,6 +34,38 @@ var LocationTable = function (_React$Component) {
       _this.modalMenu.current.show_menu("create_location", {}, _this.create_location);
     };
 
+    _this.set_areas = function () {
+      var that = _this;
+      $.ajax({
+        url: "../areas",
+        type: "GET",
+        success: function success(data) {
+          that.setState({
+            areas: data
+          });
+        }
+      });
+    };
+
+    _this.create_area_options = function () {
+      return React.createElement(
+        "select",
+        null,
+        React.createElement(
+          "option",
+          { value: "none" },
+          "None"
+        ),
+        _this.state.areas.map(function (area) {
+          return React.createElement(
+            "option",
+            { value: area.id, key: "area-" + area.id },
+            area.area
+          );
+        })
+      );
+    };
+
     _this.get_locations = function () {
       var that = _this;
       $.ajax({
@@ -160,11 +192,13 @@ var LocationTable = function (_React$Component) {
 
     _this.modalMenu = React.createRef();
     _this.state = {
+      areas: [],
       locations: []
 
     };
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;
+    _this.set_areas();
     _this.get_locations();
     return _this;
   }
@@ -205,6 +239,12 @@ var LocationTable = function (_React$Component) {
             { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
             React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
           )
+        ),
+        React.createElement(
+          "span",
+          null,
+          "Area: ",
+          this.create_area_options()
         ),
         React.createElement(
           "table",

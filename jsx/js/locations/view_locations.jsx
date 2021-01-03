@@ -3,11 +3,13 @@ class LocationTable extends React.Component {
     super(props);
     this.modalMenu = React.createRef();
     this.state = {
+      areas: [],
       locations: [],
       
     }
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
+    this.set_areas();
     this.get_locations();
   }
 
@@ -34,6 +36,30 @@ class LocationTable extends React.Component {
   // Changes location object to formatted data
   convert_location(l) {
     l.location_string = `${l.area}-${l.row}-${l.bay}-${l.level}-${l.shelf}`;
+  }
+
+  set_areas = () => {
+    var that = this;
+    $.ajax({
+      url: "../areas",
+      type: "GET",
+      success: function(data) {
+        that.setState({
+          areas: data,
+        })
+      },
+    });
+  }
+
+  create_area_options =() =>  {
+    return (<select>
+      <option value="none">None</option>
+      {this.state.areas.map((area) => {
+        return (
+          <option value={area.id} key={"area-" + area.id}>{area.area}</option>
+        );
+      })}
+      </select>);
   }
 
   get_locations = () => {
@@ -128,6 +154,10 @@ class LocationTable extends React.Component {
           <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
         </svg>
       </button>
+      <span>
+        Area: {this.create_area_options()}
+      </span>
+      
 
       <table className="table table-sm">
         <thead>
