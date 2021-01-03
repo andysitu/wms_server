@@ -51,7 +51,7 @@ public class Area {
     @LastModifiedDate
     private Date lastModifiedDate;
     @CreatedBy
-    public String createdBy;
+    private String createdBy;
     @LastModifiedBy
-    public String modifiedBy;
+    private String modifiedBy;
 }

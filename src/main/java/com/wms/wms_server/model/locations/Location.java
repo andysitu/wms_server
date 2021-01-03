@@ -42,9 +42,9 @@ public class Location {
     @LastModifiedDate
     private Date lastModifiedDate;
     @CreatedBy
-    public String createdBy;
+    private String createdBy;
     @LastModifiedBy
-    public String modifiedBy;
+    private String modifiedBy;
         
     public Location() {}
 
