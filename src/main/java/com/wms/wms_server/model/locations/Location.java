@@ -60,8 +60,14 @@ public class Location {
     public Integer getId() {
         return this.id;
     }
-    public String getArea() {
-        return "A";
+    public void setArea(Area area) {
+        this.area = area;
+    }
+    public Area getArea() {
+        return this.area;
+    }
+    public String getAreaString() {
+        return this.area.getArea();
         // return this.area;
     }
     public String getLoc() {
