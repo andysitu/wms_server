@@ -45,6 +45,9 @@ public class Area {
     public String getArea() {
         return this.area;
     }
+    public Long getId() {
+        return this.id;
+    }
 
     @CreatedDate
     private Date createdDate;
