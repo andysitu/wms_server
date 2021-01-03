@@ -48,8 +48,7 @@ public class Location {
         
     public Location() {}
 
-    public Location(String area, String loc, int row, int bay, int level, int shelf) {
-        // this.area = area;
+    public Location(String loc, int row, int bay, int level, int shelf) {
         this.loc = loc;
         this.row = row;
         this.bay = bay;

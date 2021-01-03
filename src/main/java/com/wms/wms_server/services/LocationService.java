@@ -47,7 +47,7 @@ public class LocationService {
                 for (int level = locReq.level_start; level < locReq.level_end+1; level++ ) {
                     for (int shelf = locReq.shelf_start; shelf < locReq.shelf_end+1; shelf++ ) {
                         loc = new Location(
-                            locReq.area, locReq.loc, row, bay, level, shelf
+                            locReq.loc, row, bay, level, shelf
                         );
                         loc.setArea(area);
                         locationRepository.save(loc);
