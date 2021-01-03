@@ -1,6 +1,7 @@
 package com.wms.wms_server.model.locations;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -27,14 +28,22 @@ public class Area {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
     private String area;
 
     // @OneToMany(cascade = CascadeType.ALL, 
     //             fetch = FetchType.LAZY, mappedBy = "area")
     // private Set<Location> locations = new HashSet<>();
 
+    public Area() {
+        this.area = "NONE";
+    }
     public Area(String area) {
         this.area = area;
+    }
+
+    public String getArea() {
+        return this.area;
     }
 
     @CreatedDate
