@@ -2,7 +2,6 @@ package com.wms.wms_server.repository;
 
 import com.wms.wms_server.model.items.ItemInfo;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

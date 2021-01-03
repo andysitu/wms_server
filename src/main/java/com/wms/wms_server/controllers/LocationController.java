@@ -8,6 +8,7 @@ import java.util.Map;
 import com.wms.wms_server.model.user.WMSUser;
 
 import com.wms.wms_server.model.response.LocationResponse;
+import com.wms.wms_server.model.locations.Area;
 import com.wms.wms_server.model.locations.Location;
 import com.wms.wms_server.model.request.LocationRequest;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.wms.wms_server.repository.AreaRepository;
 import com.wms.wms_server.repository.LocationRepository;
 import com.wms.wms_server.services.LocationService;
 
@@ -36,6 +38,8 @@ import com.wms.wms_server.services.OAuthUserService;
 public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private AreaRepository AreaRepository;
     @Autowired
 	OAuthUserService oAuthUserService;
 
@@ -55,14 +59,19 @@ public class LocationController {
         for (Map.Entry<String, Object> entry : ats.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
-        ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
-        for(Location loc : locationRepository.findAll())  {
-            // System.out.println(loc.created);
-            // System.out.println(loc.modified);
-            System.out.println(loc.getCreatedBy());
-            locs.add(locationService.convertLocation(loc));
+        for(Area area : AreaRepository.findAll()) {
+            System.out.println("area   area");
+            System.out.println(area.getArea());
         }
-        return locs;
+        // ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
+        // for(Location loc : locationRepository.findAll())  {
+        //     // System.out.println(loc.created);
+        //     // System.out.println(loc.modified);
+        //     System.out.println(loc.getCreatedBy());
+        //     locs.add(locationService.convertLocation(loc));
+        // }
+        // return locs;
+        return new ArrayList<>();
     }
 
     // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
@@ -70,9 +79,6 @@ public class LocationController {
     @ResponseBody
     public List<Location> create_location(@RequestBody LocationRequest lr) {
         List<Location> locs = locationService.buildLocations(lr);
-        for (Location loc : locs) {
-            locationRepository.save(loc);
-        }
         return locs;
     }
 
