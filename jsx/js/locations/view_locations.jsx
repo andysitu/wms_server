@@ -33,7 +33,7 @@ class LocationTable extends React.Component {
 
   // Changes location object to formatted data
   convert_location(l) {
-    l.location_string = `${l.area}.${l.loc}.${l.row}.${l.bay}.${l.level}.${l.shelf}`;
+    l.location_string = `${l.area}.${l.row}.${l.bay}.${l.level}.${l.shelf}`;
   }
 
   get_locations = () => {
@@ -136,7 +136,6 @@ class LocationTable extends React.Component {
               <input type="checkbox" onChange={this.onChange_top_checkbox} />
             </th>
             <th scope="col">Area</th>
-            <th scope="col">Loc</th>
             <th scope="col">Row</th>
             <th scope="col">Bay</th>
             <th scope="col">Level</th>
@@ -201,7 +200,6 @@ class LocationRow extends React.Component {
             onChange={this.onChange_checkbox}
             ></input></td>
       <td>{this.state.location.area}</td>
-      <td>{this.state.location.loc}</td>
       <td>{this.state.location.row}</td>
       <td>{this.state.location.bay}</td>
       <td>{this.state.location.level}</td>
