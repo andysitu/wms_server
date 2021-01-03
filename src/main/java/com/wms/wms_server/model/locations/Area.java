@@ -29,9 +29,9 @@ public class Area {
 
     private String area;
 
-    @OneToMany(cascade = CascadeType.ALL, 
-                fetch = FetchType.LAZY, mappedBy = "area")
-    private Set<Location> locations = new HashSet<>();
+    // @OneToMany(cascade = CascadeType.ALL, 
+    //             fetch = FetchType.LAZY, mappedBy = "area")
+    // private Set<Location> locations = new HashSet<>();
 
     public Area(String area) {
         this.area = area;
