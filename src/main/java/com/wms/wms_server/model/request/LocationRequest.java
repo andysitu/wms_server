@@ -2,7 +2,6 @@ package com.wms.wms_server.model.request;
 
 public class LocationRequest {
     public String area;
-    public String loc;
     public int row_start;
     public int row_end;
     public int bay_start;
@@ -12,11 +11,10 @@ public class LocationRequest {
     public int shelf_start;
     public int shelf_end;
 
-    public LocationRequest(String area, String loc, 
+    public LocationRequest(String area,
         int row_start, int row_end, int bay_start, int bay_end, 
         int level_start, int level_end, int shelf_start, int shelf_end) {
         this.area = area;
-        this.loc = loc;
         this.row_start = row_start;
         this.row_end = row_end;
         this.bay_start = bay_start;

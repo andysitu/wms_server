@@ -26,7 +26,6 @@ public class Location {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String loc;
     private int row;
     private int bay;
     private int level;
@@ -48,8 +47,7 @@ public class Location {
         
     public Location() {}
 
-    public Location(String loc, int row, int bay, int level, int shelf) {
-        this.loc = loc;
+    public Location(int row, int bay, int level, int shelf) {
         this.row = row;
         this.bay = bay;
         this.level = level;
@@ -68,9 +66,6 @@ public class Location {
     public String getAreaString() {
         return this.area.getArea();
         // return this.area;
-    }
-    public String getLoc() {
-        return this.loc;
     }
     public int getRow() {
         return this.row;
