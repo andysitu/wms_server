@@ -50,7 +50,8 @@ var LocationTable = function (_React$Component) {
     _this.create_area_options = function () {
       return React.createElement(
         "select",
-        null,
+        { onChange: _this.onChange_area,
+          value: _this.state.selected_area },
         React.createElement(
           "option",
           { value: "none" },
@@ -59,11 +60,18 @@ var LocationTable = function (_React$Component) {
         _this.state.areas.map(function (area) {
           return React.createElement(
             "option",
-            { value: area.id, key: "area-" + area.id },
+            { value: area.id, key: "area-" + area.id
+            },
             area.area
           );
         })
       );
+    };
+
+    _this.onChange_area = function (e) {
+      _this.setState({
+        selected_area: e.target.value
+      });
     };
 
     _this.get_locations = function () {
@@ -193,7 +201,8 @@ var LocationTable = function (_React$Component) {
     _this.modalMenu = React.createRef();
     _this.state = {
       areas: [],
-      locations: []
+      locations: [],
+      selected_area: "none"
 
     };
     _this.prev_clicked_index = null;

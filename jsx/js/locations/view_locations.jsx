@@ -5,6 +5,7 @@ class LocationTable extends React.Component {
     this.state = {
       areas: [],
       locations: [],
+      selected_area: "none",
       
     }
     this.prev_clicked_index = null;
@@ -52,14 +53,23 @@ class LocationTable extends React.Component {
   }
 
   create_area_options =() =>  {
-    return (<select>
-      <option value="none">None</option>
-      {this.state.areas.map((area) => {
-        return (
-          <option value={area.id} key={"area-" + area.id}>{area.area}</option>
-        );
-      })}
+    return (
+      <select onChange={this.onChange_area}
+          value={this.state.selected_area}>
+        <option value="none">None</option>
+        {this.state.areas.map((area) => {
+          return (
+            <option value={area.id} key={"area-" + area.id}
+            >{area.area}</option>
+          );
+        })}
       </select>);
+  }
+
+  onChange_area = (e) => {
+    this.setState({
+      selected_area: e.target.value,
+    });
   }
 
   get_locations = () => {
