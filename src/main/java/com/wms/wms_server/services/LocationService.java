@@ -27,6 +27,14 @@ public class LocationService {
         );
     }
 
+    public List<LocationResponse> convertLocations(List<Location> locations) {
+        ArrayList<LocationResponse> loclist = new ArrayList<>();
+        for(Location loc: locations) {
+            loclist.add(this.convertLocation(loc));
+        }
+        return loclist;
+    }
+
     /**
      * Creates a list of locations specified by LocationRequest
      * @param locReq : LocationRequest specifying the parameter range for Location
