@@ -235,10 +235,6 @@ class CreateLocationMenu extends React.Component {
         <label>Area</label>
         <input type="text" className="form-control" min="0" name="area" required></input>
       </div>
-      <div className="form-group">
-        <label>Location</label>
-        <input type="text" className="form-control" min="0" name="loc" required></input>
-      </div>
       <div className="form-row">
         <div className="form-group col-sm-6">
           <label>Start Row</label>

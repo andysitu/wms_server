@@ -362,16 +362,6 @@ var CreateLocationMenu = function (_React$Component2) {
         ),
         React.createElement(
           "div",
-          { className: "form-group" },
-          React.createElement(
-            "label",
-            null,
-            "Location"
-          ),
-          React.createElement("input", { type: "text", className: "form-control", min: "0", name: "loc", required: true })
-        ),
-        React.createElement(
-          "div",
           { className: "form-row" },
           React.createElement(
             "div",
