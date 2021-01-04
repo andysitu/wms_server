@@ -25,8 +25,14 @@ class LocationTable extends React.Component {
         for (var i=0; i< new_locations.length; i++) {
           that.convert_location(new_locations[i]);
         }
-        console.log(that.state.locations.concat(new_locations))
-        that.setState({locations: that.state.locations.concat(new_locations),});
+        that.setState(
+          {locations: that.state.locations.concat(new_locations)},
+          () => {
+            if (new_locations.length > 0) {
+              that.add_area_to_state(
+                new_locations[0].area_id, new_locations[0].area);
+            }
+          });
       },
     });
   };
@@ -39,7 +45,17 @@ class LocationTable extends React.Component {
   convert_location(l) {
     l.location_string = `${l.area}-${l.row}-${l.bay}-${l.level}-${l.shelf}`;
   }
-
+  add_area_to_state = (area_id, area_string) => {
+    var areas = this.state.areas;
+    for (let area of areas) {
+      if (area.id == area_id || area.area == area_string) {
+        return ;
+      }
+    }
+    this.setState({
+      areas: areas.concat({id: area_id, area: area_string})
+    })
+  }
   set_areas = () => {
     var that = this;
     $.ajax({
