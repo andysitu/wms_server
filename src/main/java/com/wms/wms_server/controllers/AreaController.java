@@ -28,4 +28,12 @@ public class AreaController {
         }
         return areaList;
     }
+
+    @RequestMapping(path="/areas/{areaId}", produces="text/plain",
+        method=RequestMethod.DELETE)
+    @ResponseBody
+    public String delete_area(@PathVariable("areaId") Long areaId) {
+        System.out.print(areaId);
+        return "OK";
+    }
 }

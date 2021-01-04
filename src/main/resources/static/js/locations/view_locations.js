@@ -25,6 +25,7 @@ var LocationTable = function (_React$Component) {
           for (var i = 0; i < new_locations.length; i++) {
             that.convert_location(new_locations[i]);
           }
+          console.log(that.state.locations.concat(new_locations));
           that.setState({ locations: that.state.locations.concat(new_locations) });
         }
       });
@@ -198,6 +199,30 @@ var LocationTable = function (_React$Component) {
       _this.prev_clicked_checked = e.target.checked;
     };
 
+    _this.delete_area = function () {
+      $.ajax({
+        url: "../areas/" + _this.state.selected_area,
+        method: "DELETE",
+        success: function success(response) {
+          console.log(response);
+        }
+      });
+    };
+
+    _this.onClick_delete_area = function () {
+      if (_this.state.selected_area === "none" || _this.state.selected_area === "all") {
+        return;
+      }
+      var area_name;
+      for (var i = 0; i < _this.state.areas.length; i++) {
+        if (_this.state.areas[i].id == _this.state.selected_area) area_name = _this.state.areas[i].area;
+      }
+      var result = window.confirm("Are you sure you want to delete area \n      " + area_name + " and all its locations?");
+      if (result) {
+        _this.delete_area();
+      }
+    };
+
     _this.modalMenu = React.createRef();
     _this.state = {
       areas: [],
@@ -253,7 +278,14 @@ var LocationTable = function (_React$Component) {
           "span",
           null,
           "Area: ",
-          this.create_area_options()
+          this.create_area_options(),
+          React.createElement(
+            "button",
+            { type: "button", className: "btn btn-sm btn-outline-primary",
+              onClick: this.onClick_delete_area
+            },
+            "Delete Area"
+          )
         ),
         React.createElement(
           "table",

@@ -25,6 +25,7 @@ class LocationTable extends React.Component {
         for (var i=0; i< new_locations.length; i++) {
           that.convert_location(new_locations[i]);
         }
+        console.log(that.state.locations.concat(new_locations))
         that.setState({locations: that.state.locations.concat(new_locations),});
       },
     });
@@ -150,6 +151,32 @@ class LocationTable extends React.Component {
     this.prev_clicked_index = parseInt(e.target.getAttribute("row_index"));
     this.prev_clicked_checked = e.target.checked;
   }
+  delete_area =() => {
+    $.ajax({
+      url: "../areas/" + this.state.selected_area,
+      method: "DELETE",
+      success: function(response) {
+        console.log(response);
+      },
+    });
+  }
+  onClick_delete_area = () => {
+    if (this.state.selected_area === "none"
+        || this.state.selected_area === "all"
+    ) {
+      return;
+    }
+    var area_name;
+    for (var i=0; i<this.state.areas.length; i++) {
+      if (this.state.areas[i].id == this.state.selected_area)
+        area_name = this.state.areas[i].area;
+    }
+    var result = window.confirm(`Are you sure you want to delete area 
+      ${area_name} and all its locations?`);
+    if (result) {
+      this.delete_area();
+    }
+  }
 
   render () {
     return (<div>
@@ -166,6 +193,10 @@ class LocationTable extends React.Component {
       </button>
       <span>
         Area: {this.create_area_options()}
+
+        <button type="button" className="btn btn-sm btn-outline-primary"
+          onClick={this.onClick_delete_area}
+        >Delete Area</button>
       </span>
       
 
