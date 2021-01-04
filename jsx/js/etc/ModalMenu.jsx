@@ -25,7 +25,6 @@ class ModalMenu extends React.Component {
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
-    console.log(data);
     // Create a blank form to reset it, and then create actual menu
     this.setState({
         menu_type: menu_type,
@@ -175,7 +174,6 @@ class ModalMenu extends React.Component {
     var data = this.get_data();
 
     var result = this.complete_and_check_data(data);
-    console.log(result, data);
     if (result) {
       if (this.state.submit_handler) {
         this.state.submit_handler(data);  

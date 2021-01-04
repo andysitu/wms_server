@@ -34,7 +34,6 @@ var ModalMenu = function (_React$Component) {
     _this.show_menu = function (menu_type, data) {
       var submit_handler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-      console.log(data);
       // Create a blank form to reset it, and then create actual menu
       _this.setState({
         menu_type: menu_type,
@@ -225,7 +224,6 @@ var ModalMenu = function (_React$Component) {
       var data = _this.get_data();
 
       var result = _this.complete_and_check_data(data);
-      console.log(result, data);
       if (result) {
         if (_this.state.submit_handler) {
           _this.state.submit_handler(data);
