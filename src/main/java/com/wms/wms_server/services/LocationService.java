@@ -22,9 +22,12 @@ public class LocationService {
     private AreaRepository areaRepository;
 
     public LocationResponse convertLocation(Location l) {
-        return new LocationResponse(
+        System.out.println(l.getArea());
+        LocationResponse lresponse = new LocationResponse(
             l.getId(), l.getAreaString(), l.getRow(), l.getBay(), l.getLevel(), l.getShelf()
         );
+        lresponse.area_id = l.getArea().getId();
+        return lresponse;
     }
 
     public List<LocationResponse> convertLocations(List<Location> locations) {

@@ -7,6 +7,7 @@ public class LocationResponse {
     public int bay;
     public int level;
     public int shelf;
+    public Long area_id;
 
     public LocationResponse(Integer id, String area, int row, int bay, int level, int shelf) {
         this.id = id;
