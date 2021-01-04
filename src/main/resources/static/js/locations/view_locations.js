@@ -199,12 +199,18 @@ var LocationTable = function (_React$Component) {
       _this.prev_clicked_checked = e.target.checked;
     };
 
-    _this.delete_area = function () {
+    _this.delete_area = function (index, id) {
+      var that = _this;
       $.ajax({
         url: "../areas/" + _this.state.selected_area,
         method: "DELETE",
         success: function success(response) {
-          console.log(response);
+          if (that.state.areas[index].id == id) {
+            that.state.areas.splice(index, 1);
+            that.setState({
+              areas: that.state.areas
+            });
+          }
         }
       });
     };
@@ -213,13 +219,16 @@ var LocationTable = function (_React$Component) {
       if (_this.state.selected_area === "none" || _this.state.selected_area === "all") {
         return;
       }
-      var area_name;
+      var area_name, index;
       for (var i = 0; i < _this.state.areas.length; i++) {
-        if (_this.state.areas[i].id == _this.state.selected_area) area_name = _this.state.areas[i].area;
+        if (_this.state.areas[i].id == _this.state.selected_area) {
+          index = i;
+          area_name = _this.state.areas[i].area;
+        }
       }
       var result = window.confirm("Are you sure you want to delete area \n      " + area_name + " and all its locations?");
       if (result) {
-        _this.delete_area();
+        _this.delete_area(index, _this.state.selected_area);
       }
     };
 

@@ -1,6 +1,7 @@
 package com.wms.wms_server.controllers;
 
 import com.wms.wms_server.repository.AreaRepository;
+import com.wms.wms_server.services.AreaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import com.wms.wms_server.model.response.AreaResponse;
 public class AreaController {
     @Autowired
     private AreaRepository areaRepository;
+
+    @Autowired
+    AreaService areaService;
 
     @RequestMapping(path="/areas", produces="application/json",
         method=RequestMethod.GET)
@@ -33,7 +37,7 @@ public class AreaController {
         method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_area(@PathVariable("areaId") Long areaId) {
-        System.out.print(areaId);
+        areaService.deleteArea(areaId);
         return "OK";
     }
 }

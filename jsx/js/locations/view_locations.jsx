@@ -151,12 +151,18 @@ class LocationTable extends React.Component {
     this.prev_clicked_index = parseInt(e.target.getAttribute("row_index"));
     this.prev_clicked_checked = e.target.checked;
   }
-  delete_area =() => {
+  delete_area = (index, id) => {
+    var that = this;
     $.ajax({
       url: "../areas/" + this.state.selected_area,
       method: "DELETE",
       success: function(response) {
-        console.log(response);
+        if (that.state.areas[index].id == id) {
+          that.state.areas.splice(index, 1);
+          that.setState({
+            areas: that.state.areas,
+          })
+        }
       },
     });
   }
@@ -166,15 +172,17 @@ class LocationTable extends React.Component {
     ) {
       return;
     }
-    var area_name;
+    var area_name, index;
     for (var i=0; i<this.state.areas.length; i++) {
-      if (this.state.areas[i].id == this.state.selected_area)
+      if (this.state.areas[i].id == this.state.selected_area) {
+        index = i;
         area_name = this.state.areas[i].area;
+      } 
     }
     var result = window.confirm(`Are you sure you want to delete area 
       ${area_name} and all its locations?`);
     if (result) {
-      this.delete_area();
+      this.delete_area(index, this.state.selected_area);
     }
   }
 
