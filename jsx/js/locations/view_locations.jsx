@@ -157,6 +157,15 @@ class LocationTable extends React.Component {
     this.setState({
       areas: this.state.areas,
     }, () => { // Next remove from locations
+      var new_locations = []
+      for (var i=0; i<this.state.locations.length; i++) {
+        if (this.state.locations[i].area != area_string) {
+          new_locations.push(this.state.locations[i]);
+        }
+      }
+      this.setState({
+        locations: new_locations,
+      });
     });
   }
 

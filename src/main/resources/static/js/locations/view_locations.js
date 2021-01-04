@@ -206,7 +206,17 @@ var LocationTable = function (_React$Component) {
       // First remove from area select element
       _this.setState({
         areas: _this.state.areas
-      }, function () {// Next remove from locations
+      }, function () {
+        // Next remove from locations
+        var new_locations = [];
+        for (var i = 0; i < _this.state.locations.length; i++) {
+          if (_this.state.locations[i].area != area_string) {
+            new_locations.push(_this.state.locations[i]);
+          }
+        }
+        _this.setState({
+          locations: new_locations
+        });
       });
     };
 
