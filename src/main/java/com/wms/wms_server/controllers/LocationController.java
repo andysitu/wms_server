@@ -69,9 +69,9 @@ public class LocationController {
     // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
     @RequestMapping(path="/locations", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public List<Location> create_location(@RequestBody LocationRequest lr) {
+    public List<LocationResponse> create_location(@RequestBody LocationRequest lr) {
         List<Location> locs = locationService.buildLocations(lr);
-        return locs;
+        return locationService.convertLocations(locs);
     }
 
     // @GetMapping(value={"/"})
@@ -81,7 +81,6 @@ public class LocationController {
 
     @RequestMapping(path="/locations/{locationId}", produces="text/plain", method=RequestMethod.DELETE)
     public ResponseEntity<String> delete_location(@PathVariable("locationId") Integer locationId) {
-        System.out.println("delete " + locationId);
         locationRepository.deleteById(locationId);
         return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
