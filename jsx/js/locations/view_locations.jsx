@@ -84,7 +84,7 @@ class LocationTable extends React.Component {
         }
         that.setState({
           locations: locations,
-        });
+        }, () => { console.log(that.state.locations); });
       }
     });
   }
@@ -151,38 +151,42 @@ class LocationTable extends React.Component {
     this.prev_clicked_index = parseInt(e.target.getAttribute("row_index"));
     this.prev_clicked_checked = e.target.checked;
   }
-  delete_area = (index, id) => {
-    var that = this;
-    $.ajax({
-      url: "../areas/" + this.state.selected_area,
-      method: "DELETE",
-      success: function(response) {
-        if (that.state.areas[index].id == id) {
-          that.state.areas.splice(index, 1);
-          that.setState({
-            areas: that.state.areas,
-          })
-        }
-      },
+  remove_area = (index) => {
+    var area_string = this.state.areas.splice(index, 1)[0].area;
+    // First remove from area select element
+    this.setState({
+      areas: this.state.areas,
+    }, () => { // Next remove from locations
     });
   }
+
   onClick_delete_area = () => {
     if (this.state.selected_area === "none"
         || this.state.selected_area === "all"
     ) {
       return;
     }
-    var area_name, index;
+    var area_name, index, id;
     for (var i=0; i<this.state.areas.length; i++) {
       if (this.state.areas[i].id == this.state.selected_area) {
         index = i;
+        id = this.state.areas[i].id
         area_name = this.state.areas[i].area;
       } 
     }
     var result = window.confirm(`Are you sure you want to delete area 
       ${area_name} and all its locations?`);
     if (result) {
-      this.delete_area(index, this.state.selected_area);
+      var that = this;
+      $.ajax({
+        url: "../areas/" + this.state.selected_area,
+        method: "DELETE",
+        success: function(response) {
+          if (that.state.areas[index].id == id) {
+            that.remove_area(index);
+          }
+        },
+      });
     }
   }
 
