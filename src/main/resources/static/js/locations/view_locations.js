@@ -67,8 +67,15 @@ var LocationTable = function (_React$Component) {
         }
       }
 
-      _this.setState({
-        areas: areas.concat({ id: area_id, area: area_string })
+      _this.setState(function (prev_state) {
+        if (prev_state.areas.length == 0) {
+          return {
+            areas: areas.concat({ id: area_id, area: area_string }),
+            selected_area: area_id
+          };
+        } else {
+          return { areas: areas.concat({ id: area_id, area: area_string }) };
+        }
       });
     };
 

@@ -50,10 +50,18 @@ class LocationTable extends React.Component {
         return ;
       }
     }
-    this.setState({
-      areas: areas.concat({id: area_id, area: area_string})
+    this.setState(prev_state => {
+      if (prev_state.areas.length == 0) {
+        return {
+          areas: areas.concat({id: area_id, area: area_string}),
+          selected_area: area_id,
+        };
+      } else {
+        return { areas: areas.concat({id: area_id, area: area_string}) };
+      }
+      
     })
-  }
+  };
   set_areas = () => {
     var that = this;
     $.ajax({
