@@ -20,6 +20,11 @@ public class ItemInfoService {
     ItemInfoRepository itemInfoRepository;
 
     public ItemInfo create_itemInfo(HttpServletRequest request) {
+        if (request.getParameter("name") == null ||
+                request.getParameter("description") == null ||
+                request.getParameter("weight") == null) {
+            return null;
+        }
         ItemInfo itemInfo = new ItemInfo.Builder(
             request.getParameter("name"),
             request.getParameter("description"),
