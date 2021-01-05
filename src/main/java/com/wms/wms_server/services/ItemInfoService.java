@@ -19,6 +19,16 @@ public class ItemInfoService {
     @Autowired
     ItemInfoRepository itemInfoRepository;
 
+    public ItemInfo create_itemInfo(HttpServletRequest request) {
+        ItemInfo itemInfo = new ItemInfo.Builder(
+            request.getParameter("name"),
+            request.getParameter("description"),
+            Float.parseFloat(request.getParameter("weight"))
+            ).build();
+        itemInfoRepository.save(itemInfo);
+        return itemInfo;
+    }
+
     public List<ItemInfo> search_itemInfo(String type, String value) {
         if (type.equals("name")) {
             return itemInfoRepository.findByItemNameContainingIgnoreCase(value);
