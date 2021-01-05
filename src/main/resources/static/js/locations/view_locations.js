@@ -100,11 +100,6 @@ var LocationTable = function (_React$Component) {
         "select",
         { onChange: _this.onChange_area,
           value: _this.state.selected_area },
-        React.createElement(
-          "option",
-          { value: "none" },
-          "None"
-        ),
         _this.state.areas.map(function (area) {
           return React.createElement(
             "option",

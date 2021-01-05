@@ -84,7 +84,6 @@ class LocationTable extends React.Component {
     return (
       <select onChange={this.onChange_area}
           value={this.state.selected_area}>
-        <option value="none">None</option>
         {this.state.areas.map((area) => {
           return (
             <option value={area.id} key={"area-" + area.id}
