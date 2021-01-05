@@ -13,6 +13,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.EntityListeners;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,11 @@ public class ItemInfo {
     private String description;
     private float weight;
 
+    @Column(columnDefinition = "integer default 0")
     private int width;
+    @Column(columnDefinition = "integer default 0")
     private int height;
+    @Column(columnDefinition = "integer default 0")
     private int length;
 
     public String getItemName() {
