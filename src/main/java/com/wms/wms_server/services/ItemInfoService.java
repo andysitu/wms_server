@@ -25,11 +25,19 @@ public class ItemInfoService {
                 request.getParameter("weight") == null) {
             return null;
         }
-        ItemInfo itemInfo = new ItemInfo.Builder(
+        ItemInfo.Builder builder = new ItemInfo.Builder(
             request.getParameter("name"),
             request.getParameter("description"),
             Float.parseFloat(request.getParameter("weight"))
-            ).build();
+            );
+        if (request.getParameter("height") != null &&
+                request.getParameter("width") != null &&
+                request.getParameter("length") != null) {
+            builder.height(Integer.parseInt(request.getParameter("height")));
+            builder.width(Integer.parseInt(request.getParameter("width")));
+            builder.length(Integer.parseInt(request.getParameter("length")));
+        }
+        ItemInfo itemInfo = builder.build();
         itemInfoRepository.save(itemInfo);
         return itemInfo;
     }
