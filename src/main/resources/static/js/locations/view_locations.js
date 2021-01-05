@@ -77,10 +77,13 @@ var LocationTable = function (_React$Component) {
       $.ajax({
         url: "../areas",
         type: "GET",
-        success: function success(data) {
-          that.setState({
-            areas: data
-          });
+        success: function success(areas) {
+          if (areas.length > 0) that.setState({
+            areas: areas,
+            selected_area: areas[0].id
+          });else {
+            that.setState({ areas: [] });
+          }
         }
       });
     };
