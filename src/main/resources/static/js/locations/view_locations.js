@@ -284,12 +284,28 @@ var LocationTable = function (_React$Component) {
       }
     };
 
+    _this.onClick_show_area = function () {
+      var area = _this.state.selected_area;
+      if (area === "none") {
+        return;
+      }
+      var that = _this;
+      $.ajax({
+        url: "../locations/area/" + area,
+        method: "GET",
+        success: function success(locationsData) {
+          that.setState({
+            locations: locationsData
+          });
+        }
+      });
+    };
+
     _this.modalMenu = React.createRef();
     _this.state = {
       areas: [],
       locations: [],
       selected_area: "none"
-
     };
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;
@@ -340,6 +356,12 @@ var LocationTable = function (_React$Component) {
           null,
           "Area: ",
           this.create_area_options(),
+          React.createElement(
+            "button",
+            { type: "button", className: "btn btn-sm btn-outline-secondary",
+              onClick: this.onClick_show_area },
+            "Show"
+          ),
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-primary",

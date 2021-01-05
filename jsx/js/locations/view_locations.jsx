@@ -6,7 +6,6 @@ class LocationTable extends React.Component {
       areas: [],
       locations: [],
       selected_area: "none",
-      
     }
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
@@ -215,6 +214,23 @@ class LocationTable extends React.Component {
     }
   }
 
+  onClick_show_area = () => {
+    var area = this.state.selected_area;
+    if (area === "none") {
+      return;
+    }
+    var that = this;
+    $.ajax({
+      url: "../locations/area/" + area,
+      method: "GET",
+      success: function(locationsData) {
+        that.setState({
+          locations: locationsData
+        });
+      },
+    });
+  };
+
   render () {
     return (<div>
       <button className="btn btn-sm btn-primary" onClick={this.show_create_loc_menu}>
@@ -230,6 +246,11 @@ class LocationTable extends React.Component {
       </button>
       <span>
         Area: {this.create_area_options()}
+
+        <button type="button" className="btn btn-sm btn-outline-secondary"
+          onClick={this.onClick_show_area}>
+          Show
+        </button>
 
         <button type="button" className="btn btn-sm btn-outline-primary"
           onClick={this.onClick_delete_area}

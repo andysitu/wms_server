@@ -101,4 +101,11 @@ public class LocationController {
     //     }
     //     return "HELLO";
     // }
+
+    @GetMapping(path="/locations/area/{areaId}", produces="application/json")
+    @ResponseBody
+    public List<LocationResponse> get_locations_by_area(@PathVariable("areaId") Long areaId) {
+        return locationService.convertLocations(
+            locationService.getLocationsByArea(areaId));
+    }
 }
