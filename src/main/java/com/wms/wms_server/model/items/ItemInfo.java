@@ -31,6 +31,10 @@ public class ItemInfo {
     private String description;
     private float weight;
 
+    private int width;
+    private int height;
+    private int length;
+
     public String getItemName() {
         return this.itemName;
     }
@@ -78,10 +82,24 @@ public class ItemInfo {
         private final String description;
         private final float weight;
 
+        private int width;
+        private int height;
+        private int length;
+
         public Builder(String itemName, String description, float weight) {
             this.itemName = itemName;
             this.description = description;
             this.weight = weight;
+        }
+
+        public void width(int width) {
+            this.width = width;
+        }
+        public void height(int height) {
+            this.height = height;
+        }
+        public void length(int length) {
+            this.length = length;
         }
 
         public ItemInfo build() {
