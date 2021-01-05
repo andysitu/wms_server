@@ -76,9 +76,12 @@ public class ItemInfo {
     private ItemInfo() {}
 
     private ItemInfo(Builder builder) {
-        this.itemName = builder.itemName;
-        this.description = builder.description;
-        this.weight = builder.weight;
+        itemName    = builder.itemName;
+        description = builder.description;
+        weight      = builder.weight;
+        height      = builder.height;
+        width       = builder.width;
+        length      = builder.length;
     }
 
     public static class Builder {
