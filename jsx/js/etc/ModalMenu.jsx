@@ -123,6 +123,20 @@ class ModalMenu extends React.Component {
             defaultValue={weight} required
           ></input>
         </div>
+        <div className="form-group">
+          <label htmlFor="">Dimensions</label>
+          <div class="form-row">
+            <div class="col-4">
+              <input type="number" name="width" class="form-control" placeholder="Width" />
+            </div>
+            <div class="col-4">
+              <input type="number" name="length" class="form-control" placeholder="Length" />
+            </div>
+            <div class="col-4">
+              <input type="number" name="height" class="form-control" placeholder="Height" />
+            </div>
+          </div>
+        </div>
       </div>)
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>

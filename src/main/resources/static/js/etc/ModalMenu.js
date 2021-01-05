@@ -138,6 +138,34 @@ var ModalMenu = function (_React$Component) {
               name: "weight", id: "item-weight-input",
               min: "0", step: "0.01", required: true,
               defaultValue: weight }, "required", true))
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "" },
+              "Dimensions"
+            ),
+            React.createElement(
+              "div",
+              { "class": "form-row" },
+              React.createElement(
+                "div",
+                { "class": "col-4" },
+                React.createElement("input", { type: "number", name: "width", "class": "form-control", placeholder: "Width" })
+              ),
+              React.createElement(
+                "div",
+                { "class": "col-4" },
+                React.createElement("input", { type: "number", name: "length", "class": "form-control", placeholder: "Length" })
+              ),
+              React.createElement(
+                "div",
+                { "class": "col-4" },
+                React.createElement("input", { type: "number", name: "height", "class": "form-control", placeholder: "Height" })
+              )
+            )
           )
         );
       } else if (_this.state.menu_type == "create_barcode") {
