@@ -102,53 +102,18 @@ var LocationTable = function (_React$Component) {
             },
             area.area
           );
-        })
+        }),
+        React.createElement(
+          "option",
+          { value: "all" },
+          "All"
+        )
       );
     };
 
     _this.onChange_area = function (e) {
       _this.setState({
         selected_area: e.target.value
-      });
-    };
-
-    _this.get_locations = function () {
-      var that = _this;
-      $.ajax({
-        type: "GET",
-        url: "./locations",
-        success: function success(locations) {
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
-
-          try {
-            for (var _iterator2 = locations[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-              var l = _step2.value;
-
-              that.convert_location(l);
-            }
-          } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
-              }
-            } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
-              }
-            }
-          }
-
-          that.setState({
-            locations: locations
-          }, function () {
-            console.log(that.state.locations);
-          });
-        }
       });
     };
 
@@ -173,28 +138,28 @@ var LocationTable = function (_React$Component) {
       var locations = [],
           index;
       if (checkboxes.length == 0) return;
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator3 = checkboxes[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var cbox = _step3.value;
+        for (var _iterator2 = checkboxes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var cbox = _step2.value;
 
           index = cbox.getAttribute("row_index");
           locations.push(_this.state.locations[index].location_string);
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
           }
         } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
@@ -284,21 +249,53 @@ var LocationTable = function (_React$Component) {
       }
     };
 
+    _this.get_locations = function (areaId) {
+      var that = _this;
+      var url = areaId == null || areaId === "all" ? "./locations" : "../locations/area/" + areaId;
+      $.ajax({
+        type: "GET",
+        url: url,
+        success: function success(locations) {
+          var _iteratorNormalCompletion3 = true;
+          var _didIteratorError3 = false;
+          var _iteratorError3 = undefined;
+
+          try {
+            for (var _iterator3 = locations[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              var l = _step3.value;
+
+              that.convert_location(l);
+            }
+          } catch (err) {
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+              }
+            } finally {
+              if (_didIteratorError3) {
+                throw _iteratorError3;
+              }
+            }
+          }
+
+          that.setState({
+            locations: locations
+          }, function () {
+            console.log(that.state.locations);
+          });
+        }
+      });
+    };
+
     _this.onClick_show_area = function () {
       var area = _this.state.selected_area;
       if (area === "none") {
         return;
       }
-      var that = _this;
-      $.ajax({
-        url: "../locations/area/" + area,
-        method: "GET",
-        success: function success(locationsData) {
-          that.setState({
-            locations: locationsData
-          });
-        }
-      });
+      _this.get_locations(area);
     };
 
     _this.modalMenu = React.createRef();
@@ -310,7 +307,6 @@ var LocationTable = function (_React$Component) {
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;
     _this.set_areas();
-    _this.get_locations();
     return _this;
   }
 
@@ -322,6 +318,7 @@ var LocationTable = function (_React$Component) {
     value: function convert_location(l) {
       l.location_string = l.area + "-" + l.row + "-" + l.bay + "-" + l.level + "-" + l.shelf;
     }
+
     // New Objects created are not deep copies (only use Object.assign)
 
   }, {

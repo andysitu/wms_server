@@ -10,7 +10,6 @@ class LocationTable extends React.Component {
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
     this.set_areas();
-    this.get_locations();
   }
 
   create_location = (data) => {
@@ -79,6 +78,7 @@ class LocationTable extends React.Component {
             >{area.area}</option>
           );
         })}
+        <option value="all">All</option>
       </select>);
   }
 
@@ -88,21 +88,6 @@ class LocationTable extends React.Component {
     });
   }
 
-  get_locations = () => {
-    var that = this;
-    $.ajax({
-      type: "GET",
-      url: "./locations",
-      success: function(locations) {
-        for(let l of locations) {
-          that.convert_location(l);
-        }
-        that.setState({
-          locations: locations,
-        }, () => { console.log(that.state.locations); });
-      }
-    });
-  }
   // New Objects created are not deep copies (only use Object.assign)
   delete_location = (location_id) => {
     var that = this;
@@ -213,22 +198,30 @@ class LocationTable extends React.Component {
       });
     }
   }
+  get_locations = (areaId) => {
+    var that = this;
+    var url = (areaId == null || areaId === "all") ? 
+              "./locations" : "../locations/area/" + areaId;
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function(locations) {
+        for(let l of locations) {
+          that.convert_location(l);
+        }
+        that.setState({
+          locations: locations,
+        }, () => { console.log(that.state.locations); });
+      }
+    });
+  }
 
   onClick_show_area = () => {
     var area = this.state.selected_area;
     if (area === "none") {
       return;
     }
-    var that = this;
-    $.ajax({
-      url: "../locations/area/" + area,
-      method: "GET",
-      success: function(locationsData) {
-        that.setState({
-          locations: locationsData
-        });
-      },
-    });
+    this.get_locations(area);
   };
 
   render () {
