@@ -51,19 +51,11 @@ public class LocationController {
     public List<LocationResponse> get_locations(@AuthenticationPrincipal OAuth2User principal) {
         // Test print out oauth user  unfo
         // WMSUser u = oAuthUserService.getOrMakeUser(principal);
-        // System.out.println(u);
         System.out.println(principal);
         var a = principal.getAttribute("groups");
         System.out.println(a);
-        Map<String, Object> ats = principal.getAttributes();
-        for (Map.Entry<String, Object> entry : ats.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
         ArrayList<LocationResponse> locs = new ArrayList<LocationResponse>();
-        for(Location loc : locationRepository.findAll())  {
-            locs.add(locationService.convertLocation(loc));
-        }
-        return locs;
+        return locationService.convertLocations(locationRepository.findAll());
     }
 
     // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
