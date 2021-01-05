@@ -22,7 +22,6 @@ public class LocationService {
     private AreaRepository areaRepository;
 
     public LocationResponse convertLocation(Location l) {
-        System.out.println(l.getArea());
         LocationResponse lresponse = new LocationResponse(
             l.getId(), l.getAreaString(), l.getRow(), l.getBay(), l.getLevel(), l.getShelf()
         );
@@ -68,5 +67,9 @@ public class LocationService {
             }   
         }
         return locs_list;
+    }
+
+    public List<Location> getLocationsByArea(Long areaId) {
+        return locationRepository.findByAreaId(areaId);
     }
 }
