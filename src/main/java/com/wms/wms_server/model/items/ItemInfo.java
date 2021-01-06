@@ -60,6 +60,15 @@ public class ItemInfo {
     public Integer getId() {
         return this.id;
     }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getLength() {
+        return length;
+    }
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ReceiveShipment> receiveShipments;
