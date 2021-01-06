@@ -21,7 +21,7 @@ class ItemInfoApp extends React.Component {
       success: function(data) {
         data.forEach((element) => {
           that.add_ref(element);
-        })
+        });
         that.setState({itemInfos: data});
       }
     });
@@ -116,8 +116,9 @@ class ItemInfoApp extends React.Component {
         <thead>
           <tr>
             <th scope="col">Item Name</th>
-            <th scope="col">Description</th>
+            <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
+            <th scope="col">Dimensions (w, l, h)</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
@@ -168,6 +169,9 @@ class ItemInfoRow extends React.Component {
     <td>{this.state.data.itemName}</td>
     <td>{this.state.data.description}</td>
     <td>{this.state.data.weight}</td>
+    <td>
+      {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
+      </td>
     <td>
     <button type="button" className="btn btn-sm btn-outline-warning"
       onClick={this.onClick_editItemInfo}>
