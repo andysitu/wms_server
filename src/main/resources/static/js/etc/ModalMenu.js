@@ -94,9 +94,14 @@ var ModalMenu = function (_React$Component) {
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
       } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
-        var item_name = _this.state.data.itemName ? _this.state.data.itemName : "",
-            description = _this.state.data.description ? _this.state.data.description : "",
-            weight = _this.state.data.weight ? _this.state.data.weight : "";
+        var edit_status = _this.state.menu_type == "edit_item_info";
+        console.log(_this.state);
+        var item_name = edit_status ? _this.state.data.itemName : "",
+            description = edit_status ? _this.state.data.description : "",
+            weight = edit_status ? _this.state.data.weight : "",
+            width = edit_status ? _this.state.data.width : "",
+            height = edit_status ? _this.state.data.height : "",
+            length = edit_status ? _this.state.data.length : "";
         return React.createElement(
           "div",
           null,
@@ -149,21 +154,24 @@ var ModalMenu = function (_React$Component) {
             ),
             React.createElement(
               "div",
-              { "class": "form-row" },
+              { className: "form-row" },
               React.createElement(
                 "div",
-                { "class": "col-4" },
-                React.createElement("input", { type: "number", name: "width", "class": "form-control", placeholder: "Width" })
+                { className: "col-4" },
+                React.createElement("input", { type: "number", name: "width", className: "form-control",
+                  defaultValue: width, placeholder: "Width" })
               ),
               React.createElement(
                 "div",
-                { "class": "col-4" },
-                React.createElement("input", { type: "number", name: "length", "class": "form-control", placeholder: "Length" })
+                { className: "col-4" },
+                React.createElement("input", { type: "number", name: "length", className: "form-control",
+                  defaultValue: length, placeholder: "Length" })
               ),
               React.createElement(
                 "div",
-                { "class": "col-4" },
-                React.createElement("input", { type: "number", name: "height", "class": "form-control", placeholder: "Height" })
+                { className: "col-4" },
+                React.createElement("input", { type: "number", name: "height", className: "form-control",
+                  defaultValue: height, placeholder: "Height" })
               )
             )
           )

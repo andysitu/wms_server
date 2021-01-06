@@ -97,9 +97,14 @@ class ModalMenu extends React.Component {
       return (<CreateLocationMenu />);
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
-      var item_name = this.state.data.itemName ? this.state.data.itemName : "",
-          description = this.state.data.description ? this.state.data.description : "",
-          weight = this.state.data.weight ? this.state.data.weight : "";
+      var edit_status = this.state.menu_type == "edit_item_info";
+      console.log(this.state);
+      var item_name   = edit_status ? this.state.data.itemName : "",
+          description = edit_status ? this.state.data.description : "",
+          weight      = edit_status ? this.state.data.weight : "",
+          width       = edit_status ? this.state.data.width : "",
+          height      = edit_status ? this.state.data.height : "",
+          length      = edit_status ? this.state.data.length : "";
       return (<div>
         <div className="form-group">
           <label htmlFor="item-name-input">Item Name</label>
@@ -125,15 +130,18 @@ class ModalMenu extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="">Dimensions</label>
-          <div class="form-row">
-            <div class="col-4">
-              <input type="number" name="width" class="form-control" placeholder="Width" />
+          <div className="form-row">
+            <div className="col-4">
+              <input type="number" name="width" className="form-control" 
+                defaultValue={width} placeholder="Width" />
             </div>
-            <div class="col-4">
-              <input type="number" name="length" class="form-control" placeholder="Length" />
+            <div className="col-4">
+              <input type="number" name="length" className="form-control" 
+                defaultValue={length} placeholder="Length" />
             </div>
-            <div class="col-4">
-              <input type="number" name="height" class="form-control" placeholder="Height" />
+            <div className="col-4">
+              <input type="number" name="height" className="form-control" 
+                defaultValue={height} placeholder="Height" />
             </div>
           </div>
         </div>
