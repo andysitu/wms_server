@@ -103,6 +103,9 @@ class ItemInfoApp extends React.Component {
     }
     return (<div>
       <div className="row justify-content-between">
+        <div className="col-1">
+          <button onClick={this.onClick_createItemInfo}>+</button>
+        </div>
         <div className="col-sm-6 col-md-4 input-group">
           <input className="form-control" type="text" id="search-bar1-input"></input>
           <select className="custom-select" id="item-search1-type-select">
@@ -113,9 +116,6 @@ class ItemInfoApp extends React.Component {
             onClick={this.onClick_search}>
             Search
           </button>
-        </div>
-        <div className="col-1">
-          <button onClick={this.onClick_createItemInfo}>+</button>
         </div>
       </div>
       <table className="table">

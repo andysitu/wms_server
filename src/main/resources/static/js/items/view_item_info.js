@@ -128,6 +128,15 @@ var ItemInfoApp = function (_React$Component) {
           { className: "row justify-content-between" },
           React.createElement(
             "div",
+            { className: "col-1" },
+            React.createElement(
+              "button",
+              { onClick: this.onClick_createItemInfo },
+              "+"
+            )
+          ),
+          React.createElement(
+            "div",
             { className: "col-sm-6 col-md-4 input-group" },
             React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input" }),
             React.createElement(
@@ -149,15 +158,6 @@ var ItemInfoApp = function (_React$Component) {
               { className: "btn btn-outline-secondary",
                 onClick: this.onClick_search },
               "Search"
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "col-1" },
-            React.createElement(
-              "button",
-              { onClick: this.onClick_createItemInfo },
-              "+"
             )
           )
         ),
