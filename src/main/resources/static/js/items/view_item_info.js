@@ -125,28 +125,40 @@ var ItemInfoApp = function (_React$Component) {
         null,
         React.createElement(
           "div",
-          { className: "input-group" },
-          React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input" }),
+          { className: "row justify-content-between" },
           React.createElement(
-            "select",
-            { className: "custom-select", id: "item-search1-type-select" },
+            "div",
+            { className: "col-sm-6 col-md-4 input-group" },
+            React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input" }),
             React.createElement(
-              "option",
-              { value: "name" },
-              "Name"
+              "select",
+              { className: "custom-select", id: "item-search1-type-select" },
+              React.createElement(
+                "option",
+                { value: "name" },
+                "Name"
+              ),
+              React.createElement(
+                "option",
+                { value: "description" },
+                "Description"
+              )
             ),
             React.createElement(
-              "option",
-              { value: "description" },
-              "Description"
+              "button",
+              { className: "btn btn-outline-secondary",
+                onClick: this.onClick_search },
+              "Search"
             )
           ),
           React.createElement(
-            "button",
-            { className: "btn btn-outline-secondary",
-              onClick: this.onClick_search
-            },
-            "Search"
+            "div",
+            null,
+            React.createElement(
+              "button",
+              { onClick: this.onClick_createItemInfo },
+              "+"
+            )
           )
         ),
         React.createElement(
@@ -189,17 +201,6 @@ var ItemInfoApp = function (_React$Component) {
             "tbody",
             null,
             rows
-          )
-        ),
-        React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "button",
-            {
-              onClick: this.onClick_createItemInfo
-            },
-            "+"
           )
         ),
         React.createElement(ModalMenu, { ref: this.modalMenu })

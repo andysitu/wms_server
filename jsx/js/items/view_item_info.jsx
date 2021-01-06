@@ -102,15 +102,21 @@ class ItemInfoApp extends React.Component {
       });   
     }
     return (<div>
-      <div className="input-group">
-        <input className="form-control" type="text" id="search-bar1-input"></input>
-        <select className="custom-select" id="item-search1-type-select">
-          <option value="name">Name</option>
-          <option value="description">Description</option>
-        </select>
-        <button className="btn btn-outline-secondary"
-          onClick={this.onClick_search}
-        >Search</button>
+      <div className="row justify-content-between">
+        <div className="col-sm-6 col-md-4 input-group">
+          <input className="form-control" type="text" id="search-bar1-input"></input>
+          <select className="custom-select" id="item-search1-type-select">
+            <option value="name">Name</option>
+            <option value="description">Description</option>
+          </select>
+          <button className="btn btn-outline-secondary"
+            onClick={this.onClick_search}>
+            Search
+          </button>
+        </div>
+        <div >
+          <button onClick={this.onClick_createItemInfo}>+</button>
+        </div>
       </div>
       <table className="table">
         <thead>
@@ -126,12 +132,6 @@ class ItemInfoApp extends React.Component {
           {rows}
         </tbody>
       </table>
-      <div>
-        <button
-          onClick={this.onClick_createItemInfo}
-        >+</button>
-      </div>
-
       <ModalMenu ref={this.modalMenu} />
     </div>);
   }
