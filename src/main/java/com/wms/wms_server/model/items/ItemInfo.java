@@ -14,12 +14,14 @@ import javax.persistence.EntityListeners;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.List;;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -38,6 +40,9 @@ public class ItemInfo {
     private int height;
     @Column(columnDefinition = "integer default 0")
     private int length;
+
+    @ElementCollection
+    public List<String> barcodes;
 
     public String getItemName() {
         return this.itemName;

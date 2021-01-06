@@ -69,6 +69,7 @@ public class ItemInfoService {
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
+        response.barcodes = item.barcodes;
         return response;
     }
 
