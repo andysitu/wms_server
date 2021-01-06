@@ -153,7 +153,7 @@ var ItemInfoApp = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            null,
+            { className: "col-1" },
             React.createElement(
               "button",
               { onClick: this.onClick_createItemInfo },

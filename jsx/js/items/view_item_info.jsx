@@ -114,7 +114,7 @@ class ItemInfoApp extends React.Component {
             Search
           </button>
         </div>
-        <div >
+        <div className="col-1">
           <button onClick={this.onClick_createItemInfo}>+</button>
         </div>
       </div>
