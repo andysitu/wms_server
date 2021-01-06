@@ -66,8 +66,10 @@ public class ItemInfoService {
         if (item == null) {
             return null;
         }
-        return new ItemInfoResponse(
+        ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
+        response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
+        return response;
     }
 
     public ItemInfo edit_itemInfo(Integer id, HttpServletRequest request) {
