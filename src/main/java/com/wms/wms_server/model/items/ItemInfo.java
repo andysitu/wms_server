@@ -26,7 +26,7 @@ import java.util.Set;
 public class ItemInfo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String itemName;
     private String description;
@@ -57,7 +57,7 @@ public class ItemInfo {
     public float getWeight() {
         return this.weight;
     }
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
     public int getWidth() {

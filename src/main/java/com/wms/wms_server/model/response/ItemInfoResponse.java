@@ -3,7 +3,7 @@ package com.wms.wms_server.model.response;
 import java.util.*;
 
 public class ItemInfoResponse {
-    public int id;
+    public Long id;
     public String itemName;
     public String description;
     public float weight;
@@ -14,7 +14,7 @@ public class ItemInfoResponse {
 
     public List<String> barcodes;
     
-    public ItemInfoResponse(int id, String itemName, String description, float weight) {
+    public ItemInfoResponse(Long id, String itemName, String description, float weight) {
         this.id = id;
         this.itemName = itemName;
         this.description = description;

@@ -99,7 +99,7 @@ public class ItemInfoService {
         }
     }
 
-    public ItemInfo add_barcodes(Integer itemInfo_id, String upc) {
+    public ItemInfo add_barcodes(Long itemInfo_id, String upc) {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();

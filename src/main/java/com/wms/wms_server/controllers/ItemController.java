@@ -68,7 +68,7 @@ public class ItemController {
     @RequestMapping(path="/item_info/{iteminfo_id}/barcodes", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public String create_barcodes(
-            @PathVariable("iteminfo_id") Integer iteminfo_id,
+            @PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
         ItemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"));
         return "HI";

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ItemInfoRepository extends JpaRepository<ItemInfo, Integer>{
+public interface ItemInfoRepository extends JpaRepository<ItemInfo, Long>{
     List<ItemInfo> findByItemNameContainingIgnoreCase(String name);
     List<ItemInfo> findByDescriptionContainingIgnoreCase(String name);
 }
