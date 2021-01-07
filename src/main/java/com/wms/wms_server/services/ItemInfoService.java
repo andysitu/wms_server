@@ -72,7 +72,6 @@ public class ItemInfoService {
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
-        response.barcodes = item.barcodes;
         return response;
     }
 
@@ -100,8 +99,6 @@ public class ItemInfoService {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
-            itemInfo.barcodes.add(upc);
-            itemInfoRepository.save(itemInfo);
             return itemInfo;
         } else {
             return null;
