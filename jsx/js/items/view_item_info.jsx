@@ -29,7 +29,7 @@ class ItemInfoApp extends React.Component {
 
   update_itemInfoRow = (index) => {
     this.state.itemInfos[index].ref.current.update_data(this.state.itemInfos[index]);
-  }
+  };
 
   editItemInfo = (row_index) => {
     var that = this;
@@ -125,6 +125,7 @@ class ItemInfoApp extends React.Component {
             <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
             <th scope="col">Dimensions (w, l, h)</th>
+            <th scope="col">Barcodes</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
@@ -147,7 +148,8 @@ loadReact();
 
 class ItemInfoRow extends React.Component {
   state = {
-    data: this.props.data,
+    data: this.props.data ? this.props.data : {},
+    show_barcodes: false,
   }
 
   onClick_editItemInfo = () => {
@@ -164,6 +166,37 @@ class ItemInfoRow extends React.Component {
     this.setState({data: new_data,})
   }
 
+  onClick_add_barcodes = () => {
+    var upc = window.prompt("UPC/ barcode number?");
+    if (upc.length > 5) {
+      $.ajax({
+        url: "../item_info/" + this.state.data.id + "/barcodes",
+        type: "POST",
+        data: {
+          upc: upc,
+        },
+        success: function(returnData) {
+          console.log(returnData);
+        }
+      });
+    }
+  };
+
+  create_barcodes = () => {
+    if (this.state.show_barcodes) {
+      return (<div>HI</div>);
+    } else {
+      if (this.state.data.barcodes && (this.state.data.barcodes.length > 1)) {
+        return (<div>
+          {this.state.data.barcodes[0] + " V"}
+        </div>);
+      } else if (this.state.data.barcodes && (this.state.data.barcodes.length == 1)) {
+        return (<div>{this.state.data.barcodes[0]}</div>);
+      }
+      return (<div></div>);
+    }
+  }
+
   render() {
     return (<tr key={"itemInfo-" + this.state.data.id}>
     <td>{this.state.data.itemName}</td>
@@ -171,27 +204,32 @@ class ItemInfoRow extends React.Component {
     <td>{this.state.data.weight}</td>
     <td>
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
-      </td>
+    </td>
     <td>
-    <button type="button" className="btn btn-sm btn-outline-warning"
-      onClick={this.onClick_editItemInfo}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
-        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-        <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-      </svg>
-    </button>
-    <button type="button" className="btn btn-sm btn-outline-danger"
-      onClick={this.onClick_deleteItemInfo}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-      </svg>
-    </button>
-    <button type="button" className="btn btn-sm btn-outline-dark">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
-        <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
-      </svg>
-    </button>
+      {this.create_barcodes()}
+    </td>
+    
+    <td>
+      <button type="button" className="btn btn-sm btn-outline-warning"
+        onClick={this.onClick_editItemInfo}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+      </button>
+      <button type="button" className="btn btn-sm btn-outline-danger"
+        onClick={this.onClick_deleteItemInfo}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+          <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg>
+      </button>
+      <button type="button" className="btn btn-sm btn-outline-dark"
+        onClick={this.onClick_add_barcodes}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
+          <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+        </svg>
+      </button>
     </td>
   </tr>);
   }
