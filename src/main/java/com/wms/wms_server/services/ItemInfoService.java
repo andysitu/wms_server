@@ -95,4 +95,16 @@ public class ItemInfoService {
             return null;
         }
     }
+
+    public ItemInfo add_barcodes(Integer id, String upc) {
+        Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
+        if (oItemInfo.isPresent()) {
+            ItemInfo itemInfo = oItemInfo.get();
+            itemInfo.barcodes.add(upc);
+            itemInfoRepository.save(itemInfo);
+            return itemInfo;
+        } else {
+            return null;
+        }
+    }
 }

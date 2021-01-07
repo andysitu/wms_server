@@ -60,10 +60,17 @@ public class ItemController {
     @ResponseBody
     public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Integer iteminfo_id,
             HttpServletRequest request) {
-        System.out.println(iteminfo_id);
-        System.out.println(request.getParameter("test"));
         ItemInfo itemInfo = ItemInfoService.edit_itemInfo(iteminfo_id, request);
 
         return ItemInfoService.convert_to_response(itemInfo);
+    }
+    
+    @RequestMapping(path="/item_info/{iteminfo_id}/barcodes", produces="application/json;", method=RequestMethod.POST)
+    @ResponseBody
+    public String create_barcodes(
+            @PathVariable("iteminfo_id") Integer iteminfo_id,
+            HttpServletRequest request) {
+        ItemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"));
+        return "HI";
     }
 }
