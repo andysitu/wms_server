@@ -30,9 +30,12 @@ public class ItemInfoService {
             request.getParameter("description"),
             Float.parseFloat(request.getParameter("weight"))
             );
-        if (request.getParameter("height") != null &&
+        if (request.getParameter("height") != null && 
+                request.getParameter("height").length() > 0 &&
                 request.getParameter("width") != null &&
-                request.getParameter("length") != null) {
+                request.getParameter("width").length() > 0 &&
+                request.getParameter("length") != null &&
+                request.getParameter("length").length() > 0) {
             builder.height(Integer.parseInt(request.getParameter("height")));
             builder.width(Integer.parseInt(request.getParameter("width")));
             builder.length(Integer.parseInt(request.getParameter("length")));
@@ -77,13 +80,13 @@ public class ItemInfoService {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
-            if (request.getParameter("name") != null) {
+            if (request.getParameter("name") != null && request.getParameter("name").length() > 0) {
                 itemInfo.setItemName(request.getParameter("name"));
             }
-            if (request.getParameter("description") != null) {
+            if (request.getParameter("description") != null && request.getParameter("description").length() > 0) {
                 itemInfo.setDescription(request.getParameter("description"));
             }
-            if (request.getParameter("weight") != null) {
+            if (request.getParameter("weight" ) != null && request.getParameter("weight").length() > 0) {
                 itemInfo.setWeight(Float.parseFloat(request.getParameter("weight")));
             }
             itemInfoRepository.save(itemInfo);
