@@ -51,7 +51,7 @@ public class ItemController {
 
     @RequestMapping(path="/item_info/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_itemInfo(@PathVariable("iteminfo_id") Integer iteminfo_id) {
+    public String delete_itemInfo(@PathVariable("iteminfo_id") Long iteminfo_id) {
         itemInfoRepository.deleteById(iteminfo_id);
         return "OK";
     }
