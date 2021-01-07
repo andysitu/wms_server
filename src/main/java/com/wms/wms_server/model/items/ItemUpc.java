@@ -44,6 +44,10 @@ public class ItemUpc {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ItemInfo itemInfo;
 
+    public void setItemInfo(ItemInfo itemInfo) {
+        this.itemInfo = itemInfo;
+    }
+
     public ItemUpc(String upc) {
         this.upc = upc;
     }
