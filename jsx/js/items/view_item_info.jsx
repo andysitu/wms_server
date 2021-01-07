@@ -168,7 +168,7 @@ class ItemInfoRow extends React.Component {
 
   onClick_add_barcodes = () => {
     var upc = window.prompt("UPC/ barcode number?");
-    if (upc.length > 5) {
+    if (upc != null && upc.length > 5) {
       $.ajax({
         url: "../item_info/" + this.state.data.id + "/barcodes",
         type: "POST",

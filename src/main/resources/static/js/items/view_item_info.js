@@ -250,7 +250,7 @@ var ItemInfoRow = function (_React$Component2) {
       _this3.setState({ data: new_data });
     }, _this3.onClick_add_barcodes = function () {
       var upc = window.prompt("UPC/ barcode number?");
-      if (upc.length > 5) {
+      if (upc != null && upc.length > 5) {
         $.ajax({
           url: "../item_info/" + _this3.state.data.id + "/barcodes",
           type: "POST",
