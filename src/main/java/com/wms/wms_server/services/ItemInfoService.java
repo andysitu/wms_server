@@ -2,6 +2,7 @@ package com.wms.wms_server.services;
 
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.items.ItemUpc;
+import com.wms.wms_server.model.request.ItemInfoRequest;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.repository.ItemInfoRepository;
 import com.wms.wms_server.repository.ItemUpcRepository;
@@ -68,7 +69,6 @@ public class ItemInfoService {
             
             barcodes = new ArrayList<>();
             for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
-                System.out.println("UPC" + itemUpc.getUpc());
                 barcodes.add(itemUpc.getUpc());
             }
             ir.barcodes = barcodes;
@@ -113,7 +113,7 @@ public class ItemInfoService {
             ItemInfo itemInfo = oItemInfo.get();
             ItemUpc itemUpc = new ItemUpc(upc);
             itemUpc.setItemInfo(itemInfo);
-            itemInfoRepository.save(itemInfo);
+            itemUpcRepository.save(itemUpc);
             return itemInfo;
         } else {
             return null;
