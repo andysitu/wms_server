@@ -1,8 +1,10 @@
 package com.wms.wms_server.services;
 
 import com.wms.wms_server.model.items.ItemInfo;
+import com.wms.wms_server.model.items.ItemUpc;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.repository.ItemInfoRepository;
+import com.wms.wms_server.repository.ItemUpcRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 public class ItemInfoService {
     @Autowired
     ItemInfoRepository itemInfoRepository;
+    @Autowired
+    ItemUpcRepository itemUpcRepository;
 
     public ItemInfo create_itemInfo(HttpServletRequest request) {
         if (request.getParameter("name") == null ||
@@ -95,10 +99,12 @@ public class ItemInfoService {
         }
     }
 
-    public ItemInfo add_barcodes(Integer id, String upc) {
-        Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
+    public ItemInfo add_barcodes(Integer itemInfo_id, String upc) {
+        Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
+            ItemUpc itemUpc = new ItemUpc(upc);
+            itemUpc.setItemInfo(itemInfo);
             return itemInfo;
         } else {
             return null;
