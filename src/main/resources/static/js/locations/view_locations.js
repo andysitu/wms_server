@@ -95,27 +95,6 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.create_area_options = function () {
-      return React.createElement(
-        "select",
-        { onChange: _this.onChange_area,
-          value: _this.state.selected_area },
-        _this.state.areas.map(function (area) {
-          return React.createElement(
-            "option",
-            { value: area.id, key: "area-" + area.id
-            },
-            area.area
-          );
-        }),
-        React.createElement(
-          "option",
-          { value: "all" },
-          "All"
-        )
-      );
-    };
-
     _this.onChange_area = function (e) {
       _this.setState({
         selected_area: e.target.value
@@ -303,6 +282,28 @@ var LocationTable = function (_React$Component) {
       _this.get_locations(area);
     };
 
+    _this.create_area_options = function () {
+      return React.createElement(
+        "select",
+        { onChange: _this.onChange_area,
+          className: "form-control",
+          value: _this.state.selected_area },
+        _this.state.areas.map(function (area) {
+          return React.createElement(
+            "option",
+            { value: area.id, key: "area-" + area.id
+            },
+            area.area
+          );
+        }),
+        React.createElement(
+          "option",
+          { value: "all" },
+          "All"
+        )
+      );
+    };
+
     _this.modalMenu = React.createRef();
     _this.state = {
       areas: [],
@@ -335,41 +336,61 @@ var LocationTable = function (_React$Component) {
         "div",
         null,
         React.createElement(
-          "button",
-          { className: "btn btn-sm btn-primary", onClick: this.show_create_loc_menu },
+          "div",
+          { className: "row justify-content-between" },
           React.createElement(
-            "svg",
-            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-plus", viewBox: "0 0 16 16" },
-            React.createElement("path", { fillRule: "evenodd", d: "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" })
-          )
-        ),
-        React.createElement(
-          "button",
-          { type: "button", className: "btn btn-sm btn-outline-dark",
-            onClick: this.show_barcodes },
-          React.createElement(
-            "svg",
-            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
-            React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
-          )
-        ),
-        React.createElement(
-          "span",
-          null,
-          "Area: ",
-          this.create_area_options(),
-          React.createElement(
-            "button",
-            { type: "button", className: "btn btn-sm btn-outline-secondary",
-              onClick: this.onClick_show_area },
-            "Show"
+            "div",
+            null,
+            React.createElement(
+              "button",
+              { className: "btn btn-sm btn-primary", onClick: this.show_create_loc_menu },
+              React.createElement(
+                "svg",
+                { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-plus", viewBox: "0 0 16 16" },
+                React.createElement("path", { fillRule: "evenodd", d: "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" })
+              )
+            ),
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-sm btn-outline-dark",
+                onClick: this.show_barcodes },
+              React.createElement(
+                "svg",
+                { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
+                React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
+              )
+            )
           ),
           React.createElement(
-            "button",
-            { type: "button", className: "btn btn-sm btn-outline-primary",
-              onClick: this.onClick_delete_area
-            },
-            "Delete Area"
+            "div",
+            { className: "col-3 form-group row" },
+            React.createElement(
+              "label",
+              { className: "col-form-label col-sm-3" },
+              "Area: "
+            ),
+            React.createElement(
+              "div",
+              { className: "col-sm-6" },
+              this.create_area_options()
+            ),
+            React.createElement(
+              "button",
+              { type: "button", className: "col btn btn-sm btn-outline-secondary",
+                onClick: this.onClick_show_area },
+              "Show"
+            )
+          ),
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "button",
+              { type: "button", className: "btn btn-sm btn-outline-primary",
+                onClick: this.onClick_delete_area
+              },
+              "Delete Area"
+            )
           )
         ),
         React.createElement(
