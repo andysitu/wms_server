@@ -47,6 +47,9 @@ public class ItemUpc {
     public void setItemInfo(ItemInfo itemInfo) {
         this.itemInfo = itemInfo;
     }
+    public String getUpc() {
+        return this.upc;
+    }
 
     public ItemUpc(String upc) {
         this.upc = upc;
