@@ -58,7 +58,7 @@ public class ItemController {
 
     @RequestMapping(path="/item_info/{iteminfo_id}", produces="application/json;", method=RequestMethod.PATCH)
     @ResponseBody
-    public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Integer iteminfo_id,
+    public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
         ItemInfo itemInfo = ItemInfoService.edit_itemInfo(iteminfo_id, request);
 

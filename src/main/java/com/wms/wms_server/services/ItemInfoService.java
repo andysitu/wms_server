@@ -87,7 +87,7 @@ public class ItemInfoService {
         return response;
     }
 
-    public ItemInfo edit_itemInfo(Integer id, HttpServletRequest request) {
+    public ItemInfo edit_itemInfo(Long id, HttpServletRequest request) {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
