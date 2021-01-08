@@ -24,7 +24,7 @@ public class ItemController {
     ItemInfoRepository itemInfoRepository;
 
     @Autowired
-    ItemInfoService ItemInfoService;
+    ItemInfoService itemInfoService;
 
     @GetMapping("/view_item_info")
     public String view_item_info() {
@@ -34,7 +34,7 @@ public class ItemController {
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ItemInfo create_itemInfo(HttpServletRequest request) {
-        return ItemInfoService.create_itemInfo(request);
+        return itemInfoService.create_itemInfo(request);
     }
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)
@@ -42,11 +42,11 @@ public class ItemController {
     public List<ItemInfoResponse> search_itemInfos(@RequestParam String type, @RequestParam String value) {
         System.out.println(type);
         System.out.println(value);
-        List<ItemInfo> items = ItemInfoService.search_itemInfo(type, value);
+        List<ItemInfo> items = itemInfoService.search_itemInfo(type, value);
         for (ItemInfo item : items) {
             System.out.println("name " + item.getItemName());
         }
-        return ItemInfoService.convert_list_to_responses(items);
+        return itemInfoService.convert_list_to_responses(items);
     }
 
     @RequestMapping(path="/item_info/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
@@ -60,9 +60,9 @@ public class ItemController {
     @ResponseBody
     public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
-        ItemInfo itemInfo = ItemInfoService.edit_itemInfo(iteminfo_id, request);
+        ItemInfo itemInfo = itemInfoService.edit_itemInfo(iteminfo_id, request);
 
-        return ItemInfoService.convert_to_response(itemInfo);
+        return itemInfoService.convert_to_response(itemInfo);
     }
     
     @RequestMapping(path="/item_info/{iteminfo_id}/barcodes", produces="application/json;", method=RequestMethod.POST)
@@ -70,7 +70,7 @@ public class ItemController {
     public String create_barcodes(
             @PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
-        ItemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"));
+        itemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"));
         return "HI";
     }
 }
