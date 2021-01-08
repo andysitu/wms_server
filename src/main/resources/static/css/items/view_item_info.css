@@ -1,3 +1,7 @@
 .reduced-barcodes-div {
     cursor: pointer;
 }
+
+.expanded-barcodes-div {
+    cursor: pointer;
+}

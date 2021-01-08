@@ -189,27 +189,29 @@ class ItemInfoRow extends React.Component {
 
   create_barcodes = () => {
     if (this.state.data.barcodes && (this.state.data.barcodes.length > 1)) {
-      var div_class, arrow_img;
       if (this.state.show_barcodes) {
-        div_class = "expanded-barcodes-div";
-        arrow_img = (
+        return (
+        <div className="expanded-barcodes-div" onClick={this.onClick_expand_barcodes}>
+          {this.state.data.barcodes.map((barcode)=> {
+            return (
+              <div key={barcode}>
+                {barcode}
+              </div>);
+          })}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-up" viewBox="0 0 16 16">
             <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
           </svg>
-        );
+        </div>);
       } else {
-        div_class = "reduced-barcodes-div";
-        arrow_img = (
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-          s</svg>);
+        return (
+          <div className="reduced-barcodes-div" onClick={this.onClick_expand_barcodes}>
+            {this.state.data.barcodes[0] + "..."}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </div>
+        );
       }
-      return (
-      <div className={div_class}
-        onClick={this.onClick_expand_barcodes}>
-        {this.state.data.barcodes[0] + "..."}
-        {arrow_img}
-      </div>);
     } else if (this.state.data.barcodes && (this.state.data.barcodes.length == 1)) {
       return (<div>{this.state.data.barcodes[0]}</div>);
     }

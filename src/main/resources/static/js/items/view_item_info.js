@@ -267,30 +267,35 @@ var ItemInfoRow = function (_React$Component2) {
       _this3.setState({ show_barcodes: !_this3.state.show_barcodes });
     }, _this3.create_barcodes = function () {
       if (_this3.state.data.barcodes && _this3.state.data.barcodes.length > 1) {
-        var div_class, arrow_img;
         if (_this3.state.show_barcodes) {
-          div_class = "expanded-barcodes-div";
-          arrow_img = React.createElement(
-            "svg",
-            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
-            React.createElement("path", { fillRule: "evenodd", d: "M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" })
+          return React.createElement(
+            "div",
+            { className: "expanded-barcodes-div", onClick: _this3.onClick_expand_barcodes },
+            _this3.state.data.barcodes.map(function (barcode) {
+              return React.createElement(
+                "div",
+                { key: barcode },
+                barcode
+              );
+            }),
+            React.createElement(
+              "svg",
+              { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
+              React.createElement("path", { fillRule: "evenodd", d: "M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" })
+            )
           );
         } else {
-          div_class = "reduced-barcodes-div";
-          arrow_img = React.createElement(
-            "svg",
-            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
-            React.createElement("path", { fillRule: "evenodd", d: "M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" }),
-            "s"
+          return React.createElement(
+            "div",
+            { className: "reduced-barcodes-div", onClick: _this3.onClick_expand_barcodes },
+            _this3.state.data.barcodes[0] + "...",
+            React.createElement(
+              "svg",
+              { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
+              React.createElement("path", { fillRule: "evenodd", d: "M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" })
+            )
           );
         }
-        return React.createElement(
-          "div",
-          { className: div_class,
-            onClick: _this3.onClick_expand_barcodes },
-          _this3.state.data.barcodes[0] + "...",
-          arrow_img
-        );
       } else if (_this3.state.data.barcodes && _this3.state.data.barcodes.length == 1) {
         return React.createElement(
           "div",
