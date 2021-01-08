@@ -63,15 +63,9 @@ public class ItemInfoService {
     public List<ItemInfoResponse> convert_list_to_responses(List<ItemInfo> items) {
         List<ItemInfoResponse> l = new ArrayList<>();
         ItemInfoResponse ir;
-        List<String> barcodes;
+        
         for (ItemInfo item : items) {
             ir = this.convert_to_response(item);
-            
-            barcodes = new ArrayList<>();
-            for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
-                barcodes.add(itemUpc.getUpc());
-            }
-            ir.barcodes = barcodes;
             l.add(ir);
         }
         return l;
@@ -83,6 +77,12 @@ public class ItemInfoService {
         }
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
+
+        List<String> barcodes = new ArrayList<>();
+        for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
+            barcodes.add(itemUpc.getUpc());
+        }
+        response.barcodes = barcodes;
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
         return response;
     }
