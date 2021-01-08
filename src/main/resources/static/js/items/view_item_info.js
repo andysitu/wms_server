@@ -270,7 +270,7 @@ var ItemInfoRow = function (_React$Component2) {
         if (_this3.state.show_barcodes) {
           return React.createElement(
             "div",
-            { className: "expanded-barcodes-div", onClick: _this3.onClick_expand_barcodes },
+            { className: "expanded-barcodes-div" },
             _this3.state.data.barcodes.map(function (barcode) {
               return React.createElement(
                 "div",
@@ -285,9 +285,13 @@ var ItemInfoRow = function (_React$Component2) {
               );
             }),
             React.createElement(
-              "svg",
-              { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
-              React.createElement("path", { fillRule: "evenodd", d: "M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" })
+              "div",
+              { onClick: _this3.onClick_expand_barcodes, "class": "reduce-btn-div" },
+              React.createElement(
+                "svg",
+                { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
+                React.createElement("path", { fillRule: "evenodd", d: "M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" })
+              )
             )
           );
         } else {

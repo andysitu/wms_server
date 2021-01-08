@@ -3,5 +3,9 @@
 }
 
 .expanded-barcodes-div {
+    /* cursor: pointer; */
+}
+
+.reduce-btn-div {
     cursor: pointer;
 }
