@@ -67,10 +67,11 @@ public class ItemController {
     
     @RequestMapping(path="/item_info/{iteminfo_id}/barcodes", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public String create_barcodes(
+    public ItemInfoResponse create_barcodes(
             @PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
-        itemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"));
-        return "HI";
+        return itemInfoService.convert_to_response(
+            itemInfoService.add_barcodes(iteminfo_id, request.getParameter("upc"))
+        );
     }
 }
