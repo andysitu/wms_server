@@ -81,7 +81,6 @@ public class ItemInfoService {
 
         List<HashMap<String, String>> upcs = new ArrayList<>();
         HashMap<String, String> upc;
-        // List<String> barcodes = new ArrayList<>();
         for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
             upc = new HashMap<>();
             upc.put("upc", itemUpc.getUpc());
@@ -113,7 +112,7 @@ public class ItemInfoService {
         }
     }
 
-    public ItemInfo add_barcodes(Long itemInfo_id, String upc) {
+    public ItemInfo add_barcode(Long itemInfo_id, String upc) {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
