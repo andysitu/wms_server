@@ -12,7 +12,7 @@ public class ItemInfoResponse {
     public int length;
     public int height;
 
-    public List<HashMap<String, String>> itemUpcs;
+    public List<HashMap<String, String>> itemupcs;
     
     public ItemInfoResponse(Long id, String itemName, String description, float weight) {
         this.id = id;

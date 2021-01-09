@@ -88,7 +88,7 @@ public class ItemInfoService {
             upc.put("id", Long.toString(itemUpc.getId()));
             upcs.add(upc);
         }
-        response.itemUpcs = upcs;
+        response.itemupcs = upcs;
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
         return response;
     }
