@@ -168,7 +168,8 @@ class ItemInfoRow extends React.Component {
   }
 
   onClick_add_itemUpcs = () => {
-    var upc = window.prompt("UPC/ itemUpc number?");
+    var upc = window.prompt("UPC/ itemUpc number?"),
+        that = this;
     if (upc != null && upc.length > 5) {
       $.ajax({
         url: "../item_info/" + this.state.data.id + "/itemupcs",
@@ -177,7 +178,13 @@ class ItemInfoRow extends React.Component {
           upc: upc,
         },
         success: function(returnData) {
-          console.log(returnData);
+          that.setState(prev_state => {
+            prev_state.data.itemupcs.push(returnData);
+
+            return {
+              data: prev_state.data,
+            };
+          });
         },
       });
     }

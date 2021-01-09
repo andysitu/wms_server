@@ -250,7 +250,8 @@ var ItemInfoRow = function (_React$Component2) {
     }, _this3.update_data = function (new_data) {
       _this3.setState({ data: new_data });
     }, _this3.onClick_add_itemUpcs = function () {
-      var upc = window.prompt("UPC/ itemUpc number?");
+      var upc = window.prompt("UPC/ itemUpc number?"),
+          that = _this3;
       if (upc != null && upc.length > 5) {
         $.ajax({
           url: "../item_info/" + _this3.state.data.id + "/itemupcs",
@@ -259,7 +260,13 @@ var ItemInfoRow = function (_React$Component2) {
             upc: upc
           },
           success: function success(returnData) {
-            console.log(returnData);
+            that.setState(function (prev_state) {
+              prev_state.data.itemupcs.push(returnData);
+
+              return {
+                data: prev_state.data
+              };
+            });
           }
         });
       }
