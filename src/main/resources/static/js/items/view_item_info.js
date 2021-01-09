@@ -319,7 +319,7 @@ var ItemInfoRow = function (_React$Component2) {
           return React.createElement(
             "div",
             { className: "reduced-itemUpcs-div", onClick: _this3.onClick_expand_itemUpcs },
-            _this3.state.data.itemUpcs[0].upc + "...",
+            _this3.state.data.itemupcs[0].upc + "...",
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
