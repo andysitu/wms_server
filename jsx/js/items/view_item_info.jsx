@@ -192,7 +192,8 @@ class ItemInfoRow extends React.Component {
 
   onClick_delete_itemInfo_itemUpc =(e) => {
     var id = e.target.getAttribute("itemupc_id"),
-        upc = e.target.getAttribute("itemupc");
+        upc = e.target.getAttribute("itemupc"),
+        that = this;
     if (e.target.getAttribute("itemupc_id")) {
       let result = window.confirm("Are you sure you want to delete upc " + upc + "?");  
       if (result) {
@@ -200,19 +201,27 @@ class ItemInfoRow extends React.Component {
           url: "../item_info/" + this.state.data.id + "/itemupcs/" + id,
           type: "DELETE",
           success: function(data) {
-            console.log(data);
+            that.setState(prev_state => {
+              for (let i=0; i<prev_state.data.itemupcs.length; i++) {
+                if (prev_state.data.itemupcs[i].id == id) {
+                  prev_state.data.itemupcs.splice(i, 1);
+                  return {
+                    data: prev_state.data,
+                  };
+                }
+              }
+            });
           },
         });
       }
     }
-    
   };
 
   onClick_expand_itemUpcs = () => {
     this.setState({show_itemUpcs: !this.state.show_itemUpcs});
   };
 
-  create_itemUpcs = () => {
+  create_itemUpc_div = () => {
     if (this.state.data.itemupcs && (this.state.data.itemupcs.length > 1)) {
       if (this.state.show_itemUpcs) {
         return (
@@ -262,7 +271,7 @@ class ItemInfoRow extends React.Component {
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
     </td>
     <td>
-      {this.create_itemUpcs()}
+      {this.create_itemUpc_div()}
     </td>
     
     <td>

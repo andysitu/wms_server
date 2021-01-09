@@ -272,7 +272,8 @@ var ItemInfoRow = function (_React$Component2) {
       }
     }, _this3.onClick_delete_itemInfo_itemUpc = function (e) {
       var id = e.target.getAttribute("itemupc_id"),
-          upc = e.target.getAttribute("itemupc");
+          upc = e.target.getAttribute("itemupc"),
+          that = _this3;
       if (e.target.getAttribute("itemupc_id")) {
         var result = window.confirm("Are you sure you want to delete upc " + upc + "?");
         if (result) {
@@ -280,14 +281,23 @@ var ItemInfoRow = function (_React$Component2) {
             url: "../item_info/" + _this3.state.data.id + "/itemupcs/" + id,
             type: "DELETE",
             success: function success(data) {
-              console.log(data);
+              that.setState(function (prev_state) {
+                for (var i = 0; i < prev_state.data.itemupcs.length; i++) {
+                  if (prev_state.data.itemupcs[i].id == id) {
+                    prev_state.data.itemupcs.splice(i, 1);
+                    return {
+                      data: prev_state.data
+                    };
+                  }
+                }
+              });
             }
           });
         }
       }
     }, _this3.onClick_expand_itemUpcs = function () {
       _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
-    }, _this3.create_itemUpcs = function () {
+    }, _this3.create_itemUpc_div = function () {
       if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length > 1) {
         if (_this3.state.show_itemUpcs) {
           return React.createElement(
@@ -374,7 +384,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.create_itemUpcs()
+          this.create_itemUpc_div()
         ),
         React.createElement(
           "td",

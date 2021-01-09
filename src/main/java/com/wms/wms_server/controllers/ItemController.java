@@ -77,7 +77,8 @@ public class ItemController {
         );
     }
 
-    @RequestMapping(path="/item_info/{iteminfo_id}/itemupcs/{itemupc_id}", produces="application/json;", method=RequestMethod.DELETE)
+    @RequestMapping(path="/item_info/{iteminfo_id}/itemupcs/{itemupc_id}", 
+        produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_barcode(
             @PathVariable("iteminfo_id") Long iteminfo_id,
