@@ -184,12 +184,21 @@ class ItemInfoRow extends React.Component {
   };
 
   onClick_delete_itemInfo_itemUpc =(e) => {
+    var id = e.target.getAttribute("itemupc_id"),
+        upc = e.target.getAttribute("itemupc");
     if (e.target.getAttribute("itemupc_id")) {
-
+      let result = window.confirm("Are you sure you want to delete upc " + upc + "?");  
+      if (result) {
+        $.ajax({
+          url: "../item_info/" + this.state.data.id + "/itemupcs/" + id,
+          type: "DELETE",
+          success: function(data) {
+            console.log(data);
+          },
+        });
+      }
     }
-    // $.ajax({
-    //   url: "../item_info/" + this.state.data.id + "/itemUpcs/" + 
-    // });
+    
   };
 
   onClick_expand_itemUpcs = () => {
@@ -205,7 +214,8 @@ class ItemInfoRow extends React.Component {
             return (
               <div key={itemUpc.id}>
                 {itemUpc.upc}
-                <span className="del-item-itemUpcs-span" itemupc_id={itemUpc.id}
+                <span className="del-item-itemUpcs-span" 
+                  itemupc_id={itemUpc.id} itemupc={itemUpc.upc}
                   onClick={this.onClick_delete_itemInfo_itemUpc}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>

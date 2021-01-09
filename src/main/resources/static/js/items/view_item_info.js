@@ -264,10 +264,20 @@ var ItemInfoRow = function (_React$Component2) {
         });
       }
     }, _this3.onClick_delete_itemInfo_itemUpc = function (e) {
-      if (e.target.getAttribute("itemupc_id")) {}
-      // $.ajax({
-      //   url: "../item_info/" + this.state.data.id + "/itemUpcs/" + 
-      // });
+      var id = e.target.getAttribute("itemupc_id"),
+          upc = e.target.getAttribute("itemupc");
+      if (e.target.getAttribute("itemupc_id")) {
+        var result = window.confirm("Are you sure you want to delete upc " + upc + "?");
+        if (result) {
+          $.ajax({
+            url: "../item_info/" + _this3.state.data.id + "/itemupcs/" + id,
+            type: "DELETE",
+            success: function success(data) {
+              console.log(data);
+            }
+          });
+        }
+      }
     }, _this3.onClick_expand_itemUpcs = function () {
       _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
     }, _this3.create_itemUpcs = function () {
@@ -283,7 +293,8 @@ var ItemInfoRow = function (_React$Component2) {
                 itemUpc.upc,
                 React.createElement(
                   "span",
-                  { className: "del-item-itemUpcs-span", itemupc_id: itemUpc.id,
+                  { className: "del-item-itemUpcs-span",
+                    itemupc_id: itemUpc.id, itemupc: itemUpc.upc,
                     onClick: _this3.onClick_delete_itemInfo_itemUpc },
                   React.createElement(
                     "svg",

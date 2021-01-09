@@ -82,7 +82,7 @@ public class ItemInfo {
     @LastModifiedBy
     private String modifiedBy;
 
-    private ItemInfo() {}
+    public ItemInfo() {}
 
     private ItemInfo(Builder builder) {
         itemName    = builder.itemName;

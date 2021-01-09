@@ -125,4 +125,11 @@ public class ItemInfoService {
             return null;
         }
     }
+
+    public void delete_itemUpc(Long itemInfo_id, Long itemUpc_id) {
+        Optional<ItemUpc> oItemUpc = itemUpcRepository.findByIdAndItemInfoId(itemUpc_id, itemInfo_id);
+        if (oItemUpc.isPresent()) {
+            itemUpcRepository.delete(oItemUpc.get());
+        }
+    }
 }
