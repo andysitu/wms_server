@@ -11,4 +11,5 @@ import com.wms.wms_server.model.items.ItemUpc;
 @Repository
 public interface ItemUpcRepository extends JpaRepository<ItemUpc, Long> {
     List<ItemUpc> findByItemInfoId(Long itemInfoId);
+    Optional<ItemUpc> findByIdAndItemInfoId(Long id, Long itemInfoId);
 }
