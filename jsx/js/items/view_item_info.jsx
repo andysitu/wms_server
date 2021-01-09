@@ -240,8 +240,8 @@ class ItemInfoRow extends React.Component {
           </div>
         );
       }
-    } else if (this.state.data.itemUpcs && (this.state.data.itemUpcs.length == 1)) {
-      return (<div>{this.state.data.itemUpcs[0]}</div>);
+    } else if (this.state.data.itemupcs && (this.state.data.itemupcs.length == 1)) {
+      return (<div>{this.state.data.itemupcs[0].upc}</div>);
     }
     return (<div></div>);
   };

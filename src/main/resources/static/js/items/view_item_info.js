@@ -327,11 +327,11 @@ var ItemInfoRow = function (_React$Component2) {
             )
           );
         }
-      } else if (_this3.state.data.itemUpcs && _this3.state.data.itemUpcs.length == 1) {
+      } else if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length == 1) {
         return React.createElement(
           "div",
           null,
-          _this3.state.data.itemUpcs[0]
+          _this3.state.data.itemupcs[0].upc
         );
       }
       return React.createElement("div", null);
