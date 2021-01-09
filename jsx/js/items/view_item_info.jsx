@@ -126,7 +126,7 @@ class ItemInfoApp extends React.Component {
             <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
             <th scope="col">Dimensions (w, l, h)</th>
-            <th scope="col">Barcodes</th>
+            <th scope="col">UPCs</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
@@ -150,7 +150,7 @@ loadReact();
 class ItemInfoRow extends React.Component {
   state = {
     data: this.props.data ? this.props.data : {},
-    show_barcodes: false,
+    show_itemUpcs: false,
   }
 
   onClick_editItemInfo = () => {
@@ -167,11 +167,11 @@ class ItemInfoRow extends React.Component {
     this.setState({data: new_data,})
   }
 
-  onClick_add_barcodes = () => {
-    var upc = window.prompt("UPC/ barcode number?");
+  onClick_add_itemUpcs = () => {
+    var upc = window.prompt("UPC/ itemUpc number?");
     if (upc != null && upc.length > 5) {
       $.ajax({
-        url: "../item_info/" + this.state.data.id + "/barcodes",
+        url: "../item_info/" + this.state.data.id + "/itemupcs",
         type: "POST",
         data: {
           upc: upc,
@@ -183,24 +183,30 @@ class ItemInfoRow extends React.Component {
     }
   };
 
-  onClick_delete_itemInfo_barcode =() => {
-    console.log("delete");
-  }
+  onClick_delete_itemInfo_itemUpc =(e) => {
+    if (e.target.getAttribute("itemupc_id")) {
 
-  onClick_expand_barcodes = () => {
-    this.setState({show_barcodes: !this.state.show_barcodes});
+    }
+    // $.ajax({
+    //   url: "../item_info/" + this.state.data.id + "/itemUpcs/" + 
+    // });
   };
 
-  create_barcodes = () => {
-    if (this.state.data.barcodes && (this.state.data.barcodes.length > 1)) {
-      if (this.state.show_barcodes) {
+  onClick_expand_itemUpcs = () => {
+    this.setState({show_itemUpcs: !this.state.show_itemUpcs});
+  };
+
+  create_itemUpcs = () => {
+    if (this.state.data.itemUpcs && (this.state.data.itemUpcs.length > 1)) {
+      if (this.state.show_itemUpcs) {
         return (
-        <div className="expanded-barcodes-div">
-          {this.state.data.barcodes.map((barcode)=> {
+        <div className="expanded-itemUpcs-div">
+          {this.state.data.itemUpcs.map((itemUpc)=> {
             return (
-              <div key={barcode}>
-                {barcode.upc}
-                <span className="del-item-barcodes-span" onClick={this.onClick_delete_itemInfo_barcode}>
+              <div key={itemUpc.id}>
+                {itemUpc.upc}
+                <span className="del-item-itemUpcs-span" itemupc_id={itemUpc.id}
+                  onClick={this.onClick_delete_itemInfo_itemUpc}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                     <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -208,7 +214,7 @@ class ItemInfoRow extends React.Component {
                   </span>
               </div>);
           })}
-          <div onClick={this.onClick_expand_barcodes} className="reduce-btn-div">
+          <div onClick={this.onClick_expand_itemUpcs} className="reduce-btn-div">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-up" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
             </svg>
@@ -216,19 +222,19 @@ class ItemInfoRow extends React.Component {
         </div>);
       } else {
         return (
-          <div className="reduced-barcodes-div" onClick={this.onClick_expand_barcodes}>
-            {this.state.data.barcodes[0].upc + "..."}
+          <div className="reduced-itemUpcs-div" onClick={this.onClick_expand_itemUpcs}>
+            {this.state.data.itemUpcs[0].upc + "..."}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             </svg>
           </div>
         );
       }
-    } else if (this.state.data.barcodes && (this.state.data.barcodes.length == 1)) {
-      return (<div>{this.state.data.barcodes[0]}</div>);
+    } else if (this.state.data.itemUpcs && (this.state.data.itemUpcs.length == 1)) {
+      return (<div>{this.state.data.itemUpcs[0]}</div>);
     }
     return (<div></div>);
-  }
+  };
 
   render() {
     return (<tr key={"itemInfo-" + this.state.data.id}>
@@ -239,7 +245,7 @@ class ItemInfoRow extends React.Component {
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
     </td>
     <td>
-      {this.create_barcodes()}
+      {this.create_itemUpcs()}
     </td>
     
     <td>
@@ -258,7 +264,7 @@ class ItemInfoRow extends React.Component {
         </svg>
       </button>
       <button type="button" className="btn btn-sm btn-outline-dark"
-        onClick={this.onClick_add_barcodes}>
+        onClick={this.onClick_add_itemUpcs}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
           <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
         </svg>

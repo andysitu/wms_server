@@ -194,7 +194,7 @@ var ItemInfoApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                "Barcodes"
+                "UPCs"
               ),
               React.createElement(
                 "th",
@@ -239,7 +239,7 @@ var ItemInfoRow = function (_React$Component2) {
 
     return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.state = {
       data: _this3.props.data ? _this3.props.data : {},
-      show_barcodes: false
+      show_itemUpcs: false
     }, _this3.onClick_editItemInfo = function () {
       _this3.props.editItemInfo(_this3.props.row_index);
     }, _this3.onClick_deleteItemInfo = function () {
@@ -249,11 +249,11 @@ var ItemInfoRow = function (_React$Component2) {
       }
     }, _this3.update_data = function (new_data) {
       _this3.setState({ data: new_data });
-    }, _this3.onClick_add_barcodes = function () {
-      var upc = window.prompt("UPC/ barcode number?");
+    }, _this3.onClick_add_itemUpcs = function () {
+      var upc = window.prompt("UPC/ itemUpc number?");
       if (upc != null && upc.length > 5) {
         $.ajax({
-          url: "../item_info/" + _this3.state.data.id + "/barcodes",
+          url: "../item_info/" + _this3.state.data.id + "/itemupcs",
           type: "POST",
           data: {
             upc: upc
@@ -263,24 +263,28 @@ var ItemInfoRow = function (_React$Component2) {
           }
         });
       }
-    }, _this3.onClick_delete_itemInfo_barcode = function () {
-      console.log("delete");
-    }, _this3.onClick_expand_barcodes = function () {
-      _this3.setState({ show_barcodes: !_this3.state.show_barcodes });
-    }, _this3.create_barcodes = function () {
-      if (_this3.state.data.barcodes && _this3.state.data.barcodes.length > 1) {
-        if (_this3.state.show_barcodes) {
+    }, _this3.onClick_delete_itemInfo_itemUpc = function (e) {
+      if (e.target.getAttribute("itemupc_id")) {}
+      // $.ajax({
+      //   url: "../item_info/" + this.state.data.id + "/itemUpcs/" + 
+      // });
+    }, _this3.onClick_expand_itemUpcs = function () {
+      _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
+    }, _this3.create_itemUpcs = function () {
+      if (_this3.state.data.itemUpcs && _this3.state.data.itemUpcs.length > 1) {
+        if (_this3.state.show_itemUpcs) {
           return React.createElement(
             "div",
-            { className: "expanded-barcodes-div" },
-            _this3.state.data.barcodes.map(function (barcode) {
+            { className: "expanded-itemUpcs-div" },
+            _this3.state.data.itemUpcs.map(function (itemUpc) {
               return React.createElement(
                 "div",
-                { key: barcode },
-                barcode.upc,
+                { key: itemUpc.id },
+                itemUpc.upc,
                 React.createElement(
                   "span",
-                  { className: "del-item-barcodes-span", onClick: _this3.onClick_delete_itemInfo_barcode },
+                  { className: "del-item-itemUpcs-span", itemupc_id: itemUpc.id,
+                    onClick: _this3.onClick_delete_itemInfo_itemUpc },
                   React.createElement(
                     "svg",
                     { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
@@ -292,7 +296,7 @@ var ItemInfoRow = function (_React$Component2) {
             }),
             React.createElement(
               "div",
-              { onClick: _this3.onClick_expand_barcodes, className: "reduce-btn-div" },
+              { onClick: _this3.onClick_expand_itemUpcs, className: "reduce-btn-div" },
               React.createElement(
                 "svg",
                 { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
@@ -303,8 +307,8 @@ var ItemInfoRow = function (_React$Component2) {
         } else {
           return React.createElement(
             "div",
-            { className: "reduced-barcodes-div", onClick: _this3.onClick_expand_barcodes },
-            _this3.state.data.barcodes[0].upc + "...",
+            { className: "reduced-itemUpcs-div", onClick: _this3.onClick_expand_itemUpcs },
+            _this3.state.data.itemUpcs[0].upc + "...",
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
@@ -312,11 +316,11 @@ var ItemInfoRow = function (_React$Component2) {
             )
           );
         }
-      } else if (_this3.state.data.barcodes && _this3.state.data.barcodes.length == 1) {
+      } else if (_this3.state.data.itemUpcs && _this3.state.data.itemUpcs.length == 1) {
         return React.createElement(
           "div",
           null,
-          _this3.state.data.barcodes[0]
+          _this3.state.data.itemUpcs[0]
         );
       }
       return React.createElement("div", null);
@@ -352,7 +356,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.create_barcodes()
+          this.create_itemUpcs()
         ),
         React.createElement(
           "td",
@@ -382,7 +386,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-dark",
-              onClick: this.onClick_add_barcodes },
+              onClick: this.onClick_add_itemUpcs },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },

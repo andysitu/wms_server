@@ -79,16 +79,16 @@ public class ItemInfoService {
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
 
-        List<HashMap<String, String>> barcodes = new ArrayList<>();
-        HashMap<String, String> barcode;
+        List<HashMap<String, String>> upcs = new ArrayList<>();
+        HashMap<String, String> upc;
         // List<String> barcodes = new ArrayList<>();
         for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
-            barcode = new HashMap<>();
-            barcode.put("upc", itemUpc.getUpc());
-            barcode.put("id", Long.toString(itemUpc.getId()));
-            barcodes.add(barcode);
+            upc = new HashMap<>();
+            upc.put("upc", itemUpc.getUpc());
+            upc.put("id", Long.toString(itemUpc.getId()));
+            upcs.add(upc);
         }
-        response.barcodes = barcodes;
+        response.itemUpcs = upcs;
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
         return response;
     }

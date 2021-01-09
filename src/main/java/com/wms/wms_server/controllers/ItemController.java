@@ -65,7 +65,7 @@ public class ItemController {
         return itemInfoService.convert_to_response(itemInfo);
     }
     
-    @RequestMapping(path="/item_info/{iteminfo_id}/barcodes", produces="application/json;", method=RequestMethod.POST)
+    @RequestMapping(path="/item_info/{iteminfo_id}/itemupcs", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ItemInfoResponse create_barcodes(
             @PathVariable("iteminfo_id") Long iteminfo_id,

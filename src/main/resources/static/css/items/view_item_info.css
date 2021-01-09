@@ -1,8 +1,8 @@
-.reduced-barcodes-div {
+.reduced-itemUpcs-div {
     cursor: pointer;
 }
 
-.expanded-barcodes-div {
+.expanded-itemUpcs-div {
     /* cursor: pointer; */
 }
 
@@ -10,6 +10,10 @@
     cursor: pointer;
 }
 
-.del-item-barcodes-span {
+.del-item-itemUpcs-span {
     cursor: pointer;
+}
+
+.del-item-itemUpcs-span > * {
+    pointer-events: none;   
 }
