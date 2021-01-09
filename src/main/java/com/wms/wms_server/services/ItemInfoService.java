@@ -16,6 +16,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;;
 
 @Service
 public class ItemInfoService {
@@ -78,9 +79,14 @@ public class ItemInfoService {
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
 
-        List<String> barcodes = new ArrayList<>();
+        List<HashMap<String, String>> barcodes = new ArrayList<>();
+        HashMap<String, String> barcode;
+        // List<String> barcodes = new ArrayList<>();
         for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
-            barcodes.add(itemUpc.getUpc());
+            barcode = new HashMap<>();
+            barcode.put("upc", itemUpc.getUpc());
+            barcode.put("id", Long.toString(itemUpc.getId()));
+            barcodes.add(barcode);
         }
         response.barcodes = barcodes;
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());

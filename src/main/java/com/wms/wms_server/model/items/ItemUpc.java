@@ -51,6 +51,9 @@ public class ItemUpc {
     public String getUpc() {
         return this.upc;
     }
+    public Long getId() {
+        return this.id;
+    }
 
     public ItemUpc() {}
     

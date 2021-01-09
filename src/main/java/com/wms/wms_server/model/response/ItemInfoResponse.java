@@ -12,7 +12,7 @@ public class ItemInfoResponse {
     public int length;
     public int height;
 
-    public List<String> barcodes;
+    public List<HashMap<String, String>> barcodes;
     
     public ItemInfoResponse(Long id, String itemName, String description, float weight) {
         this.id = id;
