@@ -277,7 +277,7 @@ var ItemInfoRow = function (_React$Component2) {
               return React.createElement(
                 "div",
                 { key: barcode },
-                barcode,
+                barcode.upc,
                 React.createElement(
                   "span",
                   { className: "del-item-barcodes-span", onClick: _this3.onClick_delete_itemInfo_barcode },
@@ -304,7 +304,7 @@ var ItemInfoRow = function (_React$Component2) {
           return React.createElement(
             "div",
             { className: "reduced-barcodes-div", onClick: _this3.onClick_expand_barcodes },
-            _this3.state.data.barcodes[0] + "...",
+            _this3.state.data.barcodes[0].upc + "...",
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },

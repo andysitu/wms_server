@@ -199,7 +199,7 @@ class ItemInfoRow extends React.Component {
           {this.state.data.barcodes.map((barcode)=> {
             return (
               <div key={barcode}>
-                {barcode}
+                {barcode.upc}
                 <span className="del-item-barcodes-span" onClick={this.onClick_delete_itemInfo_barcode}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -217,7 +217,7 @@ class ItemInfoRow extends React.Component {
       } else {
         return (
           <div className="reduced-barcodes-div" onClick={this.onClick_expand_barcodes}>
-            {this.state.data.barcodes[0] + "..."}
+            {this.state.data.barcodes[0].upc + "..."}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             </svg>
