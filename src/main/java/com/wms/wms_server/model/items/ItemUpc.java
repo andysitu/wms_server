@@ -26,7 +26,7 @@ import java.util.Date;
 public class ItemUpc {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @CreatedDate
     private Date createdDate;
