@@ -112,17 +112,24 @@ public class ItemInfoService {
         }
     }
 
-    public ItemInfo add_barcode(Long itemInfo_id, String upc) {
+    public ItemUpc add_barcode(Long itemInfo_id, String upc) {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
             ItemUpc itemUpc = new ItemUpc(upc);
             itemUpc.setItemInfo(itemInfo);
             itemUpcRepository.save(itemUpc);
-            return itemInfo;
+            return itemUpc;
         } else {
             return null;
         }
+    }
+
+    public HashMap<String, String> convert_itemUpc_to_obj(ItemUpc itemUpc) {
+        HashMap<String, String> response = new HashMap<>();
+        response.put("upc", itemUpc.getUpc());
+        response.put("id", Long.toString(itemUpc.getId()));
+        return response;
     }
 
     public void delete_itemUpc(Long itemInfo_id, Long itemUpc_id) {
