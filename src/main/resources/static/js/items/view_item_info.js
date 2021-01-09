@@ -281,12 +281,12 @@ var ItemInfoRow = function (_React$Component2) {
     }, _this3.onClick_expand_itemUpcs = function () {
       _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
     }, _this3.create_itemUpcs = function () {
-      if (_this3.state.data.itemUpcs && _this3.state.data.itemUpcs.length > 1) {
+      if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length > 1) {
         if (_this3.state.show_itemUpcs) {
           return React.createElement(
             "div",
             { className: "expanded-itemUpcs-div" },
-            _this3.state.data.itemUpcs.map(function (itemUpc) {
+            _this3.state.data.itemupcs.map(function (itemUpc) {
               return React.createElement(
                 "div",
                 { key: itemUpc.id },

@@ -206,11 +206,11 @@ class ItemInfoRow extends React.Component {
   };
 
   create_itemUpcs = () => {
-    if (this.state.data.itemUpcs && (this.state.data.itemUpcs.length > 1)) {
+    if (this.state.data.itemupcs && (this.state.data.itemupcs.length > 1)) {
       if (this.state.show_itemUpcs) {
         return (
         <div className="expanded-itemUpcs-div">
-          {this.state.data.itemUpcs.map((itemUpc)=> {
+          {this.state.data.itemupcs.map((itemUpc)=> {
             return (
               <div key={itemUpc.id}>
                 {itemUpc.upc}
