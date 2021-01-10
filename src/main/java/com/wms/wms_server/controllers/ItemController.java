@@ -34,8 +34,9 @@ public class ItemController {
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public ItemInfo create_itemInfo(HttpServletRequest request) {
-        return itemInfoService.create_itemInfo(request);
+    public ItemInfoResponse create_itemInfo(HttpServletRequest request) {
+        return itemInfoService.convert_to_response(
+        itemInfoService.create_itemInfo(request));
     }
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)
