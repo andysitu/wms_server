@@ -35,6 +35,10 @@ var ItemInfoApp = function (_React$Component) {
       });
     };
 
+    _this.show_itemInfo_barcode = function (barcodes) {
+      _this.modalMenu.current.show_menu("create_barcode", { barcode_strings: barcodes });
+    };
+
     _this.update_itemInfoRow = function (index) {
       _this.state.itemInfos[index].ref.current.update_data(_this.state.itemInfos[index]);
     };
@@ -111,14 +115,16 @@ var ItemInfoApp = function (_React$Component) {
       var rows = [];
       if (this.state.itemInfos.length > 0) {
         rows = this.state.itemInfos.map(function (itemInfo, index) {
-          return React.createElement(ItemInfoRow, _defineProperty({ key: "itemInifo-" + itemInfo.id,
+          var _React$createElement;
+
+          return React.createElement(ItemInfoRow, (_React$createElement = { key: "itemInifo-" + itemInfo.id,
             ref: itemInfo.ref,
             deleteItemInfo: _this2.deleteItemInfo,
             editItemInfo: _this2.editItemInfo,
             row_index: index,
             data: itemInfo,
             itemName: itemInfo.itemName
-          }, "editItemInfo", _this2.editItemInfo));
+          }, _defineProperty(_React$createElement, "editItemInfo", _this2.editItemInfo), _defineProperty(_React$createElement, "show_itemInfo_barcode", _this2.show_itemInfo_barcode), _React$createElement));
         });
       }
       return React.createElement(
@@ -297,6 +303,9 @@ var ItemInfoRow = function (_React$Component2) {
       }
     }, _this3.onClick_expand_itemSkus = function () {
       _this3.setState({ show_itemSkus: !_this3.state.show_itemSkus });
+    }, _this3.onClick_show_barcode = function (e) {
+      _this3.props.show_itemInfo_barcode([e.target.getAttribute("sku")]);
+      // this.modalMenu.current.show_menu("create_barcode", {barcode_strings: locations,});
     }, _this3.create_itemSku_div = function (itemSku) {
       return React.createElement(
         "span",
@@ -304,7 +313,18 @@ var ItemInfoRow = function (_React$Component2) {
         itemSku.sku,
         React.createElement(
           "button",
-          { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemSkus",
+          { type: "button", className: "btn btn-sm btn-outline-dark btn-with-svgs",
+            sku: itemSku.sku,
+            onClick: _this3.onClick_show_barcode },
+          React.createElement(
+            "svg",
+            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
+            React.createElement("path", { d: "M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" })
+          )
+        ),
+        React.createElement(
+          "button",
+          { type: "button", className: "btn btn-sm btn-outline-danger btn-with-svgs",
             itemsku_id: itemSku.id, itemsku: itemSku.sku,
             onClick: _this3.onClick_delete_itemInfo_itemSku },
           React.createElement(

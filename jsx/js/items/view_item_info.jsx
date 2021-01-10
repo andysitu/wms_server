@@ -28,6 +28,11 @@ class ItemInfoApp extends React.Component {
     });
   };
 
+  show_itemInfo_barcode = (barcodes) => {
+    this.modalMenu.current.show_menu(
+      "create_barcode", {barcode_strings: barcodes,});
+  }
+
   update_itemInfoRow = (index) => {
     this.state.itemInfos[index].ref.current.update_data(this.state.itemInfos[index]);
   };
@@ -99,6 +104,7 @@ class ItemInfoApp extends React.Component {
           data={itemInfo}
           itemName={itemInfo.itemName}
           editItemInfo = {this.editItemInfo}
+          show_itemInfo_barcode={this.show_itemInfo_barcode}
         />);
       });   
     }
@@ -221,11 +227,23 @@ class ItemInfoRow extends React.Component {
     this.setState({show_itemSkus: !this.state.show_itemSkus});
   };
 
+  onClick_show_barcode = (e) => {
+    this.props.show_itemInfo_barcode( [ e.target.getAttribute("sku"), ] );
+    // this.modalMenu.current.show_menu("create_barcode", {barcode_strings: locations,});
+  }
+
   create_itemSku_div = (itemSku) => {
     return (
     <span key={itemSku.id}>
       {itemSku.sku}
-      <button type="button" className="btn btn-sm btn-outline-dark del-item-itemSkus"
+      <button type="button" className="btn btn-sm btn-outline-dark btn-with-svgs"
+        sku={itemSku.sku}
+        onClick={this.onClick_show_barcode}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
+          <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+        </svg>
+      </button>
+      <button type="button" className="btn btn-sm btn-outline-danger btn-with-svgs"
         itemsku_id={itemSku.id} itemsku={itemSku.sku}
         onClick={this.onClick_delete_itemInfo_itemSku}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
