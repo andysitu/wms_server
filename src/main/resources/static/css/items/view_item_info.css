@@ -1,19 +1,11 @@
-.reduced-itemUpcs-div {
+.itemSkus-btn-container {
     cursor: pointer;
 }
 
-.expanded-itemUpcs-div {
-    /* cursor: pointer; */
-}
-
-.reduce-btn-div {
+.del-item-itemSkus-span {
     cursor: pointer;
 }
 
-.del-item-itemUpcs-span {
-    cursor: pointer;
-}
-
-.del-item-itemUpcs > * {
+.del-item-itemSkus > * {
     pointer-events: none;   
 }
