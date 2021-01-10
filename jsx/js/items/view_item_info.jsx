@@ -243,7 +243,7 @@ class ItemInfoRow extends React.Component {
           {this.state.data.itemskus.map((itemSku)=> {
             return this.create_itemSku_div(itemSku);
           })}
-          <div onClick={this.onClick_expand_itemSkus} className="reduce-btn-div">
+          <div onClick={this.onClick_expand_itemSkus} className="itemSkus-btn-container">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-up" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
             </svg>
@@ -251,11 +251,13 @@ class ItemInfoRow extends React.Component {
         </div>);
       } else {
         return (
-          <div className="reduced-itemSkus-div" onClick={this.onClick_expand_itemSkus}>
+          <div className="reduced-itemSkus-div">
             {this.create_itemSku_div(this.state.data.itemskus[0])}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-            </svg>
+            <span onClick={this.onClick_expand_itemSkus} className="itemSkus-btn-container">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </span>
           </div>
         );
       }
