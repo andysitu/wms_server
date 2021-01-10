@@ -6,6 +6,6 @@
     cursor: pointer;
 }
 
-.del-item-itemSkus > * {
+.btn-with-svgs > * {
     pointer-events: none;   
 }
