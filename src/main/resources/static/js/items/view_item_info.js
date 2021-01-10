@@ -301,7 +301,7 @@ var ItemInfoRow = function (_React$Component2) {
       var _React$createElement2;
 
       return React.createElement(
-        "div",
+        "span",
         { key: itemSku.id },
         itemSku.sku,
         React.createElement(
@@ -323,7 +323,11 @@ var ItemInfoRow = function (_React$Component2) {
             "div",
             { className: "expanded-itemSkus-div" },
             _this3.state.data.itemskus.map(function (itemSku) {
-              return _this3.create_itemSku_div(itemSku);
+              return React.createElement(
+                "div",
+                { key: "div-" + itemSku.id },
+                _this3.create_itemSku_div(itemSku)
+              );
             }),
             React.createElement(
               "div",
