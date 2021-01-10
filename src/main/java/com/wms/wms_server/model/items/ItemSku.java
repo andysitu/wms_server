@@ -23,7 +23,7 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ItemUpc {
+public class ItemSku {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -37,7 +37,7 @@ public class ItemUpc {
     @LastModifiedBy
     private String modifiedBy;
 
-    private String upc;
+    private String sku;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_info_id", nullable = false)
@@ -48,16 +48,16 @@ public class ItemUpc {
         this.itemInfo = itemInfo;
     }
 
-    public String getUpc() {
-        return this.upc;
+    public String getSku() {
+        return this.sku;
     }
     public Long getId() {
         return this.id;
     }
 
-    public ItemUpc() {}
+    public ItemSku() {}
     
-    public ItemUpc(String upc) {
-        this.upc = upc;
+    public ItemSku(String sku) {
+        this.sku = sku;
     }
 }
