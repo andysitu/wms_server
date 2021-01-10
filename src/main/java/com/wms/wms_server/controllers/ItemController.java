@@ -67,25 +67,25 @@ public class ItemController {
         return itemInfoService.convert_to_response(itemInfo);
     }
     
-    @RequestMapping(path="/item_info/{iteminfo_id}/itemupcs", 
+    @RequestMapping(path="/item_info/{iteminfo_id}/itemskus", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, String> create_barcode(
             @PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
-        return itemInfoService.convert_itemUpc_to_obj(
-            itemInfoService.add_barcode(iteminfo_id, request.getParameter("upc"))
+        return itemInfoService.convert_itemSku_to_obj(
+            itemInfoService.add_barcode(iteminfo_id, request.getParameter("sku"))
         );
     }
 
-    @RequestMapping(path="/item_info/{iteminfo_id}/itemupcs/{itemupc_id}", 
+    @RequestMapping(path="/item_info/{iteminfo_id}/itemskus/{itemsku_id}", 
         produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_barcode(
             @PathVariable("iteminfo_id") Long iteminfo_id,
-            @PathVariable("itemupc_id") Long itemupc_id) 
+            @PathVariable("itemsku_id") Long itemsku_id) 
     {
-        itemInfoService.delete_itemUpc(iteminfo_id, itemupc_id);
+        itemInfoService.delete_itemSku(iteminfo_id, itemsku_id);
         return "OK";
     }
 }

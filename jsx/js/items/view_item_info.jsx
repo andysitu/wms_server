@@ -126,7 +126,7 @@ class ItemInfoApp extends React.Component {
             <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
             <th scope="col">Dimensions (w, l, h)</th>
-            <th scope="col">UPCs</th>
+            <th scope="col">SKUs</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
@@ -150,7 +150,7 @@ loadReact();
 class ItemInfoRow extends React.Component {
   state = {
     data: this.props.data ? this.props.data : {},
-    show_itemUpcs: false,
+    show_itemSkus: false,
   }
 
   onClick_editItemInfo = () => {
@@ -167,19 +167,19 @@ class ItemInfoRow extends React.Component {
     this.setState({data: new_data,})
   }
 
-  onClick_add_itemUpcs = () => {
-    var upc = window.prompt("UPC/ itemUpc number?"),
+  onClick_add_itemSkuss = () => {
+    var sku = window.prompt("SKU/ itemSku number?"),
         that = this;
-    if (upc != null && upc.length > 5) {
+    if (sku != null && sku.length > 5) {
       $.ajax({
-        url: "../item_info/" + this.state.data.id + "/itemupcs",
+        url: "../item_info/" + this.state.data.id + "/itemskus",
         type: "POST",
         data: {
-          upc: upc,
+          sku: sku,
         },
         success: function(returnData) {
           that.setState(prev_state => {
-            prev_state.data.itemupcs.push(returnData);
+            prev_state.data.itemskus.push(returnData);
 
             return {
               data: prev_state.data,
@@ -190,21 +190,21 @@ class ItemInfoRow extends React.Component {
     }
   };
 
-  onClick_delete_itemInfo_itemUpc =(e) => {
-    var id = e.target.getAttribute("itemupc_id"),
-        upc = e.target.getAttribute("itemupc"),
+  onClick_delete_itemInfo_itemSku =(e) => {
+    var id = e.target.getAttribute("itemsku_id"),
+        sku = e.target.getAttribute("itemsku"),
         that = this;
-    if (e.target.getAttribute("itemupc_id")) {
-      let result = window.confirm("Are you sure you want to delete upc " + upc + "?");  
+    if (e.target.getAttribute("itemsku_id")) {
+      let result = window.confirm("Are you sure you want to delete sku " + sku + "?");  
       if (result) {
         $.ajax({
-          url: "../item_info/" + this.state.data.id + "/itemupcs/" + id,
+          url: "../item_info/" + this.state.data.id + "/itemskus/" + id,
           type: "DELETE",
           success: function(data) {
             that.setState(prev_state => {
-              for (let i=0; i<prev_state.data.itemupcs.length; i++) {
-                if (prev_state.data.itemupcs[i].id == id) {
-                  prev_state.data.itemupcs.splice(i, 1);
+              for (let i=0; i<prev_state.data.itemskus.length; i++) {
+                if (prev_state.data.itemskus[i].id == id) {
+                  prev_state.data.itemskus.splice(i, 1);
                   return {
                     data: prev_state.data,
                   };
@@ -217,16 +217,16 @@ class ItemInfoRow extends React.Component {
     }
   };
 
-  onClick_expand_itemUpcs = () => {
-    this.setState({show_itemUpcs: !this.state.show_itemUpcs});
+  onClick_expand_itemSkus = () => {
+    this.setState({show_itemSkus: !this.state.show_itemSkus});
   };
 
-  create_itemUpc_div = (itemUpc) => {
-    return (<div key={itemUpc.id}>
-      {itemUpc.upc}
-      <button type="button" className="btn btn-sm btn-outline-dark del-item-itemUpcs"
-        itemupc_id={itemUpc.id} itemupc={itemUpc.upc}
-        onClick={this.onClick_delete_itemInfo_itemUpc}>
+  create_itemSku_div = (itemSku) => {
+    return (<div key={itemSku.id}>
+      {itemSku.sku}
+      <button type="button" className="btn btn-sm btn-outline-dark del-item-itemSkus"
+        itemsku={itemSku.id} itemsku={itemSku.sku}
+        onClick={this.onClick_delete_itemInfo_itemSku}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
           <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -235,15 +235,15 @@ class ItemInfoRow extends React.Component {
     </div>);
   };
 
-  create_itemUpc_divs = () => {
-    if (this.state.data.itemupcs && this.state.data.itemupcs.length > 1) {
-      if (this.state.show_itemUpcs) {
+  create_itemSku_divs = () => {
+    if (this.state.data.itemskus && this.state.data.itemskus.length > 1) {
+      if (this.state.show_itemSkus) {
         return (
-        <div className="expanded-itemUpcs-div">
-          {this.state.data.itemupcs.map((itemUpc)=> {
-            return this.create_itemUpc_div(itemUpc);
+        <div className="expanded-itemSkus-div">
+          {this.state.data.itemskus.map((itemSku)=> {
+            return this.create_itemSku_div(itemSku);
           })}
-          <div onClick={this.onClick_expand_itemUpcs} className="reduce-btn-div">
+          <div onClick={this.onClick_expand_itemSkus} className="reduce-btn-div">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-up" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
             </svg>
@@ -251,18 +251,18 @@ class ItemInfoRow extends React.Component {
         </div>);
       } else {
         return (
-          <div className="reduced-itemUpcs-div" onClick={this.onClick_expand_itemUpcs}>
-            {this.create_itemUpc_div(this.state.data.itemupcs[0])}
+          <div className="reduced-itemSkus-div" onClick={this.onClick_expand_itemSkus}>
+            {this.create_itemSku_div(this.state.data.itemskus[0])}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             </svg>
           </div>
         );
       }
-    } else if (this.state.data.itemupcs && this.state.data.itemupcs.length == 1) {
+    } else if (this.state.data.itemskus && this.state.data.itemskus.length == 1) {
       return (
         <div>
-          {this.create_itemUpc_div(this.state.data.itemupcs[0])}
+          {this.create_itemSku_div(this.state.data.itemskus[0])}
         </div>
       );
     }
@@ -278,7 +278,7 @@ class ItemInfoRow extends React.Component {
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
     </td>
     <td>
-      {this.create_itemUpc_divs()}
+      {this.create_itemSku_divs()}
     </td>
     
     <td>
@@ -297,7 +297,7 @@ class ItemInfoRow extends React.Component {
         </svg>
       </button>
       <button type="button" className="btn btn-sm btn-outline-dark"
-        onClick={this.onClick_add_itemUpcs}>
+        onClick={this.onClick_add_itemSkuss}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
           <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
         </svg>

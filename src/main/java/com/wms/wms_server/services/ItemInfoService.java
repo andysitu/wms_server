@@ -1,11 +1,11 @@
 package com.wms.wms_server.services;
 
 import com.wms.wms_server.model.items.ItemInfo;
-import com.wms.wms_server.model.items.ItemUpc;
+import com.wms.wms_server.model.items.ItemSku;
 import com.wms.wms_server.model.request.ItemInfoRequest;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.repository.ItemInfoRepository;
-import com.wms.wms_server.repository.ItemUpcRepository;
+import com.wms.wms_server.repository.ItemSkuRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class ItemInfoService {
     @Autowired
     ItemInfoRepository itemInfoRepository;
     @Autowired
-    ItemUpcRepository itemUpcRepository;
+    ItemSkuRepository itemSkuRepository;
 
     public ItemInfo create_itemInfo(HttpServletRequest request) {
         if (request.getParameter("name") == null ||
@@ -79,15 +79,15 @@ public class ItemInfoService {
         ItemInfoResponse response = new ItemInfoResponse(
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
 
-        List<HashMap<String, String>> upcs = new ArrayList<>();
-        HashMap<String, String> upc;
-        for (ItemUpc itemUpc : itemUpcRepository.findByItemInfoId(item.getId())) {
-            upc = new HashMap<>();
-            upc.put("upc", itemUpc.getUpc());
-            upc.put("id", Long.toString(itemUpc.getId()));
-            upcs.add(upc);
+        List<HashMap<String, String>> skus = new ArrayList<>();
+        HashMap<String, String> sku;
+        for (ItemSku itemSku : itemSkuRepository.findByItemInfoId(item.getId())) {
+            sku = new HashMap<>();
+            sku.put("sku", itemSku.getSku());
+            sku.put("id", Long.toString(itemSku.getId()));
+            skus.add(sku);
         }
-        response.itemupcs = upcs;
+        response.itemskus = skus;
         response.setDimensions(item.getWidth(), item.getLength(), item.getHeight());
         return response;
     }
@@ -112,30 +112,30 @@ public class ItemInfoService {
         }
     }
 
-    public ItemUpc add_barcode(Long itemInfo_id, String upc) {
+    public ItemSku add_barcode(Long itemInfo_id, String sku) {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
-            ItemUpc itemUpc = new ItemUpc(upc);
-            itemUpc.setItemInfo(itemInfo);
-            itemUpcRepository.save(itemUpc);
-            return itemUpc;
+            ItemSku itemSku = new ItemSku(sku);
+            itemSku.setItemInfo(itemInfo);
+            itemSkuRepository.save(itemSku);
+            return itemSku;
         } else {
             return null;
         }
     }
 
-    public HashMap<String, String> convert_itemUpc_to_obj(ItemUpc itemUpc) {
+    public HashMap<String, String> convert_itemSku_to_obj(ItemSku itemSku) {
         HashMap<String, String> response = new HashMap<>();
-        response.put("upc", itemUpc.getUpc());
-        response.put("id", Long.toString(itemUpc.getId()));
+        response.put("sku", itemSku.getSku());
+        response.put("id", Long.toString(itemSku.getId()));
         return response;
     }
 
-    public void delete_itemUpc(Long itemInfo_id, Long itemUpc_id) {
-        Optional<ItemUpc> oItemUpc = itemUpcRepository.findByIdAndItemInfoId(itemUpc_id, itemInfo_id);
-        if (oItemUpc.isPresent()) {
-            itemUpcRepository.delete(oItemUpc.get());
+    public void delete_itemSku(Long itemInfo_id, Long itemSku_id) {
+        Optional<ItemSku> oItemSku = itemSkuRepository.findByIdAndItemInfoId(itemSku_id, itemInfo_id);
+        if (oItemSku.isPresent()) {
+            itemSkuRepository.delete(oItemSku.get());
         }
     }
 }

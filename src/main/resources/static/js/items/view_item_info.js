@@ -194,7 +194,7 @@ var ItemInfoApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                "UPCs"
+                "SKUs"
               ),
               React.createElement(
                 "th",
@@ -239,7 +239,7 @@ var ItemInfoRow = function (_React$Component2) {
 
     return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = ItemInfoRow.__proto__ || Object.getPrototypeOf(ItemInfoRow)).call.apply(_ref, [this].concat(args))), _this3), _this3.state = {
       data: _this3.props.data ? _this3.props.data : {},
-      show_itemUpcs: false
+      show_itemSkus: false
     }, _this3.onClick_editItemInfo = function () {
       _this3.props.editItemInfo(_this3.props.row_index);
     }, _this3.onClick_deleteItemInfo = function () {
@@ -249,19 +249,19 @@ var ItemInfoRow = function (_React$Component2) {
       }
     }, _this3.update_data = function (new_data) {
       _this3.setState({ data: new_data });
-    }, _this3.onClick_add_itemUpcs = function () {
-      var upc = window.prompt("UPC/ itemUpc number?"),
+    }, _this3.onClick_add_itemSkuss = function () {
+      var sku = window.prompt("SKU/ itemSku number?"),
           that = _this3;
-      if (upc != null && upc.length > 5) {
+      if (sku != null && sku.length > 5) {
         $.ajax({
-          url: "../item_info/" + _this3.state.data.id + "/itemupcs",
+          url: "../item_info/" + _this3.state.data.id + "/itemskus",
           type: "POST",
           data: {
-            upc: upc
+            sku: sku
           },
           success: function success(returnData) {
             that.setState(function (prev_state) {
-              prev_state.data.itemupcs.push(returnData);
+              prev_state.data.itemskus.push(returnData);
 
               return {
                 data: prev_state.data
@@ -270,21 +270,21 @@ var ItemInfoRow = function (_React$Component2) {
           }
         });
       }
-    }, _this3.onClick_delete_itemInfo_itemUpc = function (e) {
-      var id = e.target.getAttribute("itemupc_id"),
-          upc = e.target.getAttribute("itemupc"),
+    }, _this3.onClick_delete_itemInfo_itemSku = function (e) {
+      var id = e.target.getAttribute("itemsku_id"),
+          sku = e.target.getAttribute("itemsku"),
           that = _this3;
-      if (e.target.getAttribute("itemupc_id")) {
-        var result = window.confirm("Are you sure you want to delete upc " + upc + "?");
+      if (e.target.getAttribute("itemsku_id")) {
+        var result = window.confirm("Are you sure you want to delete sku " + sku + "?");
         if (result) {
           $.ajax({
-            url: "../item_info/" + _this3.state.data.id + "/itemupcs/" + id,
+            url: "../item_info/" + _this3.state.data.id + "/itemskus/" + id,
             type: "DELETE",
             success: function success(data) {
               that.setState(function (prev_state) {
-                for (var i = 0; i < prev_state.data.itemupcs.length; i++) {
-                  if (prev_state.data.itemupcs[i].id == id) {
-                    prev_state.data.itemupcs.splice(i, 1);
+                for (var i = 0; i < prev_state.data.itemskus.length; i++) {
+                  if (prev_state.data.itemskus[i].id == id) {
+                    prev_state.data.itemskus.splice(i, 1);
                     return {
                       data: prev_state.data
                     };
@@ -295,18 +295,19 @@ var ItemInfoRow = function (_React$Component2) {
           });
         }
       }
-    }, _this3.onClick_expand_itemUpcs = function () {
-      _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
-    }, _this3.create_itemUpc_div = function (itemUpc) {
+    }, _this3.onClick_expand_itemSkus = function () {
+      _this3.setState({ show_itemSkus: !_this3.state.show_itemSkus });
+    }, _this3.create_itemSku_div = function (itemSku) {
+      var _React$createElement2;
+
       return React.createElement(
         "div",
-        { key: itemUpc.id },
-        itemUpc.upc,
+        { key: itemSku.id },
+        itemSku.sku,
         React.createElement(
           "button",
-          { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemUpcs",
-            itemupc_id: itemUpc.id, itemupc: itemUpc.upc,
-            onClick: _this3.onClick_delete_itemInfo_itemUpc },
+          (_React$createElement2 = { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemSkus",
+            itemsku: itemSku.id }, _defineProperty(_React$createElement2, "itemsku", itemSku.sku), _defineProperty(_React$createElement2, "onClick", _this3.onClick_delete_itemInfo_itemSku), _React$createElement2),
           React.createElement(
             "svg",
             { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
@@ -315,18 +316,18 @@ var ItemInfoRow = function (_React$Component2) {
           )
         )
       );
-    }, _this3.create_itemUpc_divs = function () {
-      if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length > 1) {
-        if (_this3.state.show_itemUpcs) {
+    }, _this3.create_itemSku_divs = function () {
+      if (_this3.state.data.itemskus && _this3.state.data.itemskus.length > 1) {
+        if (_this3.state.show_itemSkus) {
           return React.createElement(
             "div",
-            { className: "expanded-itemUpcs-div" },
-            _this3.state.data.itemupcs.map(function (itemUpc) {
-              return _this3.create_itemUpc_div(itemUpc);
+            { className: "expanded-itemSkus-div" },
+            _this3.state.data.itemskus.map(function (itemSku) {
+              return _this3.create_itemSku_div(itemSku);
             }),
             React.createElement(
               "div",
-              { onClick: _this3.onClick_expand_itemUpcs, className: "reduce-btn-div" },
+              { onClick: _this3.onClick_expand_itemSkus, className: "reduce-btn-div" },
               React.createElement(
                 "svg",
                 { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-up", viewBox: "0 0 16 16" },
@@ -337,8 +338,8 @@ var ItemInfoRow = function (_React$Component2) {
         } else {
           return React.createElement(
             "div",
-            { className: "reduced-itemUpcs-div", onClick: _this3.onClick_expand_itemUpcs },
-            _this3.create_itemUpc_div(_this3.state.data.itemupcs[0]),
+            { className: "reduced-itemSkus-div", onClick: _this3.onClick_expand_itemSkus },
+            _this3.create_itemSku_div(_this3.state.data.itemskus[0]),
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
@@ -346,11 +347,11 @@ var ItemInfoRow = function (_React$Component2) {
             )
           );
         }
-      } else if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length == 1) {
+      } else if (_this3.state.data.itemskus && _this3.state.data.itemskus.length == 1) {
         return React.createElement(
           "div",
           null,
-          _this3.create_itemUpc_div(_this3.state.data.itemupcs[0])
+          _this3.create_itemSku_div(_this3.state.data.itemskus[0])
         );
       }
       return React.createElement("div", null);
@@ -386,7 +387,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.create_itemUpc_divs()
+          this.create_itemSku_divs()
         ),
         React.createElement(
           "td",
@@ -416,7 +417,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-dark",
-              onClick: this.onClick_add_itemUpcs },
+              onClick: this.onClick_add_itemSkuss },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
