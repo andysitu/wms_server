@@ -34,8 +34,8 @@ class ModalMenu extends React.Component {
       }, () => {
       if (menu_type == "create_barcode") {
         // Set the barcode after img element is set
-        for (let i=0; i < this.state.data.location_strings.length; i++) {
-          JsBarcode("#barcode_" + i, data.location_strings[i]);
+        for (let i=0; i < this.state.data.barcode_strings.length; i++) {
+          JsBarcode("#barcode_" + i, data.barcode_strings[i]);
         }
       }
       $("#modalMenu").modal("show");
@@ -85,7 +85,7 @@ class ModalMenu extends React.Component {
       index = imgs[i].getAttribute("index");
       link = document.createElement("a");
       link.setAttribute("href", imgs[i].src);
-      link.setAttribute("download", this.state.data.location_strings[index].replaceAll(".", "-") + ".png");
+      link.setAttribute("download", this.state.data.barcode_strings[index].replaceAll(".", "-") + ".png");
       link.click();
     }
   }
@@ -156,7 +156,7 @@ class ModalMenu extends React.Component {
         </div>
 
         <div id="barcode-container">
-          {this.state.data.location_strings.map(
+          {this.state.data.barcode_strings.map(
             (location_string, index) => {
               return (
                 <div key={"barcode_div_" + index}>

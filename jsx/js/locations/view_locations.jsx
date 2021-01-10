@@ -114,7 +114,7 @@ class LocationTable extends React.Component {
       index = cbox.getAttribute("row_index");
       locations.push(this.state.locations[index].location_string);
     }
-    this.modalMenu.current.show_menu("create_barcode", {location_strings: locations,});
+    this.modalMenu.current.show_menu("create_barcode", {barcode_strings: locations,});
   };
 
   onChange_top_checkbox = (e) => {

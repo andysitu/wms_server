@@ -43,8 +43,8 @@ var ModalMenu = function (_React$Component) {
       }, function () {
         if (menu_type == "create_barcode") {
           // Set the barcode after img element is set
-          for (var i = 0; i < _this.state.data.location_strings.length; i++) {
-            JsBarcode("#barcode_" + i, data.location_strings[i]);
+          for (var i = 0; i < _this.state.data.barcode_strings.length; i++) {
+            JsBarcode("#barcode_" + i, data.barcode_strings[i]);
           }
         }
         $("#modalMenu").modal("show");
@@ -83,7 +83,7 @@ var ModalMenu = function (_React$Component) {
         index = imgs[i].getAttribute("index");
         link = document.createElement("a");
         link.setAttribute("href", imgs[i].src);
-        link.setAttribute("download", _this.state.data.location_strings[index].replaceAll(".", "-") + ".png");
+        link.setAttribute("download", _this.state.data.barcode_strings[index].replaceAll(".", "-") + ".png");
         link.click();
       }
     };
@@ -199,7 +199,7 @@ var ModalMenu = function (_React$Component) {
           React.createElement(
             "div",
             { id: "barcode-container" },
-            _this.state.data.location_strings.map(function (location_string, index) {
+            _this.state.data.barcode_strings.map(function (location_string, index) {
               return React.createElement(
                 "div",
                 { key: "barcode_div_" + index },

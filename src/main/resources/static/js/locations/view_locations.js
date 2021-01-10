@@ -148,7 +148,7 @@ var LocationTable = function (_React$Component) {
         }
       }
 
-      _this.modalMenu.current.show_menu("create_barcode", { location_strings: locations });
+      _this.modalMenu.current.show_menu("create_barcode", { barcode_strings: locations });
     };
 
     _this.onChange_top_checkbox = function (e) {
