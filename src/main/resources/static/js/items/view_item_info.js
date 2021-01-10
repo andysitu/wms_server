@@ -316,7 +316,7 @@ var ItemInfoRow = function (_React$Component2) {
         )
       );
     }, _this3.create_itemUpc_divs = function () {
-      if (_this3.state.data.itemupcs) {
+      if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length > 1) {
         if (_this3.state.show_itemUpcs) {
           return React.createElement(
             "div",
@@ -335,11 +335,10 @@ var ItemInfoRow = function (_React$Component2) {
             )
           );
         } else {
-          var txt = _this3.state.data.itemupcs.length > 1 ? _this3.state.data.itemupcs[0].upc + "..." : _this3.state.data.itemupcs[0].upc;
           return React.createElement(
             "div",
             { className: "reduced-itemUpcs-div", onClick: _this3.onClick_expand_itemUpcs },
-            txt,
+            _this3.create_itemUpc_div(_this3.state.data.itemupcs[0]),
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-chevron-down", viewBox: "0 0 16 16" },
@@ -347,6 +346,12 @@ var ItemInfoRow = function (_React$Component2) {
             )
           );
         }
+      } else if (_this3.state.data.itemupcs && _this3.state.data.itemupcs.length == 1) {
+        return React.createElement(
+          "div",
+          null,
+          _this3.create_itemUpc_div(_this3.state.data.itemupcs[0])
+        );
       }
       return React.createElement("div", null);
     }, _temp), _possibleConstructorReturn(_this3, _ret);

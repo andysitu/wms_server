@@ -236,7 +236,7 @@ class ItemInfoRow extends React.Component {
   };
 
   create_itemUpc_divs = () => {
-    if (this.state.data.itemupcs) {
+    if (this.state.data.itemupcs && this.state.data.itemupcs.length > 1) {
       if (this.state.show_itemUpcs) {
         return (
         <div className="expanded-itemUpcs-div">
@@ -250,18 +250,21 @@ class ItemInfoRow extends React.Component {
           </div>
         </div>);
       } else {
-        var txt = (this.state.data.itemupcs.length > 1) ? 
-                    this.state.data.itemupcs[0].upc + "..." :
-                    this.state.data.itemupcs[0].upc;
         return (
           <div className="reduced-itemUpcs-div" onClick={this.onClick_expand_itemUpcs}>
-            {txt}
+            {this.create_itemUpc_div(this.state.data.itemupcs[0])}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
             </svg>
           </div>
         );
       }
+    } else if (this.state.data.itemupcs && this.state.data.itemupcs.length == 1) {
+      return (
+        <div>
+          {this.create_itemUpc_div(this.state.data.itemupcs[0])}
+        </div>
+      );
     }
     return (<div></div>);
   };
