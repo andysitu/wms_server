@@ -298,16 +298,15 @@ var ItemInfoRow = function (_React$Component2) {
     }, _this3.onClick_expand_itemSkus = function () {
       _this3.setState({ show_itemSkus: !_this3.state.show_itemSkus });
     }, _this3.create_itemSku_div = function (itemSku) {
-      var _React$createElement2;
-
       return React.createElement(
         "span",
         { key: itemSku.id },
         itemSku.sku,
         React.createElement(
           "button",
-          (_React$createElement2 = { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemSkus",
-            itemsku: itemSku.id }, _defineProperty(_React$createElement2, "itemsku", itemSku.sku), _defineProperty(_React$createElement2, "onClick", _this3.onClick_delete_itemInfo_itemSku), _React$createElement2),
+          { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemSkus",
+            itemsku_id: itemSku.id, itemsku: itemSku.sku,
+            onClick: _this3.onClick_delete_itemInfo_itemSku },
           React.createElement(
             "svg",
             { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
