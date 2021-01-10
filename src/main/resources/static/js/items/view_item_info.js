@@ -297,30 +297,32 @@ var ItemInfoRow = function (_React$Component2) {
       }
     }, _this3.onClick_expand_itemUpcs = function () {
       _this3.setState({ show_itemUpcs: !_this3.state.show_itemUpcs });
-    }, _this3.create_itemUpc_div = function () {
+    }, _this3.create_itemUpc_div = function (itemUpc) {
+      return React.createElement(
+        "div",
+        { key: itemUpc.id },
+        itemUpc.upc,
+        React.createElement(
+          "button",
+          { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemUpcs",
+            itemupc_id: itemUpc.id, itemupc: itemUpc.upc,
+            onClick: _this3.onClick_delete_itemInfo_itemUpc },
+          React.createElement(
+            "svg",
+            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
+            React.createElement("path", { d: "M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" }),
+            React.createElement("path", { fillRule: "evenodd", d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" })
+          )
+        )
+      );
+    }, _this3.create_itemUpc_divs = function () {
       if (_this3.state.data.itemupcs) {
         if (_this3.state.show_itemUpcs) {
           return React.createElement(
             "div",
             { className: "expanded-itemUpcs-div" },
             _this3.state.data.itemupcs.map(function (itemUpc) {
-              return React.createElement(
-                "div",
-                { key: itemUpc.id },
-                itemUpc.upc,
-                React.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-sm btn-outline-dark del-item-itemUpcs",
-                    itemupc_id: itemUpc.id, itemupc: itemUpc.upc,
-                    onClick: _this3.onClick_delete_itemInfo_itemUpc },
-                  React.createElement(
-                    "svg",
-                    { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
-                    React.createElement("path", { d: "M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" }),
-                    React.createElement("path", { fillRule: "evenodd", d: "M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" })
-                  )
-                )
-              );
+              return _this3.create_itemUpc_div(itemUpc);
             }),
             React.createElement(
               "div",
@@ -379,7 +381,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.create_itemUpc_div()
+          this.create_itemUpc_divs()
         ),
         React.createElement(
           "td",
