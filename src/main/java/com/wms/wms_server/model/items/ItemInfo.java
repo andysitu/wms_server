@@ -70,9 +70,6 @@ public class ItemInfo {
         return length;
     }
 
-    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ReceiveShipment> receiveShipments;
-
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate
