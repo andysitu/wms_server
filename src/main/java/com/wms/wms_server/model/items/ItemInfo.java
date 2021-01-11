@@ -1,10 +1,14 @@
 package com.wms.wms_server.model.items;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 
 import org.springframework.data.annotation.LastModifiedBy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -68,6 +72,14 @@ public class ItemInfo {
     }
     public int getLength() {
         return length;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private itemCategory itemCategory;
+
+    public void setItemCategory(itemCategory itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
     @CreatedDate
