@@ -5,6 +5,7 @@ class ModalMenu extends React.Component {
       menu_type: "none",
       submit_handler: null,
       data: null,
+      categories: [],
       title: null,
     };
   }
@@ -90,7 +91,21 @@ class ModalMenu extends React.Component {
     }
   }
 
-  creatte_item_info_menu = () => {
+  get_categories = () => {
+    var that = this;
+    $.ajax({
+      url: "../item_categories",
+      type: "GET",
+      success: function(data) {
+        console.log(data);
+        that.setState({
+          categories: data,
+        })
+      },
+    })
+  }
+
+  create_item_info_menu = () => {
     var edit_status = this.state.menu_type == "edit_item_info";
     var item_name   = edit_status ? this.state.data.itemName : "",
         description = edit_status ? this.state.data.description : "",
@@ -153,7 +168,8 @@ class ModalMenu extends React.Component {
       return (<CreateLocationMenu />);
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
-      return this.creatte_item_info_menu();
+      this.get_categories();
+      return this.create_item_info_menu();
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
         <div>

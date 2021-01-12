@@ -88,7 +88,21 @@ var ModalMenu = function (_React$Component) {
       }
     };
 
-    _this.creatte_item_info_menu = function () {
+    _this.get_categories = function () {
+      var that = _this;
+      $.ajax({
+        url: "../item_categories",
+        type: "GET",
+        success: function success(data) {
+          console.log(data);
+          that.setState({
+            categories: data
+          });
+        }
+      });
+    };
+
+    _this.create_item_info_menu = function () {
       var edit_status = _this.state.menu_type == "edit_item_info";
       var item_name = edit_status ? _this.state.data.itemName : "",
           description = edit_status ? _this.state.data.description : "",
@@ -193,7 +207,8 @@ var ModalMenu = function (_React$Component) {
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
       } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
-        return _this.creatte_item_info_menu();
+        _this.get_categories();
+        return _this.create_item_info_menu();
       } else if (_this.state.menu_type == "create_barcode") {
         return React.createElement(
           "div",
@@ -292,6 +307,7 @@ var ModalMenu = function (_React$Component) {
       menu_type: "none",
       submit_handler: null,
       data: null,
+      categories: [],
       title: null
     };
     return _this;
