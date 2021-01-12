@@ -32,6 +32,8 @@ public class ItemCategory {
     @LastModifiedBy
     private String modifiedBy;
 
+    public ItemCategory() {}
+
     public ItemCategory(String name) {
         this.name = name;
     }
