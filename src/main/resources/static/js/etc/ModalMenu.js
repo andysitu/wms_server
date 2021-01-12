@@ -104,14 +104,21 @@ var ModalMenu = function (_React$Component) {
           return;
         }
       }
+      var that = _this;
       $.ajax({
         url: "../item_categories",
         type: "POST",
         data: {
           name: category_name
         },
-        success: function success(data) {
-          console.log(data);
+        success: function success(category) {
+          that.setState(function (prev_state) {
+            prev_state.categories.push(category);
+
+            return {
+              categories: prev_state.categories
+            };
+          });
         }
       });
     };

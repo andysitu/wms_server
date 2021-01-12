@@ -107,16 +107,23 @@ class ModalMenu extends React.Component {
         return;
       }
     }
+    var that = this;
     $.ajax({
       url: "../item_categories",
       type: "POST",
       data: {
         name: category_name
       },
-      success: function(data) {
-        console.log(data);
+      success: function(category) {
+        that.setState(prev_state => {
+          prev_state.categories.push(category);
+
+          return {
+            categories: prev_state.categories,
+          };
+        });
       }
-    })
+    });
   };
 
   get_categories = () => {
