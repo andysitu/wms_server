@@ -101,7 +101,8 @@ class ModalMenu extends React.Component {
       return;
     }
     for (var i=0;i<this.state.categories.length;i++) {
-      if (this.state.categories[i].name == category_name) {
+      console.log(this.state.categories[i].name);
+      if (this.state.categories[i].name.toUpperCase() == category_name.toUpperCase()) {
         window.alert(`A category with the name ${category_name} already exists.`);
         return;
       }
