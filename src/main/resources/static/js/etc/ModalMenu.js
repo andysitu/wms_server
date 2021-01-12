@@ -98,7 +98,6 @@ var ModalMenu = function (_React$Component) {
         return;
       }
       for (var i = 0; i < _this.state.categories.length; i++) {
-        console.log(_this.state.categories[i].name);
         if (_this.state.categories[i].name.toUpperCase() == category_name.toUpperCase()) {
           window.alert("A category with the name " + category_name + " already exists.");
           return;
@@ -129,7 +128,6 @@ var ModalMenu = function (_React$Component) {
         url: "../item_categories",
         type: "GET",
         success: function success(data) {
-          console.log(data);
           that.setState({
             categories: data
           });
