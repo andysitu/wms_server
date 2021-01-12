@@ -161,7 +161,14 @@ class ModalMenu extends React.Component {
         <label htmlFor="">Category</label>
         <button type="button" className=""
           onClick={this.onClick_add_itemCategory}>+</button>
-        <select className="form-control"></select>
+        <select className="form-control">
+          {this.state.categories.map((category) => {
+            return (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>);
+          })}
+        </select>
       </div>
       <div className="form-group">
         <label htmlFor="">Dimensions</label>
