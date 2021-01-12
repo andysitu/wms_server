@@ -91,6 +91,24 @@ class ModalMenu extends React.Component {
     }
   }
 
+  onClick_add_itemCategory = () => {
+    var category_name = window.prompt("Category name?");
+    if (category_name == null || category_name.length == 0) {
+      window.alert("Format of the category name is incorrect");
+      return;
+    }
+    $.ajax({
+      url: "../item_cateogries",
+      type: "POST",
+      data: {
+        name: category_name
+      },
+      success: function(data) {
+        console.log(data);
+      }
+    })
+  };
+
   get_categories = () => {
     var that = this;
     $.ajax({
@@ -100,7 +118,7 @@ class ModalMenu extends React.Component {
         console.log(data);
         that.setState({
           categories: data,
-        })
+        });
       },
     })
   }
@@ -138,7 +156,8 @@ class ModalMenu extends React.Component {
       </div>
       <div className="form-group">
         <label htmlFor="">Category</label>
-        <button type="button" className="">+</button>
+        <button type="button" className=""
+          onClick={this.onClick_add_itemCategory}>+</button>
         <select className="form-control"></select>
       </div>
       <div className="form-group">

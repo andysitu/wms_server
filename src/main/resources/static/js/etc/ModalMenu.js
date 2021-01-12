@@ -88,6 +88,24 @@ var ModalMenu = function (_React$Component) {
       }
     };
 
+    _this.onClick_add_itemCategory = function () {
+      var category_name = window.prompt("Category name?");
+      if (category_name == null || category_name.length == 0) {
+        window.alert("Format of the category name is incorrect");
+        return;
+      }
+      $.ajax({
+        url: "../item_cateogries",
+        type: "POST",
+        data: {
+          name: category_name
+        },
+        success: function success(data) {
+          console.log(data);
+        }
+      });
+    };
+
     _this.get_categories = function () {
       var that = _this;
       $.ajax({
@@ -162,7 +180,8 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "" },
+            { type: "button", className: "",
+              onClick: _this.onClick_add_itemCategory },
             "+"
           ),
           React.createElement("select", { className: "form-control" })
