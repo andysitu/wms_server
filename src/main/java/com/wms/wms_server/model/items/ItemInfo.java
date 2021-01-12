@@ -94,12 +94,13 @@ public class ItemInfo {
     public ItemInfo() {}
 
     private ItemInfo(Builder builder) {
-        itemName    = builder.itemName;
-        description = builder.description;
-        weight      = builder.weight;
-        height      = builder.height;
-        width       = builder.width;
-        length      = builder.length;
+        itemName        = builder.itemName;
+        description     = builder.description;
+        weight          = builder.weight;
+        height          = builder.height;
+        width           = builder.width;
+        length          = builder.length;
+        itemCategory    = builder.itemCategory;
     }
 
     public static class Builder {
