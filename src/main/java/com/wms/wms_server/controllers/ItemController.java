@@ -2,8 +2,10 @@ package com.wms.wms_server.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.response.ItemInfoResponse;
+import com.wms.wms_server.repository.ItemCategoryRepository;
 import com.wms.wms_server.repository.ItemInfoRepository;
 import com.wms.wms_server.services.ItemInfoService;
 
@@ -16,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ItemController {
     @Autowired
     ItemInfoRepository itemInfoRepository;
+    @Autowired
+    ItemCategoryRepository ItemCategoryRepository;
 
     @Autowired
     ItemInfoService itemInfoService;
@@ -42,8 +45,6 @@ public class ItemController {
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)
     @ResponseBody
     public List<ItemInfoResponse> search_itemInfos(@RequestParam String type, @RequestParam String value) {
-        System.out.println(type);
-        System.out.println(value);
         List<ItemInfo> items = itemInfoService.search_itemInfo(type, value);
         for (ItemInfo item : items) {
             System.out.println("name " + item.getItemName());
@@ -88,4 +89,20 @@ public class ItemController {
         itemInfoService.delete_itemSku(iteminfo_id, itemsku_id);
         return "OK";
     }
+
+    @RequestMapping(path="/item_categories", 
+        produces="application/json;", method=RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, String>> get_itemCategories() {
+        List<Map<String, String>> categories = new ArrayList<>();
+        Map<String, String> c;
+        for (ItemCategory category : ItemCategoryRepository.findAll()) {
+            c = new HashMap<>();
+            c.put("name", category.getName());
+            c.put("id", Long.toString(category.getId()));
+            categories.add(c);
+        }
+        return categories;
+    }
+
 }
