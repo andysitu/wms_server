@@ -88,103 +88,112 @@ var ModalMenu = function (_React$Component) {
       }
     };
 
+    _this.creatte_item_info_menu = function () {
+      var edit_status = _this.state.menu_type == "edit_item_info";
+      var item_name = edit_status ? _this.state.data.itemName : "",
+          description = edit_status ? _this.state.data.description : "",
+          weight = edit_status ? _this.state.data.weight : "",
+          width = edit_status ? _this.state.data.width : "",
+          height = edit_status ? _this.state.data.height : "",
+          length = edit_status ? _this.state.data.length : "";
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "item-name-input" },
+            "Item Name"
+          ),
+          React.createElement("input", { type: "text", className: "form-control",
+            name: "name", id: "item-name-input",
+            defaultValue: item_name, required: true
+          })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "item-description-input" },
+            "Description"
+          ),
+          React.createElement("input", { type: "text", className: "form-control",
+            name: "description", id: "item-description-input",
+            defaultValue: description, required: true
+          })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "item-weight-input" },
+            "Weight"
+          ),
+          React.createElement("input", _defineProperty({ type: "number", className: "form-control",
+            name: "weight", id: "item-weight-input",
+            min: "0", step: "0.01", required: true,
+            defaultValue: weight }, "required", true))
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "" },
+            "Category"
+          ),
+          React.createElement(
+            "button",
+            { type: "button", className: "" },
+            "+"
+          ),
+          React.createElement("select", { className: "form-control" })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "" },
+            "Dimensions"
+          ),
+          React.createElement(
+            "div",
+            { className: "form-row" },
+            React.createElement(
+              "div",
+              { className: "col-4" },
+              React.createElement("input", { type: "number", name: "width", className: "form-control",
+                defaultValue: width, placeholder: "Width" })
+            ),
+            React.createElement(
+              "div",
+              { className: "col-4" },
+              React.createElement("input", { type: "number", name: "length", className: "form-control",
+                defaultValue: length, placeholder: "Length" })
+            ),
+            React.createElement(
+              "div",
+              { className: "col-4" },
+              React.createElement("input", { type: "number", name: "height", className: "form-control",
+                defaultValue: height, placeholder: "Height" })
+            )
+          )
+        )
+      );
+    };
+
     _this.create_menu = function () {
       if (_this.state.menu_type == "none") {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
         return React.createElement(CreateLocationMenu, null);
       } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
-        var edit_status = _this.state.menu_type == "edit_item_info";
-        var item_name = edit_status ? _this.state.data.itemName : "",
-            description = edit_status ? _this.state.data.description : "",
-            weight = edit_status ? _this.state.data.weight : "",
-            width = edit_status ? _this.state.data.width : "",
-            height = edit_status ? _this.state.data.height : "",
-            length = edit_status ? _this.state.data.length : "";
-        return React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "item-name-input" },
-              "Item Name"
-            ),
-            React.createElement("input", { type: "text", className: "form-control",
-              name: "name", id: "item-name-input",
-              defaultValue: item_name, required: true
-            })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "item-description-input" },
-              "Description"
-            ),
-            React.createElement("input", { type: "text", className: "form-control",
-              name: "description", id: "item-description-input",
-              defaultValue: description, required: true
-            })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "item-weight-input" },
-              "Weight"
-            ),
-            React.createElement("input", _defineProperty({ type: "number", className: "form-control",
-              name: "weight", id: "item-weight-input",
-              min: "0", step: "0.01", required: true,
-              defaultValue: weight }, "required", true))
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "" },
-              "Category"
-            ),
-            React.createElement("select", { className: "form-control" })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "" },
-              "Dimensions"
-            ),
-            React.createElement(
-              "div",
-              { className: "form-row" },
-              React.createElement(
-                "div",
-                { className: "col-4" },
-                React.createElement("input", { type: "number", name: "width", className: "form-control",
-                  defaultValue: width, placeholder: "Width" })
-              ),
-              React.createElement(
-                "div",
-                { className: "col-4" },
-                React.createElement("input", { type: "number", name: "length", className: "form-control",
-                  defaultValue: length, placeholder: "Length" })
-              ),
-              React.createElement(
-                "div",
-                { className: "col-4" },
-                React.createElement("input", { type: "number", name: "height", className: "form-control",
-                  defaultValue: height, placeholder: "Height" })
-              )
-            )
-          )
-        );
+        return _this.creatte_item_info_menu();
       } else if (_this.state.menu_type == "create_barcode") {
         return React.createElement(
           "div",
