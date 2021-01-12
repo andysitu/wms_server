@@ -105,4 +105,11 @@ public class ItemController {
         return categories;
     }
 
+    @RequestMapping(path="/item_categories", 
+        produces="application/json;", method=RequestMethod.POST)
+    @ResponseBody
+    public String create_itemCategories(HttpServletRequest request) {
+        System.out.println("CC " + request.getParameter("name"));
+        return "OK";
+    }
 }
