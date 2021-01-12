@@ -76,9 +76,9 @@ public class ItemInfo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private itemCategory itemCategory;
+    private ItemCategory itemCategory;
 
-    public void setItemCategory(itemCategory itemCategory) {
+    public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
     }
 
