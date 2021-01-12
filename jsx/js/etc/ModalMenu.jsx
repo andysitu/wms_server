@@ -26,6 +26,9 @@ class ModalMenu extends React.Component {
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
+    if (menu_type == "create_item_info" || menu_type == "edit_item_info") {
+      this.get_categories();
+    }
     // Create a blank form to reset it, and then create actual menu
     this.setState({
         menu_type: menu_type,
@@ -187,7 +190,6 @@ class ModalMenu extends React.Component {
       return (<CreateLocationMenu />);
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
-      this.get_categories();
       return this.create_item_info_menu();
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
