@@ -201,7 +201,12 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "select",
-            { className: "form-control" },
+            { className: "form-control", size: "4", value: "category" },
+            React.createElement(
+              "option",
+              { value: "" },
+              "None"
+            ),
             _this.state.categories.map(function (category) {
               return React.createElement(
                 "option",
