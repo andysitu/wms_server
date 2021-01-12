@@ -18,7 +18,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class ItemCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -31,4 +31,8 @@ public class ItemCategory {
     private String createdBy;
     @LastModifiedBy
     private String modifiedBy;
+
+    public ItemCategory(String name) {
+        this.name = name;
+    }
 }
