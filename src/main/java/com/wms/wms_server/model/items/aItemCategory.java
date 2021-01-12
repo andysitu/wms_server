@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class itemCategory {
+public class ItemCategory {
     private String name;
 
     @CreatedDate
