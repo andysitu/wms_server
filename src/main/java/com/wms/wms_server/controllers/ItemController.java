@@ -97,6 +97,7 @@ public class ItemController {
         List<Map<String, String>> categories = new ArrayList<>();
         Map<String, String> c;
         for (ItemCategory category : ItemCategoryRepository.findAll()) {
+            System.out.println(category);
             c = new HashMap<>();
             c.put("name", category.getName());
             c.put("id", Long.toString(category.getId()));
@@ -108,8 +109,13 @@ public class ItemController {
     @RequestMapping(path="/item_categories", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public String create_itemCategories(HttpServletRequest request) {
-        System.out.println("CC " + request.getParameter("name"));
-        return "OK";
+    public Map<String, String> create_itemCategories(HttpServletRequest request) {
+        ItemCategory itemCategory = new ItemCategory(request.getParameter("name"));
+        ItemCategoryRepository.save(itemCategory);
+
+        Map<String, String> c = new HashMap<>();
+        c.put("name", itemCategory.getName());
+        c.put("id", Long.toString(itemCategory.getId()));
+        return c;
     }
 }
