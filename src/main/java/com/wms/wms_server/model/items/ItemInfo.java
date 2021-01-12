@@ -111,6 +111,8 @@ public class ItemInfo {
         private int height;
         private int length;
 
+        private ItemCategory itemCategory;
+
         public Builder(String itemName, String description, float weight) {
             this.itemName = itemName;
             this.description = description;
@@ -125,6 +127,9 @@ public class ItemInfo {
         }
         public void length(int length) {
             this.length = length;
+        }
+        public void category(ItemCategory itemCategory) {
+            this.itemCategory = itemCategory;
         }
 
         public ItemInfo build() {
