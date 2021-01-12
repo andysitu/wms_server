@@ -98,7 +98,6 @@ class ModalMenu extends React.Component {
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
       var edit_status = this.state.menu_type == "edit_item_info";
-      console.log(this.state);
       var item_name   = edit_status ? this.state.data.itemName : "",
           description = edit_status ? this.state.data.description : "",
           weight      = edit_status ? this.state.data.weight : "",
@@ -127,6 +126,10 @@ class ModalMenu extends React.Component {
             min="0" step="0.01" required
             defaultValue={weight} required
           ></input>
+        </div>
+        <div className="form-group">
+          <label htmlFor="">Category</label>
+          <select className="form-control"></select>
         </div>
         <div className="form-group">
           <label htmlFor="">Dimensions</label>

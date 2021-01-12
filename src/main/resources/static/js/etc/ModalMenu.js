@@ -95,7 +95,6 @@ var ModalMenu = function (_React$Component) {
         return React.createElement(CreateLocationMenu, null);
       } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
         var edit_status = _this.state.menu_type == "edit_item_info";
-        console.log(_this.state);
         var item_name = edit_status ? _this.state.data.itemName : "",
             description = edit_status ? _this.state.data.description : "",
             weight = edit_status ? _this.state.data.weight : "",
@@ -143,6 +142,16 @@ var ModalMenu = function (_React$Component) {
               name: "weight", id: "item-weight-input",
               min: "0", step: "0.01", required: true,
               defaultValue: weight }, "required", true))
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "" },
+              "Category"
+            ),
+            React.createElement("select", { className: "form-control" })
           ),
           React.createElement(
             "div",
