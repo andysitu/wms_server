@@ -101,7 +101,7 @@ class ModalMenu extends React.Component {
       return;
     }
     $.ajax({
-      url: "../item_cateogries",
+      url: "../item_categories",
       type: "POST",
       data: {
         name: category_name
