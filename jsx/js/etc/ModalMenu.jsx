@@ -100,6 +100,12 @@ class ModalMenu extends React.Component {
       window.alert("Format of the category name is incorrect");
       return;
     }
+    for (var i=0;i<this.state.categories.length;i++) {
+      if (this.state.categories[i].name == category_name) {
+        window.alert(`A category with the name ${category_name} already exists.`);
+        return;
+      }
+    }
     $.ajax({
       url: "../item_categories",
       type: "POST",

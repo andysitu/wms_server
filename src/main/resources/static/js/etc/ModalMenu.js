@@ -97,6 +97,12 @@ var ModalMenu = function (_React$Component) {
         window.alert("Format of the category name is incorrect");
         return;
       }
+      for (var i = 0; i < _this.state.categories.length; i++) {
+        if (_this.state.categories[i].name == category_name) {
+          window.alert("A category with the name " + category_name + " already exists.");
+          return;
+        }
+      }
       $.ajax({
         url: "../item_categories",
         type: "POST",
