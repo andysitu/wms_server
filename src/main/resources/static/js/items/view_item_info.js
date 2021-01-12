@@ -195,6 +195,11 @@ var ItemInfoApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
+                "Category"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
                 "Dimensions (w, l, h)"
               ),
               React.createElement(
@@ -405,6 +410,11 @@ var ItemInfoRow = function (_React$Component2) {
           "td",
           null,
           this.state.data.weight
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.state.data.category
         ),
         React.createElement(
           "td",

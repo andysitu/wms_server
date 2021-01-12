@@ -131,6 +131,7 @@ class ItemInfoApp extends React.Component {
             <th scope="col">Item Name</th>
             <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
+            <th scope="col">Category</th>
             <th scope="col">Dimensions (w, l, h)</th>
             <th scope="col">SKUs</th>
             <th scope="col">Options</th>
@@ -298,6 +299,7 @@ class ItemInfoRow extends React.Component {
     <td>{this.state.data.itemName}</td>
     <td>{this.state.data.description}</td>
     <td>{this.state.data.weight}</td>
+    <td>{this.state.data.category}</td>
     <td>
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
     </td>
