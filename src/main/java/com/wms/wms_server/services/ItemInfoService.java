@@ -1,9 +1,11 @@
 package com.wms.wms_server.services;
 
+import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.items.ItemSku;
 import com.wms.wms_server.model.request.ItemInfoRequest;
 import com.wms.wms_server.model.response.ItemInfoResponse;
+import com.wms.wms_server.repository.ItemCategoryRepository;
 import com.wms.wms_server.repository.ItemInfoRepository;
 import com.wms.wms_server.repository.ItemSkuRepository;
 
@@ -24,6 +26,8 @@ public class ItemInfoService {
     ItemInfoRepository itemInfoRepository;
     @Autowired
     ItemSkuRepository itemSkuRepository;
+    @Autowired
+    ItemCategoryRepository itemCategoryRepository;
 
     public ItemInfo create_itemInfo(HttpServletRequest request) {
         if (request.getParameter("name") == null ||
@@ -104,6 +108,14 @@ public class ItemInfoService {
             }
             if (request.getParameter("weight" ) != null && request.getParameter("weight").length() > 0) {
                 itemInfo.setWeight(Float.parseFloat(request.getParameter("weight")));
+            }
+            if (request.getParameter("itemCategory")!=null && 
+                    request.getParameter("itemCategory").length() > 0) {
+                Optional<ItemCategory> oItemCategory = 
+                    itemCategoryRepository.findById(Long.parseLong(request.getParameter("itemCategory")));
+                if (oItemCategory.isPresent()) {
+                    itemInfo.setItemCategory(oItemCategory.get());
+                }
             }
             itemInfoRepository.save(itemInfo);
             return itemInfo;
