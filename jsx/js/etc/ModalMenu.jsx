@@ -40,7 +40,9 @@ class ModalMenu extends React.Component {
         // Set the barcode after img element is set
         for (let i=0; i < this.state.data.barcode_strings.length; i++) {
           JsBarcode("#barcode_" + i, data.barcode_strings[i], {
-            width: 2,
+            width: 1.5,
+            fontSize: 20,
+            fontOptions: "bold"
           });
         }
       }
