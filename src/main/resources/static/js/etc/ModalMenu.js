@@ -410,7 +410,7 @@ var ModalMenu = function (_React$Component) {
         { className: "modal", tabIndex: "-1", role: "dialog", id: "modalMenu" },
         React.createElement(
           "div",
-          { className: "modal-dialog", role: "document" },
+          { className: "modal-dialog modal-lg", role: "document" },
           React.createElement(
             "div",
             { className: "modal-content" },
