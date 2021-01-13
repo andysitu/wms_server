@@ -146,7 +146,8 @@ var ModalMenu = function (_React$Component) {
           weight = edit_status ? _this.state.data.weight : "",
           width = edit_status ? _this.state.data.width : "",
           height = edit_status ? _this.state.data.height : "",
-          length = edit_status ? _this.state.data.length : "";
+          length = edit_status ? _this.state.data.length : "",
+          itemCategory = edit_status ? _this.state.data.itemCategory : "";
       return React.createElement(
         "div",
         null,
@@ -205,7 +206,8 @@ var ModalMenu = function (_React$Component) {
           ),
           React.createElement(
             "select",
-            { className: "form-control", size: "4", value: "category" },
+            { className: "form-control", size: "4", name: "category",
+              defaultValue: itemCategory },
             React.createElement(
               "option",
               { value: "" },

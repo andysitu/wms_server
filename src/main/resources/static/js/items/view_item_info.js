@@ -46,19 +46,18 @@ var ItemInfoApp = function (_React$Component) {
     _this.editItemInfo = function (row_index) {
       var that = _this;
       _this.modalMenu.current.show_menu("edit_item_info", _this.state.itemInfos[row_index], function (data) {
-        $.ajax({
-          url: "../item_info/" + _this.state.itemInfos[row_index].id,
-          type: "PATCH",
-          data: data,
-          success: function success(new_data) {
-            that.setState(function (prevState) {
-              var new_itemInfos = prevState.itemInfos;
-              Object.assign(new_itemInfos[row_index], new_data);
-            }, function () {
-              that.update_itemInfoRow(row_index);
-            });
-          }
-        });
+        // $.ajax({
+        //   url: "../item_info/" + this.state.itemInfos[row_index].id,
+        //   type: "PATCH",
+        //   data: data,
+        //   success: function(new_data) {
+        //     that.setState(prevState => {
+        //       let new_itemInfos = prevState.itemInfos;
+        //       Object.assign(new_itemInfos[row_index], new_data);
+        //     }, ()=>{that.update_itemInfoRow(row_index)});
+        //   },
+        // });
+        console.log(data);
       });
     };
 
