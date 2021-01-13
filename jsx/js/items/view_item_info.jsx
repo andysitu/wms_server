@@ -299,7 +299,7 @@ class ItemInfoRow extends React.Component {
     <td>{this.state.data.itemName}</td>
     <td>{this.state.data.description}</td>
     <td>{this.state.data.weight}</td>
-    <td>{this.state.data.category}</td>
+    <td>{this.state.data.itemCategoryName}</td>
     <td>
       {`${this.state.data.width} ${this.state.data.length} ${this.state.data.height}`}
     </td>

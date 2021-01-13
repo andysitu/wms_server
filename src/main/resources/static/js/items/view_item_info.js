@@ -414,7 +414,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "td",
           null,
-          this.state.data.category
+          this.state.data.itemCategoryName
         ),
         React.createElement(
           "td",
