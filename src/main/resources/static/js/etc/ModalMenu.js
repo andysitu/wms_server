@@ -155,7 +155,7 @@ var ModalMenu = function (_React$Component) {
           width = edit_status ? _this.state.data.width : "",
           height = edit_status ? _this.state.data.height : "",
           length = edit_status ? _this.state.data.length : "",
-          itemCategoryId = edit_status ? _this.state.data.itemCategoryId : "";
+          itemCategoryId = _this.state.data.itemCategoryId;
       return React.createElement(
         "div",
         null,
@@ -368,7 +368,7 @@ var ModalMenu = function (_React$Component) {
     _this.state = {
       menu_type: "none",
       submit_handler: null,
-      data: null,
+      data: {},
       categories: [],
       title: null
     };

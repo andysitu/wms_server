@@ -4,7 +4,7 @@ class ModalMenu extends React.Component {
     this.state = {
       menu_type: "none",
       submit_handler: null,
-      data: null,
+      data: {},
       categories: [],
       title: null,
     };
@@ -158,7 +158,7 @@ class ModalMenu extends React.Component {
         width       = edit_status ? this.state.data.width : "",
         height      = edit_status ? this.state.data.height : "",
         length      = edit_status ? this.state.data.length : "",
-        itemCategoryId    = edit_status ? this.state.data.itemCategoryId : "";
+        itemCategoryId    = this.state.data.itemCategoryId;
     return (<div>
       <div className="form-group">
         <label htmlFor="item-name-input">Item Name</label>
