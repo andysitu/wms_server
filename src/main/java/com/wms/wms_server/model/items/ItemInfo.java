@@ -82,7 +82,12 @@ public class ItemInfo {
         this.itemCategory = itemCategory;
     }
     public Long getItemCategoryId() {
-        return this.itemCategory.getId();
+        if (this.itemCategory != null) {
+            return this.itemCategory.getId();
+        } else {
+            return null;
+        }
+        
     }
 
     @CreatedDate

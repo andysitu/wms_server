@@ -12,6 +12,8 @@ public class ItemInfoResponse {
     public int length;
     public int height;
 
+    public long itemCategory;
+
     public List<HashMap<String, String>> itemskus;
     
     public ItemInfoResponse(Long id, String itemName, String description, float weight) {
