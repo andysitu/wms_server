@@ -26,8 +26,9 @@ class ModalMenu extends React.Component {
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
+    // Get Item Categories for Item Info
     if (menu_type == "create_item_info" || menu_type == "edit_item_info") {
-      this.get_categories();
+      this.get_itemCategories();
     }
     // Create a blank form to reset it, and then create actual menu
     this.setState({
@@ -129,7 +130,7 @@ class ModalMenu extends React.Component {
     });
   };
 
-  get_categories = () => {
+  get_itemCategories = () => {
     var that = this;
     $.ajax({
       url: "../item_categories",
