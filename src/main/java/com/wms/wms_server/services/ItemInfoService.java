@@ -50,6 +50,14 @@ public class ItemInfoService {
             builder.width(Integer.parseInt(request.getParameter("width")));
             builder.length(Integer.parseInt(request.getParameter("length")));
         }
+        if (request.getParameter("itemCategory") != null &&
+                request.getParameter("itemCategory").length() > 0) {
+            Optional<ItemCategory> oItemCategory = 
+                itemCategoryRepository.findById(Long.parseLong(request.getParameter("itemCategory")));
+            if (oItemCategory.isPresent()) {
+                builder.itemCategory(oItemCategory.get());
+            }
+        }
         ItemInfo itemInfo = builder.build();
         itemInfoRepository.save(itemInfo);
         return itemInfo;
