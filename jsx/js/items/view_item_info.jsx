@@ -43,18 +43,17 @@ class ItemInfoApp extends React.Component {
       "edit_item_info",
       this.state.itemInfos[row_index],
       (data) => {
-        // $.ajax({
-        //   url: "../item_info/" + this.state.itemInfos[row_index].id,
-        //   type: "PATCH",
-        //   data: data,
-        //   success: function(new_data) {
-        //     that.setState(prevState => {
-        //       let new_itemInfos = prevState.itemInfos;
-        //       Object.assign(new_itemInfos[row_index], new_data);
-        //     }, ()=>{that.update_itemInfoRow(row_index)});
-        //   },
-        // });
-        console.log(data);
+        $.ajax({
+          url: "../item_info/" + this.state.itemInfos[row_index].id,
+          type: "PATCH",
+          data: data,
+          success: function(new_data) {
+            that.setState(prevState => {
+              let new_itemInfos = prevState.itemInfos;
+              Object.assign(new_itemInfos[row_index], new_data);
+            }, ()=>{that.update_itemInfoRow(row_index)});
+          },
+        });
       }
     )
   };
