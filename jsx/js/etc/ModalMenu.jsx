@@ -142,6 +142,13 @@ class ModalMenu extends React.Component {
     })
   }
 
+  onChange_itemCategory = (e) => {
+    this.setState(prev_state => {
+      this.state.data.itemCategory = e.target.value;
+      return {data: this.state.data};
+      });
+  }
+
   create_item_info_menu = () => {
     var edit_status = this.state.menu_type == "edit_item_info";
     var item_name   = edit_status ? this.state.data.itemName : "",
@@ -179,7 +186,7 @@ class ModalMenu extends React.Component {
         <button type="button" className=""
           onClick={this.onClick_add_itemCategory}>+</button>
         <select className="form-control" size="4" name="itemCategory"
-          defaultValue={itemCategory}>
+          value={itemCategory} onChange={this.onChange_itemCategory}>
           <option value="">None</option>
           {this.state.categories.map((category) => {
             return (

@@ -139,6 +139,13 @@ var ModalMenu = function (_React$Component) {
       });
     };
 
+    _this.onChange_itemCategory = function (e) {
+      _this.setState(function (prev_state) {
+        _this.state.data.itemCategory = e.target.value;
+        return { data: _this.state.data };
+      });
+    };
+
     _this.create_item_info_menu = function () {
       var edit_status = _this.state.menu_type == "edit_item_info";
       var item_name = edit_status ? _this.state.data.itemName : "",
@@ -207,7 +214,7 @@ var ModalMenu = function (_React$Component) {
           React.createElement(
             "select",
             { className: "form-control", size: "4", name: "itemCategory",
-              defaultValue: itemCategory },
+              value: itemCategory, onChange: _this.onChange_itemCategory },
             React.createElement(
               "option",
               { value: "" },
