@@ -143,7 +143,7 @@ public class ItemInfo {
         public void length(int length) {
             this.length = length;
         }
-        public void category(ItemCategory itemCategory) {
+        public void itemCategory(ItemCategory itemCategory) {
             this.itemCategory = itemCategory;
         }
 
