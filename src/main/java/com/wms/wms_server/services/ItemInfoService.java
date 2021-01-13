@@ -84,7 +84,8 @@ public class ItemInfoService {
             item.getId(), item.getItemName(), item.getDescription(), item.getWeight());
         Long itemCategoryId = item.getItemCategoryId();
         if (itemCategoryId != null) {
-            response.itemCategory = itemCategoryId;
+            response.itemCategoryId = itemCategoryId;
+            response.itemCategoryName = item.getItemCategoryName();
         }
 
         List<HashMap<String, String>> skus = new ArrayList<>();

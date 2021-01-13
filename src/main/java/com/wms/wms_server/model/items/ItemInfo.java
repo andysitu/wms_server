@@ -87,7 +87,13 @@ public class ItemInfo {
         } else {
             return null;
         }
-        
+    }
+    public String getItemCategoryName() {
+        if (this.itemCategory != null) {
+            return this.itemCategory.getName();
+        } else {
+            return "";
+        }
     }
 
     @CreatedDate
