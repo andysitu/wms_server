@@ -144,7 +144,7 @@ class ModalMenu extends React.Component {
 
   onChange_itemCategory = (e) => {
     this.setState(prev_state => {
-      this.state.data.itemCategory = e.target.value;
+      this.state.data.itemCategoryId = e.target.value;
       return {data: this.state.data};
       });
   }
@@ -157,7 +157,7 @@ class ModalMenu extends React.Component {
         width       = edit_status ? this.state.data.width : "",
         height      = edit_status ? this.state.data.height : "",
         length      = edit_status ? this.state.data.length : "",
-        itemCategory    = edit_status ? this.state.data.itemCategory : "";
+        itemCategoryId    = edit_status ? this.state.data.itemCategoryId : "";
     return (<div>
       <div className="form-group">
         <label htmlFor="item-name-input">Item Name</label>
@@ -186,7 +186,7 @@ class ModalMenu extends React.Component {
         <button type="button" className=""
           onClick={this.onClick_add_itemCategory}>+</button>
         <select className="form-control" size="4" name="itemCategory"
-          value={itemCategory} onChange={this.onChange_itemCategory}>
+          value={itemCategoryId} onChange={this.onChange_itemCategory}>
           <option value="">None</option>
           {this.state.categories.map((category) => {
             return (

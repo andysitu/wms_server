@@ -141,7 +141,7 @@ var ModalMenu = function (_React$Component) {
 
     _this.onChange_itemCategory = function (e) {
       _this.setState(function (prev_state) {
-        _this.state.data.itemCategory = e.target.value;
+        _this.state.data.itemCategoryId = e.target.value;
         return { data: _this.state.data };
       });
     };
@@ -154,7 +154,7 @@ var ModalMenu = function (_React$Component) {
           width = edit_status ? _this.state.data.width : "",
           height = edit_status ? _this.state.data.height : "",
           length = edit_status ? _this.state.data.length : "",
-          itemCategory = edit_status ? _this.state.data.itemCategory : "";
+          itemCategoryId = edit_status ? _this.state.data.itemCategoryId : "";
       return React.createElement(
         "div",
         null,
@@ -214,7 +214,7 @@ var ModalMenu = function (_React$Component) {
           React.createElement(
             "select",
             { className: "form-control", size: "4", name: "itemCategory",
-              value: itemCategory, onChange: _this.onChange_itemCategory },
+              value: itemCategoryId, onChange: _this.onChange_itemCategory },
             React.createElement(
               "option",
               { value: "" },
