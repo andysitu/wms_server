@@ -81,6 +81,9 @@ public class ItemInfo {
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
     }
+    public Long getItemCategoryId() {
+        return this.itemCategory.getId();
+    }
 
     @CreatedDate
     private Date createdDate;
