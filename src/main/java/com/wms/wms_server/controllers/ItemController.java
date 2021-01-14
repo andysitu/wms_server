@@ -46,9 +46,6 @@ public class ItemController {
     @ResponseBody
     public List<ItemInfoResponse> search_itemInfos(@RequestParam String type, @RequestParam String value) {
         List<ItemInfo> items = itemInfoService.search_itemInfo(type, value);
-        for (ItemInfo item : items) {
-            System.out.println("name " + item.getItemName());
-        }
         return itemInfoService.convert_list_to_responses(items);
     }
 
@@ -97,7 +94,6 @@ public class ItemController {
         List<Map<String, String>> categories = new ArrayList<>();
         Map<String, String> c;
         for (ItemCategory category : ItemCategoryRepository.findAll()) {
-            System.out.println(category);
             c = new HashMap<>();
             c.put("name", category.getName());
             c.put("id", Long.toString(category.getId()));
