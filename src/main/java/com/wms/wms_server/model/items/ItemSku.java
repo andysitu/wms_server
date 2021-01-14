@@ -48,6 +48,10 @@ public class ItemSku {
         this.itemInfo = itemInfo;
     }
 
+    public ItemInfo getItemInfo() {
+        return this.itemInfo;
+    }
+
     public String getSku() {
         return this.sku;
     }
