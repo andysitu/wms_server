@@ -12,6 +12,6 @@ public interface ItemInfoRepository extends JpaRepository<ItemInfo, Long>{
     List<ItemInfo> findByItemNameContainingIgnoreCase(String name);
     List<ItemInfo> findByDescriptionContainingIgnoreCase(String name);
 
-    @Query("SELECT i FROM ItemInfo i inner join i.itemCategory c where c.name = :name")
+    @Query("SELECT i FROM ItemInfo i inner join i.itemCategory c where lower(c.name) LIKE lower(CONCAT('%',:name,'%'))")
     List<ItemInfo> findByItemCategoryName(String name);
 }
