@@ -1,5 +1,6 @@
 package com.wms.wms_server.model.items;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ public class ItemCategory {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
     private String name;
 
     @CreatedDate
