@@ -74,6 +74,12 @@ public class ItemInfoService {
                 items.add(sku.getItemInfo());
             }
             return items;
+        } else if (type.equals("category")) {
+            List<ItemInfo> items = new ArrayList<>();
+            for (ItemInfo item : itemInfoRepository.findByItemCategoryName(value)) {
+                items.add(item);
+            }
+            return items;
         } else {
             return new ArrayList<>();
         }

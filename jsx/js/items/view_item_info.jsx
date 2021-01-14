@@ -119,6 +119,7 @@ class ItemInfoApp extends React.Component {
             <option value="name">Name</option>
             <option value="description">Description</option>
             <option value="sku">SKU</option>
+            <option value="category">Category</option>
           </select>
           <button className="btn btn-outline-secondary"
             onClick={this.onClick_search}>
