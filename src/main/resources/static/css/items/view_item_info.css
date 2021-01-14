@@ -1,5 +1,6 @@
 .itemSkus-btn-container {
     cursor: pointer;
+    text-align:center;
 }
 
 .del-item-itemSkus-span {

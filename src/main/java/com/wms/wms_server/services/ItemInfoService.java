@@ -3,7 +3,6 @@ package com.wms.wms_server.services;
 import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.items.ItemSku;
-import com.wms.wms_server.model.request.ItemInfoRequest;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.repository.ItemCategoryRepository;
 import com.wms.wms_server.repository.ItemInfoRepository;
