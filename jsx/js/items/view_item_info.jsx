@@ -118,6 +118,7 @@ class ItemInfoApp extends React.Component {
           <select className="custom-select" id="item-search1-type-select">
             <option value="name">Name</option>
             <option value="description">Description</option>
+            <option value="sku">SKU</option>
           </select>
           <button className="btn btn-outline-secondary"
             onClick={this.onClick_search}>

@@ -68,6 +68,12 @@ public class ItemInfoService {
             return itemInfoRepository.findByItemNameContainingIgnoreCase(value);
         } else if (type.equals("description")) {
             return itemInfoRepository.findByDescriptionContainingIgnoreCase(value);
+        } else if (type.equals("sku")) {
+            List<ItemInfo> items = new ArrayList<>();
+            for (ItemSku sku : itemSkuRepository.findBySkuContainingIgnoreCase(value)) {
+                items.add(sku.getItemInfo());
+            }
+            return items;
         } else {
             return new ArrayList<>();
         }

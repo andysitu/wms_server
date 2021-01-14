@@ -158,6 +158,11 @@ var ItemInfoApp = function (_React$Component) {
                 "option",
                 { value: "description" },
                 "Description"
+              ),
+              React.createElement(
+                "option",
+                { value: "sku" },
+                "SKU"
               )
             ),
             React.createElement(
