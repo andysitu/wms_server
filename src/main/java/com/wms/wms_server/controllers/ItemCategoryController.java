@@ -72,4 +72,18 @@ public class ItemCategoryController {
         }
         return null;
     }
+
+    @RequestMapping(path="/categories/{itemCategory_id}",
+        produces="text/plain;", method=RequestMethod.DELETE)
+    @ResponseBody
+    public String delete_category(
+        @PathVariable("itemCategory_id") Long itemCategory_id) 
+    {
+        Optional<ItemCategory> oIC = itemCategoryRepository.findById(itemCategory_id);
+        if (oIC.isPresent()) {
+            itemCategoryRepository.delete(oIC.get());
+            return "OK";
+        }
+        return null;
+    }
 }

@@ -29,9 +29,8 @@ var CategoryApp = function (_React$Component) {
     };
 
     _this.onClick_editItemCategory = function (e) {
-      var index = e.target.getAttribute("index");
-      var name = window.prompt("New name for " + _this.state.itemCategories[index].name + "?");
-      console.log(name);
+      var index = e.target.getAttribute("index"),
+          name = window.prompt("New name for " + _this.state.itemCategories[index].name + "?");
       if (!name) {
         return;
       } else if (name.length == 0) {
@@ -59,7 +58,24 @@ var CategoryApp = function (_React$Component) {
     };
 
     _this.onClick_deleteItemCategory = function (e) {
-      console.log(e.target.getAttribute("itemcategory_id"));
+      var index = e.target.getAttribute("index"),
+          name = _this.state.itemCategories[index].name;
+      var result = window.confirm("Are you sure want to delete Category " + name + "?");
+      if (result) {
+        $.ajax({
+          url: "./categories/" + e.target.getAttribute("itemcategory_id"),
+          type: "DELETE",
+          context: _this,
+          success: function success() {
+            this.setState(function (prev_state) {
+              prev_state.itemCategories.splice(index, 1);
+              return {
+                itemCategories: prev_state.itemCategories
+              };
+            });
+          }
+        });
+      }
     };
 
     _this.state = {

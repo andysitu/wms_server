@@ -21,9 +21,8 @@ class CategoryApp extends React.Component {
   }
 
   onClick_editItemCategory = (e) => {
-    var index = e.target.getAttribute("index");
-    var name = window.prompt(`New name for ${this.state.itemCategories[index].name}?`);
-    console.log(name);
+    var index = e.target.getAttribute("index"),
+        name = window.prompt(`New name for ${this.state.itemCategories[index].name}?`);
     if (!name) {
       return;
     } else if (name.length == 0) {
@@ -50,7 +49,25 @@ class CategoryApp extends React.Component {
     }
   };
   onClick_deleteItemCategory = (e) => {
-    console.log(e.target.getAttribute("itemcategory_id"));
+    var index = e.target.getAttribute("index"),
+        name = this.state.itemCategories[index].name;
+    let result = window.confirm(`Are you sure want to delete Category ${name}?`);
+    if (result) {
+      $.ajax({
+        url: "./categories/" + e.target.getAttribute("itemcategory_id"),
+        type: "DELETE",
+        context: this,
+        success: function() {
+          this.setState((prev_state) => {
+            prev_state.itemCategories.splice(index, 1);
+            return {
+              itemCategories: prev_state.itemCategories,
+            };
+          });
+        }
+      })
+    }
+    
   };
 
   render() {
