@@ -134,7 +134,7 @@ class ItemInfoApp extends React.Component {
             <th scope="col">Descriptions</th>
             <th scope="col">Weight</th>
             <th scope="col">Category</th>
-            <th scope="col">Dimensions (w, l, h)</th>
+            <th scope="col">[w, l, h]</th>
             <th scope="col">SKUs</th>
             <th scope="col">Options</th>
           </tr>

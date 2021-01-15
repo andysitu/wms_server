@@ -17,4 +17,3 @@ public class ItemIncoming {
 
     private int quantity;
 }
-

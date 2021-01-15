@@ -210,7 +210,7 @@ var ItemInfoApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                "Dimensions (w, l, h)"
+                "[w, l, h]"
               ),
               React.createElement(
                 "th",
