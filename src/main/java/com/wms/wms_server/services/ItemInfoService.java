@@ -17,7 +17,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
-import java.util.HashMap;;
+import java.util.HashMap;
+import java.util.HashSet;;
 
 @Service
 public class ItemInfoService {
@@ -68,9 +69,15 @@ public class ItemInfoService {
         } else if (type.equals("description")) {
             return itemInfoRepository.findByDescriptionContainingIgnoreCase(value);
         } else if (type.equals("sku")) {
+            HashSet<String> ids = new HashSet<>();
+            ItemInfo item;
             List<ItemInfo> items = new ArrayList<>();
             for (ItemSku sku : itemSkuRepository.findBySkuContainingIgnoreCase(value)) {
-                items.add(sku.getItemInfo());
+                item = sku.getItemInfo();
+                if (!ids.contains(Long.toString(item.getId()))) {
+                    ids.add(Long.toString(item.getId()));
+                    items.add(item);
+                }
             }
             return items;
         } else if (type.equals("category")) {
