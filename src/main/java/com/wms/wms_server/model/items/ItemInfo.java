@@ -75,7 +75,6 @@ public class ItemInfo {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private ItemCategory itemCategory;
 
     public void setItemCategory(ItemCategory itemCategory) {
