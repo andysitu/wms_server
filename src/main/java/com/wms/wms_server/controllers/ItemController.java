@@ -88,21 +88,6 @@ public class ItemController {
     }
 
     @RequestMapping(path="/item_categories", 
-        produces="application/json;", method=RequestMethod.GET)
-    @ResponseBody
-    public List<Map<String, String>> get_itemCategories() {
-        List<Map<String, String>> categories = new ArrayList<>();
-        Map<String, String> c;
-        for (ItemCategory category : ItemCategoryRepository.findAll()) {
-            c = new HashMap<>();
-            c.put("name", category.getName());
-            c.put("id", Long.toString(category.getId()));
-            categories.add(c);
-        }
-        return categories;
-    }
-
-    @RequestMapping(path="/item_categories", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, String> create_itemCategories(HttpServletRequest request) {

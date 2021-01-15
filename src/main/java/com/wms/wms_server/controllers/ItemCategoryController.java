@@ -42,7 +42,7 @@ public class ItemCategoryController {
             dateFormat.format(category.getLastModifiedDate()));
     }
     
-    @GetMapping(value="/categories")
+    @GetMapping(value="/item_categories")
     @ResponseBody
     public List<ItemCategoryResponse> get_categories() {
         List<ItemCategoryResponse> responses = new ArrayList<>();
