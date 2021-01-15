@@ -47,4 +47,11 @@ public class ItemCategory {
     public String getName() {
         return this.name;
     }
+
+    public Date getCreatedDate() {
+        return new Date(this.createdDate.getTime());
+    }
+    public Date getLastModifiedDate() {
+        return new Date(this.lastModifiedDate.getTime());
+    }
 }
