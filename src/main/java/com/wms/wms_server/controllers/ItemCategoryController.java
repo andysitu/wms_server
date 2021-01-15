@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
 import java.util.*;
 
 
@@ -29,12 +30,14 @@ public class ItemCategoryController {
     @ResponseBody
     public List<ItemCategoryResponse> get_categories() {
         List<ItemCategoryResponse> responses = new ArrayList<>();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance();
         for (ItemCategory category : itemCategoryRepository.findAll()) {
             responses.add(
                 new ItemCategoryResponse(category.getId(), category.getName(), 
-                category.getCreatedDate(), category.getLastModifiedDate())
+                dateFormat.format(category.getCreatedDate()), 
+                dateFormat.format(category.getLastModifiedDate()))
             );
-        };
+        }
         return responses;
     }
 }
