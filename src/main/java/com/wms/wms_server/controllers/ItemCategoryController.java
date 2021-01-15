@@ -32,7 +32,7 @@ public class ItemCategoryController {
     }
 
     public ItemCategoryResponse convert_to_response(ItemCategory category) {
-        return convert_to_response(category, DateFormat.getDateInstance());
+        return convert_to_response(category, DateFormat.getDateTimeInstance());
     }
 
     public ItemCategoryResponse convert_to_response(ItemCategory category, DateFormat dateFormat) {
