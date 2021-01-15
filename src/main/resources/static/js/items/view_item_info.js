@@ -144,11 +144,16 @@ var ItemInfoApp = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            { className: "col-sm-6 col-md-4 input-group" },
-            React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input" }),
+            { className: "col-sm-10 col-md-5 input-group" },
+            React.createElement("input", { className: "form-control", type: "text", id: "search-bar1-input", autoFocus: true }),
             React.createElement(
               "select",
-              { className: "custom-select", id: "item-search1-type-select" },
+              { className: "custom-select col-4", id: "item-search1-type-select" },
+              React.createElement(
+                "option",
+                { value: "sku" },
+                "SKU"
+              ),
               React.createElement(
                 "option",
                 { value: "name" },
@@ -158,11 +163,6 @@ var ItemInfoApp = function (_React$Component) {
                 "option",
                 { value: "description" },
                 "Description"
-              ),
-              React.createElement(
-                "option",
-                { value: "sku" },
-                "SKU"
               ),
               React.createElement(
                 "option",
@@ -180,7 +180,7 @@ var ItemInfoApp = function (_React$Component) {
         ),
         React.createElement(
           "table",
-          { className: "table" },
+          { className: "table table-sm" },
           React.createElement(
             "thead",
             null,

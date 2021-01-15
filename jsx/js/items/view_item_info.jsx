@@ -113,13 +113,13 @@ class ItemInfoApp extends React.Component {
         <div className="col-1">
           <button onClick={this.onClick_createItemInfo}>+</button>
         </div>
-        <div className="col-sm-6 col-md-4 input-group">
-          <input className="form-control" type="text" id="search-bar1-input"></input>
-          <select className="custom-select" id="item-search1-type-select">
-            <option value="name">Name</option>
-            <option value="description">Description</option>
+        <div className="col-sm-10 col-md-5 input-group">
+          <input className="form-control" type="text" id="search-bar1-input" autoFocus></input>
+          <select className="custom-select col-4" id="item-search1-type-select">
             <option value="sku">SKU</option>
-            <option value="category">Category</option>
+              <option value="name">Name</option>
+              <option value="description">Description</option>
+              <option value="category">Category</option>
           </select>
           <button className="btn btn-outline-secondary"
             onClick={this.onClick_search}>
@@ -127,7 +127,7 @@ class ItemInfoApp extends React.Component {
           </button>
         </div>
       </div>
-      <table className="table">
+      <table className="table table-sm">
         <thead>
           <tr>
             <th scope="col">Item Name</th>
