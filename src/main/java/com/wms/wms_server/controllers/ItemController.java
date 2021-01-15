@@ -24,9 +24,7 @@ import java.util.*;
 public class ItemController {
     @Autowired
     ItemInfoRepository itemInfoRepository;
-    @Autowired
-    ItemCategoryRepository ItemCategoryRepository;
-
+    
     @Autowired
     ItemInfoService itemInfoService;
 
@@ -85,18 +83,5 @@ public class ItemController {
     {
         itemInfoService.delete_itemSku(iteminfo_id, itemsku_id);
         return "OK";
-    }
-
-    @RequestMapping(path="/item_categories", 
-        produces="application/json;", method=RequestMethod.POST)
-    @ResponseBody
-    public Map<String, String> create_itemCategories(HttpServletRequest request) {
-        ItemCategory itemCategory = new ItemCategory(request.getParameter("name"));
-        ItemCategoryRepository.save(itemCategory);
-
-        Map<String, String> c = new HashMap<>();
-        c.put("name", itemCategory.getName());
-        c.put("id", Long.toString(itemCategory.getId()));
-        return c;
     }
 }

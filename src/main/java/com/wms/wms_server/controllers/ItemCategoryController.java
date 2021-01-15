@@ -86,4 +86,17 @@ public class ItemCategoryController {
         }
         return null;
     }
+
+    @RequestMapping(path="/item_categories", 
+        produces="application/json;", method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> create_itemCategories(HttpServletRequest request) {
+        ItemCategory itemCategory = new ItemCategory(request.getParameter("name"));
+        itemCategoryRepository.save(itemCategory);
+
+        Map<String, String> c = new HashMap<>();
+        c.put("name", itemCategory.getName());
+        c.put("id", Long.toString(itemCategory.getId()));
+        return c;
+    }
 }
