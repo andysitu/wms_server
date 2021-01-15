@@ -8,7 +8,7 @@ class CategoryApp extends React.Component {
   }
   load_categories = () => {
     $.ajax({
-      url: "./categories",
+      url: "./item_categories",
       type: "GET",
       context: this,
       success: function(data) {
@@ -31,7 +31,7 @@ class CategoryApp extends React.Component {
       window.alert("Error in matching the IDs");
     } else {
       $.ajax({
-        url: "./categories/" + e.target.getAttribute("itemcategory_id"),
+        url: "./item_categories/" + e.target.getAttribute("itemcategory_id"),
         type: "PATCH",
         data: {
           name: name,
@@ -54,7 +54,7 @@ class CategoryApp extends React.Component {
     let result = window.confirm(`Are you sure want to delete Category ${name}?`);
     if (result) {
       $.ajax({
-        url: "./categories/" + e.target.getAttribute("itemcategory_id"),
+        url: "./item_categories/" + e.target.getAttribute("itemcategory_id"),
         type: "DELETE",
         context: this,
         success: function() {

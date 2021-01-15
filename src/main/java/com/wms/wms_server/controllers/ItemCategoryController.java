@@ -53,7 +53,7 @@ public class ItemCategoryController {
         return responses;
     }
 
-    @RequestMapping(path="/categories/{itemCategory_id}",
+    @RequestMapping(path="/item_categories/{itemCategory_id}",
         produces="application/json", method=RequestMethod.PATCH)
     @ResponseBody
     public ItemCategoryResponse edit_category(
@@ -73,7 +73,7 @@ public class ItemCategoryController {
         return null;
     }
 
-    @RequestMapping(path="/categories/{itemCategory_id}",
+    @RequestMapping(path="/item_categories/{itemCategory_id}",
         produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_category(
