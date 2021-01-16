@@ -2,10 +2,8 @@ package com.wms.wms_server.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.response.ItemInfoResponse;
-import com.wms.wms_server.repository.ItemCategoryRepository;
 import com.wms.wms_server.repository.ItemInfoRepository;
 import com.wms.wms_server.services.ItemInfoService;
 
