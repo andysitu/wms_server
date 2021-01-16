@@ -239,6 +239,7 @@ class LocationTable extends React.Component {
 
   render () {
     return (<div>
+      <h1>Locations</h1>
       <div className="row justify-content-between">
         <div>
           <button className="btn btn-sm btn-primary" onClick={this.show_create_loc_menu}>

@@ -336,6 +336,11 @@ var LocationTable = function (_React$Component) {
         "div",
         null,
         React.createElement(
+          "h1",
+          null,
+          "Locations"
+        ),
+        React.createElement(
           "div",
           { className: "row justify-content-between" },
           React.createElement(

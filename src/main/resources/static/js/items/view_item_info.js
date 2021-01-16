@@ -131,6 +131,11 @@ var ItemInfoApp = function (_React$Component) {
         "div",
         null,
         React.createElement(
+          "h1",
+          null,
+          "Items"
+        ),
+        React.createElement(
           "div",
           { className: "row justify-content-between" },
           React.createElement(

@@ -109,6 +109,7 @@ class ItemInfoApp extends React.Component {
       });   
     }
     return (<div>
+      <h1>Items</h1>
       <div className="row justify-content-between">
         <div className="col-1">
           <button onClick={this.onClick_createItemInfo}>+</button>
