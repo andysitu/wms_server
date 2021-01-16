@@ -75,6 +75,7 @@ public class ItemInfo {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="item_category_id", nullable = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private ItemCategory itemCategory;
 
