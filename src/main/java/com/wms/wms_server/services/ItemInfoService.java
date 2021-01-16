@@ -102,6 +102,13 @@ public class ItemInfoService {
         return l;
     }
 
+    public void setItemCategoryNull(String itemCategory_name) {
+        for (ItemInfo item : itemInfoRepository.findByItemCategoryName(itemCategory_name)) {
+            item.setItemCategory(null);
+            itemInfoRepository.save(item);
+        }
+    }
+
     public ItemInfoResponse convert_to_response(ItemInfo item) {
         if (item == null) {
             return null;

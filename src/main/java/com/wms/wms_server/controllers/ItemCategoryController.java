@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.response.ItemCategoryResponse;
 import com.wms.wms_server.repository.ItemCategoryRepository;
+import com.wms.wms_server.services.ItemInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import java.util.*;
 public class ItemCategoryController {
     @Autowired
     ItemCategoryRepository itemCategoryRepository;
+    @Autowired
+    ItemInfoService itemInfoService;
 
     @GetMapping(value="/view_categories")
     public String view_categories() {
@@ -81,7 +84,10 @@ public class ItemCategoryController {
     {
         Optional<ItemCategory> oIC = itemCategoryRepository.findById(itemCategory_id);
         if (oIC.isPresent()) {
-            itemCategoryRepository.delete(oIC.get());
+            ItemCategory itemCategory = oIC.get();
+            itemInfoService.setItemCategoryNull(itemCategory.getName());
+
+            itemCategoryRepository.delete(itemCategory);
             return "OK";
         }
         return null;
