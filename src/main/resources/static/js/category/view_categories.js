@@ -94,6 +94,11 @@ var CategoryApp = function (_React$Component) {
         "div",
         null,
         React.createElement(
+          "h1",
+          null,
+          "Item Categories"
+        ),
+        React.createElement(
           "table",
           { className: "table table-sm" },
           React.createElement(

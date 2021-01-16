@@ -73,6 +73,7 @@ class CategoryApp extends React.Component {
   render() {
     return (
       <div>
+        <h1>Item Categories</h1>
         <table className="table table-sm">
           <thead>
             <tr>
