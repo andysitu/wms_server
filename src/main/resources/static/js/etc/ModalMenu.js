@@ -119,10 +119,14 @@ var ModalMenu = function (_React$Component) {
         },
         success: function success(category) {
           that.setState(function (prev_state) {
-            var categories = [].concat(_toConsumableArray(prev_state.categories), [category]);
+            var categories = [].concat(_toConsumableArray(prev_state.categories), [category]),
+                data = Object.assign({}, prev_state.data, {
+              itemCategoryId: category.id
+            });
 
             return {
-              categories: categories
+              categories: categories,
+              data: data
             };
           });
         }
