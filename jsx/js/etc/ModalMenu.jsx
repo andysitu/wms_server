@@ -120,10 +120,10 @@ class ModalMenu extends React.Component {
       },
       success: function(category) {
         that.setState(prev_state => {
-          prev_state.categories.push(category);
+          var categories = [...prev_state.categories, category];
 
           return {
-            categories: prev_state.categories,
+            categories: categories,
           };
         });
       }
