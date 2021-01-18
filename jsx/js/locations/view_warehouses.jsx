@@ -22,8 +22,12 @@ class WarehouseApp extends React.Component {
     })
   }
 
+  create_warehouse = (data) => {
+    console.log(data);
+  }
+
   onClick_add_warehouse = () => {
-    console.log("add");
+    this.modalMenu.current.show_menu("create_warehouse", {}, this.create_warehouse);
   };
 
   render() {

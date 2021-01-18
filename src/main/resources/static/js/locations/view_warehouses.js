@@ -28,8 +28,12 @@ var WarehouseApp = function (_React$Component) {
       });
     };
 
+    _this.create_warehouse = function (data) {
+      console.log(data);
+    };
+
     _this.onClick_add_warehouse = function () {
-      console.log("add");
+      _this.modalMenu.current.show_menu("create_warehouse", {}, _this.create_warehouse);
     };
 
     _this.state = {
