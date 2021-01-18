@@ -32,6 +32,10 @@ public class Warehouse {
     private String country;
     private String zip;
 
+    public String getName() {
+        return this.name;
+    }
+
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate
