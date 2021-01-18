@@ -22,6 +22,15 @@ public class Warehouse {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    private String name;
+    private String phone;
+    private String address_1;
+    private String address_2;
+    private String city;
+    private String state;
+    private String country;
+    private String zip;
+
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate
@@ -30,11 +39,4 @@ public class Warehouse {
     private String createdBy;
     @LastModifiedBy
     private String modifiedBy;
-
-    private String address_1;
-    private String address_2;
-    private String city;
-    private String state;
-    private String country;
-    private String zip;
 }
