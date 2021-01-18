@@ -23,7 +23,16 @@ class WarehouseApp extends React.Component {
   }
 
   create_warehouse = (data) => {
-    console.log(data);
+    $.ajax({
+      url: "./warehouses",
+      type: "POST",
+      // context: this,
+      contentType: "application/json;",
+      data: JSON.stringify(data),
+      success: function(warehouse) {
+        console.log(warehouse);
+      },
+    });
   }
 
   onClick_add_warehouse = () => {

@@ -29,7 +29,16 @@ var WarehouseApp = function (_React$Component) {
     };
 
     _this.create_warehouse = function (data) {
-      console.log(data);
+      $.ajax({
+        url: "./warehouses",
+        type: "POST",
+        // context: this,
+        contentType: "application/json;",
+        data: JSON.stringify(data),
+        success: function success(warehouse) {
+          console.log(warehouse);
+        }
+      });
     };
 
     _this.onClick_add_warehouse = function () {
