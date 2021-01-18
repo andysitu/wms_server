@@ -23,6 +23,7 @@ public class Warehouse {
     private Integer id;
 
     private String name;
+    private String description;
     private String phone;
     private String address_1;
     private String address_2;
