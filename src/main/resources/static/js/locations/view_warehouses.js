@@ -36,6 +36,7 @@ var WarehouseApp = function (_React$Component) {
       warehouses: []
     };
     _this.load_warehouses();
+    _this.modalMenu = React.createRef();
     return _this;
   }
 
@@ -87,7 +88,8 @@ var WarehouseApp = function (_React$Component) {
               )
             )
           )
-        )
+        ),
+        React.createElement(ModalMenu, { ref: this.modalMenu })
       );
     }
   }]);

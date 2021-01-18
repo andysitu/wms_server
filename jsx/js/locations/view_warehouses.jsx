@@ -5,6 +5,7 @@ class WarehouseApp extends React.Component {
       warehouses: [],
     };
     this.load_warehouses();
+    this.modalMenu = React.createRef();
   }
 
   load_warehouses = () => {
@@ -42,6 +43,8 @@ class WarehouseApp extends React.Component {
           </tr>
         </thead>
       </table>
+
+      <ModalMenu ref={this.modalMenu} />
     </div>)
   }
 }
