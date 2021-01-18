@@ -100,6 +100,36 @@ var WarehouseApp = function (_React$Component) {
                 "Country"
               )
             )
+          ),
+          React.createElement(
+            "tbody",
+            null,
+            this.state.warehouses.map(function (warehouse) {
+              return React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  warehouse.name
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  warehouse.city
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  warehouse.state
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  warehouse.country
+                )
+              );
+            })
           )
         ),
         React.createElement(ModalMenu, { ref: this.modalMenu })

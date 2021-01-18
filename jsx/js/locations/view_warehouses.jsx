@@ -55,10 +55,22 @@ class WarehouseApp extends React.Component {
             <th scope="col">Country</th>
           </tr>
         </thead>
+        <tbody>
+          {this.state.warehouses.map((warehouse) => {
+            return (
+              <tr>
+                <td>{warehouse.name}</td>
+                <td>{warehouse.city}</td>
+                <td>{warehouse.state}</td>
+                <td>{warehouse.country}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
 
       <ModalMenu ref={this.modalMenu} />
-    </div>)
+    </div>);
   }
 }
 
