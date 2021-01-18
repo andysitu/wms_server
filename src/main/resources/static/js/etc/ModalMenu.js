@@ -19,18 +19,12 @@ var ModalMenu = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ModalMenu.__proto__ || Object.getPrototypeOf(ModalMenu)).call(this, props));
 
     _this.get_title = function (menu_type) {
-      switch (menu_type) {
-        case "create_location":
-          return "Create Location";
-        case "create_item_info":
-          return "Create Item Info";
-        case "create_barcode":
-          return "Create Barcode";
-        case "edit_item_info":
-          return "Edit item Info";
-        default:
-          return "Title";
+      var strings = menu_type.split("_");
+
+      for (var i = 0; i < strings.length; i++) {
+        strings[i] = strings[i][0].toUpperCase() + strings[i].slice(1);
       }
+      return strings.join(" ");
     };
 
     _this.show_menu = function (menu_type, data) {

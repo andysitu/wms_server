@@ -11,18 +11,12 @@ class ModalMenu extends React.Component {
   }
 
   get_title = (menu_type) => {
-    switch(menu_type) {
-      case "create_location":
-        return "Create Location";
-      case "create_item_info":
-        return "Create Item Info";
-      case "create_barcode":
-        return "Create Barcode";
-      case "edit_item_info":
-        return "Edit item Info";
-      default:
-        return "Title";
+    var strings = menu_type.split("_");
+
+    for (let i=0; i<strings.length; i++) {
+      strings[i] = strings[i][0].toUpperCase() + strings[i].slice(1)
     }
+    return strings.join(" ");
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
