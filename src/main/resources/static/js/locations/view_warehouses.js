@@ -14,10 +14,28 @@ var WarehouseApp = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (WarehouseApp.__proto__ || Object.getPrototypeOf(WarehouseApp)).call(this, props));
 
+    _this.load_warehouses = function () {
+      $.ajax({
+        url: '/warehouses',
+        type: "GET",
+        context: _this,
+        success: function success(warehouse_data) {
+          console.log(warehouse_data);
+          this.setState({
+            warehouses: warehouse_data
+          });
+        }
+      });
+    };
+
     _this.onClick_add_warehouse = function () {
       console.log("add");
     };
 
+    _this.state = {
+      warehouses: []
+    };
+    _this.load_warehouses();
     return _this;
   }
 
@@ -28,11 +46,15 @@ var WarehouseApp = function (_React$Component) {
         "div",
         null,
         React.createElement(
-          "button",
-          { className: "btn btn-sm btn-primary",
-            onClick: this.onClick_add_warehouse
-          },
-          "+"
+          "div",
+          { className: "m-1" },
+          React.createElement(
+            "button",
+            { className: "btn btn-sm btn-primary",
+              onClick: this.onClick_add_warehouse
+            },
+            "+"
+          )
         ),
         React.createElement(
           "table",
