@@ -41,7 +41,8 @@ public class WarehouseController {
 
     @PostMapping(value="/warehouses", consumes = "application/json")
     @ResponseBody
-    public Warehouse create_warehouse(@Valid @RequestBody Warehouse warehouse) {
-        return warehouseRepository.save(warehouse);
+    public WarehouseResponse create_warehouse(@Valid @RequestBody Warehouse warehouse) {
+        warehouseRepository.save(warehouse);
+        return warehouseService.convert_to_response(warehouse);
     }
 }
