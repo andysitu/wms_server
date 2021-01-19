@@ -265,6 +265,15 @@ var ModalMenu = function (_React$Component) {
     };
 
     _this.create_warehouse_menu = function () {
+      var edit_status = _this.state.menu_type == "edit_warehouse";
+      var name = edit_status ? _this.state.data.name : "",
+          description = edit_status ? _this.state.data.description : "",
+          address1 = edit_status ? _this.state.data.address1 : "",
+          address2 = edit_status ? _this.state.data.address2 : "",
+          city = edit_status ? _this.state.data.city : "",
+          state = edit_status ? _this.state.data.state : "",
+          zip = edit_status ? _this.state.data.zip : "",
+          phone = edit_status ? _this.state.data.phone : "";
       return React.createElement(
         "div",
         null,
@@ -280,7 +289,7 @@ var ModalMenu = function (_React$Component) {
               "Name"
             ),
             React.createElement("input", { type: "text", name: "name", id: "mm-name-input",
-              className: "form-control", required: true })
+              className: "form-control", defaultValue: name, required: true })
           ),
           React.createElement(
             "div",
@@ -291,7 +300,7 @@ var ModalMenu = function (_React$Component) {
               "Description"
             ),
             React.createElement("input", { type: "text", name: "description", id: "mm-desc-input",
-              className: "form-control", required: true })
+              className: "form-control", defaultValue: description, required: true })
           )
         ),
         React.createElement(
@@ -303,7 +312,7 @@ var ModalMenu = function (_React$Component) {
             "Address 1"
           ),
           React.createElement("input", { type: "text", name: "address_1", id: "mm-addr1-input",
-            className: "form-control", required: true })
+            className: "form-control", defaultValue: address1, required: true })
         ),
         React.createElement(
           "div",
@@ -314,7 +323,7 @@ var ModalMenu = function (_React$Component) {
             "Address 2"
           ),
           React.createElement("input", { type: "text", name: "address_2", id: "mm-addr2-input",
-            className: "form-control" })
+            className: "form-control", defaultValue: address2 })
         ),
         React.createElement(
           "div",
@@ -328,7 +337,7 @@ var ModalMenu = function (_React$Component) {
               "City"
             ),
             React.createElement("input", { type: "text", className: "form-control", id: "mm-input-city",
-              name: "city", required: true })
+              name: "city", defaultValue: city, required: true })
           ),
           React.createElement(
             "div",
@@ -339,7 +348,7 @@ var ModalMenu = function (_React$Component) {
               "State"
             ),
             React.createElement("input", { type: "text", id: "mm-state-input", className: "form-control",
-              name: "state", required: true })
+              name: "state", defaultValue: state, required: true })
           ),
           React.createElement(
             "div",
@@ -350,7 +359,7 @@ var ModalMenu = function (_React$Component) {
               "Zip"
             ),
             React.createElement("input", { type: "text", className: "form-control", id: "mm-zip-input",
-              name: "zip", required: true })
+              name: "zip", defaultValue: zip, required: true })
           )
         ),
         React.createElement(
@@ -362,7 +371,7 @@ var ModalMenu = function (_React$Component) {
             "Phone"
           ),
           React.createElement("input", { type: "text", name: "phone", id: "mm-phone-input",
-            className: "form-control" })
+            className: "form-control", defaultValue: phone })
         )
       );
     };
@@ -407,7 +416,7 @@ var ModalMenu = function (_React$Component) {
             })
           )
         );
-      } else if (_this.state.menu_type == "create_warehouse") {
+      } else if (_this.state.menu_type == "create_warehouse" || _this.state.menu_type == "edit_warehouse") {
         return _this.create_warehouse_menu();
       } else {
         return;
