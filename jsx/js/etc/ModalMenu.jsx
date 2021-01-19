@@ -216,37 +216,8 @@ class ModalMenu extends React.Component {
     </div>);
   }
 
-  create_menu = () => {
-    if (this.state.menu_type == "none") {
-      return (<div></div>);
-    } else if (this.state.menu_type == "create_location") {
-      return (<CreateLocationMenu />);
-    } else if (this.state.menu_type == "create_item_info"
-        || this.state.menu_type == "edit_item_info") {
-      return this.create_item_info_menu();
-    } else if (this.state.menu_type == "create_barcode") {
-      return (<div>
-        <div>
-          <button type="button" className="btn btn-outline-primary"
-            onClick={this.onClick_print_barcode}>Print</button>
-          <button type="button" className="btn btn-outline-secondary"
-            onClick={this.onClick_save_barcode}>Save</button>
-        </div>
-
-        <div id="barcode-container">
-          {this.state.data.barcode_strings.map(
-            (location_string, index) => {
-              return (
-                <div key={"barcode_div_" + index}>
-                  <img key={"barcode_img_" + index} className="barcode-img"
-                    id={"barcode_"+index} index={index} />
-                </div>);
-            })
-          }
-        </div>
-      </div>);
-    } else if (this.state.menu_type == "create_warehouse") {
-      return (
+  create_warehouse_menu = () => {
+    return (
       <div>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -293,6 +264,39 @@ class ModalMenu extends React.Component {
             className="form-control" />
         </div>
       </div>);
+  };
+
+  create_menu = () => {
+    if (this.state.menu_type == "none") {
+      return (<div></div>);
+    } else if (this.state.menu_type == "create_location") {
+      return (<CreateLocationMenu />);
+    } else if (this.state.menu_type == "create_item_info"
+        || this.state.menu_type == "edit_item_info") {
+      return this.create_item_info_menu();
+    } else if (this.state.menu_type == "create_barcode") {
+      return (<div>
+        <div>
+          <button type="button" className="btn btn-outline-primary"
+            onClick={this.onClick_print_barcode}>Print</button>
+          <button type="button" className="btn btn-outline-secondary"
+            onClick={this.onClick_save_barcode}>Save</button>
+        </div>
+
+        <div id="barcode-container">
+          {this.state.data.barcode_strings.map(
+            (location_string, index) => {
+              return (
+                <div key={"barcode_div_" + index}>
+                  <img key={"barcode_img_" + index} className="barcode-img"
+                    id={"barcode_"+index} index={index} />
+                </div>);
+            })
+          }
+        </div>
+      </div>);
+    } else if (this.state.menu_type == "create_warehouse") {
+      return this.create_warehouse_menu();
     } else {
       return ;
     }

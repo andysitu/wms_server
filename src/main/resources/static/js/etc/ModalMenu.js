@@ -264,6 +264,109 @@ var ModalMenu = function (_React$Component) {
       );
     };
 
+    _this.create_warehouse_menu = function () {
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-md-6" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-name-input" },
+              "Name"
+            ),
+            React.createElement("input", { type: "text", name: "name", id: "mm-name-input",
+              className: "form-control", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-md-6" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-desc-input" },
+              "Description"
+            ),
+            React.createElement("input", { type: "text", name: "description", id: "mm-desc-input",
+              className: "form-control", required: true })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "mm-addr1-input" },
+            "Address 1"
+          ),
+          React.createElement("input", { type: "text", name: "address_1", id: "mm-addr1-input",
+            className: "form-control", required: true })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "mm-addr2-input" },
+            "Address 2"
+          ),
+          React.createElement("input", { type: "text", name: "address_2", id: "mm-addr2-input",
+            className: "form-control" })
+        ),
+        React.createElement(
+          "div",
+          { className: "form-row" },
+          React.createElement(
+            "div",
+            { className: "form-group col-md-6" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-city-input" },
+              "City"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", id: "mm-input-city",
+              name: "city", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-md-4" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-state-input" },
+              "State"
+            ),
+            React.createElement("input", { type: "text", id: "mm-state-input", className: "form-control",
+              name: "state", required: true })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group col-md-2" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-zip-input" },
+              "Zip"
+            ),
+            React.createElement("input", { type: "text", className: "form-control", id: "mm-zip-input",
+              name: "zip", required: true })
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "form-group" },
+          React.createElement(
+            "label",
+            { htmlFor: "mm-phone-input" },
+            "Phone"
+          ),
+          React.createElement("input", { type: "text", name: "phone", id: "mm-phone-input",
+            className: "form-control" })
+        )
+      );
+    };
+
     _this.create_menu = function () {
       if (_this.state.menu_type == "none") {
         return React.createElement("div", null);
@@ -305,106 +408,7 @@ var ModalMenu = function (_React$Component) {
           )
         );
       } else if (_this.state.menu_type == "create_warehouse") {
-        return React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-md-6" },
-              React.createElement(
-                "label",
-                { htmlFor: "mm-name-input" },
-                "Name"
-              ),
-              React.createElement("input", { type: "text", name: "name", id: "mm-name-input",
-                className: "form-control", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-md-6" },
-              React.createElement(
-                "label",
-                { htmlFor: "mm-desc-input" },
-                "Description"
-              ),
-              React.createElement("input", { type: "text", name: "description", id: "mm-desc-input",
-                className: "form-control", required: true })
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "mm-addr1-input" },
-              "Address 1"
-            ),
-            React.createElement("input", { type: "text", name: "address_1", id: "mm-addr1-input",
-              className: "form-control", required: true })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "mm-addr2-input" },
-              "Address 2"
-            ),
-            React.createElement("input", { type: "text", name: "address_2", id: "mm-addr2-input",
-              className: "form-control" })
-          ),
-          React.createElement(
-            "div",
-            { className: "form-row" },
-            React.createElement(
-              "div",
-              { className: "form-group col-md-6" },
-              React.createElement(
-                "label",
-                { htmlFor: "mm-city-input" },
-                "City"
-              ),
-              React.createElement("input", { type: "text", className: "form-control", id: "mm-input-city",
-                name: "city", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-md-4" },
-              React.createElement(
-                "label",
-                { htmlFor: "mm-state-input" },
-                "State"
-              ),
-              React.createElement("input", { type: "text", id: "mm-state-input", className: "form-control",
-                name: "state", required: true })
-            ),
-            React.createElement(
-              "div",
-              { className: "form-group col-md-2" },
-              React.createElement(
-                "label",
-                { htmlFor: "mm-zip-input" },
-                "Zip"
-              ),
-              React.createElement("input", { type: "text", className: "form-control", id: "mm-zip-input",
-                name: "zip", required: true })
-            )
-          ),
-          React.createElement(
-            "div",
-            { className: "form-group" },
-            React.createElement(
-              "label",
-              { htmlFor: "mm-phone-input" },
-              "Phone"
-            ),
-            React.createElement("input", { type: "text", name: "phone", id: "mm-phone-input",
-              className: "form-control" })
-          )
-        );
+        return _this.create_warehouse_menu();
       } else {
         return;
       }
