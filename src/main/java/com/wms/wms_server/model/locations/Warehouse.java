@@ -22,21 +22,17 @@ import lombok.Setter;
 public class Warehouse {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @Getter private Integer id;
 
     @Getter private String name;
     @Getter private String description;
     @Getter private String phone;
-    @Getter private String address_1;
-    @Getter private String address_2;
+    @Getter private String address1;
+    @Getter private String address2;
     @Getter private String city;
     @Getter private String state;
     @Getter private String country;
     @Getter private String zip;
-
-    public String getName() {
-        return this.name;
-    }
 
     @CreatedDate
     private Date createdDate;
