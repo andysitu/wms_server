@@ -320,7 +320,7 @@ var ModalMenu = function (_React$Component) {
                 "Name"
               ),
               React.createElement("input", { type: "text", name: "name", id: "mm-name-input",
-                className: "form-control" })
+                className: "form-control", required: true })
             ),
             React.createElement(
               "div",
@@ -331,7 +331,7 @@ var ModalMenu = function (_React$Component) {
                 "Description"
               ),
               React.createElement("input", { type: "text", name: "description", id: "mm-desc-input",
-                className: "form-control" })
+                className: "form-control", required: true })
             )
           ),
           React.createElement(
@@ -343,7 +343,7 @@ var ModalMenu = function (_React$Component) {
               "Address 1"
             ),
             React.createElement("input", { type: "text", name: "address_1", id: "mm-addr1-input",
-              className: "form-control" })
+              className: "form-control", required: true })
           ),
           React.createElement(
             "div",
@@ -368,7 +368,7 @@ var ModalMenu = function (_React$Component) {
                 "City"
               ),
               React.createElement("input", { type: "text", className: "form-control", id: "mm-input-city",
-                name: "city" })
+                name: "city", required: true })
             ),
             React.createElement(
               "div",
@@ -379,7 +379,7 @@ var ModalMenu = function (_React$Component) {
                 "State"
               ),
               React.createElement("input", { type: "text", id: "mm-state-input", className: "form-control",
-                name: "state" })
+                name: "state", required: true })
             ),
             React.createElement(
               "div",
@@ -390,7 +390,7 @@ var ModalMenu = function (_React$Component) {
                 "Zip"
               ),
               React.createElement("input", { type: "text", className: "form-control", id: "mm-zip-input",
-                name: "zip" })
+                name: "zip", required: true })
             )
           ),
           React.createElement(

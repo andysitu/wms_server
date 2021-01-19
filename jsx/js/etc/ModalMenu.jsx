@@ -252,45 +252,45 @@ class ModalMenu extends React.Component {
           <div className="form-group col-md-6">
             <label htmlFor="mm-name-input">Name</label>
             <input type="text" name="name" id="mm-name-input" 
-              className="form-control"></input>
+              className="form-control" required />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="mm-desc-input">Description</label>
             <input type="text" name="description" id="mm-desc-input" 
-              className="form-control"></input>
+              className="form-control" required />
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="mm-addr1-input">Address 1</label>
           <input type="text" name="address_1" id="mm-addr1-input" 
-            className="form-control"></input>
+            className="form-control" required />
         </div>
         <div className="form-group">
           <label htmlFor="mm-addr2-input">Address 2</label>
           <input type="text" name="address_2" id="mm-addr2-input" 
-            className="form-control"></input>
+            className="form-control" />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="mm-city-input">City</label>
             <input type="text" className="form-control" id="mm-input-city" 
-              name="city"/>
+              name="city" required />
           </div>
           <div className="form-group col-md-4">
             <label htmlFor="mm-state-input">State</label>
             <input type="text" id="mm-state-input" className="form-control" 
-              name="state"/>
+              name="state" required />
           </div>
           <div className="form-group col-md-2">
             <label htmlFor="mm-zip-input">Zip</label>
             <input type="text" className="form-control" id="mm-zip-input"
-              name="zip"/>
+              name="zip" required />
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="mm-phone-input">Phone</label>
           <input type="text" name="phone" id="mm-phone-input" 
-            className="form-control"></input>
+            className="form-control" />
         </div>
       </div>);
     } else {
