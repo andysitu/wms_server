@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -22,15 +24,15 @@ public class Warehouse {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String name;
-    private String description;
-    private String phone;
-    private String address_1;
-    private String address_2;
-    private String city;
-    private String state;
-    private String country;
-    private String zip;
+    @Getter private String name;
+    @Getter private String description;
+    @Getter private String phone;
+    @Getter private String address_1;
+    @Getter private String address_2;
+    @Getter private String city;
+    @Getter private String state;
+    @Getter private String country;
+    @Getter private String zip;
 
     public String getName() {
         return this.name;
