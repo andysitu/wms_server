@@ -311,7 +311,7 @@ var ModalMenu = function (_React$Component) {
             { htmlFor: "mm-addr1-input" },
             "Address 1"
           ),
-          React.createElement("input", { type: "text", name: "address_1", id: "mm-addr1-input",
+          React.createElement("input", { type: "text", name: "address1", id: "mm-addr1-input",
             className: "form-control", defaultValue: address1, required: true })
         ),
         React.createElement(
@@ -322,7 +322,7 @@ var ModalMenu = function (_React$Component) {
             { htmlFor: "mm-addr2-input" },
             "Address 2"
           ),
-          React.createElement("input", { type: "text", name: "address_2", id: "mm-addr2-input",
+          React.createElement("input", { type: "text", name: "address2", id: "mm-addr2-input",
             className: "form-control", defaultValue: address2 })
         ),
         React.createElement(

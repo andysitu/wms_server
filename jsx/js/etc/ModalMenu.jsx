@@ -242,12 +242,12 @@ class ModalMenu extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="mm-addr1-input">Address 1</label>
-          <input type="text" name="address_1" id="mm-addr1-input" 
+          <input type="text" name="address1" id="mm-addr1-input" 
             className="form-control" defaultValue={address1} required />
         </div>
         <div className="form-group">
           <label htmlFor="mm-addr2-input">Address 2</label>
-          <input type="text" name="address_2" id="mm-addr2-input" 
+          <input type="text" name="address2" id="mm-addr2-input" 
             className="form-control" defaultValue={address2} />
         </div>
         <div className="form-row">
