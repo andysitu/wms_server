@@ -29,8 +29,16 @@ class WarehouseApp extends React.Component {
       // context: this,
       contentType: "application/json;",
       data: JSON.stringify(data),
+      context: this,
       success: function(warehouse) {
         console.log(warehouse);
+        this.setState((state) => {
+          var new_warehouse = [warehouse,];
+          for (let i=0; i<state.warehouses.length; i++) {
+            new_warehouse.push(state.warehouses[i]);
+          }
+          return {warehousees: new_warehouse,};
+        });
       },
     });
   }
@@ -58,7 +66,7 @@ class WarehouseApp extends React.Component {
         <tbody>
           {this.state.warehouses.map((warehouse) => {
             return (
-              <tr>
+              <tr key={warehouse.id}>
                 <td>{warehouse.name}</td>
                 <td>{warehouse.city}</td>
                 <td>{warehouse.state}</td>

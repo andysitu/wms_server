@@ -35,8 +35,16 @@ var WarehouseApp = function (_React$Component) {
         // context: this,
         contentType: "application/json;",
         data: JSON.stringify(data),
+        context: _this,
         success: function success(warehouse) {
           console.log(warehouse);
+          this.setState(function (state) {
+            var new_warehouse = [warehouse];
+            for (var i = 0; i < state.warehouses.length; i++) {
+              new_warehouse.push(state.warehouses[i]);
+            }
+            return { warehousees: new_warehouse };
+          });
         }
       });
     };
@@ -107,7 +115,7 @@ var WarehouseApp = function (_React$Component) {
             this.state.warehouses.map(function (warehouse) {
               return React.createElement(
                 "tr",
-                null,
+                { key: warehouse.id },
                 React.createElement(
                   "td",
                   null,
