@@ -37,7 +37,7 @@ class WarehouseApp extends React.Component {
           for (let i=0; i<state.warehouses.length; i++) {
             new_warehouse.push(state.warehouses[i]);
           }
-          return {warehousees: new_warehouse,};
+          return {warehouses: new_warehouse,};
         });
       },
     });
