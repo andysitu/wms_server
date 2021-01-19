@@ -6,9 +6,12 @@ import com.wms.wms_server.services.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wms.wms_server.model.locations.Warehouse;
 import com.wms.wms_server.model.response.WarehouseResponse;
@@ -44,5 +47,12 @@ public class WarehouseController {
     public WarehouseResponse create_warehouse(@Valid @RequestBody Warehouse warehouse) {
         warehouseRepository.save(warehouse);
         return warehouseService.convert_to_response(warehouse);
+    }
+
+    @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.DELETE)
+    @ResponseBody
+    public String delete_warehouse(@PathVariable("warehouseId") int warehouseId) {
+        warehouseRepository.deleteById(warehouseId);
+        return "OK";
     }
 }
