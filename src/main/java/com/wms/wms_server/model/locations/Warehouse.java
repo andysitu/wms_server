@@ -22,7 +22,7 @@ import lombok.Setter;
 public class Warehouse {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Getter private Integer id;
+    @Getter private Long id;
 
     @Getter private String name;
     @Getter private String description;

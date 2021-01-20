@@ -51,7 +51,7 @@ public class WarehouseController {
 
     @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_warehouse(@PathVariable("warehouseId") int warehouseId) {
+    public String delete_warehouse(@PathVariable("warehouseId") long warehouseId) {
         warehouseRepository.deleteById(warehouseId);
         return "OK";
     }

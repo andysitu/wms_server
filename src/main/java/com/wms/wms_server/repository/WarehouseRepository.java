@@ -7,6 +7,6 @@ import com.wms.wms_server.model.locations.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface WarehouseRepository extends JpaRepository<Warehouse, Integer> {
+public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     
 }
