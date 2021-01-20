@@ -67,7 +67,7 @@ class WarehouseApp extends React.Component {
             }
             return {warehouses: new_warehouse,};
           });
-        }
+        },
       });
     }
   };
@@ -83,9 +83,13 @@ class WarehouseApp extends React.Component {
         type: "PATCH",
         data: data,
         context: this,
-        success: function(response) {
-          console.log(response);
-        }
+        success: function(new_warehouse) {
+          this.setState((state) => {
+            var new_warehouses = [...state.warehouses];
+            new_warehouses[index] = new_warehouse
+            return {warehouses: new_warehouses,};
+          });
+        },
       });  
     });
   };
