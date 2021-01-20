@@ -24,15 +24,15 @@ public class Warehouse {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Long id;
 
-    @Getter private String name;
-    @Getter private String description;
-    @Getter private String phone;
-    @Getter private String address1;
-    @Getter private String address2;
-    @Getter private String city;
-    @Getter private String state;
-    @Getter private String country;
-    @Getter private String zip;
+    @Getter @Setter private String name;
+    @Getter @Setter private String description;
+    @Getter @Setter private String phone;
+    @Getter @Setter private String address1;
+    @Getter @Setter private String address2;
+    @Getter @Setter private String city;
+    @Getter @Setter private String state;
+    @Getter @Setter private String country;
+    @Getter @Setter private String zip;
 
     @CreatedDate
     private Date createdDate;
