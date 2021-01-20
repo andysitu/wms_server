@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class WarehouseResponse {
-    @Getter @Setter private long id;    
+    @Getter @Setter private Long id;    
     @Getter @Setter private String name;
     @Getter @Setter private String description;
     @Getter @Setter private String address1;
