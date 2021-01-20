@@ -59,9 +59,9 @@ public class WarehouseController {
 
     @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.PATCH)
     @ResponseBody
-    public String edit_warehouse(@PathVariable("warehouseId") Long warehouseId,
+    public WarehouseResponse edit_warehouse(@PathVariable("warehouseId") Long warehouseId,
                     HttpServletRequest request) {
-        warehouseService.update_warehouse(warehouseId, request);
-        return "OK";
+        Warehouse warehouse = warehouseService.update_warehouse(warehouseId, request);
+        return warehouseService.convert_to_response(warehouse);
     }
 }

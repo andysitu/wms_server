@@ -40,7 +40,7 @@ public class WarehouseService {
         return (result != null && result.length() > 0);
     }
 
-    public void update_warehouse(Long warehouseId, HttpServletRequest request) {
+    public Warehouse update_warehouse(Long warehouseId, HttpServletRequest request) {
         Optional<Warehouse> oWarehouse = warehouseRepository.findById(warehouseId);
         if (oWarehouse.isPresent()) {
             Warehouse warehouse = oWarehouse.get();
@@ -69,6 +69,9 @@ public class WarehouseService {
                 warehouse.setPhone(request.getParameter("phone"));
             }
             warehouseRepository.save(warehouse);
+            return warehouse;
+        } else {
+            return null;
         }
     }
 }
