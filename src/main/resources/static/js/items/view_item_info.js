@@ -469,7 +469,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-dark",
-              onClick: this.onClick_add_itemSkuss, item: "Add item sku" },
+              onClick: this.onClick_add_itemSkuss, title: "Add item sku" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
