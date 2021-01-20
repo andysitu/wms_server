@@ -348,7 +348,8 @@ var LocationTable = function (_React$Component) {
             null,
             React.createElement(
               "button",
-              { className: "btn btn-sm btn-primary", onClick: this.show_create_loc_menu },
+              { className: "btn btn-sm btn-primary", title: "Create location",
+                onClick: this.show_create_loc_menu },
               React.createElement(
                 "svg",
                 { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-plus", viewBox: "0 0 16 16" },
@@ -358,7 +359,7 @@ var LocationTable = function (_React$Component) {
             React.createElement(
               "button",
               { type: "button", className: "btn btn-sm btn-outline-dark",
-                onClick: this.show_barcodes },
+                onClick: this.show_barcodes, title: "Show barcodes window" },
               React.createElement(
                 "svg",
                 { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },

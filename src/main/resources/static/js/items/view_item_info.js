@@ -334,7 +334,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "button",
           { type: "button", className: "btn btn-sm btn-outline-dark btn-with-svgs",
-            sku: itemSku.sku,
+            sku: itemSku.sku, title: "Show barcodes menu",
             onClick: _this3.onClick_show_barcode },
           React.createElement(
             "svg",
@@ -345,7 +345,7 @@ var ItemInfoRow = function (_React$Component2) {
         React.createElement(
           "button",
           { type: "button", className: "btn btn-sm btn-outline-danger btn-with-svgs",
-            itemsku_id: itemSku.id, itemsku: itemSku.sku,
+            itemsku_id: itemSku.id, itemsku: itemSku.sku, title: "Delete item sku",
             onClick: _this3.onClick_delete_itemInfo_itemSku },
           React.createElement(
             "svg",
@@ -447,7 +447,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-warning",
-              onClick: this.onClick_editItemInfo },
+              onClick: this.onClick_editItemInfo, title: "Edit item info" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-pencil-square", viewBox: "0 0 16 16" },
@@ -458,7 +458,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-danger",
-              onClick: this.onClick_deleteItemInfo },
+              onClick: this.onClick_deleteItemInfo, title: "Delete item info" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
@@ -469,7 +469,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-dark",
-              onClick: this.onClick_add_itemSkuss },
+              onClick: this.onClick_add_itemSkuss, item: "Add item sku" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-upc", viewBox: "0 0 16 16" },
@@ -478,7 +478,8 @@ var ItemInfoRow = function (_React$Component2) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-dark" },
+            { type: "button", className: "btn btn-sm btn-outline-dark",
+              title: "Create item" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-box-seam", viewBox: "0 0 16 16" },

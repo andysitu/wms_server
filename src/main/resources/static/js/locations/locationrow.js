@@ -85,7 +85,8 @@ var LocationRow = function (_React$Component) {
           null,
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-warning" },
+            { type: "button", className: "btn btn-sm btn-outline-warning",
+              title: "Edit Location" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-pencil-square", viewBox: "0 0 16 16" },
@@ -95,7 +96,8 @@ var LocationRow = function (_React$Component) {
           ),
           React.createElement(
             "button",
-            { type: "button", className: "btn btn-sm btn-outline-danger", onClick: this.onClick_delete_btn },
+            { type: "button", className: "btn btn-sm btn-outline-danger",
+              onClick: this.onClick_delete_btn, title: "Delete location" },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-trash", viewBox: "0 0 16 16" },
