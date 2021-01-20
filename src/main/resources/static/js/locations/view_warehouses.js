@@ -77,15 +77,22 @@ var WarehouseApp = function (_React$Component) {
       }
     };
 
-    _this.edit_warehouse = function (data) {
-      console.log(data);
-    };
-
-    _this.onClick_edit = function (e) {
+    _this.onClick_edit_warehouse = function (e) {
       var index = e.target.getAttribute("index"),
           warehouse_id = e.target.getAttribute("warehouse_id"),
           data = Object.assign({}, _this.state.warehouses[index]);
-      _this.modalMenu.current.show_menu("edit_warehouse", data, _this.edit_warehouse);
+      data.warehouse_id = warehouse_id;
+      _this.modalMenu.current.show_menu("edit_warehouse", data, function (data) {
+        $.ajax({
+          url: "warehouses/" + warehouse_id,
+          type: "PATCH",
+          data: data,
+          context: _this,
+          success: function success(response) {
+            console.log(response);
+          }
+        });
+      });
     };
 
     _this.state = {
@@ -198,7 +205,7 @@ var WarehouseApp = function (_React$Component) {
                     "button",
                     { type: "button", className: "btn btn-sm btn-outline-warning",
                       warehouse_id: warehouse.id, index: index,
-                      onClick: _this2.onClick_edit },
+                      onClick: _this2.onClick_edit_warehouse },
                     React.createElement(
                       "svg",
                       { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor",
