@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.wms.wms_server.model.locations.Warehouse;
 import com.wms.wms_server.model.response.WarehouseResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import java.util.*;
@@ -51,8 +52,16 @@ public class WarehouseController {
 
     @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_warehouse(@PathVariable("warehouseId") long warehouseId) {
+    public String delete_warehouse(@PathVariable("warehouseId") Long warehouseId) {
         warehouseRepository.deleteById(warehouseId);
+        return "OK";
+    }
+
+    @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.PATCH)
+    @ResponseBody
+    public String edit_warehouse(@PathVariable("warehouseId") Long warehouseId,
+                    HttpServletRequest request) {
+        warehouseService.update_warehouse(warehouseId, request);
         return "OK";
     }
 }
