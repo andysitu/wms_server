@@ -19,6 +19,9 @@ public class WarehouseService {
     WarehouseRepository warehouseRepository;
 
     public WarehouseResponse convert_to_response(Warehouse warehouse) {
+        if (warehouse == null) {
+            return null;
+        }
         WarehouseResponse response = new WarehouseResponse(warehouse.getName());
         response.setDescription(warehouse.getDescription());
         response.setAddress1(warehouse.getAddress1());
