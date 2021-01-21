@@ -1,7 +1,7 @@
 var storage_obj = {
   warehouse_property: "default_warehouse_id",
   get_warehouse() {
-    return window.locatStorage.getItem(this.warehouse_property);
+    return window.localStorage.getItem(this.warehouse_property);
   },
   set_warehouse(warehouse_id) {
     window.localStorage.setitem(this.warehouse_property, warehouse_id);
