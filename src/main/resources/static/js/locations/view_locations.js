@@ -305,6 +305,12 @@ var LocationTable = function (_React$Component) {
       _this.get_locations(area);
     };
 
+    _this.onChange_warehouse = function (e) {
+      _this.setState({
+        selected_warehouse: e.target.value
+      });
+    };
+
     _this.create_area_options = function () {
       return React.createElement(
         "select",
@@ -330,7 +336,8 @@ var LocationTable = function (_React$Component) {
     _this.create_warehouse_option = function () {
       return React.createElement(
         "select",
-        { className: "form-control" },
+        { className: "form-control", value: _this.state.selected_warehouse,
+          onChange: _this.onChange_warehouse },
         _this.state.warehouses.map(function (warehouse) {
           return React.createElement(
             "option",
@@ -346,7 +353,8 @@ var LocationTable = function (_React$Component) {
       warehouses: [],
       areas: [],
       locations: [],
-      selected_area: "none"
+      selected_area: "",
+      selected_warehouse: ""
     };
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;

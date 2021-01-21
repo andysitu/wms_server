@@ -248,6 +248,12 @@ class LocationTable extends React.Component {
     this.get_locations(area);
   };
 
+  onChange_warehouse = (e) => {
+    this.setState({
+      selected_warehouse: e.target.value,
+    })
+  }
+
   create_area_options =() =>  {
     return (
       <select onChange={this.onChange_area}
@@ -261,17 +267,19 @@ class LocationTable extends React.Component {
         })}
         <option value="all">All</option>
       </select>);
-  }
+  };
+  
   create_warehouse_option = () => {
     return (
-      <select className="form-control">
+      <select className="form-control" value={this.state.selected_warehouse}
+        onChange={this.onChange_warehouse}>
         {this.state.warehouses.map((warehouse) => {
           return (<option value={warehouse.id} key={"woption-"+warehouse.id}>
             {warehouse.name + "-" + warehouse.code}
           </option>);
         })}
       </select>);
-  }
+  };
 
   render () {
     return (<div>
