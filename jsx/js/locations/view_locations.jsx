@@ -222,30 +222,28 @@ class LocationTable extends React.Component {
       });
     }
   }
-  get_locations = (areaId) => {
-    var that = this;
-    var url = (areaId == null || areaId === "all") ? 
-              "./locations" : "../locations/area/" + areaId;
-    $.ajax({
-      type: "GET",
-      url: url,
-      success: function(locations) {
-        for(let l of locations) {
-          that.convert_location(l);
-        }
-        that.setState({
-          locations: locations,
-        }, () => { console.log(that.state.locations); });
-      }
-    });
-  }
 
   onClick_show_area = () => {
     var area = this.state.selected_area;
     if (area === "none") {
       return;
     }
-    this.get_locations(area);
+
+    var url = (area == null || area === "all") ? 
+              "./locations" : "../locations/area/" + area;
+    $.ajax({
+      type: "GET",
+      url: url,
+      context: this,
+      success: function(locations) {
+        for(let l of locations) {
+          this.convert_location(l);
+        }
+        this.setState({
+          locations: locations,
+        }, () => { console.log(this.state.locations); });
+      }
+    });
   };
 
   onChange_warehouse = (e) => {

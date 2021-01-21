@@ -256,13 +256,20 @@ var LocationTable = function (_React$Component) {
       }
     };
 
-    _this.get_locations = function (areaId) {
-      var that = _this;
-      var url = areaId == null || areaId === "all" ? "./locations" : "../locations/area/" + areaId;
+    _this.onClick_show_area = function () {
+      var area = _this.state.selected_area;
+      if (area === "none") {
+        return;
+      }
+
+      var url = area == null || area === "all" ? "./locations" : "../locations/area/" + area;
       $.ajax({
         type: "GET",
         url: url,
+        context: _this,
         success: function success(locations) {
+          var _this2 = this;
+
           var _iteratorNormalCompletion3 = true;
           var _didIteratorError3 = false;
           var _iteratorError3 = undefined;
@@ -271,7 +278,7 @@ var LocationTable = function (_React$Component) {
             for (var _iterator3 = locations[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
               var l = _step3.value;
 
-              that.convert_location(l);
+              this.convert_location(l);
             }
           } catch (err) {
             _didIteratorError3 = true;
@@ -288,21 +295,13 @@ var LocationTable = function (_React$Component) {
             }
           }
 
-          that.setState({
+          this.setState({
             locations: locations
           }, function () {
-            console.log(that.state.locations);
+            console.log(_this2.state.locations);
           });
         }
       });
-    };
-
-    _this.onClick_show_area = function () {
-      var area = _this.state.selected_area;
-      if (area === "none") {
-        return;
-      }
-      _this.get_locations(area);
     };
 
     _this.onChange_warehouse = function (e) {
@@ -387,7 +386,7 @@ var LocationTable = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return React.createElement(
         "div",
@@ -527,9 +526,9 @@ var LocationTable = function (_React$Component) {
               return React.createElement(LocationRow, { key: location.id,
                 index: index,
                 location: location,
-                show_barcode: _this2.show_barcode,
-                onClick_row_checkbox: _this2.onClick_row_checkbox,
-                delete_location: _this2.delete_location
+                show_barcode: _this3.show_barcode,
+                onClick_row_checkbox: _this3.onClick_row_checkbox,
+                delete_location: _this3.delete_location
               });
             })
           )
