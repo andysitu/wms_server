@@ -386,7 +386,7 @@ var ModalMenu = function (_React$Component) {
               "Warehouse Code"
             ),
             React.createElement("input", { type: "text", name: "code", id: "mm-code-input",
-              className: "form-control", defaultValue: phone, required: true })
+              className: "form-control", defaultValue: code, required: true })
           )
         )
       );

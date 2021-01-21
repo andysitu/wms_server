@@ -277,7 +277,7 @@ class ModalMenu extends React.Component {
           <div className="form-group col-md-6">
             <label htmlFor="mm-code-input">Warehouse Code</label>
             <input type="text" name="code" id="mm-code-input" 
-              className="form-control" defaultValue={phone} required />
+              className="form-control" defaultValue={code} required />
           </div>
         </div>
       </div>);
