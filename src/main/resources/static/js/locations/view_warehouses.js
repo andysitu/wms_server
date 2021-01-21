@@ -101,8 +101,46 @@ var WarehouseApp = function (_React$Component) {
       });
     };
 
+    _this.onClick_set_default_warehouse = function (e) {
+      var warehouse_id = e.target.getAttribute('warehouse_id');
+      storage_obj.set_warehouse(warehouse_id);
+      _this.setState({
+        default_warehouse: warehouse_id
+      });
+    };
+
+    _this.create_default_btn = function (warehouse) {
+      if (_this.state.default_warehouse && _this.state.default_warehouse == warehouse.id) {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement(
+            "svg",
+            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-check2", viewBox: "0 0 16 16" },
+            React.createElement("path", { d: "M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" })
+          )
+        );
+      } else {
+        return React.createElement(
+          "button",
+          { className: "btn btn-sm btn-outline-primary",
+            onClick: _this.onClick_set_default_warehouse,
+            warehouse_id: warehouse.id
+          },
+          React.createElement(
+            "svg",
+            { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16",
+              style: { "pointerEvents": "none" },
+              fill: "currentColor", className: "bi bi-check2", viewBox: "0 0 16 16" },
+            React.createElement("path", { d: "M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" })
+          )
+        );
+      }
+    };
+
     _this.state = {
-      warehouses: []
+      warehouses: [],
+      default_warehouse: storage_obj.get_warehouse()
     };
     _this.load_warehouses();
     _this.modalMenu = React.createRef();
@@ -140,6 +178,11 @@ var WarehouseApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
+                "Default"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
                 "Name"
               ),
               React.createElement(
@@ -171,6 +214,11 @@ var WarehouseApp = function (_React$Component) {
               return React.createElement(
                 "tr",
                 { key: warehouse.id },
+                React.createElement(
+                  "td",
+                  null,
+                  _this2.create_default_btn(warehouse)
+                ),
                 React.createElement(
                   "td",
                   null,

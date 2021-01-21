@@ -3,6 +3,7 @@ class WarehouseApp extends React.Component {
     super(props);
     this.state = {
       warehouses: [],
+      default_warehouse: storage_obj.get_warehouse(),
     };
     this.load_warehouses();
     this.modalMenu = React.createRef();
@@ -93,6 +94,37 @@ class WarehouseApp extends React.Component {
       });  
     });
   };
+  onClick_set_default_warehouse = (e) => {
+    var warehouse_id = e.target.getAttribute('warehouse_id');
+    storage_obj.set_warehouse(warehouse_id);
+    this.setState({
+      default_warehouse: warehouse_id,
+    })
+  };
+
+  create_default_btn = (warehouse)=> {
+    if (this.state.default_warehouse 
+        && this.state.default_warehouse == warehouse.id) {
+      return (<div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check2" viewBox="0 0 16 16">
+          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      </div>)
+    } else {
+      return (
+      <button className="btn btn-sm btn-outline-primary"
+        onClick={this.onClick_set_default_warehouse}
+        warehouse_id={warehouse.id}
+      >
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+              style={{"pointerEvents": "none"}}
+              fill="currentColor" className="bi bi-check2" viewBox="0 0 16 16">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+          </svg>
+      </button>);
+    }
+  };
 
   render() {
     return(<div>
@@ -104,6 +136,7 @@ class WarehouseApp extends React.Component {
       <table className="table table-sm">
         <thead>
           <tr>
+            <th scope="col">Default</th>
             <th scope="col">Name</th>
             <th scope="col">City</th>
             <th scope="col">State</th>
@@ -115,6 +148,9 @@ class WarehouseApp extends React.Component {
           {this.state.warehouses.map((warehouse, index) => {
             return (
               <tr key={warehouse.id}>
+                <td>
+                  {this.create_default_btn(warehouse)}
+                </td>
                 <td>{warehouse.name}</td>
                 <td>{warehouse.city}</td>
                 <td>{warehouse.state}</td>
