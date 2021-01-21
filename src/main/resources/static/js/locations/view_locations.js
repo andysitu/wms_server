@@ -85,8 +85,18 @@ var LocationTable = function (_React$Component) {
         type: 'GET',
         context: _this,
         success: function success(warehouses) {
-          this.setState({
-            warehouses: warehouses
+          this.setState(function (state) {
+            if (warehouses.length > 0) {
+              return {
+                warehouses: warehouses,
+                selected_warehouse: warehouses[0].id
+              };
+            } else {
+              return {
+                warehouses: warehouses,
+                selected_warehouse: ""
+              };
+            }
           });
         }
       });
