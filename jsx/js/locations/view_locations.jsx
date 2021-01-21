@@ -3,12 +3,14 @@ class LocationTable extends React.Component {
     super(props);
     this.modalMenu = React.createRef();
     this.state = {
+      warehouses: [],
       areas: [],
       locations: [],
       selected_area: "none",
     }
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
+    this.set_warehouses()
     this.set_areas();
   }
 
@@ -62,6 +64,19 @@ class LocationTable extends React.Component {
       
     })
   };
+  set_warehouses = () => {
+    $.ajax({
+      url: './warehouses',
+      type: 'GET',
+      context: this,
+      success: function(warehouses) {
+        this.setState({
+          warehouses: warehouses,
+        });
+      }
+    });
+  };
+
   set_areas = () => {
     var that = this;
     $.ajax({
@@ -239,6 +254,11 @@ class LocationTable extends React.Component {
   create_warehouse_option = () => {
     return (
       <select className="form-control">
+        {this.state.warehouses.map((warehouse) => {
+          return (<option value={warehouse.id} key={"woption-"+warehouse.id}>
+            {warehouse.name + "-" + warehouse.code}
+          </option>);
+        })}
       </select>);
   }
 

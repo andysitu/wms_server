@@ -79,6 +79,19 @@ var LocationTable = function (_React$Component) {
       });
     };
 
+    _this.set_warehouses = function () {
+      $.ajax({
+        url: './warehouses',
+        type: 'GET',
+        context: _this,
+        success: function success(warehouses) {
+          this.setState({
+            warehouses: warehouses
+          });
+        }
+      });
+    };
+
     _this.set_areas = function () {
       var that = _this;
       $.ajax({
@@ -305,17 +318,29 @@ var LocationTable = function (_React$Component) {
     };
 
     _this.create_warehouse_option = function () {
-      return React.createElement("select", { className: "form-control" });
+      return React.createElement(
+        "select",
+        { className: "form-control" },
+        _this.state.warehouses.map(function (warehouse) {
+          return React.createElement(
+            "option",
+            { value: warehouse.id, key: "woption-" + warehouse.id },
+            warehouse.name + "-" + warehouse.code
+          );
+        })
+      );
     };
 
     _this.modalMenu = React.createRef();
     _this.state = {
+      warehouses: [],
       areas: [],
       locations: [],
       selected_area: "none"
     };
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;
+    _this.set_warehouses();
     _this.set_areas();
     return _this;
   }
