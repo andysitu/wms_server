@@ -4,7 +4,7 @@ var storage_obj = {
     return window.localStorage.getItem(this.warehouse_property);
   },
   set_warehouse(warehouse_id) {
-    window.localStorage.setitem(this.warehouse_property, warehouse_id);
+    window.localStorage.setItem(this.warehouse_property, warehouse_id);
   },
   clear_warehouse_if_id(warehouse_id) {
     var w_id = this.get_warehouse();
