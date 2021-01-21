@@ -157,6 +157,11 @@ var WarehouseApp = function (_React$Component) {
         "div",
         null,
         React.createElement(
+          "h1",
+          null,
+          "Warehouses"
+        ),
+        React.createElement(
           "div",
           { className: "m-1" },
           React.createElement(

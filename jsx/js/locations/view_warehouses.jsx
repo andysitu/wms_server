@@ -129,6 +129,7 @@ class WarehouseApp extends React.Component {
 
   render() {
     return(<div>
+      <h1>Warehouses</h1>
       <div className="m-1">
         <button className="btn btn-sm btn-primary"
           onClick={this.onClick_add_warehouse}
