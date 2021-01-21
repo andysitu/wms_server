@@ -6,7 +6,3 @@
 .del-item-itemSkus-span {
     cursor: pointer;
 }
-
-.btn-with-svgs > * {
-    pointer-events: none;   
-}

@@ -333,7 +333,7 @@ var ItemInfoRow = function (_React$Component2) {
         itemSku.sku,
         React.createElement(
           "button",
-          { type: "button", className: "btn btn-sm btn-outline-dark btn-with-svgs",
+          { type: "button", className: "btn btn-sm btn-outline-dark",
             sku: itemSku.sku, title: "Show barcodes menu",
             onClick: _this3.onClick_show_barcode },
           React.createElement(
@@ -344,7 +344,7 @@ var ItemInfoRow = function (_React$Component2) {
         ),
         React.createElement(
           "button",
-          { type: "button", className: "btn btn-sm btn-outline-danger btn-with-svgs",
+          { type: "button", className: "btn btn-sm btn-outline-danger",
             itemsku_id: itemSku.id, itemsku: itemSku.sku, title: "Delete item sku",
             onClick: _this3.onClick_delete_itemInfo_itemSku },
           React.createElement(
