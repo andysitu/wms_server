@@ -140,6 +140,7 @@ class WarehouseApp extends React.Component {
           <tr>
             <th scope="col">Default</th>
             <th scope="col">Name</th>
+            <th scope="col">Code</th>
             <th scope="col">City</th>
             <th scope="col">State</th>
             <th scope="col">Country</th>
@@ -153,6 +154,7 @@ class WarehouseApp extends React.Component {
                 <td>
                   {this.create_default_btn(warehouse)}
                 </td>
+                <td>{warehouse.code}</td>
                 <td>{warehouse.name}</td>
                 <td>{warehouse.city}</td>
                 <td>{warehouse.state}</td>

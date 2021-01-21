@@ -194,6 +194,11 @@ var WarehouseApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
+                "Code"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
                 "City"
               ),
               React.createElement(
@@ -224,6 +229,11 @@ var WarehouseApp = function (_React$Component) {
                   "td",
                   null,
                   _this2.create_default_btn(warehouse)
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  warehouse.code
                 ),
                 React.createElement(
                   "td",
