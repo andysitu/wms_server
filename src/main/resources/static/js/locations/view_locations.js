@@ -304,6 +304,10 @@ var LocationTable = function (_React$Component) {
       );
     };
 
+    _this.create_warehouse_option = function () {
+      return React.createElement("select", { className: "form-control" });
+    };
+
     _this.modalMenu = React.createRef();
     _this.state = {
       areas: [],
@@ -369,16 +373,34 @@ var LocationTable = function (_React$Component) {
           ),
           React.createElement(
             "div",
-            { className: "col-3 form-group row" },
+            { className: "col-7 form-group row" },
             React.createElement(
-              "label",
-              { className: "col-form-label col-sm-3" },
-              "Area: "
+              "div",
+              { className: "col-6  form-row row" },
+              React.createElement(
+                "label",
+                { className: "col-form-label col-sm-4" },
+                "Warehouse: "
+              ),
+              React.createElement(
+                "div",
+                { className: "col-sm-8" },
+                this.create_warehouse_option()
+              )
             ),
             React.createElement(
               "div",
-              { className: "col-sm-6" },
-              this.create_area_options()
+              { className: "col-5 form-row row" },
+              React.createElement(
+                "label",
+                { className: "col-form-label col-sm-3" },
+                "Area: "
+              ),
+              React.createElement(
+                "div",
+                { className: "col-sm-9" },
+                this.create_area_options()
+              )
             ),
             React.createElement(
               "button",

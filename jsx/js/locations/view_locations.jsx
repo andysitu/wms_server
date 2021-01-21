@@ -236,6 +236,11 @@ class LocationTable extends React.Component {
         <option value="all">All</option>
       </select>);
   }
+  create_warehouse_option = () => {
+    return (
+      <select className="form-control">
+      </select>);
+  }
 
   render () {
     return (<div>
@@ -255,12 +260,19 @@ class LocationTable extends React.Component {
             </svg>
           </button>
         </div>
-        <div className="col-3 form-group row">
-          <label className="col-form-label col-sm-3">Area: </label>
-          <div className="col-sm-6">
-            {this.create_area_options()}
+        <div className="col-7 form-group row">
+          <div className="col-6  form-row row">
+            <label className="col-form-label col-sm-4">Warehouse: </label>
+            <div className="col-sm-8">
+              {this.create_warehouse_option()}
+            </div>
           </div>
-
+          <div className="col-5 form-row row">
+            <label className="col-form-label col-sm-3">Area: </label>
+            <div className="col-sm-9">
+              {this.create_area_options()}
+            </div>
+          </div>
           <button type="button" className="col btn btn-sm btn-outline-secondary"
             onClick={this.onClick_show_area}>
             Show
