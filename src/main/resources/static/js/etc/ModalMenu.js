@@ -273,7 +273,8 @@ var ModalMenu = function (_React$Component) {
           city = edit_status ? _this.state.data.city : "",
           state = edit_status ? _this.state.data.state : "",
           zip = edit_status ? _this.state.data.zip : "",
-          phone = edit_status ? _this.state.data.phone : "";
+          phone = edit_status ? _this.state.data.phone : "",
+          code = edit_status ? _this.state.data.code : "";
       return React.createElement(
         "div",
         null,
@@ -364,14 +365,29 @@ var ModalMenu = function (_React$Component) {
         ),
         React.createElement(
           "div",
-          { className: "form-group" },
+          { className: "form-row" },
           React.createElement(
-            "label",
-            { htmlFor: "mm-phone-input" },
-            "Phone"
+            "div",
+            { className: "form-group col-md-6" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-phone-input" },
+              "Phone"
+            ),
+            React.createElement("input", { type: "text", name: "phone", id: "mm-phone-input",
+              className: "form-control", defaultValue: phone })
           ),
-          React.createElement("input", { type: "text", name: "phone", id: "mm-phone-input",
-            className: "form-control", defaultValue: phone })
+          React.createElement(
+            "div",
+            { className: "form-group col-md-6" },
+            React.createElement(
+              "label",
+              { htmlFor: "mm-code-input" },
+              "Warehouse Code"
+            ),
+            React.createElement("input", { type: "text", name: "code", id: "mm-code-input",
+              className: "form-control", defaultValue: phone, required: true })
+          )
         )
       );
     };

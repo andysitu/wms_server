@@ -225,7 +225,8 @@ class ModalMenu extends React.Component {
         city        = edit_status ? this.state.data.city : "",
         state       = edit_status ? this.state.data.state : "",
         zip         = edit_status ? this.state.data.zip : "",
-        phone       = edit_status ? this.state.data.phone : "";
+        phone       = edit_status ? this.state.data.phone : "",
+        code        = edit_status ? this.state.data.code : "";
     return (
       <div>
         <div className="form-row">
@@ -267,10 +268,17 @@ class ModalMenu extends React.Component {
               name="zip" defaultValue={zip} required />
           </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="mm-phone-input">Phone</label>
-          <input type="text" name="phone" id="mm-phone-input" 
-            className="form-control" defaultValue={phone} />
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="mm-phone-input">Phone</label>
+            <input type="text" name="phone" id="mm-phone-input" 
+              className="form-control" defaultValue={phone} />
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="mm-code-input">Warehouse Code</label>
+            <input type="text" name="code" id="mm-code-input" 
+              className="form-control" defaultValue={phone} required />
+          </div>
         </div>
       </div>);
   };
