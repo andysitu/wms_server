@@ -65,6 +65,7 @@ var WarehouseApp = function (_React$Component) {
           type: "DELETE",
           context: _this,
           success: function success() {
+            storage_obj.clear_warehouse_if_id(warehouse_id);
             this.setState(function (state) {
               var new_warehouse = [];
               for (var i = 0; i < state.warehouses.length; i++) {

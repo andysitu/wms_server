@@ -59,6 +59,7 @@ class WarehouseApp extends React.Component {
         type: "DELETE",
         context: this,
         success: function() {
+          storage_obj.clear_warehouse_if_id(warehouse_id);
           this.setState((state) => {
             var new_warehouse = [];
             for (let i=0; i<state.warehouses.length; i++) {
