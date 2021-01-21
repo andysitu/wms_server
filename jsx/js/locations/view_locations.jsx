@@ -249,9 +249,19 @@ class LocationTable extends React.Component {
   };
 
   onChange_warehouse = (e) => {
-    this.setState({
-      selected_warehouse: e.target.value,
-    })
+    var warehouse_id = e.target.value;
+    $.ajax({
+      url: "./warehouses/" + warehouse_id + "/areas",
+      type: "GET",
+      context: this,
+      success: function(areas) {
+        this.setState({
+            selected_warehouse: warehouse_id,
+            areas: areas,
+            selected_area: (areas.length>0) ? areas[0].id : "",
+        });
+      },
+    });
   }
 
   create_area_options =() =>  {

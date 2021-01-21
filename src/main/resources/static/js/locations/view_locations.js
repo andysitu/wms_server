@@ -306,8 +306,18 @@ var LocationTable = function (_React$Component) {
     };
 
     _this.onChange_warehouse = function (e) {
-      _this.setState({
-        selected_warehouse: e.target.value
+      var warehouse_id = e.target.value;
+      $.ajax({
+        url: "./warehouses/" + warehouse_id + "/areas",
+        type: "GET",
+        context: _this,
+        success: function success(areas) {
+          this.setState({
+            selected_warehouse: warehouse_id,
+            areas: areas,
+            selected_area: areas.length > 0 ? areas[0].id : ""
+          });
+        }
       });
     };
 
