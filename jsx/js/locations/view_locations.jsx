@@ -6,7 +6,8 @@ class LocationTable extends React.Component {
       warehouses: [],
       areas: [],
       locations: [],
-      selected_area: "none",
+      selected_area: "",
+      selected_warehouse: "",
     }
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
@@ -70,8 +71,18 @@ class LocationTable extends React.Component {
       type: 'GET',
       context: this,
       success: function(warehouses) {
-        this.setState({
-          warehouses: warehouses,
+        this.setState(state => {
+          if (warehouses.length > 0) {
+            return {
+              warehouses: warehouses,
+              selected_warehouse: warehouses[0].id,
+            }
+          } else {
+            return {
+              warehouses: warehouses,
+              selected_warehouse: "",
+            }
+          }
         });
       }
     });
