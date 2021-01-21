@@ -1,5 +1,6 @@
 package com.wms.wms_server.controllers;
 
+import com.wms.wms_server.repository.AreaRepository;
 import com.wms.wms_server.repository.WarehouseRepository;
 import com.wms.wms_server.services.WarehouseService;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wms.wms_server.model.locations.Area;
 import com.wms.wms_server.model.locations.Warehouse;
+import com.wms.wms_server.model.response.AreaResponse;
 import com.wms.wms_server.model.response.WarehouseResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,8 @@ public class WarehouseController {
     WarehouseRepository warehouseRepository;
     @Autowired
     WarehouseService warehouseService;
+    @Autowired
+    AreaRepository areaRepository;
     
     @GetMapping(value = "/view_warehouses")
     public String view_warehouses() {
@@ -55,6 +60,19 @@ public class WarehouseController {
     public String delete_warehouse(@PathVariable("warehouseId") Long warehouseId) {
         warehouseRepository.deleteById(warehouseId);
         return "OK";
+    }
+
+    @RequestMapping(path="/warehouses/{warehouseId}/areas", produces="application/json",
+        method=RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<AreaResponse> get_areas(@PathVariable("warehouseId") Long warehouseId) {
+        ArrayList<AreaResponse> areaList = new ArrayList<>();
+        AreaResponse a;
+        for(Area area: areaRepository.findByWarehouseId(warehouseId)) {
+            a = new AreaResponse(area.getArea(), area.getId());
+            areaList.add(a);
+        }
+        return areaList;
     }
 
     @RequestMapping(path="/warehouses/{warehouseId}", method=RequestMethod.PATCH)
