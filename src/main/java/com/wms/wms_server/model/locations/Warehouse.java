@@ -33,6 +33,7 @@ public class Warehouse {
     @Getter @Setter private String state;
     @Getter @Setter private String country;
     @Getter @Setter private String zip;
+    @Getter @Setter private String code;
 
     @CreatedDate
     private Date createdDate;

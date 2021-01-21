@@ -31,6 +31,7 @@ public class WarehouseService {
         response.setState(warehouse.getState());
         response.setId(warehouse.getId());
         response.setPhone(warehouse.getPhone());
+        response.setCode(warehouse.getCode());
 
         return response;
     }
@@ -67,6 +68,9 @@ public class WarehouseService {
             }
             if (check_request(request, "phone") == true) {
                 warehouse.setPhone(request.getParameter("phone"));
+            }
+            if (check_request(request, "code") == true) {
+                warehouse.setCode(request.getParameter("code"));
             }
             warehouseRepository.save(warehouse);
             return warehouse;

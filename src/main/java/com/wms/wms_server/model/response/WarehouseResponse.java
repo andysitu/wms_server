@@ -14,6 +14,7 @@ public class WarehouseResponse {
     @Getter @Setter private String country;
     @Getter @Setter private String zip;
     @Getter @Setter private String phone;
+    @Getter @Setter private String code;
 
     public WarehouseResponse(String name) {
         this.name = name;
