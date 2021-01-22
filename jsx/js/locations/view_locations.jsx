@@ -15,21 +15,21 @@ class LocationTable extends React.Component {
   }
 
   create_location = (data) => {
-    const that = this;
     $.ajax({
       type: "POST",
       url: "./locations",
       contentType: "application/json",
+      context: this,
       data: JSON.stringify(data),
       success: function(new_locations) {
         for (var i=0; i< new_locations.length; i++) {
-          that.convert_location(new_locations[i]);
+          this.convert_location(new_locations[i]);
         }
-        that.setState(
-          {locations: that.state.locations.concat(new_locations)},
+        this.setState(
+          {locations: this.state.locations.concat(new_locations)},
           () => {
             if (new_locations.length > 0) {
-              that.add_area_to_state(
+              this.add_area_to_state(
                 new_locations[0].area_id, new_locations[0].area);
             }
           });
@@ -43,7 +43,22 @@ class LocationTable extends React.Component {
       window.alert("Please create/select a warehouse first.");
       return;
     }
-    this.modalMenu.current.show_menu("create_location", {}, this.create_location);
+    var warehouse_name,
+        warehouses = this.state.warehouses;
+    for (var i=0; i<warehouses.length; i++) {
+      if (warehouses[i].id == this.state.selected_warehouse) {
+        warehouse_name = warehouses[i].name;
+        break;
+      }
+    }
+    if (!warehouse_name) {
+      window.alert("Error: please reselect warehouse");
+    }
+    var data = {
+      warehouse_name: warehouse_name,
+      warehouse_id: this.state.selected_warehouse,
+    }
+    this.modalMenu.current.show_menu("create_location", data, this.create_location);
   };
 
   // Changes location object to formatted data

@@ -15,19 +15,21 @@ var LocationTable = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (LocationTable.__proto__ || Object.getPrototypeOf(LocationTable)).call(this, props));
 
     _this.create_location = function (data) {
-      var that = _this;
       $.ajax({
         type: "POST",
         url: "./locations",
         contentType: "application/json",
+        context: _this,
         data: JSON.stringify(data),
         success: function success(new_locations) {
+          var _this2 = this;
+
           for (var i = 0; i < new_locations.length; i++) {
-            that.convert_location(new_locations[i]);
+            this.convert_location(new_locations[i]);
           }
-          that.setState({ locations: that.state.locations.concat(new_locations) }, function () {
+          this.setState({ locations: this.state.locations.concat(new_locations) }, function () {
             if (new_locations.length > 0) {
-              that.add_area_to_state(new_locations[0].area_id, new_locations[0].area);
+              _this2.add_area_to_state(new_locations[0].area_id, new_locations[0].area);
             }
           });
         }
@@ -39,7 +41,22 @@ var LocationTable = function (_React$Component) {
         window.alert("Please create/select a warehouse first.");
         return;
       }
-      _this.modalMenu.current.show_menu("create_location", {}, _this.create_location);
+      var warehouse_name,
+          warehouses = _this.state.warehouses;
+      for (var i = 0; i < warehouses.length; i++) {
+        if (warehouses[i].id == _this.state.selected_warehouse) {
+          warehouse_name = warehouses[i].name;
+          break;
+        }
+      }
+      if (!warehouse_name) {
+        window.alert("Error: please reselect warehouse");
+      }
+      var data = {
+        warehouse_name: warehouse_name,
+        warehouse_id: _this.state.selected_warehouse
+      };
+      _this.modalMenu.current.show_menu("create_location", data, _this.create_location);
     };
 
     _this.add_area_to_state = function (area_id, area_string) {
@@ -89,7 +106,7 @@ var LocationTable = function (_React$Component) {
         type: 'GET',
         context: _this,
         success: function success(warehouses) {
-          var _this2 = this;
+          var _this3 = this;
 
           this.setState(function (state) {
             if (warehouses.length > 0) {
@@ -105,7 +122,7 @@ var LocationTable = function (_React$Component) {
             }
           }, function () {
             if (warehouses.length > 0) {
-              _this2.load_areas_by_warehouse();
+              _this3.load_areas_by_warehouse();
             }
           });
         }
@@ -262,7 +279,7 @@ var LocationTable = function (_React$Component) {
         url: url,
         context: _this,
         success: function success(locations) {
-          var _this3 = this;
+          var _this4 = this;
 
           var _iteratorNormalCompletion3 = true;
           var _didIteratorError3 = false;
@@ -292,7 +309,7 @@ var LocationTable = function (_React$Component) {
           this.setState({
             locations: locations
           }, function () {
-            console.log(_this3.state.locations);
+            console.log(_this4.state.locations);
           });
         }
       });
@@ -386,7 +403,7 @@ var LocationTable = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return React.createElement(
         "div",
@@ -526,9 +543,9 @@ var LocationTable = function (_React$Component) {
               return React.createElement(LocationRow, { key: location.id,
                 index: index,
                 location: location,
-                show_barcode: _this4.show_barcode,
-                onClick_row_checkbox: _this4.onClick_row_checkbox,
-                delete_location: _this4.delete_location
+                show_barcode: _this5.show_barcode,
+                onClick_row_checkbox: _this5.onClick_row_checkbox,
+                delete_location: _this5.delete_location
               });
             })
           )
