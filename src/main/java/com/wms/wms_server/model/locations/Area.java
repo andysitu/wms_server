@@ -42,8 +42,9 @@ public class Area {
     public Area() {
         this.area = "NONE";
     }
-    public Area(String area) {
+    public Area(Warehouse warehouse ,String area) {
         this.area = area;
+        this.warehouse = warehouse;
     }
 
     public String getArea() {
