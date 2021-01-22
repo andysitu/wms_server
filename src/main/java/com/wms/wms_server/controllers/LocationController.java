@@ -58,14 +58,6 @@ public class LocationController {
         return locationService.convertLocations(locationRepository.findAll());
     }
 
-    // @RequestMapping(path="/locations", produces="text/plain", method=RequestMethod.POST)
-    @RequestMapping(path="/locations", produces="application/json;", method=RequestMethod.POST)
-    @ResponseBody
-    public List<LocationResponse> create_location(@RequestBody LocationRequest lr) {
-        List<Location> locs = locationService.buildLocations(lr);
-        return locationService.convertLocations(locs);
-    }
-
     // @GetMapping(value={"/"})
     // public String view_index() {
     //     return "index";
