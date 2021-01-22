@@ -396,7 +396,9 @@ var ModalMenu = function (_React$Component) {
       if (_this.state.menu_type == "none") {
         return React.createElement("div", null);
       } else if (_this.state.menu_type == "create_location") {
-        return React.createElement(CreateLocationMenu, null);
+        return React.createElement(CreateLocationMenu, {
+          warehouse_name: _this.state.data.warehouse_name,
+          warehouse_code: _this.state.data.warehouse_code });
       } else if (_this.state.menu_type == "create_item_info" || _this.state.menu_type == "edit_item_info") {
         return _this.create_item_info_menu();
       } else if (_this.state.menu_type == "create_barcode") {
@@ -610,6 +612,14 @@ var CreateLocationMenu = function (_React$Component2) {
       return React.createElement(
         "div",
         null,
+        React.createElement(
+          "h3",
+          null,
+          "Warehouse: ",
+          this.props.warehouse_name,
+          "-",
+          this.props.warehouse_code
+        ),
         React.createElement(
           "div",
           { className: "form-group" },

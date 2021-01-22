@@ -43,11 +43,12 @@ class LocationTable extends React.Component {
       window.alert("Please create/select a warehouse first.");
       return;
     }
-    var warehouse_name,
+    var warehouse_name, warehouse_code,
         warehouses = this.state.warehouses;
     for (var i=0; i<warehouses.length; i++) {
       if (warehouses[i].id == this.state.selected_warehouse) {
         warehouse_name = warehouses[i].name;
+        warehouse_code = warehouses[i].code;
         break;
       }
     }
@@ -57,6 +58,7 @@ class LocationTable extends React.Component {
     var data = {
       warehouse_name: warehouse_name,
       warehouse_id: this.state.selected_warehouse,
+      warehouse_code: warehouse_code
     }
     this.modalMenu.current.show_menu("create_location", data, this.create_location);
   };

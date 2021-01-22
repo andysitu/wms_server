@@ -42,10 +42,12 @@ var LocationTable = function (_React$Component) {
         return;
       }
       var warehouse_name,
+          warehouse_code,
           warehouses = _this.state.warehouses;
       for (var i = 0; i < warehouses.length; i++) {
         if (warehouses[i].id == _this.state.selected_warehouse) {
           warehouse_name = warehouses[i].name;
+          warehouse_code = warehouses[i].code;
           break;
         }
       }
@@ -54,7 +56,8 @@ var LocationTable = function (_React$Component) {
       }
       var data = {
         warehouse_name: warehouse_name,
-        warehouse_id: _this.state.selected_warehouse
+        warehouse_id: _this.state.selected_warehouse,
+        warehouse_code: warehouse_code
       };
       _this.modalMenu.current.show_menu("create_location", data, _this.create_location);
     };

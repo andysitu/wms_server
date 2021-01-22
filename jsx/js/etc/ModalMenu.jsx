@@ -287,7 +287,9 @@ class ModalMenu extends React.Component {
     if (this.state.menu_type == "none") {
       return (<div></div>);
     } else if (this.state.menu_type == "create_location") {
-      return (<CreateLocationMenu />);
+      return (<CreateLocationMenu 
+                warehouse_name={this.state.data.warehouse_name}
+                warehouse_code={this.state.data.warehouse_code} />);
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
       return this.create_item_info_menu();
@@ -399,6 +401,7 @@ class ModalMenu extends React.Component {
 class CreateLocationMenu extends React.Component {
   render() {
     return (<div>
+      <h3>Warehouse: {this.props.warehouse_name}-{this.props.warehouse_code}</h3>
       <div className="form-group">
         <label>Area</label>
         <input type="text" className="form-control" min="0" name="area" required></input>
