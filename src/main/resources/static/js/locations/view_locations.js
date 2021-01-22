@@ -102,22 +102,6 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.set_areas = function () {
-      var that = _this;
-      $.ajax({
-        url: "../areas",
-        type: "GET",
-        success: function success(areas) {
-          if (areas.length > 0) that.setState({
-            areas: areas,
-            selected_area: areas[0].id
-          });else {
-            that.setState({ areas: [] });
-          }
-        }
-      });
-    };
-
     _this.onChange_area = function (e) {
       _this.setState({
         selected_area: e.target.value

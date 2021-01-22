@@ -11,8 +11,7 @@ class LocationTable extends React.Component {
     }
     this.prev_clicked_index = null;
     this.prev_clicked_checked = null;
-    this.set_warehouses()
-    this.set_areas();
+    this.set_warehouses();
   }
 
   create_location = (data) => {
@@ -85,24 +84,6 @@ class LocationTable extends React.Component {
           }
         });
       }
-    });
-  };
-
-  set_areas = () => {
-    var that = this;
-    $.ajax({
-      url: "../areas",
-      type: "GET",
-      success: function(areas) {
-        if (areas.length > 0)
-          that.setState({
-            areas: areas,
-            selected_area: areas[0].id,
-          });
-        else {
-          that.setState({areas: [],});
-        }
-      },
     });
   };
 
