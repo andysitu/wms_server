@@ -288,22 +288,6 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.set_areas_by_warehouse = function () {
-      var that = _this;
-      $.ajax({
-        url: "../areas",
-        type: "GET",
-        success: function success(areas) {
-          if (areas.length > 0) that.setState({
-            areas: areas,
-            selected_area: areas[0].id
-          });else {
-            that.setState({ areas: [] });
-          }
-        }
-      });
-    };
-
     _this.load_areas_by_warehouse = function () {
       $.ajax({
         url: "./warehouses/" + _this.state.selected_warehouse + "/areas",
@@ -385,6 +369,9 @@ var LocationTable = function (_React$Component) {
     }
 
     // New Objects created are not deep copies (only use Object.assign)
+
+
+    // Loads area by warehouse id set by state.selected_warehouse
 
   }, {
     key: "render",
