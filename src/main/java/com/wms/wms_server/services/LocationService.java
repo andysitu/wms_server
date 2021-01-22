@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wms.wms_server.model.locations.Location;
+import com.wms.wms_server.model.locations.Warehouse;
 import com.wms.wms_server.model.response.LocationResponse;
 import com.wms.wms_server.repository.AreaRepository;
 import com.wms.wms_server.repository.LocationRepository;
+import com.wms.wms_server.repository.WarehouseRepository;
 import com.wms.wms_server.model.request.LocationRequest;
 
 import com.wms.wms_server.model.locations.Area;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 
 @Service
@@ -20,6 +23,8 @@ public class LocationService {
     private LocationRepository locationRepository;
     @Autowired
     private AreaRepository areaRepository;
+    @Autowired 
+    private WarehouseRepository warehouseRepository;
 
     public LocationResponse convertLocation(Location l) {
         LocationResponse lresponse = new LocationResponse(
@@ -42,12 +47,17 @@ public class LocationService {
      * @param locReq : LocationRequest specifying the parameter range for Location
      * @return ArrayList of location objects
      */
-    public List<Location> buildLocations(LocationRequest locReq) {
+    public List<Location> buildLocations(Long warehouseId,LocationRequest locReq) {
         ArrayList<Location> locs_list = new ArrayList<Location>();
         Location loc;
         Area area;
+        Optional<Warehouse> oWarehouse = warehouseRepository.findById(warehouseId);
+        if (oWarehouse.isEmpty()) {
+            return locs_list;
+        }
+        Warehouse warehouse = oWarehouse.get();
         if (!areaRepository.existsByArea(locReq.area)) {
-            area = new Area(locReq.area);
+            area = new Area(warehouse, locReq.area);
             areaRepository.save(area);
         } else {
             area = areaRepository.getByArea(locReq.area);
