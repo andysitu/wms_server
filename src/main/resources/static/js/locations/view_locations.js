@@ -246,7 +246,7 @@ var LocationTable = function (_React$Component) {
         return;
       }
 
-      var url = area == null || area === "all" ? "./locations" : "../locations/area/" + area;
+      var url = area === "all" || area == "" ? "./locations" : "../locations/area/" + area;
       $.ajax({
         type: "GET",
         url: url,
@@ -288,20 +288,40 @@ var LocationTable = function (_React$Component) {
       });
     };
 
-    _this.onChange_warehouse = function (e) {
-      var warehouse_id = e.target.value;
+    _this.set_areas_by_warehouse = function () {
+      var that = _this;
       $.ajax({
-        url: "./warehouses/" + warehouse_id + "/areas",
+        url: "../areas",
+        type: "GET",
+        success: function success(areas) {
+          if (areas.length > 0) that.setState({
+            areas: areas,
+            selected_area: areas[0].id
+          });else {
+            that.setState({ areas: [] });
+          }
+        }
+      });
+    };
+
+    _this.load_areas_by_warehouse = function () {
+      $.ajax({
+        url: "./warehouses/" + _this.state.selected_warehouse + "/areas",
         type: "GET",
         context: _this,
         success: function success(areas) {
           this.setState({
-            selected_warehouse: warehouse_id,
             areas: areas,
             selected_area: areas.length > 0 ? areas[0].id : ""
           });
         }
       });
+    };
+
+    _this.onChange_warehouse = function (e) {
+      _this.setState({
+        selected_warehouse: e.target.value
+      }, _this.load_areas_by_warehouse);
     };
 
     _this.create_area_options = function () {
@@ -352,7 +372,6 @@ var LocationTable = function (_React$Component) {
     _this.prev_clicked_index = null;
     _this.prev_clicked_checked = null;
     _this.set_warehouses();
-    _this.set_areas();
     return _this;
   }
 

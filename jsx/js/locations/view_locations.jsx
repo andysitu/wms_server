@@ -210,7 +210,7 @@ class LocationTable extends React.Component {
       return;
     }
 
-    var url = (area == null || area === "all") ? 
+    var url = (area === "all" || area == "") ? 
               "./locations" : "../locations/area/" + area;
     $.ajax({
       type: "GET",
@@ -227,20 +227,42 @@ class LocationTable extends React.Component {
     });
   };
 
-  onChange_warehouse = (e) => {
-    var warehouse_id = e.target.value;
+  set_areas_by_warehouse = () => {
+    var that = this;
     $.ajax({
-      url: "./warehouses/" + warehouse_id + "/areas",
+      url: "../areas",
+      type: "GET",
+      success: function(areas) {
+        if (areas.length > 0)
+          that.setState({
+            areas: areas,
+            selected_area: areas[0].id,
+          });
+        else {
+          that.setState({areas: [],});
+        }
+      },
+    });
+  };
+
+  load_areas_by_warehouse = () => {
+    $.ajax({
+      url: "./warehouses/" + this.state.selected_warehouse + "/areas",
       type: "GET",
       context: this,
       success: function(areas) {
         this.setState({
-            selected_warehouse: warehouse_id,
             areas: areas,
             selected_area: (areas.length>0) ? areas[0].id : "",
         });
       },
     });
+  }
+
+  onChange_warehouse = (e) => {
+    this.setState({
+      selected_warehouse: e.target.value,
+    }, this.load_areas_by_warehouse);
   }
 
   create_area_options =() =>  {
