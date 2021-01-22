@@ -2,6 +2,7 @@ package com.wms.wms_server.controllers;
 
 import com.wms.wms_server.repository.AreaRepository;
 import com.wms.wms_server.repository.WarehouseRepository;
+import com.wms.wms_server.services.LocationService;
 import com.wms.wms_server.services.WarehouseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wms.wms_server.model.locations.Area;
 import com.wms.wms_server.model.locations.Warehouse;
+import com.wms.wms_server.model.request.LocationRequest;
 import com.wms.wms_server.model.response.AreaResponse;
 import com.wms.wms_server.model.response.WarehouseResponse;
+import com.wms.wms_server.model.locations.Location;
+import com.wms.wms_server.model.response.LocationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -32,6 +36,8 @@ public class WarehouseController {
     WarehouseService warehouseService;
     @Autowired
     AreaRepository areaRepository;
+    @Autowired
+    LocationService locationService;
     
     @GetMapping(value = "/view_warehouses")
     public String view_warehouses() {
@@ -81,5 +87,17 @@ public class WarehouseController {
                     HttpServletRequest request) {
         Warehouse warehouse = warehouseService.update_warehouse(warehouseId, request);
         return warehouseService.convert_to_response(warehouse);
+    }
+
+    @RequestMapping(path="/warehouses/{warehouseId}/locations", produces="application/json",
+        method=RequestMethod.POST)
+    @ResponseBody
+    public List<LocationResponse> create_locations(
+        @PathVariable("warehouseId") Long warehouseId,
+        @RequestBody LocationRequest lr) 
+    {
+        List<Location> locs = locationService.buildLocations(warehouseId, lr);
+        return locationService.convertLocations(locs);
+        
     }
 }
