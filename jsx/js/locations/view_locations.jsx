@@ -38,6 +38,11 @@ class LocationTable extends React.Component {
   };
 
   show_create_loc_menu = () => {
+    if (this.state.warehouses.length == 0 || 
+        this.state.selected_warehouse == "") {
+      window.alert("Please create/select a warehouse first.");
+      return;
+    }
     this.modalMenu.current.show_menu("create_location", {}, this.create_location);
   };
 

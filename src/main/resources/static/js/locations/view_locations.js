@@ -35,6 +35,10 @@ var LocationTable = function (_React$Component) {
     };
 
     _this.show_create_loc_menu = function () {
+      if (_this.state.warehouses.length == 0 || _this.state.selected_warehouse == "") {
+        window.alert("Please create/select a warehouse first.");
+        return;
+      }
       _this.modalMenu.current.show_menu("create_location", {}, _this.create_location);
     };
 
