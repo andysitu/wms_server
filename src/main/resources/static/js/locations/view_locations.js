@@ -15,9 +15,12 @@ var LocationTable = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (LocationTable.__proto__ || Object.getPrototypeOf(LocationTable)).call(this, props));
 
     _this.create_location = function (data) {
+      if (!_this.state.selected_warehouse || _this.state.selected_warehouse.length == 0) {
+        return;
+      }
       $.ajax({
         type: "POST",
-        url: "./locations",
+        url: "./warehouses/" + _this.state.selected_warehouse + "/locations",
         contentType: "application/json",
         context: _this,
         data: JSON.stringify(data),

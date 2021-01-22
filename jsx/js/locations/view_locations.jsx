@@ -15,9 +15,12 @@ class LocationTable extends React.Component {
   }
 
   create_location = (data) => {
+    if (!this.state.selected_warehouse || this.state.selected_warehouse.length == 0) {
+      return;
+    }
     $.ajax({
       type: "POST",
-      url: "./locations",
+      url: "./warehouses/" + this.state.selected_warehouse + "/locations",
       contentType: "application/json",
       context: this,
       data: JSON.stringify(data),
