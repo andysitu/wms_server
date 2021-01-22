@@ -85,6 +85,8 @@ var LocationTable = function (_React$Component) {
         type: 'GET',
         context: _this,
         success: function success(warehouses) {
+          var _this2 = this;
+
           this.setState(function (state) {
             if (warehouses.length > 0) {
               return {
@@ -96,6 +98,10 @@ var LocationTable = function (_React$Component) {
                 warehouses: warehouses,
                 selected_warehouse: ""
               };
+            }
+          }, function () {
+            if (warehouses.length > 0) {
+              _this2.load_areas_by_warehouse();
             }
           });
         }
@@ -252,7 +258,7 @@ var LocationTable = function (_React$Component) {
         url: url,
         context: _this,
         success: function success(locations) {
-          var _this2 = this;
+          var _this3 = this;
 
           var _iteratorNormalCompletion3 = true;
           var _didIteratorError3 = false;
@@ -282,7 +288,7 @@ var LocationTable = function (_React$Component) {
           this.setState({
             locations: locations
           }, function () {
-            console.log(_this2.state.locations);
+            console.log(_this3.state.locations);
           });
         }
       });
@@ -376,7 +382,7 @@ var LocationTable = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return React.createElement(
         "div",
@@ -516,9 +522,9 @@ var LocationTable = function (_React$Component) {
               return React.createElement(LocationRow, { key: location.id,
                 index: index,
                 location: location,
-                show_barcode: _this3.show_barcode,
-                onClick_row_checkbox: _this3.onClick_row_checkbox,
-                delete_location: _this3.delete_location
+                show_barcode: _this4.show_barcode,
+                onClick_row_checkbox: _this4.onClick_row_checkbox,
+                delete_location: _this4.delete_location
               });
             })
           )

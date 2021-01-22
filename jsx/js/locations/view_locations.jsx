@@ -82,6 +82,10 @@ class LocationTable extends React.Component {
               selected_warehouse: "",
             }
           }
+        }, () => {
+          if (warehouses.length > 0) {
+            this.load_areas_by_warehouse();
+          }
         });
       }
     });
