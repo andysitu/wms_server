@@ -303,7 +303,6 @@ class ItemInfoRow extends React.Component {
       window.alert(`Please create at least 1 SKU for item '${this.state.data.itemName}' first.`);
       return;
     }
-    
   };
 
   render() {
