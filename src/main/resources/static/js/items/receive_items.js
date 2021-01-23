@@ -21,10 +21,47 @@ var ReceiveItemApp = function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        "HI HI"
+        React.createElement(
+          "table",
+          null,
+          React.createElement(
+            "thead",
+            null,
+            React.createElement(
+              "tr",
+              null,
+              React.createElement(
+                "th",
+                { scole: "col" },
+                "Name"
+              ),
+              React.createElement(
+                "th",
+                { scole: "col" },
+                "Location"
+              ),
+              React.createElement(
+                "th",
+                { scole: "col" },
+                "Quantity"
+              ),
+              React.createElement(
+                "th",
+                { scole: "col" },
+                "Options"
+              )
+            )
+          )
+        )
       );
     }
   }]);
 
   return ReceiveItemApp;
 }(React.Component);
+
+function loadReact() {
+  ReactDOM.render(React.createElement(ReceiveItemApp, null), document.getElementById("content-container"));
+}
+
+loadReact();
