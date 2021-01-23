@@ -402,6 +402,12 @@ var ItemInfoRow = function (_React$Component2) {
         );
       }
       return React.createElement("div", null);
+    }, _this3.onClick_create_item = function () {
+      // Check that itemInfo has at least 1 SKU
+      if (_this3.state.data.itemskus.length == 0) {
+        window.alert("Please create at least 1 SKU for item '" + _this3.state.data.itemName + "' first.");
+        return;
+      }
     }, _temp), _possibleConstructorReturn(_this3, _ret);
   }
 
@@ -479,7 +485,7 @@ var ItemInfoRow = function (_React$Component2) {
           React.createElement(
             "button",
             { type: "button", className: "btn btn-sm btn-outline-dark",
-              title: "Create item" },
+              title: "Create item", onClick: this.onClick_create_item },
             React.createElement(
               "svg",
               { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", className: "bi bi-box-seam", viewBox: "0 0 16 16" },
