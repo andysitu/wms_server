@@ -149,14 +149,6 @@ class ItemInfoApp extends React.Component {
   }
 }
 
-function loadReact() {
-  ReactDOM.render((
-    <ItemInfoApp />
-  ), document.getElementById("content-container"));
-}
-
-loadReact();
-
 class ItemInfoRow extends React.Component {
   state = {
     data: this.props.data ? this.props.data : {},
@@ -349,3 +341,11 @@ class ItemInfoRow extends React.Component {
   </tr>);
   }
 }
+
+function loadReact() {
+  ReactDOM.render((
+    <ItemInfoApp />
+  ), document.getElementById("content-container"));
+}
+
+loadReact();

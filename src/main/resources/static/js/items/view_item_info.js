@@ -243,12 +243,6 @@ var ItemInfoApp = function (_React$Component) {
   return ItemInfoApp;
 }(React.Component);
 
-function loadReact() {
-  ReactDOM.render(React.createElement(ItemInfoApp, null), document.getElementById("content-container"));
-}
-
-loadReact();
-
 var ItemInfoRow = function (_React$Component2) {
   _inherits(ItemInfoRow, _React$Component2);
 
@@ -499,3 +493,9 @@ var ItemInfoRow = function (_React$Component2) {
 
   return ItemInfoRow;
 }(React.Component);
+
+function loadReact() {
+  ReactDOM.render(React.createElement(ItemInfoApp, null), document.getElementById("content-container"));
+}
+
+loadReact();
