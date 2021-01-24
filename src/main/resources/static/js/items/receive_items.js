@@ -9,18 +9,62 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ReceiveItemApp = function (_React$Component) {
   _inherits(ReceiveItemApp, _React$Component);
 
-  function ReceiveItemApp() {
+  function ReceiveItemApp(props) {
     _classCallCheck(this, ReceiveItemApp);
 
-    return _possibleConstructorReturn(this, (ReceiveItemApp.__proto__ || Object.getPrototypeOf(ReceiveItemApp)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ReceiveItemApp.__proto__ || Object.getPrototypeOf(ReceiveItemApp)).call(this, props));
   }
 
   _createClass(ReceiveItemApp, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.getElementById("shipment-input").focus();
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
+        React.createElement(
+          "form",
+          null,
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "shipment-input" },
+              "Shipment"
+            ),
+            React.createElement("input", { type: "text", "class": "form-control", id: "shipment-input" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "item-sku-input" },
+              "Item SKU"
+            ),
+            React.createElement("input", { type: "text", "class": "form-control", id: "item-sku-input" })
+          ),
+          React.createElement(
+            "div",
+            { className: "form-group" },
+            React.createElement(
+              "label",
+              { htmlFor: "quantity-input" },
+              "Quantity"
+            ),
+            React.createElement("input", { type: "number", "class": "form-control", id: "quantity-input" })
+          ),
+          React.createElement(
+            "button",
+            { type: "submit" },
+            "Submit"
+          )
+        ),
         React.createElement(
           "table",
           null,
@@ -32,22 +76,27 @@ var ReceiveItemApp = function (_React$Component) {
               null,
               React.createElement(
                 "th",
-                { scole: "col" },
+                { scope: "col" },
                 "Name"
               ),
               React.createElement(
                 "th",
-                { scole: "col" },
+                { scope: "col" },
+                "Shipment"
+              ),
+              React.createElement(
+                "th",
+                { scope: "col" },
                 "Location"
               ),
               React.createElement(
                 "th",
-                { scole: "col" },
+                { scope: "col" },
                 "Quantity"
               ),
               React.createElement(
                 "th",
-                { scole: "col" },
+                { scope: "col" },
                 "Options"
               )
             )
