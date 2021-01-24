@@ -1,5 +1,7 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -12,7 +14,28 @@ var ReceiveItemApp = function (_React$Component) {
   function ReceiveItemApp(props) {
     _classCallCheck(this, ReceiveItemApp);
 
-    return _possibleConstructorReturn(this, (ReceiveItemApp.__proto__ || Object.getPrototypeOf(ReceiveItemApp)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ReceiveItemApp.__proto__ || Object.getPrototypeOf(ReceiveItemApp)).call(this, props));
+
+    _this.onSubmit_item = function (e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = Object.fromEntries(new FormData(form).entries());
+
+      form.reset();
+      document.getElementById("shipment-input").focus();
+      _this.setState(function (state) {
+        var new_items = [].concat(_toConsumableArray(state.session_received_items));
+        new_items.push(data);
+        return {
+          session_received_items: new_items
+        };
+      });
+    };
+
+    _this.state = {
+      session_received_items: []
+    };
+    return _this;
   }
 
   _createClass(ReceiveItemApp, [{
@@ -28,7 +51,7 @@ var ReceiveItemApp = function (_React$Component) {
         null,
         React.createElement(
           "form",
-          null,
+          { onSubmit: this.onSubmit_item },
           React.createElement(
             "div",
             { className: "form-group" },
@@ -37,7 +60,7 @@ var ReceiveItemApp = function (_React$Component) {
               { htmlFor: "shipment-input" },
               "Shipment"
             ),
-            React.createElement("input", { type: "text", "class": "form-control", id: "shipment-input" })
+            React.createElement("input", { type: "text", name: "shipment", className: "form-control", id: "shipment-input" })
           ),
           React.createElement(
             "div",
@@ -47,7 +70,7 @@ var ReceiveItemApp = function (_React$Component) {
               { htmlFor: "item-sku-input" },
               "Item SKU"
             ),
-            React.createElement("input", { type: "text", "class": "form-control", id: "item-sku-input" })
+            React.createElement("input", { type: "text", name: "itemSku", className: "form-control", id: "item-sku-input" })
           ),
           React.createElement(
             "div",
@@ -57,7 +80,7 @@ var ReceiveItemApp = function (_React$Component) {
               { htmlFor: "quantity-input" },
               "Quantity"
             ),
-            React.createElement("input", { type: "number", "class": "form-control", id: "quantity-input" })
+            React.createElement("input", { type: "number", name: "quantity", className: "form-control", id: "quantity-input" })
           ),
           React.createElement(
             "button",
@@ -77,17 +100,12 @@ var ReceiveItemApp = function (_React$Component) {
               React.createElement(
                 "th",
                 { scope: "col" },
-                "Name"
+                "Item Name"
               ),
               React.createElement(
                 "th",
                 { scope: "col" },
                 "Shipment"
-              ),
-              React.createElement(
-                "th",
-                { scope: "col" },
-                "Location"
               ),
               React.createElement(
                 "th",
@@ -100,6 +118,32 @@ var ReceiveItemApp = function (_React$Component) {
                 "Options"
               )
             )
+          ),
+          React.createElement(
+            "tbody",
+            null,
+            this.state.session_received_items.map(function (item) {
+              return React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  item.name
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  item.shipment
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  item.quantity
+                ),
+                React.createElement("td", null)
+              );
+            })
           )
         )
       );
