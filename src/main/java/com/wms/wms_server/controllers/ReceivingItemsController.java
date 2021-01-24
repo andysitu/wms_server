@@ -9,4 +9,9 @@ public class ReceivingItemsController {
     public String view_receiving_items() {
         return "items/receive_items";
     }
+
+    @GetMapping(value = "view_item_receive")
+    public String view_item_receive() {
+        return "items/view_item_receive";
+    }
 }
