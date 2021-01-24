@@ -16,9 +16,12 @@ import javax.persistence.GenerationType;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class itemShipment {
+public class ItemShipment {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
