@@ -18,7 +18,7 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ReceiveShipment {
+public class itemShipment {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
