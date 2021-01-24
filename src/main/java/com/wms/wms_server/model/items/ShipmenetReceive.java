@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ItemShipment {
+public class ShipmenetReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Integer id;
