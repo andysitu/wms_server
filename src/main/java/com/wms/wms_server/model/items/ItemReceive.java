@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ItemIncoming {
+public class ItemReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
