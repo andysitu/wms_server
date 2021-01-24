@@ -24,7 +24,7 @@ import lombok.Setter;
 public class ShipmenetReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Getter private Integer id;
+    @Getter private Long id;
 
     @CreatedDate
     private Date createdDate;
