@@ -24,7 +24,7 @@ import lombok.Setter;
 public class ItemShipment {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @Getter private Integer id;
 
     @CreatedDate
     private Date createdDate;
@@ -33,5 +33,7 @@ public class ItemShipment {
     @CreatedBy
     private String createdBy;
     @LastModifiedBy
-    private String modifiedBy;  
+    private String modifiedBy;
+
+    @Getter @Setter private String code;
 }
