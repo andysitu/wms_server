@@ -32,4 +32,9 @@ public class ItemReceive {
     @JoinColumn(name="shipment_receive_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Getter @Setter private ShipmentReceive shipment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="item_info_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Getter @Setter private ItemInfo itemInfo;
 }
