@@ -5,4 +5,6 @@ public class ItemReceiveResponse {
     public int quantity;
     public String itemSku;
     public String shipmentCode;
+
+    public ItemInfoResponse itemInfoResponse;
 }
