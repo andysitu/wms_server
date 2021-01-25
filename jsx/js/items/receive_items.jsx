@@ -15,15 +15,30 @@ class ReceiveItemApp extends React.Component {
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
 
+    $.ajax({
+      
+    })
     form.reset();
     document.getElementById("shipment-input").focus();
-    this.setState((state)=> {
-      var new_items = [...state.session_received_items];
-      new_items.push(data);
-      return {
-        session_received_items: new_items,
+    console.log("submit", data);
+
+    $.ajax({
+      url: "./itemreceive",
+      type: "POST",
+      context: this,
+      data: data,
+      success: function(return_data) {
+        console.log(return_data);
       }
-    });
+    })
+
+    // this.setState((state)=> {
+    //   var new_items = [...state.session_received_items];
+    //   new_items.push(data);
+    //   return {
+    //     session_received_items: new_items,
+    //   }
+    // });
   }
 
   render() {
@@ -31,15 +46,18 @@ class ReceiveItemApp extends React.Component {
       <form onSubmit={this.onSubmit_item}>
         <div className="form-group">
           <label htmlFor="shipment-input">Shipment</label>
-          <input type="text" name="shipment" className="form-control" id="shipment-input"></input>
+          <input type="text" name="shipmentCode" className="form-control" 
+            id="shipment-input" required></input>
         </div>
         <div className="form-group">
           <label htmlFor="item-sku-input">Item SKU</label>
-          <input type="text" name="itemSku" className="form-control" id="item-sku-input"></input>
+          <input type="text" name="itemSku" className="form-control" 
+            id="item-sku-input" required></input>
         </div>
         <div className="form-group">
           <label htmlFor="quantity-input">Quantity</label>
-          <input type="number" name="quantity" className="form-control" id="quantity-input"></input>
+          <input type="number" name="quantity" className="form-control" 
+            id="quantity-input" required></input>
         </div>
         <button type="submit">Submit</button>
       </form>
