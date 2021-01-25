@@ -1,5 +1,6 @@
 package com.wms.wms_server.model.items;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -37,6 +38,7 @@ public class ItemSku {
     @LastModifiedBy
     private String modifiedBy;
 
+    @Column(unique=true)
     private String sku;
 
     @ManyToOne(fetch = FetchType.LAZY)
