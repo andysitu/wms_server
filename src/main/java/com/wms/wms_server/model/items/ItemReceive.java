@@ -43,6 +43,7 @@ public class ItemReceive {
     @Getter @Setter private ItemInfo itemInfo;
 
 
+    public ItemReceive() {}
     public ItemReceive(int quantity, ShipmentReceive shipmentReceive, 
             ItemInfo itemInfo) {
         this.quantity = quantity;
