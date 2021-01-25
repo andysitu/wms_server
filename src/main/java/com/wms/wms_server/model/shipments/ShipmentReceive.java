@@ -9,7 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.EntityListeners;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,5 +35,6 @@ public class ShipmentReceive {
     @LastModifiedBy
     private String modifiedBy;
 
+    @Column(unique=true)
     @Getter @Setter private String code;
 }
