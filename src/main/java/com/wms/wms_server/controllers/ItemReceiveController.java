@@ -3,6 +3,7 @@ package com.wms.wms_server.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemReceive;
+import com.wms.wms_server.model.response.ItemReceiveResponse;
 import com.wms.wms_server.repository.ItemReceiveRepository;
 import com.wms.wms_server.repository.ShipmentReceiveRepository;
 import com.wms.wms_server.services.items.ItemReceiveService;
@@ -36,9 +37,11 @@ public class ItemReceiveController {
     @RequestMapping(path="/itemreceive", produces="application/json;", 
         method=RequestMethod.POST)
     @ResponseBody
-    public String create_itemReceive(HttpServletRequest request) {
-        itemReceiveService.create_itemReceive(request);
-        System.out.println("itemreceive");
-        return "HI";
+    public ItemReceiveResponse create_itemReceive(HttpServletRequest request) {
+        ItemReceive itemReceive = itemReceiveService.create_itemReceive(request);
+        if (itemReceive == null) {
+            return null;
+        }
+        return itemReceiveService.convert_to_response(itemReceive);
     }
 }
