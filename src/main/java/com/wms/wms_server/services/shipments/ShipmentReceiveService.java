@@ -15,7 +15,7 @@ public class ShipmentReceiveService {
 
     public ShipmentReceive get_or_create_shipmentReceive(String shipmentCode) {
         List<ShipmentReceive> shipments = shipmentReceiveRepository.findByCode(shipmentCode);
-        if (shipments.size() == 0) {
+        if (shipments.size() > 0) {
             return shipments.get(0);
         } else {
             ShipmentReceive shipment = new ShipmentReceive(shipmentCode);
