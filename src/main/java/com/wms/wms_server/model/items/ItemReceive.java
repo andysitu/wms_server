@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.wms.wms_server.model.shipments.ShipmentReceive;
+
 import javax.persistence.FetchType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -23,10 +26,10 @@ public class ItemReceive {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    private int quantity;
+    @Getter @Setter private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="shipment_receive_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @Getter @Setter private ShipmenetReceive shipment;
+    @Getter @Setter private ShipmentReceive shipment;
 }
