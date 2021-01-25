@@ -24,7 +24,7 @@ import lombok.Setter;
 public class ItemReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @Getter @Setter private Long id;
 
     @Getter @Setter private int quantity;
 
@@ -32,6 +32,10 @@ public class ItemReceive {
     @JoinColumn(name="shipment_receive_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Getter @Setter private ShipmentReceive shipmentReceive;
+
+    public String getShipmentCode() {
+        return this.shipmentReceive.getCode();
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="item_info_id", nullable = false)
