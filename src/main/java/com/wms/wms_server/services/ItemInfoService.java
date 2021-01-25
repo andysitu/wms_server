@@ -102,10 +102,24 @@ public class ItemInfoService {
         return l;
     }
 
+    /**
+     * Sets the itemCategory of ItemInfo to null before the ItemCategory
+     * is deleted (due to issue with JPA forcing a CASCADE deletion).
+     * @param itemCategory_name - Name of the itemCategory
+     */
     public void setItemCategoryNull(String itemCategory_name) {
         for (ItemInfo item : itemInfoRepository.findByItemCategoryName(itemCategory_name)) {
             item.setItemCategory(null);
             itemInfoRepository.save(item);
+        }
+    }
+
+    public ItemInfo getItemInfoBySku(String sku) {
+        List<ItemSku> itemSkus = itemSkuRepository.findBySku(sku);
+        if (itemSkus.size() > 0) {
+            return itemSkus.get(0).getItemInfo();
+        } else {
+            return null;
         }
     }
 
