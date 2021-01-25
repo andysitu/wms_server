@@ -37,4 +37,8 @@ public class ShipmentReceive {
 
     @Column(unique=true)
     @Getter @Setter private String code;
+
+    public ShipmentReceive(String code) {
+        this.code = code;
+    }
 }
