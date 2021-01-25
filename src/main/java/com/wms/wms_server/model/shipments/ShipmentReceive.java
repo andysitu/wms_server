@@ -1,4 +1,4 @@
-package com.wms.wms_server.model.items;
+package com.wms.wms_server.model.shipments;
 
 import javax.persistence.Id;
 
@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ShipmenetReceive {
+public class ShipmentReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Long id;
