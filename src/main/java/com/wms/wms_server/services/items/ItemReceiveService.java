@@ -31,12 +31,12 @@ public class ItemReceiveService {
     public ItemReceive create_itemReceive(HttpServletRequest request) {
         if (check_request(request, "itemSku") && check_request(request, "shipmentCode")
             && check_request(request, "quantity")) {
-            ShipmentReceive shipment = shipmentReceiveService.get_or_create_shipmentReceive(
-                request.getParameter("shipmentCode"));
             ItemInfo itemInfo = itemInfoService.getItemInfoBySku(request.getParameter("itemSku"));
             if (itemInfo == null) {
                 return null;
             }
+            ShipmentReceive shipment = shipmentReceiveService.get_or_create_shipmentReceive(
+                request.getParameter("shipmentCode"));
             ItemReceive itemReceive = new ItemReceive(
                 Integer.parseInt(request.getParameter("quantity")),
                 request.getParameter("itemSku"),
