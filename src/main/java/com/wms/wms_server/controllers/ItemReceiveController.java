@@ -64,7 +64,9 @@ public class ItemReceiveController {
     public ItemReceiveResponse create_itemReceive(HttpServletRequest request) {
         ItemReceive itemReceive = itemReceiveService.create_itemReceive(request);
         if (itemReceive == null) {
-            return null;
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ItemReceive not found"
+            );
         }
         return itemReceiveService.convert_to_response(itemReceive);
     }
