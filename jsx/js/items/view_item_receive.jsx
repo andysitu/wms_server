@@ -1,5 +1,49 @@
 class ItemReceiveApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+    };
+    this.load_data();
+  }
+
+  load_data = () => {
+    $.ajax({
+      url: "./itemreceive",
+      type: "GET",
+      context: this,
+      success: function(data) {
         console.log(data);
+        this.setState({
+          items: data,
+        })
+      }
+    })
+  };
+
+  onClick_delete = (e) => {
+    var index = e.target.getAttribute("index"),
+        id = e.target.getAttribute("id");
+    var result = window.confirm(`Are you sure you want to delete ${
+      this.state.items[index].itemInfoResponse.itemName}?`);
+    if (result) {
+      $.ajax({
+        url: "./itemreceive/" + id,
+        type: "DELETE",
+        context: this,
+        success: function() {
+          this.setState((state) => {
+            var new_items = [...this.state.items];
+            new_items.splice(index, 1);
+            return {
+              items: new_items,
+            };
+          })
+        }
+      })
+    }
+  };
+
   render() {
     return (<div>
       <table>
@@ -12,6 +56,23 @@ class ItemReceiveApp extends React.Component {
             <th scole="col">Options</th>
           </tr>
         </thead>
+        <tbody>
+          {this.state.items.map((item, index) => {
+            return (
+              <tr key={item.id}>
+                <td>{item.itemInfoResponse.itemName}</td>
+                <td>{item.shipmentCode}</td>
+                <td>{item.quantity}</td>
+                <td></td>
+                <td>
+                  <button type="button" id={item.id} index={index}
+                    onClick={this.onClick_delete}
+                  >Delete</button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     </div>);
   }
