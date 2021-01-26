@@ -54,6 +54,7 @@ public class ItemReceiveService {
         response.id = itemReceive.getId();
         response.shipmentCode = itemReceive.getShipmentCode();
         response.quantity = itemReceive.getQuantity();
+        response.itemSku = itemReceive.getSku();
 
         ItemInfoResponse infoResponse = itemInfoService.convert_to_response(itemReceive.getItemInfo());
         response.itemInfoResponse = infoResponse;
