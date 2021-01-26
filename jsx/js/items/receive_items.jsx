@@ -2,22 +2,35 @@ class ReceiveItemApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      session_received_items: [],
-    }
+      received_items: [],
+    };
   }
 
   componentDidMount() {
+    this.load_items_from_localstorage();
     document.getElementById("shipment-input").focus();
   }
+
+  load_items_from_localstorage = () =>  {
+    // Save items to LocalStorage before closing
+    window.addEventListener('beforeunload', (e) => {
+      this.save_items_to_localstorage();
+    });
+
+    this.setState({
+      received_items: storage_obj.get_itemReceive(),
+    });
+  };
+
+  save_items_to_localstorage = () => {
+    storage_obj.set_itemReceive(this.state.received_items);
+  };
 
   onSubmit_item = (e) => {
     e.preventDefault();
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
 
-    $.ajax({
-      
-    })
     form.reset();
     document.getElementById("shipment-input").focus();
     console.log("submit", data);
@@ -29,17 +42,16 @@ class ReceiveItemApp extends React.Component {
       data: data,
       success: function(return_data) {
         console.log(return_data);
+        this.setState((state)=> {
+          var new_items = [...state.received_items];
+          new_items.push(return_data);
+          return {
+            received_items: new_items,
+          };
+        });
       }
-    })
-
-    // this.setState((state)=> {
-    //   var new_items = [...state.session_received_items];
-    //   new_items.push(data);
-    //   return {
-    //     session_received_items: new_items,
-    //   }
-    // });
-  }
+    });
+  };
 
   render() {
     return (<div>
@@ -71,9 +83,9 @@ class ReceiveItemApp extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.session_received_items.map((item)=> {
+          {this.state.received_items.map((item)=> {
             return (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.shipment}</td>
                 <td>{item.quantity}</td>
@@ -85,7 +97,6 @@ class ReceiveItemApp extends React.Component {
     </div>);
   }
 }
-
 
 function loadReact() {
   ReactDOM.render((
