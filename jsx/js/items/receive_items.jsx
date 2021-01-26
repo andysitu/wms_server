@@ -40,6 +40,10 @@ class ReceiveItemApp extends React.Component {
       type: "POST",
       context: this,
       data: data,
+      error: function(xhr, textStatus) {
+        console.log(textStatus);
+        window.alert("Error: item SKU does not exist");
+      },
       success: function(return_data) {
         console.log(return_data);
         this.setState((state)=> {
