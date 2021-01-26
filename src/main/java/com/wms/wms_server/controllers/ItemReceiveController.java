@@ -13,6 +13,7 @@ import com.wms.wms_server.services.items.ItemReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,4 +65,13 @@ public class ItemReceiveController {
         }
         return itemReceiveService.convert_to_response(itemReceive);
     }
+
+    @RequestMapping(path="/itemreceive/:itemReceive_id", produces="text/plain;", 
+        method=RequestMethod.DELETE)
+    @ResponseBody
+    public String delete_itemReceive(@PathVariable("itemReceive_id") Long itemReceive_id) {
+        itemReceiveRepository.deleteById(itemReceive_id);
+        return "OK";
+    }
+}
 }
