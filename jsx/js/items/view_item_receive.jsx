@@ -1,4 +1,5 @@
 class ItemReceiveApp extends React.Component {
+        console.log(data);
   render() {
     return (<div>
       <table>
