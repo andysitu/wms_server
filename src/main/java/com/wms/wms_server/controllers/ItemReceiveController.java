@@ -51,8 +51,6 @@ public class ItemReceiveController {
         List<ItemReceiveResponse> responses = new ArrayList<>();
         for (ItemReceive item : itemReceiveRepository.findAll()) {
             ItemReceiveResponse response = itemReceiveService.convert_to_response(item);
-            ItemInfoResponse infoResponse = itemInfoService.convert_to_response(item.getItemInfo());
-            response.itemInfoResponse = infoResponse;
             responses.add(response);
         }
         return responses;
@@ -75,7 +73,6 @@ public class ItemReceiveController {
         method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_itemReceive(@PathVariable("itemReceiveId") Long itemReceiveId) {
-        System.out.println("delete");
         try {
             itemReceiveRepository.deleteById(itemReceiveId);
             return "OK";

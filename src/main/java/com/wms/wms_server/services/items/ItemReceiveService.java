@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.items.ItemReceive;
+import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.model.response.ItemReceiveResponse;
 import com.wms.wms_server.model.shipments.ShipmentReceive;
 import com.wms.wms_server.repository.ItemReceiveRepository;
@@ -53,6 +54,10 @@ public class ItemReceiveService {
         response.id = itemReceive.getId();
         response.shipmentCode = itemReceive.getShipmentCode();
         response.quantity = itemReceive.getQuantity();
+
+        ItemInfoResponse infoResponse = itemInfoService.convert_to_response(itemReceive.getItemInfo());
+        response.itemInfoResponse = infoResponse;
+
         return response;
     }
 }
