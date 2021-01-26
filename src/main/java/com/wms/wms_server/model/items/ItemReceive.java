@@ -28,6 +28,8 @@ public class ItemReceive {
 
     @Getter @Setter private int quantity;
 
+    @Getter private String sku;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="shipment_receive_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -42,10 +44,10 @@ public class ItemReceive {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Getter @Setter private ItemInfo itemInfo;
 
-
     public ItemReceive() {}
-    public ItemReceive(int quantity, ShipmentReceive shipmentReceive, 
-            ItemInfo itemInfo) {
+    public ItemReceive(int quantity, String sku,
+            ShipmentReceive shipmentReceive, ItemInfo itemInfo) {
+        this.sku = sku;
         this.quantity = quantity;
         this.shipmentReceive = shipmentReceive;
         this.itemInfo = itemInfo;
