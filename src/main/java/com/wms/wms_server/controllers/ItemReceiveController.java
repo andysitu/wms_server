@@ -11,12 +11,15 @@ import com.wms.wms_server.services.ItemInfoService;
 import com.wms.wms_server.services.items.ItemReceiveService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -66,11 +69,18 @@ public class ItemReceiveController {
         return itemReceiveService.convert_to_response(itemReceive);
     }
 
-    @RequestMapping(path="/itemreceive/:itemReceiveId", produces="text/plain;", 
+    @RequestMapping(path="/itemreceive/{itemReceiveId}", produces="text/plain;", 
         method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_itemReceive(@PathVariable("itemReceiveId") Long itemReceiveId) {
-        itemReceiveRepository.deleteById(itemReceiveId);
-        return "OK";
+        System.out.println("delete");
+        try {
+            itemReceiveRepository.deleteById(itemReceiveId);
+            return "OK";
+        } catch(Exception e) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ItemReceive not found"
+            );
+        }
     }
 }
