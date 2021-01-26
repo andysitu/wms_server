@@ -81,6 +81,7 @@ class ReceiveItemApp extends React.Component {
         <thead>
           <tr>
             <th scope="col">Item Name</th>
+            <th scope="col">SKU</th>
             <th scope="col">Shipment</th>
             <th scope="col">Quantity</th>
             <th scope="col">Options</th>
@@ -90,8 +91,9 @@ class ReceiveItemApp extends React.Component {
           {this.state.received_items.map((item)=> {
             return (
               <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.shipment}</td>
+                <td>{item.itemInfoResponse.itemName}</td>
+                <td>{item.itemSku}</td>
+                <td>{item.shipmentCode}</td>
                 <td>{item.quantity}</td>
                 <td></td>
               </tr>);
