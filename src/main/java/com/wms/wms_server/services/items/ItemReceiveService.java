@@ -38,6 +38,7 @@ public class ItemReceiveService {
             }
             ItemReceive itemReceive = new ItemReceive(
                 Integer.parseInt(request.getParameter("quantity")),
+                request.getParameter("itemSku"),
                 shipment,
                 itemInfo
             );
