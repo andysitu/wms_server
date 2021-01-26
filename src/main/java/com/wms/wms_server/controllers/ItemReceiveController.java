@@ -66,11 +66,11 @@ public class ItemReceiveController {
         return itemReceiveService.convert_to_response(itemReceive);
     }
 
-    @RequestMapping(path="/itemreceive/:itemReceive_id", produces="text/plain;", 
+    @RequestMapping(path="/itemreceive/:itemReceiveId", produces="text/plain;", 
         method=RequestMethod.DELETE)
     @ResponseBody
-    public String delete_itemReceive(@PathVariable("itemReceive_id") Long itemReceive_id) {
-        itemReceiveRepository.deleteById(itemReceive_id);
+    public String delete_itemReceive(@PathVariable("itemReceiveId") Long itemReceiveId) {
+        itemReceiveRepository.deleteById(itemReceiveId);
         return "OK";
     }
 }
