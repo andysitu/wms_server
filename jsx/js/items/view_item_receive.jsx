@@ -46,7 +46,7 @@ class ItemReceiveApp extends React.Component {
 
   render() {
     return (<div>
-      <table>
+      <table className="table table-sm">
         <thead>
           <tr>
             <th scole="col">Item Name</th>

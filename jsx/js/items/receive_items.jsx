@@ -101,7 +101,7 @@ class ReceiveItemApp extends React.Component {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <table>
+      <table className="table table-sm">
         <thead>
           <tr>
             <th scope="col">Item Name</th>
