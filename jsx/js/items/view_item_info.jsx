@@ -118,19 +118,6 @@ class ItemInfoApp extends React.Component {
         <div className="col-1">
           <button onClick={this.onClick_createItemInfo}>+</button>
         </div>
-        {/* <div className="col-sm-10 col-md-5 input-group">
-          <input className="form-control" type="text" id="search-bar1-input" autoFocus></input>
-          <select className="custom-select col-4" id="item-search1-type-select">
-            <option value="sku">SKU</option>
-            <option value="name">Name</option>
-            <option value="description">Description</option>
-            <option value="category">Category</option>
-          </select>
-          <button className="btn btn-outline-secondary"
-            onClick={this.onClick_search}>
-            Search
-          </button>
-        </div> */}
         <TableSearchBar onClick_search={this.onClick_search} search_type="item_info"/>
       </div>
       <table className="table table-sm">
