@@ -18,7 +18,7 @@ class ItemReceiveApp extends React.Component {
           items: data,
         })
       }
-    })
+    });
   };
 
   onClick_delete = (e) => {
@@ -40,7 +40,7 @@ class ItemReceiveApp extends React.Component {
             };
           })
         }
-      })
+      });
     }
   };
 
