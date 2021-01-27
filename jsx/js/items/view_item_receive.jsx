@@ -44,8 +44,15 @@ class ItemReceiveApp extends React.Component {
     }
   };
 
+  onClick_search = (property, value) => {
+    console.log(property, value);
+  }
+
   render() {
     return (<div>
+      <div>
+        <TableSearchBar onClick_search={this.onClick_search} search_type="item_receive"/>
+      </div>
       <table className="table table-sm">
         <thead>
           <tr>
