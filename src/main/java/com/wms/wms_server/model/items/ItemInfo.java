@@ -20,6 +20,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 @Entity
@@ -27,49 +30,18 @@ import java.util.Date;
 public class ItemInfo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @Getter private Long id;
 
-    private String itemName;
-    private String description;
-    private float weight;
+    @Getter @Setter private String itemName;
+    @Getter @Setter private String description;
+    @Getter @Setter private float weight;
 
     @Column(columnDefinition = "integer default 0")
-    private int width;
+    @Getter @Setter private int width;
     @Column(columnDefinition = "integer default 0")
-    private int height;
+    @Getter @Setter private int height;
     @Column(columnDefinition = "integer default 0")
-    private int length;
-
-    public String getItemName() {
-        return this.itemName;
-    }
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-    public float getWeight() {
-        return this.weight;
-    }
-    public Long getId() {
-        return this.id;
-    }
-    public int getWidth() {
-        return width;
-    }
-    public int getHeight() {
-        return height;
-    }
-    public int getLength() {
-        return length;
-    }
+    @Getter @Setter private int length;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="item_category_id", nullable = true)
