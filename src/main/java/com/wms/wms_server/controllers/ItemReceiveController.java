@@ -51,7 +51,6 @@ public class ItemReceiveController {
     public List<ItemReceiveResponse> get_itemreceive(
             @RequestParam(required = false) String property, 
             @RequestParam(required = false) String value) {
-        System.out.println(property + " " + value);
         List<ItemReceiveResponse> responses = new ArrayList<>();
         if (property == null || value == null) {
             for (ItemReceive item : itemReceiveRepository.findAll()) {
