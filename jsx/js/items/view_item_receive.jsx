@@ -51,7 +51,9 @@ class ItemReceiveApp extends React.Component {
       type: "GET",
       context: this,
       success: function(data) {
-        console.log(data);
+        this.setState({
+          items: data,
+        })
       }
     })
   }
