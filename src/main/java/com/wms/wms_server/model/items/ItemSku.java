@@ -20,6 +20,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+
 import java.util.Date;
 
 @Entity
@@ -27,43 +29,37 @@ import java.util.Date;
 public class ItemSku {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @Getter private Long id;
 
     @CreatedDate
-    private Date createdDate;
+    @Getter private Date createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    @Getter private Date lastModifiedDate;
     @CreatedBy
-    private String createdBy;
+    @Getter private String createdBy;
     @LastModifiedBy
-    private String modifiedBy;
+    @Getter private String modifiedBy;
 
     @Column(unique=true)
-    private String sku;
+    @Getter private String sku;
+
+    public void setSku(String sku) {
+        sku = sku.replaceAll("\\s", "");
+        this.sku = sku;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_info_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ItemInfo itemInfo;
+    @Getter private ItemInfo itemInfo;
 
     public void setItemInfo(ItemInfo itemInfo) {
         this.itemInfo = itemInfo;
     }
 
-    public ItemInfo getItemInfo() {
-        return this.itemInfo;
-    }
-
-    public String getSku() {
-        return this.sku;
-    }
-    public Long getId() {
-        return this.id;
-    }
-
     public ItemSku() {}
     
     public ItemSku(String sku) {
-        this.sku = sku;
+        setSku(sku);
     }
 }
