@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.LastModifiedBy;
 import org.hibernate.annotations.OnDelete;
@@ -19,9 +18,10 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.util.Set;
 import java.util.Date;
-import java.util.HashSet;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,10 +30,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Area {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Getter private Long id;
 
     @Column(unique=true)
-    private String area;
+    @Getter private String area;
+
+    public void setArea(String area) {
+        area = area.replaceAll("\\s", "");
+        this.area = area;
+    }
 
     // @OneToMany(cascade = CascadeType.ALL, 
     //             fetch = FetchType.LAZY, mappedBy = "area")
@@ -43,15 +48,8 @@ public class Area {
         this.area = "NONE";
     }
     public Area(Warehouse warehouse ,String area) {
-        this.area = area;
+        setArea(area);
         this.warehouse = warehouse;
-    }
-
-    public String getArea() {
-        return this.area;
-    }
-    public Long getId() {
-        return this.id;
     }
     
     @ManyToOne(fetch = FetchType.LAZY)
