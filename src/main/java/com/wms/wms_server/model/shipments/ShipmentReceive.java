@@ -36,10 +36,15 @@ public class ShipmentReceive {
     private String modifiedBy;
 
     @Column(unique=true)
-    @Getter @Setter private String code;
+    @Getter private String code;
+
+    public void setCode(String code) {
+        code = code.replaceAll("\\s", "");
+        this.code = code;
+    }
 
     public ShipmentReceive() {}
     public ShipmentReceive(String code) {
-        this.code = code;
+        this.setCode(code);
     }
 }
