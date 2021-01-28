@@ -67,6 +67,7 @@ class ItemReceiveApp extends React.Component {
           <tr>
             <th scole="col">Item Name</th>
             <th scole="col">Shipment</th>
+            <th scole="col">SKU</th>
             <th scole="col">Quantity</th>
             <th scole="col">Date</th>
             <th scole="col">Options</th>
@@ -78,6 +79,7 @@ class ItemReceiveApp extends React.Component {
               <tr key={item.id}>
                 <td>{item.itemInfoResponse.itemName}</td>
                 <td>{item.shipmentCode}</td>
+                <td>{item.itemSku}</td>
                 <td>{item.quantity}</td>
                 <td></td>
                 <td>
