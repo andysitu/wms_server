@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+
 import com.wms.wms_server.model.shipments.ShipmentReceive;
 
 import javax.persistence.FetchType;
@@ -19,12 +24,23 @@ import org.hibernate.annotations.OnDeleteAction;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class ItemReceive {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter @Setter private Long id;
+
+    @CreatedDate
+    private Date createdDate;
+    @LastModifiedDate
+    private Date lastModifiedDate;
+    @CreatedBy
+    private String createdBy;
+    @LastModifiedBy
+    private String modifiedBy;
 
     @Getter @Setter private int quantity;
 
