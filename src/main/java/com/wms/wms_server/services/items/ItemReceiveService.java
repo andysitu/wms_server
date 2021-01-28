@@ -54,9 +54,10 @@ public class ItemReceiveService {
     public List<ItemReceive> searchItemReceive(String property, String value) {
         if (property.equals("shipmentCode")) {
             return itemReceiveRepository.findByShipmentCode(value);
-        } 
-        else if (property.equals("itemName")) {
+        } else if (property.equals("itemName")) {
             return itemReceiveRepository.findByItemName(value);
+        } else if (property.equals("itemSku")) {
+            return itemReceiveRepository.findBySku(value);
         }
         return new ArrayList<>();
     }

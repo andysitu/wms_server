@@ -20,6 +20,7 @@ class TableSearchBar extends React.Component {
       case "item_receive": return [
         { value: "itemName", name: "Item Name", },
         { value: "shipmentCode", name: "Shipment Code", },
+        { value: "itemSku", name: "Item SKU", },
       ];
       default: return [];
     }

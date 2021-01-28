@@ -10,6 +10,7 @@ import java.util.*;
 
 @Repository
 public interface ItemReceiveRepository extends JpaRepository<ItemReceive, Long> {
+    List<ItemReceive> findBySku(String sku);
 
     @Query("SELECT i FROM ItemReceive i inner join i.shipmentReceive s where lower(s.code) LIKE lower(CONCAT('%',:code,'%'))")
     List<ItemReceive> findByShipmentCode(String code);
