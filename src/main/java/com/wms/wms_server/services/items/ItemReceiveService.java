@@ -55,9 +55,9 @@ public class ItemReceiveService {
         if (property.equals("shipmentCode")) {
             return itemReceiveRepository.findByShipmentCode(value);
         } 
-        // else if (property == "shipmentCode") {
-
-        // }
+        else if (property.equals("itemName")) {
+            return itemReceiveRepository.findByItemName(value);
+        }
         return new ArrayList<>();
     }
 
