@@ -38,14 +38,13 @@ class ItemReceiveApp extends React.Component {
             return {
               items: new_items,
             };
-          })
-        }
+          });
+        },
       });
     }
   };
 
   onClick_search = (property, value) => {
-    console.log(property, value);
     $.ajax({
       url: `./itemreceive?property=${property}&value=${value}`, 
       type: "GET",
@@ -53,10 +52,10 @@ class ItemReceiveApp extends React.Component {
       success: function(data) {
         this.setState({
           items: data,
-        })
-      }
-    })
-  }
+        });
+      },
+    });
+  };
 
   render() {
     return (<div>
