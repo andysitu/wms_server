@@ -46,6 +46,14 @@ class ItemReceiveApp extends React.Component {
 
   onClick_search = (property, value) => {
     console.log(property, value);
+    $.ajax({
+      url: `./itemreceive?property=${property}&value=${value}`, 
+      type: "GET",
+      context: this,
+      success: function(data) {
+        console.log(data);
+      }
+    })
   }
 
   render() {

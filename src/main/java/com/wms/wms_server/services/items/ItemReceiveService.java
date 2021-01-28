@@ -14,6 +14,8 @@ import com.wms.wms_server.services.shipments.ShipmentReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class ItemReceiveService {
     @Autowired
@@ -47,6 +49,16 @@ public class ItemReceiveService {
             return itemReceive;
         }
         return null;
+    }
+
+    public List<ItemReceive> searchItemReceive(String property, String value) {
+        if (property.equals("shipmentCode")) {
+            return itemReceiveRepository.findByShipmentCode(value);
+        } 
+        // else if (property == "shipmentCode") {
+
+        // }
+        return new ArrayList<>();
     }
 
     public ItemReceiveResponse convert_to_response(ItemReceive itemReceive) {

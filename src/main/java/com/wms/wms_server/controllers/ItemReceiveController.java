@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.server.ResponseStatusException;
@@ -47,12 +48,23 @@ public class ItemReceiveController {
     @RequestMapping(path="/itemreceive", produces="application/json;", 
         method=RequestMethod.GET)
     @ResponseBody
-    public List<ItemReceiveResponse> get_itemReceive() {
+    public List<ItemReceiveResponse> get_itemreceive(
+            @RequestParam(required = false) String property, 
+            @RequestParam(required = false) String value) {
+        System.out.println(property + " " + value);
         List<ItemReceiveResponse> responses = new ArrayList<>();
-        for (ItemReceive item : itemReceiveRepository.findAll()) {
-            ItemReceiveResponse response = itemReceiveService.convert_to_response(item);
-            responses.add(response);
+        if (property == null || value == null) {
+            for (ItemReceive item : itemReceiveRepository.findAll()) {
+                ItemReceiveResponse response = itemReceiveService.convert_to_response(item);
+                responses.add(response);
+            }
+        } else {
+            for (ItemReceive item : itemReceiveService.searchItemReceive(property, value)) {
+                ItemReceiveResponse response = itemReceiveService.convert_to_response(item);
+                responses.add(response);
+            }
         }
+        
         return responses;
     }
 
