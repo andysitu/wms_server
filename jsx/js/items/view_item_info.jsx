@@ -1,4 +1,5 @@
 import { TableSearchBar } from '../etc/TableSearchBar.js'
+import { ModalMenu } from "../etc/ModalMenu.js"
 
 class ItemInfoApp extends React.Component {
   constructor(props) {
