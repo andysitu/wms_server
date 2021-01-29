@@ -68,7 +68,7 @@ public class ItemReceiveService {
         response.shipmentCode = itemReceive.getShipmentCode();
         response.quantity = itemReceive.getQuantity();
         response.itemSku = itemReceive.getSku();
-        response.createdDate = itemReceive.getCreatedDate();
+        response.setCreatedDate(itemReceive.getCreatedDate());
 
         ItemInfoResponse infoResponse = itemInfoService.convert_to_response(itemReceive.getItemInfo());
         response.itemInfoResponse = infoResponse;

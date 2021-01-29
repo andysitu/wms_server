@@ -1,8 +1,13 @@
 package com.wms.wms_server.model.response;
 
+import com.wms.wms_server.model.response.Response;
+
 import java.util.Date;
 
-public class ItemReceiveResponse {
+import java.text.DateFormat;
+import java.util.*;
+
+public class ItemReceiveResponse extends Response {
     public Long id;
     public int quantity;
     public String itemSku;
@@ -10,5 +15,9 @@ public class ItemReceiveResponse {
 
     public ItemInfoResponse itemInfoResponse;
 
-    public Date createdDate;
+    public String createdDate;
+
+    public void setCreatedDate(Date date) {
+        this.createdDate = convertDateToString(date);
+    }
 }
