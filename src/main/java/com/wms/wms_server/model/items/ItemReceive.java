@@ -34,13 +34,13 @@ public class ItemReceive {
     @Getter @Setter private Long id;
 
     @CreatedDate
-    private Date createdDate;
+    @Getter private Date createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    @Getter private Date lastModifiedDate;
     @CreatedBy
-    private String createdBy;
+    @Getter private String createdBy;
     @LastModifiedBy
-    private String modifiedBy;
+    @Getter private String modifiedBy;
 
     @Getter @Setter private int quantity;
 
