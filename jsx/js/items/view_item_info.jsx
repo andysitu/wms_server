@@ -1,3 +1,5 @@
+import { TableSearchBar } from '../etc/TableSearchBar.js'
+
 class ItemInfoApp extends React.Component {
   constructor(props) {
     super(props);

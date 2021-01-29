@@ -1,3 +1,7 @@
+export {
+  TableSearchBar as TableSearchBar,
+}
+
 /**
  * Parameters:
  *  Props
