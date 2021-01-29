@@ -1,3 +1,7 @@
+export {
+  LocationRow,
+}
+
 class LocationRow extends React.Component {
   constructor(props) {
     super(props);

@@ -1,3 +1,6 @@
+import { LocationRow } from './locationrow.js'
+import { ModalMenu } from "../etc/ModalMenu.js"
+
 class LocationTable extends React.Component {
   constructor(props) {
     super(props);

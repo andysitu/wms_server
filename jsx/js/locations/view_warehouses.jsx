@@ -1,3 +1,5 @@
+import { ModalMenu } from "../etc/ModalMenu.js"
+
 class WarehouseApp extends React.Component {
   constructor(props) {
     super(props);
