@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemCategory;
 import com.wms.wms_server.model.response.ItemCategoryResponse;
-import com.wms.wms_server.repository.ItemCategoryRepository;
+import com.wms.wms_server.repository.items.ItemCategoryRepository;
 import com.wms.wms_server.services.ItemInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
