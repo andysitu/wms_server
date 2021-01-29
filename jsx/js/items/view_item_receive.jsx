@@ -81,7 +81,7 @@ class ItemReceiveApp extends React.Component {
                 <td>{item.shipmentCode}</td>
                 <td>{item.itemSku}</td>
                 <td>{item.quantity}</td>
-                <td></td>
+                <td>{item.createdDate}</td>
                 <td>
                   <button type="button" id={item.id} index={index}
                     onClick={this.onClick_delete}
