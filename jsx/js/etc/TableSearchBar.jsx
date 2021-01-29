@@ -1,5 +1,5 @@
 export {
-  TableSearchBar as TableSearchBar,
+  TableSearchBar,
 }
 
 /**
