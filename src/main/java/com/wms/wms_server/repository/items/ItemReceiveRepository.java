@@ -1,4 +1,4 @@
-package com.wms.wms_server.repository;
+package com.wms.wms_server.repository.items;
 
 import com.wms.wms_server.model.items.ItemReceive;
 

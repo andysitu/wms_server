@@ -7,7 +7,7 @@ import com.wms.wms_server.model.items.ItemReceive;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.model.response.ItemReceiveResponse;
 import com.wms.wms_server.model.shipments.ShipmentReceive;
-import com.wms.wms_server.repository.ItemReceiveRepository;
+import com.wms.wms_server.repository.items.ItemReceiveRepository;
 import com.wms.wms_server.services.ItemInfoService;
 import com.wms.wms_server.services.shipments.ShipmentReceiveService;
 

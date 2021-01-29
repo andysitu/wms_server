@@ -6,7 +6,7 @@ import com.wms.wms_server.model.items.ItemSku;
 import com.wms.wms_server.model.response.ItemInfoResponse;
 import com.wms.wms_server.repository.items.ItemCategoryRepository;
 import com.wms.wms_server.repository.items.ItemInfoRepository;
-import com.wms.wms_server.repository.ItemSkuRepository;
+import com.wms.wms_server.repository.items.ItemSkuRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
