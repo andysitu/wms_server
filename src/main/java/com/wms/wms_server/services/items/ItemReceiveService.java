@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemInfo;
 import com.wms.wms_server.model.items.ItemReceive;
-import com.wms.wms_server.model.response.ItemInfoResponse;
-import com.wms.wms_server.model.response.ItemReceiveResponse;
+import com.wms.wms_server.model.response.items.ItemInfoResponse;
+import com.wms.wms_server.model.response.items.ItemReceiveResponse;
 import com.wms.wms_server.model.shipments.ShipmentReceive;
 import com.wms.wms_server.repository.items.ItemReceiveRepository;
 import com.wms.wms_server.services.ItemInfoService;

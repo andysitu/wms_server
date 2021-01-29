@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemCategory;
-import com.wms.wms_server.model.response.ItemCategoryResponse;
+import com.wms.wms_server.model.response.items.ItemCategoryResponse;
 import com.wms.wms_server.repository.items.ItemCategoryRepository;
 import com.wms.wms_server.services.ItemInfoService;
 

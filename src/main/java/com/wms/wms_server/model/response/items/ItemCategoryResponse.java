@@ -1,4 +1,4 @@
-package com.wms.wms_server.model.response;
+package com.wms.wms_server.model.response.items;
 
 import java.util.Date;
 
