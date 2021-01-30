@@ -57,15 +57,26 @@ class PutawayApp extends React.Component {
   };
 
   onSelectItemReceive = (e) => {
+    var element = e.target; 
+    // Can't control propagation with React, so use JS to find TR
+    for (let i=0; i<5; i++) {
+      if (element.tagName == "TR") {
+        break;
+      }
+      element = element.parentNode;
+    }
+    var selectedIndex = element.getAttribute("index");
+    if (selectedIndex == null || element.tagName !="TR") {
+      return;
+    }
     var previousTrs = document.getElementsByClassName("selected");
     for (let i=0; i<previousTrs.length; i++) {
       previousTrs[i].classList.remove("selected");
     }
-    var newTr = e.target.parentNode.parentNode;
-    newTr.classList.add("selected");
+    element.classList.add("selected");
 
     this.setState({
-      selectedItemReceiveIndex: parseInt(e.target.value),
+      selectedItemReceiveIndex: parseInt(selectedIndex),
     }, () => {
       $("#" + this.locationInputId).focus();
     });
@@ -105,10 +116,11 @@ class PutawayApp extends React.Component {
           </thead>
           <tbody id="itemReceive-table">
             {this.state.itemReceiveList.map((itemReceive, index) => {
+              let checkStatus = this.state.selectedItemReceiveIndex == index
               return (
-                <tr key={itemReceive.id}>
-                  <td><input type="radio" value={index} name="itemReceive-select" 
-                        onChange={this.onSelectItemReceive}/></td>
+                <tr index={index} key={itemReceive.id} onClick={this.onSelectItemReceive}>
+                  <td><input type="radio" checked={checkStatus} value={index} 
+                    name="itemReceive-select" readOnly/></td>
                   <td>{itemReceive.shipmentCode}</td>
                   <td>{itemReceive.itemInfoResponse.itemName}</td>
                   <td>{itemReceive.itemSku}</td>
