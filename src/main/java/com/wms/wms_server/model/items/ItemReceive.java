@@ -43,6 +43,7 @@ public class ItemReceive {
     @Getter private String modifiedBy;
 
     @Getter @Setter private int quantity;
+    @Getter private int startQuantity;
 
     @Getter private String sku;
 
@@ -65,6 +66,7 @@ public class ItemReceive {
             ShipmentReceive shipmentReceive, ItemInfo itemInfo) {
         this.sku = sku;
         this.quantity = quantity;
+        this.startQuantity = quantity;
         this.shipmentReceive = shipmentReceive;
         this.itemInfo = itemInfo;
     }
