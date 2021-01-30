@@ -15,8 +15,8 @@ class PutawayApp extends React.Component {
     $("#" + this.shipmentCodeInpuId).focus();
   }
 
-  getData = () => {
-    var formData = new FormData($("#" + this.receiveFormId)[0]),
+  getData = (formId) => {
+    var formData = new FormData($("#" + formId)[0]),
         data = {};
 
     for (var key of formData.keys()) {
@@ -36,7 +36,7 @@ class PutawayApp extends React.Component {
     e.preventDefault();
     this.resetItemReceiveTable();
     
-    const data = this.getData();
+    const data = this.getData(this.receiveFormId);
     let searchType = (data.itemSku.length > 0) ? 
           "shipmentCodeAndItemSku" : "shipmentCode",
         url = `./itemreceive?property=${searchType}&value=${data.shipmentCode}`;
@@ -80,6 +80,11 @@ class PutawayApp extends React.Component {
     }, () => {
       $("#" + this.locationInputId).focus();
     });
+  }
+  
+  submitItemInventory = (e) => {
+    e.preventDefault();
+    console.log(this.getData(this.putawayFormId));    
   }
 
   render() {
@@ -130,7 +135,7 @@ class PutawayApp extends React.Component {
           </tbody>
         </table>
       </div>
-      <form id={this.putawayFormId}>
+      <form id={this.putawayFormId} onSubmit={this.submitItemInventory}>
         <div className="form-group row">
           <div className="col-6">
             <label htmlFor="location-input">Location</label>
@@ -143,7 +148,7 @@ class PutawayApp extends React.Component {
               name="quantity" required disabled={disablePutaway}></input>
           </div>  
         </div>
-        <button type="submit">Search</button>
+        <button type="submit">Submit</button>
       </form>
     </div>);
   }
