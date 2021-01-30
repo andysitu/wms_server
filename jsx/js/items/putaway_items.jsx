@@ -1,16 +1,52 @@
 class PutawayApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemReceiveList: [],
+    };
+    this.formId = "itemReceiveForm"
+  }
+
+  getData = () => {
+    var formData = new FormData($("#" + this.formId)[0]),
+        data = {};
+
+    for (var key of formData.keys()) {
+      data[key] = formData.get(key);
+    }
+    return data;
+  }
+
   onSubmit_searchForm = (e) => {
     e.preventDefault();
+    const data = this.getData();
+    let searchType = (data.itemSku.length > 0) ? 
+          "shipmentCodeAndItemSku" : "shipmentCode",
+        url = `./itemreceive?property=${searchType}&value=${data.shipmentCode}`;
+    if (data.itemSku.length > 0) {
+      url += `&value2=${data.itemSku}`;
+    }
+    $.ajax({
+      type: "GET",
+      url: url,
+      context: this,
+      success: function(returnData) {
+        console.log(returnData);
+        this.setState({
+          itemReceiveList: returnData,
+        });
+      }
+    });
   };
 
   render() {
     return (
     <div>
-      <form onSubmit={this.onSubmit_searchForm}>
+      <form onSubmit={this.onSubmit_searchForm} id={this.formId}>
         <div className="form-group row">
           <div className="col-5">
             <label htmlFor="">Shipment Code</label>
-            <input type="text" className="form-control" name="shipmentCode"></input>
+            <input type="text" className="form-control" name="shipmentCode" required></input>
           </div>
           <div className="col-5">
             <label htmlFor="">Item SKU</label>
@@ -20,10 +56,11 @@ class PutawayApp extends React.Component {
         <button type="submit">Search</button>
       </form>
 
-      <div>
+      <div id="itemReceive-table-container">
         <table className="table table-sm">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">Shipment Code</th>
               <th scope="col">Item Name</th>
               <th scope="col">SKU</th>
@@ -31,7 +68,18 @@ class PutawayApp extends React.Component {
               <th scope="col">Quantity</th>
             </tr>
           </thead>
-          <tbody id="itemReceive-table"></tbody>
+          <tbody id="itemReceive-table">
+            {this.state.itemReceiveList.map((itemReceive, index) => {
+              return (
+                <tr key={itemReceive.id}>
+                  <td><input type="radio" value={index} name="itemReceive-select" /></td>
+                  <td>{itemReceive.shipmentCode}</td>
+                  <td>{itemReceive.itemInfoResponse.itemName}</td>
+                  <td>{itemReceive.itemSku}</td>
+                  <td>{itemReceive.quantity}</td>
+                </tr>);
+            })}
+          </tbody>
         </table>
       </div>
     </div>);
