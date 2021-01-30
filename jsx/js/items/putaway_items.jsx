@@ -4,11 +4,11 @@ class PutawayApp extends React.Component {
     this.state = {
       itemReceiveList: [],
     };
-    this.formId = "itemReceiveForm"
+    this.receiveFormId = "itemReceiveForm";
   }
 
   getData = () => {
-    var formData = new FormData($("#" + this.formId)[0]),
+    var formData = new FormData($("#" + this.receiveFormId)[0]),
         data = {};
 
     for (var key of formData.keys()) {
@@ -53,7 +53,7 @@ class PutawayApp extends React.Component {
   render() {
     return (
     <div>
-      <form onSubmit={this.onSubmit_searchForm} id={this.formId}>
+      <form onSubmit={this.onSubmit_searchForm} id={this.receiveFormId}>
         <div className="form-group row">
           <div className="col-5">
             <label htmlFor="">Shipment Code</label>
