@@ -3,6 +3,7 @@ class PutawayApp extends React.Component {
     super(props);
     this.state = {
       itemReceiveList: [],
+      selectedItemReceive: -1,
     };
     this.receiveFormId = "itemReceiveForm";
   }
@@ -17,8 +18,17 @@ class PutawayApp extends React.Component {
     return data;
   }
 
+  resetItemReceiveTable = () => {
+    this.setState({
+      selectedItemReceive: -1,
+      itemReceiveList: [],
+    });
+  }
+
   onSubmit_searchForm = (e) => {
     e.preventDefault();
+    this.resetItemReceiveTable();
+    
     const data = this.getData();
     let searchType = (data.itemSku.length > 0) ? 
           "shipmentCodeAndItemSku" : "shipmentCode",
@@ -39,8 +49,10 @@ class PutawayApp extends React.Component {
     });
   };
 
-  onitemReceiveSelect = (e) => {
-    var itemReceiveIndex = e.target.value;
+  onSelectItemReceive = (e) => {
+    this.setState({
+      selectedItemReceive: parseInt(e.target.value),
+    });
 
     var previousTrs = document.getElementsByClassName("selected");
     for (let i=0; i<previousTrs.length; i++) {
