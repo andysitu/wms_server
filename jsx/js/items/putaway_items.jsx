@@ -39,6 +39,17 @@ class PutawayApp extends React.Component {
     });
   };
 
+  onitemReceiveSelect = (e) => {
+    var itemReceiveIndex = e.target.value;
+
+    var previousTrs = document.getElementsByClassName("selected");
+    for (let i=0; i<previousTrs.length; i++) {
+      previousTrs[i].classList.remove("selected");
+    }
+    var newTr = e.target.parentNode.parentNode;
+    newTr.classList.add("selected");
+  }
+
   render() {
     return (
     <div>
@@ -65,14 +76,14 @@ class PutawayApp extends React.Component {
               <th scope="col">Item Name</th>
               <th scope="col">SKU</th>
               <th scope="col">Quantity</th>
-              <th scope="col">Quantity</th>
             </tr>
           </thead>
           <tbody id="itemReceive-table">
             {this.state.itemReceiveList.map((itemReceive, index) => {
               return (
                 <tr key={itemReceive.id}>
-                  <td><input type="radio" value={index} name="itemReceive-select" /></td>
+                  <td><input type="radio" value={index} name="itemReceive-select" 
+                        onChange={this.onitemReceiveSelect}/></td>
                   <td>{itemReceive.shipmentCode}</td>
                   <td>{itemReceive.itemInfoResponse.itemName}</td>
                   <td>{itemReceive.itemSku}</td>

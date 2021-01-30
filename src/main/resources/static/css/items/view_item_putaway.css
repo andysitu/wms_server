@@ -2,3 +2,7 @@
     max-height: 400px;
     overflow: auto;
 }
+
+tr.selected {
+    background-color: lightgrey;    
+}
