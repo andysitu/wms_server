@@ -39,6 +39,7 @@ public class ItemInventory {
     @LastModifiedBy
     @Getter private String modifiedBy;
 
+    @Getter private int startQuantity;
     @Getter @Setter private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
