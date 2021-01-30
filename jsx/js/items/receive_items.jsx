@@ -97,7 +97,7 @@ class ReceiveItemApp extends React.Component {
         <div className="form-group">
           <label htmlFor="quantity-input">Quantity</label>
           <input type="number" name="quantity" className="form-control" 
-            id="quantity-input" required></input>
+            id="quantity-input" min="1" max="1000" required></input>
         </div>
         <button type="submit">Submit</button>
       </form>
