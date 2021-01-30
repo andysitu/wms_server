@@ -90,6 +90,9 @@ class PutawayApp extends React.Component {
   render() {
     let disablePutaway = this.state.selectedItemReceiveIndex < 0;
 
+    let maxQuantity = (disablePutaway) ? 0 :
+        this.state.itemReceiveList[this.state.selectedItemReceiveIndex].quantity;
+
     return (
     <div>
       <form onSubmit={this.onSubmit_searchForm} id={this.receiveFormId}>
@@ -145,6 +148,8 @@ class PutawayApp extends React.Component {
           <div className="col-6">
             <label htmlFor="quantity-input">Quantity</label>
             <input type="number" className="form-control" id="quantity-input"
+              placeholder={`Max Quantity: ${maxQuantity}`}
+              min="1" max={maxQuantity}
               name="quantity" required disabled={disablePutaway}></input>
           </div>  
         </div>
