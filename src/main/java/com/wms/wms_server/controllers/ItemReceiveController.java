@@ -50,7 +50,8 @@ public class ItemReceiveController {
     @ResponseBody
     public List<ItemReceiveResponse> get_itemreceive(
             @RequestParam(required = false) String property, 
-            @RequestParam(required = false) String value) {
+            @RequestParam(required = false) String value,
+            @RequestParam(required = false) String value2) {
         List<ItemReceiveResponse> responses = new ArrayList<>();
         if (property == null || value == null) {
             for (ItemReceive item : itemReceiveRepository.findAll()) {
@@ -58,7 +59,7 @@ public class ItemReceiveController {
                 responses.add(response);
             }
         } else {
-            for (ItemReceive item : itemReceiveService.searchItemReceive(property, value)) {
+            for (ItemReceive item : itemReceiveService.searchItemReceive(property, value, value2)) {
                 ItemReceiveResponse response = itemReceiveService.convert_to_response(item);
                 responses.add(response);
             }
