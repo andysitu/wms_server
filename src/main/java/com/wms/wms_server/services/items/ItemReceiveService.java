@@ -51,7 +51,7 @@ public class ItemReceiveService {
         return null;
     }
 
-    public List<ItemReceive> searchItemReceive(String property, String value) {
+    public List<ItemReceive> searchItemReceive(String property, String value, String value2) {
         if (property.equals("shipmentCode")) {
             return itemReceiveRepository.findByShipmentCode(value);
         } else if (property.equals("itemName")) {
@@ -60,6 +60,10 @@ public class ItemReceiveService {
             return itemReceiveRepository.findBySku(value);
         }
         return new ArrayList<>();
+    }
+
+    public List<ItemReceive> searchItemReceive(String property, String value) {
+        return searchItemReceive(property, value, "");
     }
 
     public ItemReceiveResponse convert_to_response(ItemReceive itemReceive) {
