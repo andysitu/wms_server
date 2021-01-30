@@ -205,15 +205,15 @@ class ModalMenu extends React.Component {
         <div className="form-row">
           <div className="col-4">
             <input type="number" name="width" className="form-control" 
-              defaultValue={width} placeholder="Width" />
+              defaultValue={width} placeholder="Width" step="0.1" min="0.1"/>
           </div>
           <div className="col-4">
             <input type="number" name="length" className="form-control" 
-              defaultValue={length} placeholder="Length" />
+              defaultValue={length} placeholder="Length" step="0.1" min="0.1"/>
           </div>
           <div className="col-4">
             <input type="number" name="height" className="form-control" 
-              defaultValue={height} placeholder="Height" />
+              defaultValue={height} placeholder="Height" step="0.1" min="0.1"/>
           </div>
         </div>
       </div>
