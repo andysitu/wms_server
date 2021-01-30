@@ -6,6 +6,7 @@ class PutawayApp extends React.Component {
       selectedItemReceive: -1,
     };
     this.receiveFormId = "itemReceiveForm";
+    this.putawayFormId = "putawayForm";
   }
 
   getData = () => {
@@ -63,17 +64,21 @@ class PutawayApp extends React.Component {
   }
 
   render() {
+    let disablePutaway = this.state.selectedItemReceive < 0;
+
     return (
     <div>
       <form onSubmit={this.onSubmit_searchForm} id={this.receiveFormId}>
         <div className="form-group row">
-          <div className="col-5">
-            <label htmlFor="">Shipment Code</label>
-            <input type="text" className="form-control" name="shipmentCode" required></input>
+          <div className="col-6">
+            <label htmlFor="shipment-code-input">Shipment Code</label>
+            <input type="text" className="form-control" id="shipment-code-input"
+              name="shipmentCode" required></input>
           </div>
-          <div className="col-5">
-            <label htmlFor="">Item SKU</label>
-            <input type="text" className="form-control" name="itemSku"></input>
+          <div className="col-6">
+            <label htmlFor="item-sku-input">Item SKU</label>
+            <input type="text" className="form-control" id="item-sku-input"
+              name="itemSku"></input>
           </div>  
         </div>
         <button type="submit">Search</button>
@@ -95,7 +100,7 @@ class PutawayApp extends React.Component {
               return (
                 <tr key={itemReceive.id}>
                   <td><input type="radio" value={index} name="itemReceive-select" 
-                        onChange={this.onitemReceiveSelect}/></td>
+                        onChange={this.onSelectItemReceive}/></td>
                   <td>{itemReceive.shipmentCode}</td>
                   <td>{itemReceive.itemInfoResponse.itemName}</td>
                   <td>{itemReceive.itemSku}</td>
@@ -105,6 +110,21 @@ class PutawayApp extends React.Component {
           </tbody>
         </table>
       </div>
+      <form id={this.putawayFormId}>
+        <div className="form-group row">
+          <div className="col-6">
+            <label htmlFor="location-input">Location</label>
+            <input type="text" className="form-control" id="location-input"
+              name="location" required disabled={disablePutaway}></input>
+          </div>
+          <div className="col-6">
+            <label htmlFor="quantity-input">Quantity</label>
+            <input type="number" className="form-control" id="quantity-input"
+              name="quantity" required disabled={disablePutaway}></input>
+          </div>  
+        </div>
+        <button type="submit">Search</button>
+      </form>
     </div>);
   }
 }
