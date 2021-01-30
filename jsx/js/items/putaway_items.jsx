@@ -7,6 +7,12 @@ class PutawayApp extends React.Component {
     };
     this.receiveFormId = "itemReceiveForm";
     this.putawayFormId = "putawayForm";
+    this.shipmentCodeInpuId = "shipment-code-input";
+    this.locationInputId = "location-input";
+  }
+
+  componentDidMount() {
+    $("#" + this.shipmentCodeInpuId).focus();
   }
 
   getData = () => {
@@ -51,16 +57,18 @@ class PutawayApp extends React.Component {
   };
 
   onSelectItemReceive = (e) => {
-    this.setState({
-      selectedItemReceive: parseInt(e.target.value),
-    });
-
     var previousTrs = document.getElementsByClassName("selected");
     for (let i=0; i<previousTrs.length; i++) {
       previousTrs[i].classList.remove("selected");
     }
     var newTr = e.target.parentNode.parentNode;
     newTr.classList.add("selected");
+
+    this.setState({
+      selectedItemReceive: parseInt(e.target.value),
+    }, () => {
+      $("#" + this.locationInputId).focus();
+    });
   }
 
   render() {
@@ -72,7 +80,7 @@ class PutawayApp extends React.Component {
         <div className="form-group row">
           <div className="col-6">
             <label htmlFor="shipment-code-input">Shipment Code</label>
-            <input type="text" className="form-control" id="shipment-code-input"
+            <input type="text" className="form-control" id={this.shipmentCodeInpuId}
               name="shipmentCode" required></input>
           </div>
           <div className="col-6">
@@ -114,7 +122,7 @@ class PutawayApp extends React.Component {
         <div className="form-group row">
           <div className="col-6">
             <label htmlFor="location-input">Location</label>
-            <input type="text" className="form-control" id="location-input"
+            <input type="text" className="form-control" id={this.locationInputId}
               name="location" required disabled={disablePutaway}></input>
           </div>
           <div className="col-6">
