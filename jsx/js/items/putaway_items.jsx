@@ -3,7 +3,7 @@ class PutawayApp extends React.Component {
     super(props);
     this.state = {
       itemReceiveList: [],
-      selectedItemReceive: -1,
+      selectedItemReceiveIndex: -1,
     };
     this.receiveFormId = "itemReceiveForm";
     this.putawayFormId = "putawayForm";
@@ -27,7 +27,7 @@ class PutawayApp extends React.Component {
 
   resetItemReceiveTable = () => {
     this.setState({
-      selectedItemReceive: -1,
+      selectedItemReceiveIndex: -1,
       itemReceiveList: [],
     });
   }
@@ -65,14 +65,14 @@ class PutawayApp extends React.Component {
     newTr.classList.add("selected");
 
     this.setState({
-      selectedItemReceive: parseInt(e.target.value),
+      selectedItemReceiveIndex: parseInt(e.target.value),
     }, () => {
       $("#" + this.locationInputId).focus();
     });
   }
 
   render() {
-    let disablePutaway = this.state.selectedItemReceive < 0;
+    let disablePutaway = this.state.selectedItemReceiveIndex < 0;
 
     return (
     <div>
