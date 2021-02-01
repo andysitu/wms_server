@@ -29,6 +29,10 @@ class LocationRow extends React.Component {
       $tr.removeClass("checked-row");
     }
   }
+
+  onClick_show_barcodes = () => {
+    this.props.show_barcodes([this.state.location.location_string,]);
+  };
   
   render() {
     return (
@@ -44,6 +48,12 @@ class LocationRow extends React.Component {
       <td>{this.state.location.level}</td>
       <td>{this.state.location.shelf}</td>
       <td>
+        <button type="button" className="btn btn-sm btn-outline-dark" 
+            onClick={this.onClick_show_barcodes} title="Show barcodes window">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
+            <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+          </svg>
+        </button>
         <button type="button" className="btn btn-sm btn-outline-warning"
             title="Edit Location">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">

@@ -374,7 +374,7 @@ class LocationTable extends React.Component {
               <LocationRow key={location.id} 
                 index={index}
                 location={location}
-                show_barcode={this.show_barcode}
+                show_barcodes={this.show_barcodes}
                 onClick_row_checkbox={this.onClick_row_checkbox}
                 delete_location={this.delete_location}
                 />
