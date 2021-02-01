@@ -365,6 +365,7 @@ class LocationTable extends React.Component {
             <th scope="col">Bay</th>
             <th scope="col">Level</th>
             <th scope="col">Shelf</th>
+            <th scope="col">Code</th>
             <th scope="col">Options</th>
           </tr>
         </thead>

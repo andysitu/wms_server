@@ -47,6 +47,7 @@ class LocationRow extends React.Component {
       <td>{this.state.location.bay}</td>
       <td>{this.state.location.level}</td>
       <td>{this.state.location.shelf}</td>
+      <td>{this.state.location.location_string}</td>
       <td>
         <button type="button" className="btn btn-sm btn-outline-dark" 
             onClick={this.onClick_show_barcodes} title="Show barcodes window">
