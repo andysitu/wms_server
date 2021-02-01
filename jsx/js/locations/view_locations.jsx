@@ -143,7 +143,7 @@ class LocationTable extends React.Component {
     });
   };
 
-  show_barcodes = (location_string) => {
+  onClick_show_barcodes = () => {
     var checkboxes = document.querySelectorAll(".row-checkbox:checked");
     var locations = [],
         index;
@@ -153,7 +153,11 @@ class LocationTable extends React.Component {
       index = cbox.getAttribute("row_index");
       locations.push(this.state.locations[index].location_string);
     }
-    this.modalMenu.current.show_menu("create_barcode", {barcode_strings: locations,});
+    this.show_barcodes(locations);
+  }
+
+  show_barcodes = (location_list) => {
+    this.modalMenu.current.show_menu("create_barcode", {barcode_strings: location_list,});
   };
 
   onChange_top_checkbox = (e) => {
@@ -319,7 +323,7 @@ class LocationTable extends React.Component {
             </svg>
           </button>
           <button type="button" className="btn btn-sm btn-outline-dark" 
-              onClick={this.show_barcodes} title="Show barcodes window">
+              onClick={this.onClick_show_barcodes} title="Show barcodes window">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-upc" viewBox="0 0 16 16">
               <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
             </svg>
