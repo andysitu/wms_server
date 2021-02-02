@@ -53,7 +53,7 @@ public class ItemInventoryService {
         
         String shipmentCode = request.getParameter("shipmentCode");
 
-        ItemInventory itemInventory = new ItemInventory(itemReceive.getItemInfo(), location, quantity, shipmentCode);
+        ItemInventory itemInventory = new ItemInventory(itemReceive.getItemInfo(), location, quantity, itemReceive.getShipmentCode());
         itemReceive.setQuantity(itemReceive.getQuantity() - quantity);
 
         itemInventoryRepository.save(itemInventory);

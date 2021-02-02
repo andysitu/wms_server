@@ -102,15 +102,15 @@ class PutawayApp extends React.Component {
       locationCode: receiveData.locationCode
     };
 
-    $.ajax({
-      url: "./iteminventory",
-      type: "POST",
-      data: data,
-      context: this,
-      success: function(data) {
+    // $.ajax({
+    //   url: "./iteminventory",
+    //   type: "POST",
+    //   data: data,
+    //   context: this,
+    //   success: function(data) {
 
-      }
-    });
+    //   }
+    // });
   }
 
   render() {
