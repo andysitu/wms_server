@@ -95,17 +95,11 @@ class PutawayApp extends React.Component {
     e.preventDefault();
     const receiveData = this.getData(this.putawayFormId);  
     const itemReceive = this.state.itemReceiveList[this.state.selectedItemReceiveIndex];
-    const quantity      = receiveData.quantity,
-          location      = receiveData.location,
-          itemReceiveId = itemReceive.id;
-    const locationObj = this.getLocationData(location);
-    if (!locationObj) {
-      return; 
-    }
+
     const data = {
-      itemReceiveId: itemReceiveId,
-      quantity: quantity,
-      ...locationObj
+      itemReceiveId: itemReceive.id,
+      quantity: receiveData.quantity,
+      locationCode: receiveData.locationCode
     };
 
     $.ajax({
@@ -175,7 +169,7 @@ class PutawayApp extends React.Component {
           <div className="col-6">
             <label htmlFor="location-input">Location</label>
             <input type="text" className="form-control" id={this.locationInputId}
-              name="location" required disabled={disablePutaway}
+              name="locationCode" required disabled={disablePutaway}
               placeholder="A-1-1-1-1"
               pattern="^[\w]+-[\w]+-[\w]+-[\w]+-[\w]+$"
               ></input>
