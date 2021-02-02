@@ -12,4 +12,5 @@ import com.wms.wms_server.model.locations.Location;
 public interface LocationRepository extends JpaRepository<Location, Integer> {
     List<Location> findByAreaId(Long areaId);
     Optional<Location> findByIdAndAreaId(Integer id, Long areaId);
+    List<Location> findByLocationCode(String locationCode);
 }
