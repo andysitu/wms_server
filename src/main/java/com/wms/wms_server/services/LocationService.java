@@ -28,7 +28,8 @@ public class LocationService {
 
     public LocationResponse convertLocation(Location l) {
         LocationResponse lresponse = new LocationResponse(
-            l.getId(), l.getAreaString(), l.getRow(), l.getBay(), l.getLevel(), l.getShelf()
+            l.getId(), l.getAreaString(), l.getRow(), 
+            l.getBay(), l.getLevel(), l.getShelf(), l.getLocationCode()
         );
         lresponse.area_id = l.getArea().getId();
         return lresponse;
@@ -67,9 +68,8 @@ public class LocationService {
                 for (int level = locReq.level_start; level < locReq.level_end+1; level++ ) {
                     for (int shelf = locReq.shelf_start; shelf < locReq.shelf_end+1; shelf++ ) {
                         loc = new Location(
-                            row, bay, level, shelf
+                            area, row, bay, level, shelf
                         );
-                        loc.setArea(area);
                         locationRepository.save(loc);
                         locs_list.add(loc);
                     }
