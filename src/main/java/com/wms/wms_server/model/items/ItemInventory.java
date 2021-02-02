@@ -39,6 +39,7 @@ public class ItemInventory {
     @LastModifiedBy
     @Getter private String modifiedBy;
 
+    @Getter private String shipmentCode;
     @Getter private int startQuantity;
     @Getter @Setter private int quantity;
 
@@ -53,7 +54,7 @@ public class ItemInventory {
     // Default constructor needed for JPA
     public ItemInventory() {}
 
-    public ItemInventory(ItemInfo itemInfo, Location location, int quantity) {
+    public ItemInventory(ItemInfo itemInfo, Location location, int quantity, String shipmentCode) {
         this.location = location;
         this.itemInfo = itemInfo;
         this.quantity = this.startQuantity = quantity;
