@@ -20,18 +20,21 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Location {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @Getter private Integer id;
 
-    private int row;
-    private int bay;
-    private int level;
-    private int shelf;
-    private String locationCode;
+    @Getter private int row;
+    @Getter private int bay;
+    @Getter private int level;
+    @Getter private int shelf;
+    @Getter private String locationCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id", nullable = false)
@@ -39,13 +42,13 @@ public class Location {
     private Area area;
     
     @CreatedDate
-    private Date createdDate;
+    @Getter private Date createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    @Getter private Date lastModifiedDate;
     @CreatedBy
-    private String createdBy;
+    @Getter private String createdBy;
     @LastModifiedBy
-    private String modifiedBy;
+    @Getter private String modifiedBy;
         
     public Location() {}
 
@@ -59,9 +62,6 @@ public class Location {
             Integer.toString(shelf);
     }
 
-    public Integer getId() {
-        return this.id;
-    }
     public void setArea(Area area) {
         this.area = area;
     }
@@ -72,28 +72,5 @@ public class Location {
         return this.area.getArea();
         // return this.area;
     }
-    public int getRow() {
-        return this.row;
-    }
-    public int getBay() {
-        return this.bay;
-    }
-    public int getLevel() {
-        return this.level;
-    }
-    public int getShelf() {
-        return this.shelf;
-    }
-
-    public Date getCreatedDate() {
-        // return new Date(this.createdDate.getTime());
-        return this.createdDate;
-    }
-    public Date getModifiedDate() {
-        // return new Date(this.lastModifiedDate.getTime());
-        return this.lastModifiedDate;
-    }
-    public String getCreatedBy() {
-        return this.createdBy;
-    }
+    
 }
