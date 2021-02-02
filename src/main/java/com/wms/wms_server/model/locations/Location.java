@@ -52,7 +52,8 @@ public class Location {
         
     public Location() {}
 
-    public Location(int row, int bay, int level, int shelf) {
+    public Location(Area area, int row, int bay, int level, int shelf) {
+        this.area = area;
         this.row = row;
         this.bay = bay;
         this.level = level;
@@ -62,9 +63,6 @@ public class Location {
             Integer.toString(shelf);
     }
 
-    public void setArea(Area area) {
-        this.area = area;
-    }
     public Area getArea() {
         return this.area;
     }
