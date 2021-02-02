@@ -176,7 +176,7 @@ class PutawayApp extends React.Component {
             <label htmlFor="location-input">Location</label>
             <input type="text" className="form-control" id={this.locationInputId}
               name="location" required disabled={disablePutaway}
-              placeholder="A-A-A-A-A"
+              placeholder="A-1-1-1-1"
               pattern="^[\w]+-[\w]+-[\w]+-[\w]+-[\w]+$"
               ></input>
           </div>
