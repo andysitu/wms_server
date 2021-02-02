@@ -1,5 +1,6 @@
 package com.wms.wms_server.model.locations;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -34,6 +35,7 @@ public class Location {
     @Getter private int bay;
     @Getter private int level;
     @Getter private int shelf;
+    @Column(unique=true)
     @Getter private String locationCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
