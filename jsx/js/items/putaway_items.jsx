@@ -84,7 +84,26 @@ class PutawayApp extends React.Component {
   
   submitItemInventory = (e) => {
     e.preventDefault();
-    console.log(this.getData(this.putawayFormId));    
+    const data = this.getData(this.putawayFormId);  
+    const itemReceive = this.state.itemReceiveList[this.state.selectedItemReceiveIndex];
+    console.log(itemReceive);
+    const quantity      = data.quantity,
+          location      = data.location,
+          itemReceiveId = itemReceive.id;
+    console.log(itemReceiveId + " " + location + " " + quantity);
+    $.ajax({
+      url: "./iteminventory",
+      type: "POST",
+      data: {
+        itemReceiveId: itemReceiveId,
+        quantity: quantity,
+        location: location,
+      },
+      context: this,
+      success: function(data) {
+
+      }
+    });
   }
 
   render() {
