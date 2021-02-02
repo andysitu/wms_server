@@ -31,6 +31,7 @@ public class Location {
     private int bay;
     private int level;
     private int shelf;
+    private String locationCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id", nullable = false)
@@ -53,6 +54,9 @@ public class Location {
         this.bay = bay;
         this.level = level;
         this.shelf = shelf;
+        this.locationCode = getAreaString() + "-" + Integer.toString(row) + "-" +
+            Integer.toString(bay) + "-" + Integer.toString(level) + "-" +
+            Integer.toString(shelf);
     }
 
     public Integer getId() {
@@ -80,6 +84,7 @@ public class Location {
     public int getShelf() {
         return this.shelf;
     }
+
     public Date getCreatedDate() {
         // return new Date(this.createdDate.getTime());
         return this.createdDate;
