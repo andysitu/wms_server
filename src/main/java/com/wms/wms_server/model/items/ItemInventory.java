@@ -49,4 +49,13 @@ public class ItemInventory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @Getter private ItemInfo itemInfo;
+
+    // Default constructor needed for JPA
+    public ItemInventory() {}
+
+    public ItemInventory(ItemInfo itemInfo, Location location, int quantity) {
+        this.location = location;
+        this.itemInfo = itemInfo;
+        this.quantity = this.startQuantity = quantity;
+    }
 }
