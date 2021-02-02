@@ -81,24 +81,37 @@ class PutawayApp extends React.Component {
       $("#" + this.locationInputId).focus();
     });
   }
+
+  getLocationData(locationString) {
+    const regex = /^(?<Area>\w+)-(?<row>\w+)-(?<bay>\w+)-(?<level>\w+)-(?<shelf>\w+)$/
+    const result = locationString.match(regex);
+    console.log(result);
+    if (result != null) {
+      return result.groups;
+    }
+  }
   
   submitItemInventory = (e) => {
     e.preventDefault();
-    const data = this.getData(this.putawayFormId);  
+    const receiveData = this.getData(this.putawayFormId);  
     const itemReceive = this.state.itemReceiveList[this.state.selectedItemReceiveIndex];
-    console.log(itemReceive);
-    const quantity      = data.quantity,
-          location      = data.location,
+    const quantity      = receiveData.quantity,
+          location      = receiveData.location,
           itemReceiveId = itemReceive.id;
-    console.log(itemReceiveId + " " + location + " " + quantity);
+    const locationObj = this.getLocationData(location);
+    if (!locationObj) {
+      return; 
+    }
+    const data = {
+      itemReceiveId: itemReceiveId,
+      quantity: quantity,
+      ...locationObj
+    };
+
     $.ajax({
       url: "./iteminventory",
       type: "POST",
-      data: {
-        itemReceiveId: itemReceiveId,
-        quantity: quantity,
-        location: location,
-      },
+      data: data,
       context: this,
       success: function(data) {
 
@@ -162,7 +175,10 @@ class PutawayApp extends React.Component {
           <div className="col-6">
             <label htmlFor="location-input">Location</label>
             <input type="text" className="form-control" id={this.locationInputId}
-              name="location" required disabled={disablePutaway}></input>
+              name="location" required disabled={disablePutaway}
+              placeholder="A-A-A-A-A"
+              pattern="^[\w]+-[\w]+-[\w]+-[\w]+-[\w]+$"
+              ></input>
           </div>
           <div className="col-6">
             <label htmlFor="quantity-input">Quantity</label>

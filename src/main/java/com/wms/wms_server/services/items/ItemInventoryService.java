@@ -14,6 +14,4 @@ public class ItemInventoryService {
         String result = request.getParameter(parameter);
         return (result != null && result.length() > 0);
     }
-
-    
 }
