@@ -70,6 +70,10 @@ public class LocationService {
                         loc = new Location(
                             area, row, bay, level, shelf
                         );
+                        List<Location> locations = locationRepository.findByLocationCode(loc.getLocationCode());
+                        if (locations.size() > 0) {
+                            continue;
+                        }
                         locationRepository.save(loc);
                         locs_list.add(loc);
                     }
