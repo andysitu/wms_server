@@ -12,7 +12,7 @@ class LocationRow extends React.Component {
 
   onClick_delete_btn = () => {
     var result = window.confirm(
-      `Are you sure you want to delete ${this.state.location.location_string}?`);
+      `Are you sure you want to delete ${this.state.location.locationCode}?`);
     if (result) {
       this.props.delete_location(this.state.location.id);
     }
@@ -31,7 +31,7 @@ class LocationRow extends React.Component {
   }
 
   onClick_show_barcodes = () => {
-    this.props.show_barcodes([this.state.location.location_string,]);
+    this.props.show_barcodes([this.state.location.locationCode,]);
   };
   
   render() {
@@ -47,7 +47,7 @@ class LocationRow extends React.Component {
       <td>{this.state.location.bay}</td>
       <td>{this.state.location.level}</td>
       <td>{this.state.location.shelf}</td>
-      <td>{this.state.location.location_string}</td>
+      <td>{this.state.location.locationCode}</td>
       <td>
         <button type="button" className="btn btn-sm btn-outline-dark" 
             onClick={this.onClick_show_barcodes} title="Show barcodes window">

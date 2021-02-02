@@ -69,10 +69,6 @@ class LocationTable extends React.Component {
     this.modalMenu.current.show_menu("create_location", data, this.create_location);
   };
 
-  // Changes location object to formatted data
-  convert_location(l) {
-    l.location_string = `${l.area}-${l.row}-${l.bay}-${l.level}-${l.shelf}`;
-  }
   add_area_to_state = (area_id, area_string) => {
     var areas = this.state.areas;
     for (let area of areas) {
@@ -151,7 +147,7 @@ class LocationTable extends React.Component {
       return;
     for (let cbox of checkboxes) {
       index = cbox.getAttribute("row_index");
-      locations.push(this.state.locations[index].location_string);
+      locations.push(this.state.locations[index].locationCode);
     }
     this.show_barcodes(locations);
   }
@@ -253,9 +249,6 @@ class LocationTable extends React.Component {
       url: url,
       context: this,
       success: function(locations) {
-        for(let l of locations) {
-          this.convert_location(l);
-        }
         this.setState({
           locations: locations,
         }, () => { console.log(this.state.locations); });
