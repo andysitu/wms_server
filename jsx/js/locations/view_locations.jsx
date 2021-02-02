@@ -28,9 +28,6 @@ class LocationTable extends React.Component {
       context: this,
       data: JSON.stringify(data),
       success: function(new_locations) {
-        for (var i=0; i< new_locations.length; i++) {
-          this.convert_location(new_locations[i]);
-        }
         this.setState(
           {locations: this.state.locations.concat(new_locations)},
           () => {
