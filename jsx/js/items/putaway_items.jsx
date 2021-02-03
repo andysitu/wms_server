@@ -123,6 +123,9 @@ class PutawayApp extends React.Component {
         if (xhr.status == 404) {
           window.alert("Location not found");
         }
+      },
+      complete: function() {
+        $("#" + this.putawayFormId)[0].reset();
       }
     });
   };
