@@ -23,6 +23,10 @@ public class ItemInventoryService {
     private LocationRepository locationRepository;
     @Autowired
     private ItemReceiveRepository itemReceiveRepository;
+
+    public List<ItemInventory> getItems() {
+        return itemInventoryRepository.findAll();
+    }
     
     public Boolean check_request(HttpServletRequest request, String parameter) {
         String result = request.getParameter(parameter);
