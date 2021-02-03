@@ -39,7 +39,6 @@ public class ItemInventory {
     @LastModifiedBy
     @Getter private String modifiedBy;
 
-    @Getter private String shipmentCode;
     @Getter private int startQuantity;
     @Getter @Setter private int quantity;
 
@@ -51,13 +50,17 @@ public class ItemInventory {
     @JoinColumn(nullable = false)
     @Getter private ItemInfo itemInfo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    @Getter private ItemReceive itemReceive;
+
     // Default constructor needed for JPA
     public ItemInventory() {}
 
-    public ItemInventory(ItemInfo itemInfo, Location location, int quantity, String shipmentCode) {
+    public ItemInventory(ItemInfo itemInfo, Location location, int quantity, ItemReceive itemReceive) {
         this.location = location;
         this.itemInfo = itemInfo;
         this.quantity = this.startQuantity = quantity;
-        this.shipmentCode = shipmentCode;
+        this.itemReceive = itemReceive;
     }
 }
