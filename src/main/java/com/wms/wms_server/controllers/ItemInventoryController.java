@@ -24,7 +24,13 @@ public class ItemInventoryController {
         return "items/view_item_putaway";
     }
 
-    @RequestMapping(value="/iteminventory", method=RequestMethod.POST)
+    @GetMapping("/view_inventory")
+    public String view_inventory() {
+        return "items/view_inventory";
+    }
+
+    @RequestMapping(value="/iteminventory", produces = "application/json",
+        method=RequestMethod.POST)
     @ResponseBody
     public String createItemInventory(HttpServletRequest request) {
         ItemInventory item = itemInventoryService.createItemInventory(request);
