@@ -56,7 +56,7 @@ public class ItemInventoryService {
         if (itemReceive.getQuantity() < quantity) return null;
 
         ItemInventory itemInventory = new ItemInventory(
-            itemReceive.getItemInfo(), location, quantity, itemReceive.getShipmentCode());
+            itemReceive.getItemInfo(), location, quantity, itemReceive);
         itemReceive.setQuantity(itemReceive.getQuantity() - quantity);
 
         itemInventoryRepository.save(itemInventory);
@@ -66,12 +66,14 @@ public class ItemInventoryService {
     }
 
     public ItemInventoryResponse convert_to_response(ItemInventory itemInventory) {
+        ItemReceive itemReceive = itemInventory.getItemReceive();
         ItemInventoryResponse response = new ItemInventoryResponse();
         response.quantity = itemInventory.getQuantity();
         response.id = itemInventory.getId();
         response.locationCode = itemInventory.getLocation().getLocationCode();
-        response.shipmentCode = itemInventory.getShipmentCode();
+        response.shipmentCode = itemReceive.getShipmentCode();
         response.itemName = itemInventory.getItemInfo().getItemName();
+        response.itemSku = itemReceive.getSku();
         return response;
     }
 }
