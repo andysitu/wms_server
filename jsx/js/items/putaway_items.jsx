@@ -80,7 +80,7 @@ class PutawayApp extends React.Component {
     }, () => {
       $("#" + this.locationInputId).focus();
     });
-  }
+  };
 
   getLocationData(locationString) {
     const regex = /^(?<Area>\w+)-(?<row>\w+)-(?<bay>\w+)-(?<level>\w+)-(?<shelf>\w+)$/
@@ -107,10 +107,25 @@ class PutawayApp extends React.Component {
       data: data,
       context: this,
       success: function(data) {
-
+        console.log(data);
+        this.setState(state => {
+          const index = state.selectedItemReceiveIndex;
+          const newItemList = [...state.itemReceiveList];
+          if (receiveData.quantity ==  newItemList[index]) {
+            newItemList.splice(index, 1);
+          } else {
+            newItemList[index].quantity -= receiveData.quantity;
+          }
+          return { itemReceiveList: newItemList };
+        });
+      }, 
+      error: function(xhr, textStatus) {
+        if (xhr.status == 404) {
+          window.alert("Location not found");
+        }
       }
     });
-  }
+  };
 
   render() {
     let disablePutaway = this.state.selectedItemReceiveIndex < 0;
