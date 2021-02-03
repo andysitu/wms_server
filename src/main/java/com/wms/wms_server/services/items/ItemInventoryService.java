@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.model.items.ItemReceive;
 import com.wms.wms_server.model.locations.Location;
+import com.wms.wms_server.model.response.items.ItemInventoryResponse;
 import com.wms.wms_server.repository.LocationRepository;
 import com.wms.wms_server.repository.items.ItemInventoryRepository;
 import com.wms.wms_server.repository.items.ItemReceiveRepository;
@@ -60,5 +61,15 @@ public class ItemInventoryService {
         itemReceiveRepository.save(itemReceive);
         
         return itemInventory;
+    }
+
+    public ItemInventoryResponse convert_to_response(ItemInventory itemInventory) {
+        ItemInventoryResponse response = new ItemInventoryResponse();
+        response.quantity = itemInventory.getQuantity();
+        response.id = itemInventory.getId();
+        response.locationCode = itemInventory.getLocation().getLocationCode();
+        response.shipmentCode = itemInventory.getShipmentCode();
+        response.itemName = itemInventory.getItemInfo().getItemName();
+        return response;
     }
 }
