@@ -3,6 +3,7 @@ package com.wms.wms_server.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemInventory;
+import com.wms.wms_server.model.response.items.ItemInventoryResponse;
 import com.wms.wms_server.services.items.ItemInventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.*;
 
 @Controller
 public class ItemInventoryController {
@@ -30,13 +32,23 @@ public class ItemInventoryController {
     }
 
     @RequestMapping(value="/iteminventory", produces = "application/json",
+        method=RequestMethod.GET)
+    @ResponseBody
+    public List<ItemInventoryResponse> getItemInventory(HttpServletRequest request) {
+        List<ItemInventoryResponse> responses = new ArrayList<>();
+        for (ItemInventory item: itemInventoryService.getItems()) {
+            responses.add(itemInventoryService.convert_to_response(item));
+        }
+        return responses;
+    }
+
+    @RequestMapping(value="/iteminventory", produces = "application/json",
         method=RequestMethod.POST)
     @ResponseBody
     public String createItemInventory(HttpServletRequest request) {
         ItemInventory item = itemInventoryService.createItemInventory(request);
         
         return "OK";
-        
     }
     
 }
