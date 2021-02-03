@@ -95,22 +95,21 @@ class PutawayApp extends React.Component {
     e.preventDefault();
     const receiveData = this.getData(this.putawayFormId);  
     const itemReceive = this.state.itemReceiveList[this.state.selectedItemReceiveIndex];
-
     const data = {
       itemReceiveId: itemReceive.id,
       quantity: receiveData.quantity,
       locationCode: receiveData.locationCode
     };
 
-    // $.ajax({
-    //   url: "./iteminventory",
-    //   type: "POST",
-    //   data: data,
-    //   context: this,
-    //   success: function(data) {
+    $.ajax({
+      url: "./iteminventory",
+      type: "POST",
+      data: data,
+      context: this,
+      success: function(data) {
 
-    //   }
-    // });
+      }
+    });
   }
 
   render() {
