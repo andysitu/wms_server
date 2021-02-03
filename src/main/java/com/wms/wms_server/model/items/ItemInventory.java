@@ -58,5 +58,6 @@ public class ItemInventory {
         this.location = location;
         this.itemInfo = itemInfo;
         this.quantity = this.startQuantity = quantity;
+        this.shipmentCode = shipmentCode;
     }
 }
