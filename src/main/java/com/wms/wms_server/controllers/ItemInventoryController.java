@@ -2,6 +2,7 @@ package com.wms.wms_server.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.services.items.ItemInventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class ItemInventoryController {
     @RequestMapping(value="/iteminventory", method=RequestMethod.POST)
     @ResponseBody
     public String createItemInventory(HttpServletRequest request) {
-
+        ItemInventory item = itemInventoryService.createItemInventory(request);
+        
         return "OK";
+        
     }
     
 }
