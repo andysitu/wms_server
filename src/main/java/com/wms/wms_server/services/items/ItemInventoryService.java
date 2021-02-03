@@ -33,8 +33,7 @@ public class ItemInventoryService {
         // Check that all parameters are given
         if (!check_request(request, "locationCode") || 
             !check_request(request, "itemReceiveId") ||
-            !check_request(request, "quantity") ||
-            !check_request(request, "shipmentCode")) {
+            !check_request(request, "quantity")) {
             return null;
         }
 
@@ -51,10 +50,9 @@ public class ItemInventoryService {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
         if (itemReceive.getQuantity() < quantity) return null;
-        
-        String shipmentCode = request.getParameter("shipmentCode");
 
-        ItemInventory itemInventory = new ItemInventory(itemReceive.getItemInfo(), location, quantity, itemReceive.getShipmentCode());
+        ItemInventory itemInventory = new ItemInventory(
+            itemReceive.getItemInfo(), location, quantity, itemReceive.getShipmentCode());
         itemReceive.setQuantity(itemReceive.getQuantity() - quantity);
 
         itemInventoryRepository.save(itemInventory);
