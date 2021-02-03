@@ -4,6 +4,7 @@ class PutawayApp extends React.Component {
     this.state = {
       itemReceiveList: [],
       selectedItemReceiveIndex: -1,
+      putawayItemList: [],
     };
     this.receiveFormId = "itemReceiveForm";
     this.putawayFormId = "putawayForm";
@@ -106,8 +107,8 @@ class PutawayApp extends React.Component {
       type: "POST",
       data: data,
       context: this,
-      success: function(data) {
-        console.log(data);
+      success: function(itemData) {
+        console.log(itemData);
         this.setState(state => {
           const index = state.selectedItemReceiveIndex;
           const newItemList = [...state.itemReceiveList];
@@ -116,7 +117,10 @@ class PutawayApp extends React.Component {
           } else {
             newItemList[index].quantity -= receiveData.quantity;
           }
-          return { itemReceiveList: newItemList };
+
+          return { 
+            putawayItemList: [itemData, ...state.putawayItemList],
+            itemReceiveList: newItemList };
         });
       }, 
       error: function(xhr, textStatus) {
@@ -201,6 +205,29 @@ class PutawayApp extends React.Component {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <table className="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">SKU</th>
+            <th scope="col">Location</th>
+            <th scope="col">Shipment Code</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.putawayItemList.map(item => {
+            return (
+            <tr key={item.id}>
+              <td>{item.itemName}</td>
+              <td>{item.itemSku}</td>
+              <td>{item.locationCode}</td>
+              <td>{item.shipmentCode}</td>
+              <td>{item.quantity}</td>
+            </tr>);
+          })}
+        </tbody>
+      </table>
     </div>);
   }
 }
