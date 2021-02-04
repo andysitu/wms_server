@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,4 +58,15 @@ public class ItemInventoryController {
         }
     }
     
+    @RequestMapping(value="/iteminventory/{itemId}", produces = "application/json",
+        method=RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity deleteItemInventory( @PathVariable("itemId") Long itemId) {
+        boolean result = itemInventoryService.deleteItemInventory(itemId);
+        if (result == true) {
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }
