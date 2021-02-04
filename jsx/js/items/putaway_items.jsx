@@ -150,6 +150,23 @@ class PutawayApp extends React.Component {
     });
   };
 
+  onClick_deleteItem = (e) => {
+    const id = e.target.getAttribute("id"),
+          index = e.target.getAttribute("index");
+    $.ajax({
+      url: "/iteminventory/" + id,
+      type: "DELETE",
+      context: this,
+      complete: function() {
+        this.setState(state => {
+          let newList = [...state.putawayItemList];
+          newList.splice(index, 1);
+          return {putawayItemList: newList};
+        })
+      }
+    })
+  };
+
   render() {
     let disablePutaway = this.state.selectedItemReceiveIndex < 0;
 
@@ -230,10 +247,11 @@ class PutawayApp extends React.Component {
             <th scope="col">Shipment Code</th>
             <th scope="col">Quantity</th>
             <th scope="col">Date</th>
+            <th scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
-          {this.state.putawayItemList.map(item => {
+          {this.state.putawayItemList.map((item, index) => {
             return (
             <tr key={item.id}>
               <td>{item.itemName}</td>
@@ -242,6 +260,10 @@ class PutawayApp extends React.Component {
               <td>{item.shipmentCode}</td>
               <td>{item.quantity}</td>
               <td>{item.createdDate}</td>
+              <td>
+                <button type="button" index={index} id={item.id}
+                  onClick={this.onClick_deleteItem}>Delete</button>
+              </td>
             </tr>);
           })}
         </tbody>
