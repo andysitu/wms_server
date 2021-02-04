@@ -77,4 +77,13 @@ public class ItemInventoryService {
         response.setCreatedDate(itemReceive.getCreatedDate());
         return response;
     }
+
+    public boolean deleteItemInventory(Long itemId) {
+        try {
+            itemInventoryRepository.deleteById(itemId);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
 }
