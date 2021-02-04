@@ -229,6 +229,7 @@ class PutawayApp extends React.Component {
             <th scope="col">Location</th>
             <th scope="col">Shipment Code</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Date</th>
           </tr>
         </thead>
         <tbody>
@@ -240,6 +241,7 @@ class PutawayApp extends React.Component {
               <td>{item.locationCode}</td>
               <td>{item.shipmentCode}</td>
               <td>{item.quantity}</td>
+              <td>{item.createdDate}</td>
             </tr>);
           })}
         </tbody>

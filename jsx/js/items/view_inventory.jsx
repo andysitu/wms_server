@@ -32,6 +32,7 @@ class InventoryApp extends React.Component {
             <th scope="col">Quantity</th>
             <th scope="col">Shipment Code</th>
             <th scope="col">Location</th>
+            <th scope="col">Created Date</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@ class InventoryApp extends React.Component {
               <td>{item.quantity}</td>
               <td>{item.shipmentCode}</td>
               <td>{item.locationCode}</td>
+              <td>{item.createdDate}</td>
             </tr>);
           })}
         </tbody>
