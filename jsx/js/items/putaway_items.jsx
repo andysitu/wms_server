@@ -14,7 +14,23 @@ class PutawayApp extends React.Component {
 
   componentDidMount() {
     $("#" + this.shipmentCodeInpuId).focus();
+    this.load_items_from_localstorage();
   }
+
+  load_items_from_localstorage = () => {
+    // Save items to LocalStorage before closing
+    window.addEventListener('beforeunload', (e) => {
+      this.save_items_to_localstorage();
+    });
+
+    this.setState({
+      putawayItemList: storage_obj.get_itemPutaway(),
+    });
+  }
+
+  save_items_to_localstorage = () => {
+    storage_obj.set_itemPutaway(this.state.putawayItemList);
+  };
 
   getData = (formId) => {
     var formData = new FormData($("#" + formId)[0]),
