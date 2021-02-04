@@ -61,9 +61,10 @@ public class ItemInventoryController {
         method=RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity deleteItemInventory( @PathVariable("itemId") Long itemId) {
-        boolean result = itemInventoryService.deleteItemInventory(itemId);
-        if (result == true) {
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+        ItemInventory item = itemInventoryService.deleteItemInventory(itemId);
+        ItemInventoryResponse response = itemInventoryService.convert_to_response(item);
+        if (item != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
