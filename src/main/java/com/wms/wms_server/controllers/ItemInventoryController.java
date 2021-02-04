@@ -3,8 +3,11 @@ package com.wms.wms_server.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemInventory;
+import com.wms.wms_server.model.items.ItemReceive;
 import com.wms.wms_server.model.response.items.ItemInventoryResponse;
+import com.wms.wms_server.model.response.items.ItemReceiveResponse;
 import com.wms.wms_server.services.items.ItemInventoryService;
+import com.wms.wms_server.services.items.ItemReceiveService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,8 @@ import java.util.*;
 public class ItemInventoryController {
     @Autowired
     ItemInventoryService itemInventoryService;
+    @Autowired
+    ItemReceiveService itemReceiveService;
 
     @GetMapping("/view_item_putaway")
     public String view_item_putaway() {
@@ -62,11 +67,11 @@ public class ItemInventoryController {
     @ResponseBody
     public ResponseEntity deleteItemInventory( @PathVariable("itemId") Long itemId) {
         ItemInventory item = itemInventoryService.deleteItemInventory(itemId);
-        ItemInventoryResponse response = itemInventoryService.convert_to_response(item);
-        if (item != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } else {
+        if (item == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+        ItemReceive itemReceive = itemReceiveService.restoreItemReceive(item);
+        ItemReceiveResponse itemReceiveResponse = itemReceiveService.convert_to_response(itemReceive);
+        return ResponseEntity.status(HttpStatus.OK).body(itemReceiveResponse);
     }
 }
