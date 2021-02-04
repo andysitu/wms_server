@@ -3,6 +3,7 @@ package com.wms.wms_server.services.items;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemInfo;
+import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.model.items.ItemReceive;
 import com.wms.wms_server.model.response.items.ItemInfoResponse;
 import com.wms.wms_server.model.response.items.ItemReceiveResponse;
@@ -80,5 +81,18 @@ public class ItemReceiveService {
         response.itemInfoResponse = infoResponse;
 
         return response;
+    }
+
+    /**
+     * Restore the ItemReceive quantity from ItemInventory (most likely due to deletion
+     * of the item).
+     * @param itemInventory - itemInventory that is being deleted/ affected.
+     * @return
+     */
+    public ItemReceive restoreItemReceive(ItemInventory itemInventory) {
+        ItemReceive itemReceive = itemInventory.getItemReceive();
+        itemReceive.setQuantity(itemReceive.getQuantity() + itemInventory.getQuantity());
+        itemReceiveRepository.save(itemReceive);
+        return itemReceive;
     }
 }
