@@ -157,6 +157,18 @@ class PutawayApp extends React.Component {
       url: "/iteminventory/" + id,
       type: "DELETE",
       context: this,
+      success: function(itemReceive) {
+        this.setState(state => {
+          let newItemReceiveList = [...state.itemReceiveList];
+          for (let i=0; i< newItemReceiveList.length; i++) {
+            if (newItemReceiveList[i].id == itemReceive.id) {
+              newItemReceiveList[i] = itemReceive;
+              break;
+            }
+          }
+          return {itemReceiveList: newItemReceiveList};
+        });
+      },
       complete: function() {
         this.setState(state => {
           let newList = [...state.putawayItemList];
@@ -164,7 +176,7 @@ class PutawayApp extends React.Component {
           return {putawayItemList: newList};
         })
       }
-    })
+    });
   };
 
   render() {
