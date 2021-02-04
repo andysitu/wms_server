@@ -1,6 +1,7 @@
 var storage_obj = {
   warehouse_property: "default_warehouse_id",
   itemReceive_property: "itemReceive",
+  itemPutaway_property: "itemPutaway",
   get_warehouse() {
     return window.localStorage.getItem(this.warehouse_property);
   },
@@ -18,7 +19,6 @@ var storage_obj = {
     if (result == null) {
       return [];
     }
-    console.log(result);
     return result;
   },
   set_itemReceive(itemReceive) {
@@ -26,5 +26,18 @@ var storage_obj = {
       this.itemReceive_property,
       JSON.stringify(itemReceive)
     );
-  }
+  },
+  get_itemPutaway() {
+    var result = JSON.parse(window.localStorage.getItem(this.itemPutaway_property));
+    if (result == null) {
+      return [];
+    }
+    return result;
+  },
+  set_itemPutaway(itemsPutaway) {
+    window.localStorage.setItem(
+      this.itemPutaway_property,
+      JSON.stringify(itemsPutaway)
+    );
+  },
 }
