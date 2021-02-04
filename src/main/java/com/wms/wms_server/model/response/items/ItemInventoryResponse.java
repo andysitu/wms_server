@@ -1,6 +1,8 @@
 package com.wms.wms_server.model.response.items;
 
-public class ItemInventoryResponse {
+import com.wms.wms_server.model.response.Response;
+
+public class ItemInventoryResponse extends Response {
     public int quantity;
     public long id;
     public String itemName;
