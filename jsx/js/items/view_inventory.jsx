@@ -67,7 +67,7 @@ class InventoryApp extends React.Component {
               <td>{item.locationCode}</td>
               <td>{item.createdDate}</td>
               <td>
-                <button type="button" className="btn btn-sm"
+                <button type="button"
                   onClick={this.onClick_deleteItem}
                   id={item.id} index={index}
                 >Delete</button>
