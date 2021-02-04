@@ -14,10 +14,4 @@ public class ItemReceiveResponse extends Response {
     public String shipmentCode;
 
     public ItemInfoResponse itemInfoResponse;
-
-    public String createdDate;
-
-    public void setCreatedDate(Date date) {
-        this.createdDate = convertDateToString(date);
-    }
 }
