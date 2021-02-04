@@ -22,6 +22,26 @@ class InventoryApp extends React.Component {
     });
   };
 
+  onClick_deleteItem = (e) => {
+    const id = e.target.getAttribute("id"),
+          index = e.target.getAttribute("index");
+    $.ajax({
+      url: "/iteminventory/" + id,
+      type: "DELETE",
+      context: this,
+      success: function(data) {
+        console.log(data);
+      },
+      complete: function() {
+        this.setState(state => {
+          let newList = [...state.itemInventory];
+          newList.splice(index, 1);
+          return {itemInventory: newList};
+        });
+      }
+    });
+  };
+
   render() {
     return (<div>
       <table className="table table-sm">
@@ -33,6 +53,7 @@ class InventoryApp extends React.Component {
             <th scope="col">Shipment Code</th>
             <th scope="col">Location</th>
             <th scope="col">Created Date</th>
+            <th scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +66,12 @@ class InventoryApp extends React.Component {
               <td>{item.shipmentCode}</td>
               <td>{item.locationCode}</td>
               <td>{item.createdDate}</td>
+              <td>
+                <button type="button" className="btn btn-sm"
+                  onClick={this.onClick_deleteItem}
+                  id={item.id} index={index}
+                >Delete</button>
+              </td>
             </tr>);
           })}
         </tbody>
