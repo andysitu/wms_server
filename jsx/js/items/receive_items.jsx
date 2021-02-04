@@ -108,6 +108,7 @@ class ReceiveItemApp extends React.Component {
             <th scope="col">SKU</th>
             <th scope="col">Shipment</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Date</th>
             <th scope="col">Options</th>
           </tr>
         </thead>
@@ -119,6 +120,7 @@ class ReceiveItemApp extends React.Component {
                 <td>{item.itemSku}</td>
                 <td>{item.shipmentCode}</td>
                 <td>{item.quantity}</td>
+                <td>{item.createdDate}</td>
                 <td>
                 <button type="button" className="btn btn-sm btn-outline-danger"
                   item_id={item.id} index={index} title="Delete item"
