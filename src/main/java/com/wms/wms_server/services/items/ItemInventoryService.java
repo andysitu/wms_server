@@ -78,12 +78,17 @@ public class ItemInventoryService {
         return response;
     }
 
-    public boolean deleteItemInventory(Long itemId) {
+    public ItemInventory deleteItemInventory(Long itemId) {
+        Optional<ItemInventory> oItem = itemInventoryRepository.findById(itemId);
+        if (oItem.isEmpty()) {
+            return null;
+        }
+        ItemInventory item = oItem.get();
         try {
             itemInventoryRepository.deleteById(itemId);
-            return true;
+            return item;
         } catch(Exception e) {
-            return false;
+            return null;
         }
     }
 }
