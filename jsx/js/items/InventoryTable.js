@@ -7,7 +7,11 @@ class InventoryTable extends React.Component {
       itemInventory: [],
     }
 
-    this.loadItemInventory();
+    this.editOptions = this.props.type != "ship_items";
+
+    if (this.editOptions) {
+      this.loadItemInventory();
+    }
     this.tablesearchbar = React.createRef();
   }
 
@@ -68,7 +72,8 @@ class InventoryTable extends React.Component {
             <th scope="col">Shipment Code</th>
             <th scope="col">Location</th>
             <th scope="col">Created Date</th>
-            <th scope="col">Options</th>
+            { this.editOptions ? <th scope="col">Options</th> : null}
+            
           </tr>
         </thead>
         <tbody>
@@ -81,12 +86,14 @@ class InventoryTable extends React.Component {
               <td>{item.shipmentCode}</td>
               <td>{item.locationCode}</td>
               <td>{item.createdDate}</td>
-              <td>
-                <button type="button"
-                  onClick={this.onClick_deleteItem}
-                  id={item.id} index={index}
-                >Delete</button>
-              </td>
+              { this.editOptions ? 
+                <td>
+                  <button type="button"
+                    onClick={this.onClick_deleteItem}
+                    id={item.id} index={index}
+                  >Delete</button>
+                </td> : null}
+              
             </tr>);
           })}
         </tbody>
