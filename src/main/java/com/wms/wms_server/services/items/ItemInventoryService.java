@@ -24,7 +24,7 @@ public class ItemInventoryService {
     @Autowired
     private ItemReceiveRepository itemReceiveRepository;
 
-    public List<ItemInventory> getItems() {
+    public List<ItemInventory> getAllItems() {
         return itemInventoryRepository.findAll();
     }
     
@@ -76,6 +76,13 @@ public class ItemInventoryService {
         response.itemSku = itemReceive.getSku();
         response.setCreatedDate(itemReceive.getCreatedDate());
         return response;
+    }
+
+    public List<ItemInventory> searchItemInventory(String property, String value) {
+        if (property.equals("itemName")) {
+            return itemInventoryRepository.findByItemName(value);
+        }
+        return new ArrayList<>();
     }
 
     public ItemInventory deleteItemInventory(Long itemId) {
