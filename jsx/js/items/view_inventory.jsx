@@ -3,7 +3,7 @@ import { InventoryTable } from "./InventoryTable.js";
 class InventoryApp extends React.Component {
   
   render() {
-    return (<InventoryTable />);
+    return (<InventoryTable type={"view_items"}/>);
   }
 }
 
