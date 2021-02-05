@@ -59,7 +59,7 @@ public class ItemReceiveService {
             return itemReceiveRepository.findByItemName(value);
         } else if (property.equals("itemSku")) {
             return itemReceiveRepository.findBySku(value);
-        } else if (property.equals("shipmentCodeAndItemSku")) {
+        } else if (property.equals("shipmentCodeAndItemSku")) { // Used in Putaway
             return itemReceiveRepository.findByShipmentCodeAndSku(value, value2);
         }
         return new ArrayList<>();
