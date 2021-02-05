@@ -1,3 +1,5 @@
+import { TableSearchBar } from "../etc/TableSearchBar.js";
+
 class InventoryApp extends React.Component {
   constructor(props) {
     super(props);
@@ -6,6 +8,7 @@ class InventoryApp extends React.Component {
     }
 
     this.loadItemInventory();
+    this.tablesearchbar = React.createRef();
   }
 
   loadItemInventory = () => {
@@ -42,8 +45,20 @@ class InventoryApp extends React.Component {
     });
   };
 
+  onClick_search = (search_type, search_value) => {
+    $.ajax({
+      url: `/iteminventory?property=${search_type}&value=${search_value}`,
+      type: "GET",
+      context: this,
+      success: function(itemList) {
+        this.setState({ itemInventory: itemList });
+      },
+    });
+  };
+
   render() {
     return (<div>
+      <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
       <table className="table table-sm">
         <thead>
           <tr>
