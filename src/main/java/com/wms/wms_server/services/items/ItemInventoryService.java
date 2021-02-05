@@ -83,6 +83,10 @@ public class ItemInventoryService {
             return itemInventoryRepository.findByItemName(value);
         } else if (property.equals("shipmentCode")) {
             return itemInventoryRepository.findByShipmentCode(value);
+        } else if (property.equals("sku")) {
+            return itemInventoryRepository.findByItemReceiveSku(value);
+        } else if (property.equals("locationCode")) {
+            return itemInventoryRepository.findByLocationCode(value);
         }
         return new ArrayList<>();
     }
