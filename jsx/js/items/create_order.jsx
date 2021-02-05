@@ -1,6 +1,6 @@
 import { InventoryTable } from "./InventoryTable.js"
 
-class ShipApp extends React.Component {
+class CreateOrderApp extends React.Component {
   render() {
     return (<div>
       <InventoryTable type={"ship_items"}/>
@@ -9,7 +9,7 @@ class ShipApp extends React.Component {
 }
 
 function loadReact() {
-  ReactDOM.render((<ShipApp />), document.getElementById("content-container"));
+  ReactDOM.render((<CreateOrderApp />), document.getElementById("content-container"));
 }
 
 loadReact();

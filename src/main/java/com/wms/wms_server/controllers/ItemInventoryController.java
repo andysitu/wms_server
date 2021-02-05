@@ -39,9 +39,9 @@ public class ItemInventoryController {
         return "items/view_inventory";
     }
 
-    @GetMapping("/ship_items")
+    @GetMapping("/create_order")
     public String view_ship_items() {
-        return "items/ship_items";
+        return "items/create_order";
     }
 
     @RequestMapping(value="/iteminventory", produces = "application/json",
