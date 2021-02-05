@@ -15,4 +15,10 @@ public interface ItemInventoryRepository extends JpaRepository<ItemInventory, Lo
 
     @Query("SELECT i FROM ItemInventory i INNER JOIN i.itemReceive ireceive INNER JOIN ireceive.shipmentReceive s WHERE lower(s.code) LIKE lower(CONCAT('%',:code,'%'))")
     List<ItemInventory> findByShipmentCode(String code);
+
+    @Query("Select i from ItemInventory i INNER JOIN i.itemReceive ireceive WHERE LOWER(ireceive.sku) LIKE LOWER(CONCAT('%',:sku,'%'))")
+    List<ItemInventory> findByItemReceiveSku(String sku);
+
+    @Query("Select i from ItemInventory i INNER JOIN i.location loc WHERE LOWER(loc.locationCode) LIKE LOWER(CONCAT('%',:locationCode,'%'))")
+    List<ItemInventory> findByLocationCode(String locationCode);
 }
