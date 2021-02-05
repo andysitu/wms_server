@@ -12,4 +12,7 @@ import java.util.*;
 public interface ItemInventoryRepository extends JpaRepository<ItemInventory, Long> {
     @Query("Select i from ItemInventory i INNER JOIN i.itemInfo iinfo WHERE LOWER(iinfo.itemName) LIKE LOWER(CONCAT('%',:name,'%'))")
     List<ItemInventory> findByItemName(String name);
+
+    @Query("SELECT i FROM ItemInventory i INNER JOIN i.itemReceive ireceive INNER JOIN ireceive.shipmentReceive s WHERE lower(s.code) LIKE lower(CONCAT('%',:code,'%'))")
+    List<ItemInventory> findByShipmentCode(String code);
 }

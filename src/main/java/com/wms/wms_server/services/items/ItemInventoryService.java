@@ -81,6 +81,8 @@ public class ItemInventoryService {
     public List<ItemInventory> searchItemInventory(String property, String value) {
         if (property.equals("itemName")) {
             return itemInventoryRepository.findByItemName(value);
+        } else if (property.equals("shipmentCode")) {
+            return itemInventoryRepository.findByShipmentCode(value);
         }
         return new ArrayList<>();
     }
