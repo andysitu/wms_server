@@ -39,6 +39,11 @@ public class ItemInventoryController {
         return "items/view_inventory";
     }
 
+    @GetMapping("/ship_items")
+    public String view_ship_items() {
+        return "items/ship_items";
+    }
+
     @RequestMapping(value="/iteminventory", produces = "application/json",
         method=RequestMethod.GET)
     @ResponseBody
