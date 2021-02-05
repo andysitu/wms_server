@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -41,10 +42,19 @@ public class ItemInventoryController {
     @RequestMapping(value="/iteminventory", produces = "application/json",
         method=RequestMethod.GET)
     @ResponseBody
-    public List<ItemInventoryResponse> getItemInventory(HttpServletRequest request) {
+    public List<ItemInventoryResponse> getItemInventory(
+        @RequestParam(required = false) String property, 
+        @RequestParam(required = false) String value)
+    {
         List<ItemInventoryResponse> responses = new ArrayList<>();
-        for (ItemInventory item: itemInventoryService.getItems()) {
-            responses.add(itemInventoryService.convert_to_response(item));
+        if (property == null || value == null) {
+            for (ItemInventory item: itemInventoryService.getAllItems()) {
+                responses.add(itemInventoryService.convert_to_response(item));
+            }
+        } else {
+            for (ItemInventory item: itemInventoryService.searchItemInventory(property, value)) {
+                responses.add(itemInventoryService.convert_to_response(item));
+            }
         }
         return responses;
     }
