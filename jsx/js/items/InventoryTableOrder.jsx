@@ -67,7 +67,7 @@ class InventoryTableOrder extends React.Component {
   }
   createItemRow = (type, item, index) => {
     return (
-    <tr key={item.id} 
+    <tr key={type + "_" +item.id} 
       type={type}
       onClick={this.onClick_row} index={index}>
       <td>
@@ -83,6 +83,9 @@ class InventoryTableOrder extends React.Component {
   };
 
   render() {
+    let itemReservedList = Object.values(this.state.reservedItems);
+    console.log(this.state.reservedItems);
+    console.log(itemReservedList);
     return (<div>
       <h2>Inventory Items</h2>
       <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
@@ -93,7 +96,7 @@ class InventoryTableOrder extends React.Component {
           </thead>
             <tbody>
               {this.state.itemInventory.map((item, index) => {
-                {return this.createItemRow("inventory", item, index)};
+                return this.createItemRow("inventory", item, index);
               })}
             </tbody>
         </table>
@@ -105,7 +108,11 @@ class InventoryTableOrder extends React.Component {
           <thead>
             {this.createItemHeaderRow()}
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {itemReservedList.map((item, index) => {
+              return this.createItemRow("reserved", item, index);
+            })}
+          </tbody>
         </table>
       </div>
     </div>);
