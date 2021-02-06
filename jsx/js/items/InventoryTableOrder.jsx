@@ -96,6 +96,12 @@ class InventoryTableOrder extends React.Component {
     </tr>);
   }
   createItemRow = (type, item, index) => {
+    let availableItemInput = (type == "reserved") ?
+    (<td className="skip-move">
+      <input type="number" className="skip-move"
+        value={item.quantity}></input>
+    </td>) :
+    (<td>{item.quantity}</td>)
     return (
     <tr key={type + "_" +item.id} 
       type={type} id={item.id}
@@ -105,7 +111,7 @@ class InventoryTableOrder extends React.Component {
       </td>
       <td>{item.itemName}</td>
       <td>{item.itemSku}</td>
-      <td>{item.quantity}</td>
+      {availableItemInput}
       <td>{item.reservedQuantity}</td>
       <td>{item.shipmentCode}</td>
       <td>{item.locationCode}</td>
