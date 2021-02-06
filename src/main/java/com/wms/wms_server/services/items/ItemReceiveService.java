@@ -91,7 +91,7 @@ public class ItemReceiveService {
      */
     public ItemReceive restoreItemReceive(ItemInventory itemInventory) {
         ItemReceive itemReceive = itemInventory.getItemReceive();
-        itemReceive.setQuantity(itemReceive.getQuantity() + itemInventory.getQuantity());
+        itemReceive.setQuantity(itemReceive.getQuantity() + itemInventory.getQuantity() + itemInventory.getReservedQuantity());
         itemReceiveRepository.save(itemReceive);
         return itemReceive;
     }
