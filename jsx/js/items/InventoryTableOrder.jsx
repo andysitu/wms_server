@@ -1,6 +1,8 @@
-import { TableSearchBar } from "../etc/TableSearchBar.js";
+import { TableSearchBar } from "../etc/TableSearchBar.jsx";
 
-class InventoryTable extends React.Component {
+export { InventoryTableOrder }
+
+class InventoryTableOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,6 +68,8 @@ class InventoryTable extends React.Component {
       <table className="table table-sm">
         <thead>
           <tr>
+            { this.props.type == "ship_items" ? 
+              (<th scope="col"></th>): (null)}
             <th scope="col">Item Name</th>
             <th scope="col">SKU</th>
             <th scope="col">Quantity</th>
@@ -80,6 +84,10 @@ class InventoryTable extends React.Component {
           {this.state.itemInventory.map((item, index) => {
             return (
             <tr key={item.id}>
+              { this.props.type == "ship_items" ? 
+                (<td>
+                  <input type="checkbox"></input>
+                </td>): (null)}
               <td>{item.itemName}</td>
               <td>{item.itemSku}</td>
               <td>{item.quantity}</td>
@@ -101,5 +109,3 @@ class InventoryTable extends React.Component {
     </div>);
   }
 }
-
-export { InventoryTable }
