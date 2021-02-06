@@ -20,7 +20,13 @@ class InventoryTableOrder extends React.Component {
       type: "GET",
       context: this,
       success: function(itemList) {
-        this.setState({ itemInventory: itemList });
+        let filteredList = [];
+        itemList.forEach((item)=> {
+          if (!(item.id in this.state.reservedItems)) {
+            filteredList.push(item);
+          }
+        });
+        this.setState({ itemInventory: filteredList });
       },
     });
   };
