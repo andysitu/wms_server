@@ -7,7 +7,11 @@ class InventoryTableOrder extends React.Component {
     super(props);
     this.state = {
       itemInventory: [],
+      reservedItems: [],
+      
     }
+    this.reservedItemIdSet = new Set();
+
     this.tablesearchbar = React.createRef();
   }
 
@@ -21,6 +25,35 @@ class InventoryTableOrder extends React.Component {
       },
     });
   };
+
+  reservedItem =(index) => {
+    this.setState(state => {
+      let newItemInventory = [...state.itemInventory];
+      let newReservedItems = [...state.reservedItems];
+      let item = newItemInventory.splice(item,1)
+      newReservedItems.push(item);
+      this.reservedItemIdSet.add(item.id);
+      return {
+        itemInventory: newItemInventory,
+        reservedItems: newReservedItems,
+      };
+    });
+    
+  };
+
+  onClick_row = (e) => {
+    e.preventDefault();
+    var element = e.target;
+    // Search up to 5 nodes for parent TR
+    for (let i=0; i<5; i++) {
+      if (element.tagName == "TR") {
+        break;
+      }
+      element = element.parentNode
+    }
+    const index = element.getAttribute("index");
+    this.reservedItem(index);
+  }
 
   render() {
     return (<div>
@@ -42,7 +75,7 @@ class InventoryTableOrder extends React.Component {
         <tbody>
           {this.state.itemInventory.map((item, index) => {
             return (
-            <tr key={item.id}>
+            <tr key={item.id} onClick={this.onClick_row} index={index}>
               <td>
                 <input type="checkbox"></input>
               </td>
