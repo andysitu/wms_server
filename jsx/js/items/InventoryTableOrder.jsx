@@ -36,7 +36,6 @@ class InventoryTableOrder extends React.Component {
         reservedItems: newReservedItems,
       };
     });
-    
   };
 
   onClick_row = (e) => {
@@ -51,7 +50,24 @@ class InventoryTableOrder extends React.Component {
     }
     const index = element.getAttribute("index");
     this.reservedItem(index);
-  }
+  };
+
+  createItemRow = (type, item, index) => {
+    return (
+    <tr key={item.id} 
+      type={type}
+      onClick={this.onClick_row} index={index}>
+      <td>
+        <input type="checkbox"></input>
+      </td>
+      <td>{item.itemName}</td>
+      <td>{item.itemSku}</td>
+      <td>{item.quantity}</td>
+      <td>{item.shipmentCode}</td>
+      <td>{item.locationCode}</td>
+      <td>{item.createdDate}</td>
+    </tr>);
+  };
 
   render() {
     return (<div>
@@ -71,18 +87,7 @@ class InventoryTableOrder extends React.Component {
         </thead>
         <tbody>
           {this.state.itemInventory.map((item, index) => {
-            return (
-            <tr key={item.id} onClick={this.onClick_row} index={index}>
-              <td>
-                <input type="checkbox"></input>
-              </td>
-              <td>{item.itemName}</td>
-              <td>{item.itemSku}</td>
-              <td>{item.quantity}</td>
-              <td>{item.shipmentCode}</td>
-              <td>{item.locationCode}</td>
-              <td>{item.createdDate}</td>
-            </tr>);
+            return {this.createItemRow("inventory", item, index)};
           })}
         </tbody>
       </table>
