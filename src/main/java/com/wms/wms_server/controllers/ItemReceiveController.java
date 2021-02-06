@@ -3,11 +3,8 @@ package com.wms.wms_server.controllers;
 import javax.servlet.http.HttpServletRequest;
 
 import com.wms.wms_server.model.items.ItemReceive;
-import com.wms.wms_server.model.response.items.ItemInfoResponse;
 import com.wms.wms_server.model.response.items.ItemReceiveResponse;
 import com.wms.wms_server.repository.items.ItemReceiveRepository;
-import com.wms.wms_server.repository.ShipmentReceiveRepository;
-import com.wms.wms_server.services.ItemInfoService;
 import com.wms.wms_server.services.items.ItemReceiveService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +25,8 @@ import java.util.*;
 public class ItemReceiveController {
     @Autowired
     ItemReceiveRepository itemReceiveRepository;
-    @Autowired
-    ShipmentReceiveRepository shipmentReceiveRepository;
     @Autowired 
     ItemReceiveService itemReceiveService;
-    @Autowired
-    ItemInfoService itemInfoService;
 
     @GetMapping(value = "receive_items")
     public String view_receiving_items() {
