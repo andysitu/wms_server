@@ -52,6 +52,18 @@ class InventoryTableOrder extends React.Component {
     this.reservedItem(index);
   };
 
+  createItemHeaderRow = () => {
+    return (<tr>
+      <th scope="col"></th>
+      <th scope="col">Item Name</th>
+      <th scope="col">SKU</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Shipment Code</th>
+      <th scope="col">Location</th>
+      <th scope="col">Created Date</th>
+      
+    </tr>);
+  }
   createItemRow = (type, item, index) => {
     return (
     <tr key={item.id} 
@@ -71,26 +83,30 @@ class InventoryTableOrder extends React.Component {
 
   render() {
     return (<div>
+      <h2>Inventory Items</h2>
       <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
-      <table className="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Item Name</th>
-            <th scope="col">SKU</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Shipment Code</th>
-            <th scope="col">Location</th>
-            <th scope="col">Created Date</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.itemInventory.map((item, index) => {
-            return {this.createItemRow("inventory", item, index)};
-          })}
-        </tbody>
-      </table>
+      <div style={{height: "320px", overflow: "auto"}}>
+        <table className="table table-sm">
+          <thead>
+            {this.createItemHeaderRow()}
+          </thead>
+            <tbody>
+              {this.state.itemInventory.map((item, index) => {
+                {return this.createItemRow("inventory", item, index)};
+              })}
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Order</h2>
+      <div style={{height: "320px", overflow: "auto"}}>
+        <table className="table table-sm">
+          <thead>
+            {this.createItemHeaderRow()}
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>);
   }
 }
