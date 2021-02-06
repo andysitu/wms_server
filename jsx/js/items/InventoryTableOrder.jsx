@@ -61,8 +61,12 @@ class InventoryTableOrder extends React.Component {
   };
 
   onClick_row = (e) => {
-    e.preventDefault();
     let element = e.target;
+    if (element.classList.contains("skip-move")) {
+      return;
+    }
+    e.preventDefault();
+    
     // Search up to 5 nodes for parent TR
     for (let i=0; i<5; i++) {
       if (element.tagName == "TR") {
