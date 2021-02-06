@@ -8,26 +8,8 @@ class InventoryTableOrder extends React.Component {
     this.state = {
       itemInventory: [],
     }
-
-    if (this.editOptions) {
-      this.loadItemInventory();
-    }
     this.tablesearchbar = React.createRef();
   }
-
-  loadItemInventory = () => {
-    $.ajax({
-      url: "./iteminventory",
-      type: "GET",
-      context: this,
-      success: function(items) {
-        console.log(items);
-        this.setState({
-          itemInventory: items,
-        });
-      }
-    });
-  };
 
   onClick_search = (search_type, search_value) => {
     $.ajax({
