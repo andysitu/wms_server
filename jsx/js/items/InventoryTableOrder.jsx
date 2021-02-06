@@ -41,7 +41,7 @@ class InventoryTableOrder extends React.Component {
 
   onClick_row = (e) => {
     e.preventDefault();
-    var element = e.target;
+    let element = e.target;
     // Search up to 5 nodes for parent TR
     for (let i=0; i<5; i++) {
       if (element.tagName == "TR") {
@@ -49,8 +49,10 @@ class InventoryTableOrder extends React.Component {
       }
       element = element.parentNode
     }
-    const index = element.getAttribute("index");
-    this.reservedItem(index);
+    if (element.getAttribute("type")=="inventory") {
+      const index = element.getAttribute("index");
+      this.reservedItem(index);
+    }
   };
 
   createItemHeaderRow = () => {
@@ -84,8 +86,6 @@ class InventoryTableOrder extends React.Component {
 
   render() {
     let itemReservedList = Object.values(this.state.reservedItems);
-    console.log(this.state.reservedItems);
-    console.log(itemReservedList);
     return (<div>
       <h2>Inventory Items</h2>
       <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
