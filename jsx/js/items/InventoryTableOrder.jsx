@@ -7,7 +7,7 @@ class InventoryTableOrder extends React.Component {
     super(props);
     this.state = {
       itemInventory: [],
-      reservedItems: {},
+      reservedItems: {}, // [item_id] : [itemData]
       
     }
 
@@ -100,11 +100,26 @@ class InventoryTableOrder extends React.Component {
     </tr>);
   };
 
+  onChange_reservedItemQuantity = (e) => {
+    const item_id = e.target.getAttribute("item_id"),
+          value = e.target.value;
+    this.setState(state => {
+      const newReservedItems = {...state.reservedItems};
+      console.log(newReservedItems);
+      newReservedItems[item_id].quantity = value;
+
+      return {
+        reservedItems: newReservedItems
+      }
+    });
+  };
+
   createItemRow = (item_type, item, index) => {
     let availableItemInput = (item_type == "reserved") ?
     (<td className="skip-move">
       <input type="number" className="skip-move"
-        index={index} item_type={item_type}
+        onChange={this.onChange_reservedItemQuantity}
+        item_id={item.id}
         value={item.quantity}></input>
     </td>) :
     (<td>{item.quantity}</td>)
