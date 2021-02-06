@@ -1,4 +1,4 @@
-import { TableSearchBar } from "../etc/TableSearchBar.jsx";
+import { TableSearchBar } from "../etc/TableSearchBar.js";
 
 export { InventoryTableOrder }
 
