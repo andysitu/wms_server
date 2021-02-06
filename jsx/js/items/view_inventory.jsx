@@ -1,9 +1,9 @@
-import { InventoryTable } from "./InventoryTable.js";
+import { InventoryTableView } from "./InventoryTableView.js";
 
 class InventoryApp extends React.Component {
   
   render() {
-    return (<InventoryTable type={"view_items"}/>);
+    return (<InventoryTableView type={"view_items"}/>);
   }
 }
 
