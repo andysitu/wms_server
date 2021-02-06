@@ -88,13 +88,12 @@ class InventoryTableView extends React.Component {
               <td>{item.shipmentCode}</td>
               <td>{item.locationCode}</td>
               <td>{item.createdDate}</td>
-                <td>
-                  <button type="button"
-                    onClick={this.onClick_deleteItem}
-                    id={item.id} index={index}
-                  >Delete</button>
-                </td> : null}
-              
+              <td>
+                <button type="button"
+                  onClick={this.onClick_deleteItem}
+                  id={item.id} index={index}
+                >Delete</button>
+              </td>
             </tr>);
           })}
         </tbody>
