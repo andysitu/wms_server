@@ -31,13 +31,28 @@ class InventoryTableOrder extends React.Component {
     });
   };
 
-  reservedItem =(index) => {
+  moveInventoryItem =(index) => {
     this.setState(state => {
       let newItemInventory = [...state.itemInventory];
       let newReservedItems = {...state.reservedItems};
       let item = newItemInventory.splice(item,1)[0];
 
       newReservedItems[item.id] = item;
+      return {
+        itemInventory: newItemInventory,
+        reservedItems: newReservedItems,
+      };
+    });
+  };
+
+  moveReservedItem = (id) => {
+    this.setState(state => {
+      let newItemInventory = [...state.itemInventory];
+      let newReservedItems = {...state.reservedItems};
+      let item = newReservedItems[id];
+
+      delete newReservedItems[id];
+      newItemInventory.push(item);
       return {
         itemInventory: newItemInventory,
         reservedItems: newReservedItems,
@@ -55,9 +70,15 @@ class InventoryTableOrder extends React.Component {
       }
       element = element.parentNode
     }
+    
     if (element.getAttribute("type")=="inventory") {
-      const index = element.getAttribute("index");
-      this.reservedItem(index);
+      this.moveInventoryItem(
+        element.getAttribute("index")
+      );
+    } else {
+      this.moveReservedItem(
+        element.getAttribute("id")
+      );
     }
   };
 
@@ -76,7 +97,7 @@ class InventoryTableOrder extends React.Component {
   createItemRow = (type, item, index) => {
     return (
     <tr key={type + "_" +item.id} 
-      type={type}
+      type={type} id={item.id}
       onClick={this.onClick_row} index={index}>
       <td>
         <input type="checkbox"></input>
