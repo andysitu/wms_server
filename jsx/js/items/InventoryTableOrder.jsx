@@ -9,8 +9,6 @@ class InventoryTableOrder extends React.Component {
       itemInventory: [],
     }
 
-    this.editOptions = this.props.type != "ship_items";
-
     if (this.editOptions) {
       this.loadItemInventory();
     }
@@ -26,26 +24,6 @@ class InventoryTableOrder extends React.Component {
         console.log(items);
         this.setState({
           itemInventory: items,
-        });
-      }
-    });
-  };
-
-  onClick_deleteItem = (e) => {
-    const id = e.target.getAttribute("id"),
-          index = e.target.getAttribute("index");
-    $.ajax({
-      url: "/iteminventory/" + id,
-      type: "DELETE",
-      context: this,
-      success: function(data) {
-        console.log(data);
-      },
-      complete: function() {
-        this.setState(state => {
-          let newList = [...state.itemInventory];
-          newList.splice(index, 1);
-          return {itemInventory: newList};
         });
       }
     });
@@ -68,8 +46,7 @@ class InventoryTableOrder extends React.Component {
       <table className="table table-sm">
         <thead>
           <tr>
-            { this.props.type == "ship_items" ? 
-              (<th scope="col"></th>): (null)}
+            <th scope="col"></th>
             <th scope="col">Item Name</th>
             <th scope="col">SKU</th>
             <th scope="col">Quantity</th>
@@ -84,24 +61,15 @@ class InventoryTableOrder extends React.Component {
           {this.state.itemInventory.map((item, index) => {
             return (
             <tr key={item.id}>
-              { this.props.type == "ship_items" ? 
-                (<td>
-                  <input type="checkbox"></input>
-                </td>): (null)}
+              <td>
+                <input type="checkbox"></input>
+              </td>
               <td>{item.itemName}</td>
               <td>{item.itemSku}</td>
               <td>{item.quantity}</td>
               <td>{item.shipmentCode}</td>
               <td>{item.locationCode}</td>
               <td>{item.createdDate}</td>
-              { this.editOptions ? 
-                <td>
-                  <button type="button"
-                    onClick={this.onClick_deleteItem}
-                    id={item.id} index={index}
-                  >Delete</button>
-                </td> : null}
-              
             </tr>);
           })}
         </tbody>
