@@ -7,10 +7,9 @@ class InventoryTableOrder extends React.Component {
     super(props);
     this.state = {
       itemInventory: [],
-      reservedItems: [],
+      reservedItems: {},
       
     }
-    this.reservedItemIdSet = new Set();
 
     this.tablesearchbar = React.createRef();
   }
@@ -31,8 +30,7 @@ class InventoryTableOrder extends React.Component {
       let newItemInventory = [...state.itemInventory];
       let newReservedItems = [...state.reservedItems];
       let item = newItemInventory.splice(item,1)
-      newReservedItems.push(item);
-      this.reservedItemIdSet.add(item.id);
+      newReservedItems[item.id] = item;
       return {
         itemInventory: newItemInventory,
         reservedItems: newReservedItems,
