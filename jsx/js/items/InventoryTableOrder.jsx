@@ -23,6 +23,8 @@ class InventoryTableOrder extends React.Component {
         let filteredList = [];
         itemList.forEach((item)=> {
           if (!(item.id in this.state.reservedItems)) {
+            // Set maxAvailable here (for input element in reserved items)
+            item.maxAvailable = item.quantity;
             filteredList.push(item);
           }
         });
@@ -96,7 +98,6 @@ class InventoryTableOrder extends React.Component {
       <th scope="col">Shipment Code</th>
       <th scope="col">Location</th>
       <th scope="col">Created Date</th>
-      
     </tr>);
   };
 
@@ -105,12 +106,11 @@ class InventoryTableOrder extends React.Component {
           value = e.target.value;
     this.setState(state => {
       const newReservedItems = {...state.reservedItems};
-      console.log(newReservedItems);
       newReservedItems[item_id].quantity = value;
 
       return {
         reservedItems: newReservedItems
-      }
+      };
     });
   };
 
@@ -120,6 +120,7 @@ class InventoryTableOrder extends React.Component {
       <input type="number" className="skip-move"
         onChange={this.onChange_reservedItemQuantity}
         item_id={item.id}
+        max={item.maxAvailable} min="0"
         value={item.quantity}></input>
     </td>) :
     (<td>{item.quantity}</td>)
