@@ -75,7 +75,7 @@ class InventoryTableOrder extends React.Component {
       element = element.parentNode
     }
     
-    if (element.getAttribute("type")=="inventory") {
+    if (element.getAttribute("item_type")=="inventory") {
       this.moveInventoryItem(
         element.getAttribute("index")
       );
@@ -98,17 +98,19 @@ class InventoryTableOrder extends React.Component {
       <th scope="col">Created Date</th>
       
     </tr>);
-  }
-  createItemRow = (type, item, index) => {
-    let availableItemInput = (type == "reserved") ?
+  };
+
+  createItemRow = (item_type, item, index) => {
+    let availableItemInput = (item_type == "reserved") ?
     (<td className="skip-move">
       <input type="number" className="skip-move"
+        index={index} item_type={item_type}
         value={item.quantity}></input>
     </td>) :
     (<td>{item.quantity}</td>)
     return (
-    <tr key={type + "_" +item.id} 
-      type={type} id={item.id}
+    <tr key={item_type + "_" +item.id} 
+      item_type={item_type} id={item.id}
       onClick={this.onClick_row} index={index}>
       <td>
         <input type="checkbox"></input>
