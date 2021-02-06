@@ -4,6 +4,7 @@ import com.wms.wms_server.model.response.Response;
 
 public class ItemInventoryResponse extends Response {
     public int quantity;
+    public int reservedQuantity;
     public long id;
     public String itemName;
     public String locationCode;
