@@ -87,7 +87,8 @@ class InventoryTableOrder extends React.Component {
       <th scope="col"></th>
       <th scope="col">Item Name</th>
       <th scope="col">SKU</th>
-      <th scope="col">Quantity</th>
+      <th scope="col">Available</th>
+      <th scope="col">Reserved</th>
       <th scope="col">Shipment Code</th>
       <th scope="col">Location</th>
       <th scope="col">Created Date</th>
@@ -105,6 +106,7 @@ class InventoryTableOrder extends React.Component {
       <td>{item.itemName}</td>
       <td>{item.itemSku}</td>
       <td>{item.quantity}</td>
+      <td>{item.reservedQuantity}</td>
       <td>{item.shipmentCode}</td>
       <td>{item.locationCode}</td>
       <td>{item.createdDate}</td>
