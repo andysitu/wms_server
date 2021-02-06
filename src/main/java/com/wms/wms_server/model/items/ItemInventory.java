@@ -42,6 +42,8 @@ public class ItemInventory {
     @Getter private int startQuantity;
     @Getter @Setter private int quantity;
 
+    @Getter private int reservedQuantity = 0;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @Getter private Location location;
