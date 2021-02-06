@@ -28,8 +28,9 @@ class InventoryTableOrder extends React.Component {
   reservedItem =(index) => {
     this.setState(state => {
       let newItemInventory = [...state.itemInventory];
-      let newReservedItems = [...state.reservedItems];
-      let item = newItemInventory.splice(item,1)
+      let newReservedItems = {...state.reservedItems};
+      let item = newItemInventory.splice(item,1)[0];
+
       newReservedItems[item.id] = item;
       return {
         itemInventory: newItemInventory,
