@@ -40,7 +40,7 @@ public class ItemInventory {
     @Getter private String modifiedBy;
 
     @Getter private int startQuantity;
-    @Getter @Setter private int quantity;
+    @Getter private int quantity;
 
     @Getter private int reservedQuantity = 0;
 
