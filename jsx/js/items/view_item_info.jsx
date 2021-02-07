@@ -72,6 +72,13 @@ class ItemInfoApp extends React.Component {
           itemInfos: [...that.state.itemInfos, item_data],
         })
       },
+      error: function(xhr, textStatus, error) {
+        if (xhr.status == 409) {
+          window.alert("Item Name already in use");
+        } else {
+          window.alert(textStatus + " " + error);
+        }
+      }
     });
   };
 

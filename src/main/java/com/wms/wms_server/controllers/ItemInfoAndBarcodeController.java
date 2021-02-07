@@ -8,6 +8,8 @@ import com.wms.wms_server.repository.items.ItemInfoRepository;
 import com.wms.wms_server.services.ItemInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,9 +35,13 @@ public class ItemInfoAndBarcodeController {
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public ItemInfoResponse createItemInfo(HttpServletRequest request) {
-        return itemInfoService.convert_to_response(
-        itemInfoService.createItemInfo(request));
+    public ResponseEntity createItemInfo(HttpServletRequest request) {
+        ItemInfo itemInfo = itemInfoService.createItemInfo(request);
+        if (itemInfo == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+            itemInfoService.convert_to_response( itemInfo ));
     }
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)
