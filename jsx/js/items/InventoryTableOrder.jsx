@@ -70,6 +70,7 @@ class InventoryTableOrder extends React.Component {
       let newItemInventory = [...state.itemInventory];
       let newReservedItems = {...state.reservedItems};
       let item = newReservedItems[id];
+      item.quantity = item.maxAvailable;
 
       delete newReservedItems[id];
       newItemInventory.push(item);
