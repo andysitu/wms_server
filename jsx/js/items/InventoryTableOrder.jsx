@@ -1,4 +1,4 @@
-import { TableSearchBar } from "../etc/TableSearchBar.js";
+import { TableSearchBar } from "../etc/TableSearchBar.js"
 
 export { InventoryTableOrder }
 
@@ -166,7 +166,8 @@ class InventoryTableOrder extends React.Component {
 
   onClick_createOrder = (e) => {
     e.preventDefault();
-    
+    let itemReservedList = Object.values(this.state.reservedItems);
+    this.props.createItemOrder(itemReservedList);
   };
 
   render() {
