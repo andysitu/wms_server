@@ -33,9 +33,9 @@ public class ItemInfoAndBarcodeController {
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
-    public ItemInfoResponse create_itemInfo(HttpServletRequest request) {
+    public ItemInfoResponse createItemInfo(HttpServletRequest request) {
         return itemInfoService.convert_to_response(
-        itemInfoService.create_itemInfo(request));
+        itemInfoService.createItemInfo(request));
     }
 
     @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)

@@ -29,7 +29,7 @@ public class ItemInfoService {
     @Autowired
     ItemCategoryRepository itemCategoryRepository;
 
-    public ItemInfo create_itemInfo(HttpServletRequest request) {
+    public ItemInfo createItemInfo(HttpServletRequest request) {
         if (request.getParameter("name") == null ||
                 request.getParameter("description") == null ||
                 request.getParameter("weight") == null) {
