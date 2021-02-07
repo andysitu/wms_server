@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 @Controller
-public class ItemController {
+public class ItemInfoAndBarcodeController {
     @Autowired
     ItemInfoRepository itemInfoRepository;
     

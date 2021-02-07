@@ -2,7 +2,7 @@ package com.wms.wms_server.testweb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wms.wms_server.controllers.ItemController;
+import com.wms.wms_server.controllers.ItemInfoAndBarcodeController;
 import com.wms.wms_server.controllers.LocationController;
 
 import org.junit.jupiter.api.Test;
@@ -14,11 +14,11 @@ public class SmokeTest {
     @Autowired
     LocationController locationController;
     @Autowired
-    ItemController itemController;
+    ItemInfoAndBarcodeController ItemInfoAndBarcodeController;
 
     @Test
     public void controllerLoads() throws Exception {
         assertThat(locationController).isNotNull();
-        assertThat(itemController).isNotNull();
+        assertThat(ItemInfoAndBarcodeController).isNotNull();
     }
 }
