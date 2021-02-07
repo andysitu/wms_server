@@ -137,6 +137,8 @@ class PutawayApp extends React.Component {
           return { 
             putawayItemList: [itemData, ...state.putawayItemList],
             itemReceiveList: newItemList };
+        }, () => {
+          document.getElementById(this.locationInputId).focus();
         });
       }, 
       error: function(xhr, textStatus) {
