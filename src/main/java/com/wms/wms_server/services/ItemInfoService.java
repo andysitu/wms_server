@@ -9,12 +9,14 @@ import com.wms.wms_server.repository.items.ItemInfoRepository;
 import com.wms.wms_server.repository.items.ItemSkuRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,37 +32,47 @@ public class ItemInfoService {
     ItemCategoryRepository itemCategoryRepository;
 
     public ItemInfo createItemInfo(HttpServletRequest request) {
-        if (request.getParameter("name") == null ||
+        try {
+            if (request.getParameter("name") == null ||
                 request.getParameter("description") == null ||
                 request.getParameter("weight") == null) {
+                return null;
+            }
+            ItemInfo.Builder builder = new ItemInfo.Builder(
+                request.getParameter("name"),
+                request.getParameter("description"),
+                Float.parseFloat(request.getParameter("weight"))
+                );
+            if (request.getParameter("height") != null && 
+                    request.getParameter("height").length() > 0 &&
+                    request.getParameter("width") != null &&
+                    request.getParameter("width").length() > 0 &&
+                    request.getParameter("length") != null &&
+                    request.getParameter("length").length() > 0) {
+                builder.height(Integer.parseInt(request.getParameter("height")));
+                builder.width(Integer.parseInt(request.getParameter("width")));
+                builder.length(Integer.parseInt(request.getParameter("length")));
+            }
+            if (request.getParameter("itemCategory") != null &&
+                    request.getParameter("itemCategory").length() > 0) {
+                Optional<ItemCategory> oItemCategory = 
+                    itemCategoryRepository.findById(Long.parseLong(request.getParameter("itemCategory")));
+                if (oItemCategory.isPresent()) {
+                    builder.itemCategory(oItemCategory.get());
+                }
+            }
+            ItemInfo itemInfo = builder.build();
+            itemInfoRepository.save(itemInfo);
+            return itemInfo;
+        } catch(ConstraintViolationException | DataIntegrityViolationException e) {
+            System.out.println("ERROREROERAR");
+            System.out.println(e.getMessage());
+            return null;
+        } catch(Exception e) {
+            System.out.println(e);
             return null;
         }
-        ItemInfo.Builder builder = new ItemInfo.Builder(
-            request.getParameter("name"),
-            request.getParameter("description"),
-            Float.parseFloat(request.getParameter("weight"))
-            );
-        if (request.getParameter("height") != null && 
-                request.getParameter("height").length() > 0 &&
-                request.getParameter("width") != null &&
-                request.getParameter("width").length() > 0 &&
-                request.getParameter("length") != null &&
-                request.getParameter("length").length() > 0) {
-            builder.height(Integer.parseInt(request.getParameter("height")));
-            builder.width(Integer.parseInt(request.getParameter("width")));
-            builder.length(Integer.parseInt(request.getParameter("length")));
-        }
-        if (request.getParameter("itemCategory") != null &&
-                request.getParameter("itemCategory").length() > 0) {
-            Optional<ItemCategory> oItemCategory = 
-                itemCategoryRepository.findById(Long.parseLong(request.getParameter("itemCategory")));
-            if (oItemCategory.isPresent()) {
-                builder.itemCategory(oItemCategory.get());
-            }
-        }
-        ItemInfo itemInfo = builder.build();
-        itemInfoRepository.save(itemInfo);
-        return itemInfo;
+        
     }
 
     public List<ItemInfo> search_itemInfo(String type, String value) {
