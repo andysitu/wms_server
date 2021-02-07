@@ -41,6 +41,7 @@ public class ItemInfo {
     @LastModifiedBy
     private String modifiedBy;
 
+    @Column(unique=true)
     @Getter @Setter private String itemName;
     @Getter @Setter private String description;
     @Getter @Setter private float weight;
