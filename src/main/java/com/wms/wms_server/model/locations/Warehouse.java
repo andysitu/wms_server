@@ -1,5 +1,6 @@
 package com.wms.wms_server.model.locations;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 
@@ -24,6 +25,7 @@ public class Warehouse {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Long id;
 
+    @Column(unique = true)
     @Getter @Setter private String name;
     @Getter @Setter private String description;
     @Getter @Setter private String phone;
@@ -33,6 +35,7 @@ public class Warehouse {
     @Getter @Setter private String state;
     @Getter @Setter private String country;
     @Getter @Setter private String zip;
+    @Column(unique = true)
     @Getter @Setter private String code;
 
     @CreatedDate
