@@ -1,4 +1,5 @@
 import { CreateLocationMenu } from "./CreateLocationMenu.js"
+import { ItemInfoMenu } from "./ItemInfoMenu.js"
 
 export {
   ModalMenu,
@@ -155,73 +156,6 @@ class ModalMenu extends React.Component {
       });
   }
 
-  create_item_info_menu = () => {
-    var edit_status = this.state.menu_type == "edit_item_info";
-    var item_name   = edit_status ? this.state.data.itemName : "",
-        description = edit_status ? this.state.data.description : "",
-        weight      = edit_status ? this.state.data.weight : "",
-        width       = edit_status ? this.state.data.width : "",
-        height      = edit_status ? this.state.data.height : "",
-        length      = edit_status ? this.state.data.length : "",
-        itemCategoryId    = this.state.data.itemCategoryId;
-    return (<div>
-      <div className="form-group">
-        <label htmlFor="item-name-input">Item Name</label>
-        <input type="text" className="form-control" 
-          name="name" id="item-name-input"
-          defaultValue={item_name} required
-        ></input>
-      </div>
-      <div className="form-group">
-        <label htmlFor="item-description-input">Description</label>
-        <input type="text" className="form-control" 
-          name="description" id="item-description-input"
-          defaultValue={description} required
-        ></input>
-      </div>
-      <div className="form-group">
-        <label htmlFor="item-weight-input">Weight</label>
-        <input type="number" className="form-control" 
-          name="weight" id="item-weight-input"
-          min="0" step="0.01" required
-          defaultValue={weight} required
-        ></input>
-      </div>
-      <div className="form-group">
-        <label htmlFor="">Category</label>
-        <button type="button" className=""
-          onClick={this.onClick_add_itemCategory}>+</button>
-        <select className="form-control" size="4" name="itemCategory"
-          value={itemCategoryId} onChange={this.onChange_itemCategory}>
-          <option value="">None</option>
-          {this.state.categories.map((category) => {
-            return (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>);
-          })}
-        </select>
-      </div>
-      <div className="form-group">
-        <label htmlFor="">Dimensions</label>
-        <div className="form-row">
-          <div className="col-4">
-            <input type="number" name="width" className="form-control" 
-              defaultValue={width} placeholder="Width" step="0.1" min="0.1"/>
-          </div>
-          <div className="col-4">
-            <input type="number" name="length" className="form-control" 
-              defaultValue={length} placeholder="Length" step="0.1" min="0.1"/>
-          </div>
-          <div className="col-4">
-            <input type="number" name="height" className="form-control" 
-              defaultValue={height} placeholder="Height" step="0.1" min="0.1"/>
-          </div>
-        </div>
-      </div>
-    </div>);
-  }
-
   create_warehouse_menu = () => {
     var edit_status = this.state.menu_type == "edit_warehouse";
     var name        = edit_status ? this.state.data.name : "",
@@ -298,7 +232,12 @@ class ModalMenu extends React.Component {
                 warehouse_code={this.state.data.warehouse_code} />);
     } else if (this.state.menu_type == "create_item_info"
         || this.state.menu_type == "edit_item_info") {
-      return this.create_item_info_menu();
+      return (
+        <ItemInfoMenu 
+          menu_type={this.state.menu_type}
+          data={this.state.data}
+          categories={this.state.categories}
+        />);
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
         <div>
