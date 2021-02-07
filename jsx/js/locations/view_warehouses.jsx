@@ -1,4 +1,4 @@
-import { ModalMenu } from "../etc/ModalMenu.js"
+import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
 
 class WarehouseApp extends React.Component {
   constructor(props) {
