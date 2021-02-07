@@ -7,9 +7,10 @@ class InventoryTableOrder extends React.Component {
     super(props);
     this.state = {
       itemInventory: [],
-      reservedItems: {}, // [item_id] : [itemData]
-      
+      // Dict to retrieve items so it won't be shown in item inventory
+      reservedItems: {}, // [item_id] : [itemData] 
     }
+    this.orderItemFormId = "order-item-form";
 
     this.tablesearchbar = React.createRef();
   }
@@ -163,13 +164,18 @@ class InventoryTableOrder extends React.Component {
     </tr>);
   };
 
+  onClick_createOrder = (e) => {
+    e.preventDefault();
+    
+  };
+
   render() {
     let itemReservedList = Object.values(this.state.reservedItems);
     return (<div>
       <div id="inventory-wrapper">
         <h2>Inventory Items</h2>
         <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
-        <div style={{height: "320px", overflow: "auto"}}>
+        <div style={{height: "300px", overflow: "auto"}}>
           <table className="table table-sm">
             <thead>
               {this.createItemHeaderRow()}
@@ -183,21 +189,28 @@ class InventoryTableOrder extends React.Component {
         </div>
       </div>
 
-      <div>
-        <h2 id="order-header">Order</h2>
-      </div>
-      <div id="order-container">
-        <table className="table table-sm">
-          <thead>
-            {this.createItemHeaderRow()}
-          </thead>
-          <tbody>
-            {itemReservedList.map((item, index) => {
-              return this.createItemRow("reserved", item, index);
-            })}
-          </tbody>
-        </table>
-      </div>
+      <form id={this.orderItemFormId} onSubmit={this.onClick_createOrder}>
+        <div>
+          <h2 id="order-header">
+            Order
+            <button className="btn btn-outline-secondary" 
+              type="submit">Create</button>
+            <button className="btn btn-outline-secondary" type="button">Test2</button>
+          </h2>
+        </div>
+        <div id="order-container">
+          <table className="table table-sm">
+            <thead>
+              {this.createItemHeaderRow()}
+            </thead>
+            <tbody>
+              {itemReservedList.map((item, index) => {
+                return this.createItemRow("reserved", item, index);
+              })}
+            </tbody>
+          </table>
+        </div>
+      </form>
     </div>);
   }
 }
