@@ -14,6 +14,24 @@ class InventoryTableOrder extends React.Component {
     this.tablesearchbar = React.createRef();
   }
 
+  componentDidMount() {
+    this.setOrderTableHeight();
+  }
+
+  setOrderTableHeight() {
+    const inventory_wrapper = document.getElementById("inventory-wrapper");
+    const navbar = document.getElementById("top-navbar-menu");
+    const header_wrapper = document.getElementById("order-header");
+    
+    let result_height = 
+      window.innerHeight - inventory_wrapper.offsetHeight 
+        - navbar.offsetHeight - header_wrapper.offsetHeight - 10;
+    result_height = Math.max(result_height, 320);
+
+    document.getElementById("order-container").style.height =
+      result_height + "px";
+  }
+
   onClick_search = (search_type, search_value) => {
     $.ajax({
       url: `/iteminventory?property=${search_type}&value=${search_value}`,
@@ -65,6 +83,9 @@ class InventoryTableOrder extends React.Component {
   onClick_row = (e) => {
     let element = e.target;
     if (element.classList.contains("skip-move")) {
+      if (element.tagName == "INPUT") {
+        element.select();
+      }
       return;
     }
     e.preventDefault();
@@ -144,23 +165,27 @@ class InventoryTableOrder extends React.Component {
   render() {
     let itemReservedList = Object.values(this.state.reservedItems);
     return (<div>
-      <h2>Inventory Items</h2>
-      <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
-      <div style={{height: "320px", overflow: "auto"}}>
-        <table className="table table-sm">
-          <thead>
-            {this.createItemHeaderRow()}
-          </thead>
-            <tbody>
-              {this.state.itemInventory.map((item, index) => {
-                return this.createItemRow("inventory", item, index);
-              })}
-            </tbody>
-        </table>
+      <div id="inventory-wrapper">
+        <h2>Inventory Items</h2>
+        <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
+        <div style={{height: "320px", overflow: "auto"}}>
+          <table className="table table-sm">
+            <thead>
+              {this.createItemHeaderRow()}
+            </thead>
+              <tbody>
+                {this.state.itemInventory.map((item, index) => {
+                  return this.createItemRow("inventory", item, index);
+                })}
+              </tbody>
+          </table>
+        </div>
       </div>
 
-      <h2>Order</h2>
-      <div style={{height: "320px", overflow: "auto"}}>
+      <div>
+        <h2 id="order-header">Order</h2>
+      </div>
+      <div id="order-container">
         <table className="table table-sm">
           <thead>
             {this.createItemHeaderRow()}
