@@ -311,8 +311,8 @@ class ModalMenu extends React.Component {
                 className="form-control" />
             </div>
             <div className="form-group col-md-6">
-              <label htmlFor="mm-transport-input">Transport</label>
-              <input type="text" name="transport" id="mm-transport-input" 
+              <label htmlFor="mm-transport-input">Transport Name</label>
+              <input type="text" name="transport_name" id="mm-transport-input" 
                 className="form-control" required />
             </div>
           </div>
