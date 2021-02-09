@@ -38,4 +38,17 @@ public class OrderPackage {
     private String createdBy;
     @LastModifiedBy
     private String modifiedBy;
+
+    private String orderName;
+    private String description;
+
+    private String contactName;
+    private String companyName;
+    private String address1;
+    private String address2;
+    private String city;
+    private String state;
+    private String zip;
+
+    private String transportName;
 }
