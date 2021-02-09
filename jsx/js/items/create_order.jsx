@@ -8,14 +8,29 @@ class CreateOrderApp extends React.Component {
   }
 
   createItemOrder = (itemReceivedList) => {
-    console.log(itemReceivedList);
-    this.modalmenu.current.show_menu(
-      "createItemorder",
-      {},
-      (data) => {
-        console.log(data);
-      }
-    );
+    var items = itemReceivedList.map( item => item.id );
+    console.log(items);
+    $.ajax({
+      url: "/orderpackage",
+      type: "POST",
+      context: this,
+      contentType: "application/json",
+      data: JSON.stringify({
+        test: 4,
+        itemIds: items,
+      }),
+      success: function() {
+
+      },
+    })
+    // this.modalmenu.current.show_menu(
+    //   "createItemorder",
+    //   {},
+    //   (data) => {
+    //     console.log(data);
+        
+    //   }
+    // );
   }
 
   render() {
