@@ -267,13 +267,25 @@ class ModalMenu extends React.Component {
         <div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label htmlFor="mm-name-input">Name</label>
-              <input type="text" name="name" id="mm-name-input" 
+              <label htmlFor="mm-name-input">Order Name</label>
+              <input type="text" name="orderName" id="mm-name-input" 
                 className="form-control" required />
             </div>
             <div className="form-group col-md-6">
               <label htmlFor="mm-desc-input">Description</label>
               <input type="text" name="description" id="mm-desc-input" 
+                className="form-control" required />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="mm-company-input">Company Name</label>
+              <input type="text" name="companyName" id="mm-company-input" 
+                className="form-control" />
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="mm-contact-input">Contact</label>
+              <input type="text" name="contactName" id="mm-contact-input" 
                 className="form-control" required />
             </div>
           </div>
@@ -312,7 +324,7 @@ class ModalMenu extends React.Component {
             </div>
             <div className="form-group col-md-6">
               <label htmlFor="mm-transport-input">Transport Name</label>
-              <input type="text" name="transport_name" id="mm-transport-input" 
+              <input type="text" name="transportName" id="mm-transport-input" 
                 className="form-control" required />
             </div>
           </div>
