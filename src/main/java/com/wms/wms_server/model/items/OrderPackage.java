@@ -25,7 +25,7 @@ import lombok.Setter;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ItemOrder {
+public class OrderPackage {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Long id;
@@ -38,15 +38,4 @@ public class ItemOrder {
     private String createdBy;
     @LastModifiedBy
     private String modifiedBy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private ItemInventory itemInventory;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private OrderPackage orderPackage;
-
-    private int orderedQuantity;
-    private int quantity;
 }
