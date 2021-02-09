@@ -1,5 +1,5 @@
 import { InventoryTableOrder } from "./InventoryTableOrder.js"
-import { ModalMenu } from "../etc/modalmenu/ModalMenu.jsx"
+import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
 
 class CreateOrderApp extends React.Component {
   constructor(props) {
