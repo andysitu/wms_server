@@ -1,5 +1,6 @@
 package com.wms.wms_server.services.items;
 
+import com.wms.wms_server.model.request.OrderPackageRequest;
 import com.wms.wms_server.repository.items.ItemOrderRepository;
 import com.wms.wms_server.repository.items.OrderPackageRepository;
 
@@ -13,5 +14,10 @@ public class OrderPackageService {
     @Autowired
     private ItemOrderRepository itemOrderRepository;
 
-    
+    public Boolean isValidOrderPackageRequest(OrderPackageRequest request) {
+        if (request.itemIds == null || request.itemIds.length == 0) {
+            return false;
+        }
+        return true;
+    }
 }
