@@ -25,17 +25,10 @@ public class OrderPackageController {
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ResponseEntity createOrderPackage(
-        // long[] itemIds,
-        // @RequestParam String param
-        @RequestBody OrderPackageRequest orderPackageRequest
-        // HttpServletRequest request
-        ) {
-        System.out.println(orderPackageRequest.itemIds.length);
+            @RequestBody OrderPackageRequest orderPackageRequest) {
         if (!orderPackageService.isValidOrderPackageRequest(orderPackageRequest)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("BAD REQUEST");
         }
-            // System.out.println(request.getParameter("itemIds"));
-        // System.out.println(itemIds);
         return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
        
