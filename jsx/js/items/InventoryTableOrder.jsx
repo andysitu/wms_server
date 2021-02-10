@@ -139,7 +139,8 @@ class InventoryTableOrder extends React.Component {
   };
 
   createItemRow = (item_type, item, index) => {
-    let availableItemInput = (item_type == "reserved") ?
+    let availableItemInput = (item_type == "reserved"
+          && this.state.mode == "order") ?
     (<td className="skip-move">
       <input type="number" className="skip-move"
         onChange={this.onChange_reservedItemQuantity}
