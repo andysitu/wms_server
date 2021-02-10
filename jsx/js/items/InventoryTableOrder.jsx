@@ -70,12 +70,30 @@ class InventoryTableOrder extends React.Component {
   moveReservedItem = (id) => {
     this.setState(state => {
       let newItemInventory = [...state.itemInventory];
-      let newReservedItems = {...state.reservedItems};
-      let item = newReservedItems[id];
-      item.quantity = item.maxAvailable;
 
-      delete newReservedItems[id];
-      newItemInventory.push(item);
+      let newReservedItems = {...state.reservedItems};
+      if (this.state.mode == "total") {
+        // Need to move all items with the same itemName
+        const itemName = state.reservedItems[id].itemName;
+        let keyId, item;
+        for (keyId in newReservedItems) {
+          if (newReservedItems[keyId].itemName == itemName) {
+            item = newReservedItems[keyId];
+            item.quantity = item.maxAvailable;
+
+            delete newReservedItems[keyId];
+            newItemInventory.push(item);
+          }
+        }
+      } else {
+        // Only need to move 1 item
+        let item = newReservedItems[id];
+        item.quantity = item.maxAvailable;
+
+        delete newReservedItems[id];
+        newItemInventory.push(item);
+      }
+      
       return {
         itemInventory: newItemInventory,
         reservedItems: newReservedItems,
