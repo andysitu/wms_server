@@ -163,11 +163,19 @@ class InventoryTableOrder extends React.Component {
       <td>{item.createdDate}</td>
     </tr>);
   };
+  clearOrders = () => {
+    this.setState({
+      itemInventory: [],
+      reservedItems: {}
+    });
+  }
 
   onClick_createOrder = (e) => {
     e.preventDefault();
     let itemReservedList = Object.values(this.state.reservedItems);
-    this.props.createItemOrder(itemReservedList);
+    this.props.createItemOrder(itemReservedList, () => {
+      this.clearOrders();
+    });
   };
 
   render() {

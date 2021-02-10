@@ -7,7 +7,7 @@ class CreateOrderApp extends React.Component {
     this.modalmenu = React.createRef();
   }
 
-  createItemOrder = (itemReceivedList) => {
+  createItemOrder = (itemReceivedList, tableCallback) => {
     console.log(itemReceivedList);
     var items = itemReceivedList.map( item => item.id ),
         quantities = itemReceivedList.map( item => item.quantity);
@@ -32,6 +32,7 @@ class CreateOrderApp extends React.Component {
           data: JSON.stringify(data),
           success: function(data) {
             console.log(data);
+            tableCallback();
           },
         });
       }
