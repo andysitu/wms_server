@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.wms.wms_server.model.request.OrderPackageRequest;
+
 import javax.persistence.FetchType;
 
 import java.util.Date;
@@ -39,16 +42,31 @@ public class OrderPackage {
     @LastModifiedBy
     private String modifiedBy;
 
-    private String orderName;
-    private String description;
+    @Getter private String orderName;
+    @Getter private String description;
 
-    private String contactName;
-    private String companyName;
-    private String address1;
-    private String address2;
-    private String city;
-    private String state;
-    private String zip;
+    @Getter private String contactName;
+    @Getter private String companyName;
+    @Getter private String address1;
+    @Getter private String address2;
+    @Getter private String city;
+    @Getter private String state;
+    @Getter private String zip;
 
-    private String transportName;
+    @Getter private String transportName;
+
+    OrderPackage(OrderPackageRequest request) {
+        this.orderName = request.orderName;
+        this.description = request.description;
+        this.contactName = request.contactName;
+        this.companyName = request.companyName;
+
+        this.address1 = request.address1;
+        this.address2 = request.address2;
+        this.city = request.city;
+        this.state = request.state;
+        this.zip = request.zip;
+
+        this.transportName = request.transportName;
+    }
 }
