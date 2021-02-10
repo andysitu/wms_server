@@ -41,12 +41,20 @@ public class ItemOrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private ItemInventory itemInventory;
+    @Getter private ItemInventory itemInventory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private OrderPackage orderPackage;
+    @Getter private OrderPackage orderPackage;
 
-    private int orderedQuantity;
-    private int quantity;
+    @Getter private int orderedQuantity;
+    @Getter private int quantity;
+
+    public ItemOrder(int quantity, ItemInventory itemInventory, 
+            OrderPackage orderPackage) 
+    {
+        this.orderedQuantity = this.quantity = quantity;
+        this.itemInventory = itemInventory;
+        this.orderPackage = orderPackage;
+    }
 }
