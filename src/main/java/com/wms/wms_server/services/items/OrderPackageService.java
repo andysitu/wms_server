@@ -25,7 +25,9 @@ public class OrderPackageService {
     private ItemInventoryRepository itemInventoryRepository;
 
     public Boolean isValidOrderPackageRequest(OrderPackageRequest request) {
-        if (request.itemIds == null || request.itemIds.length == 0) {
+        if (request.itemIds == null || request.itemIds.length == 0 ||
+            request.quantities.length != request.itemIds.length ) 
+        {
             return false;
         }
         return true;
