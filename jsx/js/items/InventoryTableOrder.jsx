@@ -9,6 +9,7 @@ class InventoryTableOrder extends React.Component {
       itemInventory: [],
       // Dict to retrieve items so it won't be shown in item inventory
       reservedItems: {}, // [item_id] : [itemData] 
+      mode: "order", // "order" / "total"
     }
     this.orderItemFormId = "order-item-form";
 
@@ -178,8 +179,30 @@ class InventoryTableOrder extends React.Component {
     });
   };
 
+  onClick_switchMode = () => {
+    this.setState({
+      mode: this.state.mode == "order" ?  "total" : "order",
+    });
+  };
+
   render() {
-    let itemReservedList = Object.values(this.state.reservedItems);
+    let itemReservedList
+    if (this.state.mode == "order") {
+      itemReservedList = Object.values(this.state.reservedItems);
+    } else {
+      const itemsByItemName = {};
+      let itemName;
+      for (let id in this.state.reservedItems) {
+        itemName = this.state.reservedItems[id].itemName;
+        if (itemName in itemsByItemName) {
+          itemsByItemName[itemName].quantity += this.state.reservedItems[id].quantity;
+          itemsByItemName[itemName].reservedQuantity += this.state.reservedItems[id].reservedQuantity;
+        } else {
+          itemsByItemName[itemName] = {...this.state.reservedItems[id]};
+        }
+      }
+      itemReservedList = Object.values(itemsByItemName);
+    }
     return (<div>
       <div id="inventory-wrapper">
         <h2>Inventory Items</h2>
@@ -203,8 +226,12 @@ class InventoryTableOrder extends React.Component {
           <h2 id="order-header">
             Order
             <button className="btn btn-outline-secondary" 
-              type="submit">Create</button>
-            <button className="btn btn-outline-secondary" type="button">Test2</button>
+              type="submit">Create Order</button>
+            <button className="btn btn-outline-secondary" 
+              onClick={this.onClick_switchMode} type="button">
+              {this.state.mode == "order" ?
+                "View Total" : "View Order"}
+            </button>
           </h2>
         </div>
         <div id="order-container">
