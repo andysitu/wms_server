@@ -8,7 +8,10 @@ class CreateOrderApp extends React.Component {
   }
 
   createItemOrder = (itemReceivedList) => {
-    var items = itemReceivedList.map( item => item.id );
+    console.log(itemReceivedList);
+    var items = itemReceivedList.map( item => item.id ),
+        quantities = itemReceivedList.map( item => item.quantity);
+    
     if (items.length == 0) {
       window.alert("You must select at least 1 item.");
       return;
@@ -20,6 +23,7 @@ class CreateOrderApp extends React.Component {
       (data) => {
         console.log(data);
         data.itemIds = items;
+        data.quantities = quantities;
         $.ajax({
           url: "/orderpackage",
           type: "POST",
