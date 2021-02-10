@@ -1,7 +1,9 @@
 package com.wms.wms_server.controllers.items;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
+import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
 import com.wms.wms_server.services.items.OrderPackageService;
 
@@ -25,11 +27,16 @@ public class OrderPackageController {
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ResponseEntity createOrderPackage(
-            @RequestBody OrderPackageRequest orderPackageRequest) {
+            @Valid @RequestBody OrderPackageRequest orderPackageRequest) {
         if (!orderPackageService.isValidOrderPackageRequest(orderPackageRequest)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("BAD REQUEST");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("OK");
+        OrderPackage orderPackage = orderPackageService.createOrderPackageAndItemOrder(orderPackageRequest);
+        if (orderPackage == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body(orderPackage);
     }
        
 }
