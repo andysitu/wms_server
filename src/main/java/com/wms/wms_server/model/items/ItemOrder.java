@@ -54,6 +54,8 @@ public class ItemOrder {
     @Column(columnDefinition = "integer default 0")
     @Getter private int complete;
 
+    public ItemOrder() {}
+
     public ItemOrder(int quantity, ItemInventory itemInventory, 
             OrderPackage orderPackage) 
     {
