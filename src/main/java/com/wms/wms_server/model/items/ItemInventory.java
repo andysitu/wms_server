@@ -1,5 +1,6 @@
 package com.wms.wms_server.model.items;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -42,7 +43,8 @@ public class ItemInventory {
     @Getter private int startQuantity;
     @Getter private int quantity;
 
-    @Getter private int reservedQuantity = 0;
+    @Column(columnDefinition = "integer default 0")
+    @Getter private int reservedQuantity;
 
     public int reserveQuantity(int amount) {
         if (amount > quantity) {
