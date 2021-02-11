@@ -127,15 +127,15 @@ class ItemInfoMenu extends React.Component {
         <div className="form-row">
           <div className="col-4">
             <input type="number" name="width" className="form-control" 
-              defaultValue={width} placeholder="Width" step="0.1" min="0.1"/>
+              defaultValue={width} placeholder="Width" step="0.1" min="0.1" required/>
           </div>
           <div className="col-4">
             <input type="number" name="length" className="form-control" 
-              defaultValue={length} placeholder="Length" step="0.1" min="0.1"/>
+              defaultValue={length} placeholder="Length" step="0.1" min="0.1" required/>
           </div>
           <div className="col-4">
             <input type="number" name="height" className="form-control" 
-              defaultValue={height} placeholder="Height" step="0.1" min="0.1"/>
+              defaultValue={height} placeholder="Height" step="0.1" min="0.1" required/>
           </div>
         </div>
       </div>
