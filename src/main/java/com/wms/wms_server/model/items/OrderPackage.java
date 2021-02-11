@@ -55,6 +55,8 @@ public class OrderPackage {
 
     @Getter private String transportName;
 
+    @Getter private boolean complete = false;
+
     public OrderPackage(OrderPackageRequest request) {
         this.orderName = request.orderName;
         this.description = request.description;
