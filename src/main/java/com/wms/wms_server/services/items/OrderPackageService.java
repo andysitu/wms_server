@@ -5,15 +5,17 @@ import java.util.Optional;
 
 import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.model.items.ItemOrder;
-import com.wms.wms_server.model.items.ItemReceive;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
+import com.wms.wms_server.model.response.items.OrderPackageResponse;
 import com.wms.wms_server.repository.items.ItemInventoryRepository;
 import com.wms.wms_server.repository.items.ItemOrderRepository;
 import com.wms.wms_server.repository.items.OrderPackageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class OrderPackageService {
@@ -60,5 +62,25 @@ public class OrderPackageService {
         itemInventoryRepository.saveAll(itemInventories);
 
         return orderPackage;
+    }
+
+    public OrderPackageResponse convertOrderToResponse(OrderPackage orderPackage) {
+        OrderPackageResponse response = new OrderPackageResponse();
+        response.orderName = orderPackage.getOrderName();
+        response.description = orderPackage.getDescription();
+        response.contactName = orderPackage.getContactName();
+        response.companyName = orderPackage.getCompanyName();
+        response.address1 = orderPackage.getAddress1();
+        response.address2 = orderPackage.getAddress2();
+        response.city = orderPackage.getCity();
+        response.state = orderPackage.getState();
+        response.zip = orderPackage.getZip();
+        response.transportName = orderPackage.getTransportName();
+        response.complete = orderPackage.getComplete();
+        return response;
+    }
+
+    public List<OrderPackage> getOrders() {
+        return orderPackageRepository.findAll();
     }
 }
