@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
+import com.wms.wms_server.model.response.items.OrderPackageResponse;
 import com.wms.wms_server.services.items.OrderPackageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.*;
 
 @Controller
 public class OrderPackageController {
     @Autowired
     OrderPackageService orderPackageService;
 
-    @RequestMapping(value="orderpackage", consumes = "application/json", 
+    @RequestMapping(value="/orderpackage", consumes = "application/json", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ResponseEntity createOrderPackage(
@@ -38,6 +40,17 @@ public class OrderPackageController {
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(orderPackage);
+    }
+
+    @RequestMapping(value="/orderpackages", 
+        produces="application/json;", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity getOrders() {
+        List<OrderPackageResponse> responses = new ArrayList<>();
+        for (OrderPackage order: orderPackageService.getOrders()) {
+            responses.add(orderPackageService.convertOrderToResponse(order));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
     @GetMapping("/create_order")
