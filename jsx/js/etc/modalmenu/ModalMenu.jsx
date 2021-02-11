@@ -100,42 +100,6 @@ class ModalMenu extends React.Component {
     }
   }
 
-  onClick_add_itemCategory = () => {
-    var category_name = window.prompt("Category name?");
-    if (category_name == null || category_name.length == 0) {
-      window.alert("Format of the category name is incorrect");
-      return;
-    }
-    for (var i=0;i<this.state.categories.length;i++) {
-      if (this.state.categories[i].name.toUpperCase() == category_name.toUpperCase()) {
-        window.alert(`A category with the name ${category_name} already exists.`);
-        return;
-      }
-    }
-    var that = this;
-    $.ajax({
-      url: "../item_categories",
-      type: "POST",
-      data: {
-        name: category_name
-      },
-      success: function(category) {
-        that.setState(prev_state => {
-          var categories = [...prev_state.categories, category],
-              data = {
-                ...prev_state.data, 
-                itemCategoryId: category.id
-              };
-
-          return {
-            categories: categories,
-            data: data,
-          };
-        });
-      }
-    });
-  };
-
   get_itemCategories = () => {
     var that = this;
     $.ajax({
