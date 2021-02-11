@@ -51,7 +51,8 @@ public class ItemOrder {
     @Getter private int startQuantity;
     @Getter private int pickedQuantity = 0;
 
-    @Getter private boolean complete = false;
+    @Column(columnDefinition = "integer default 0")
+    @Getter private int complete;
 
     public ItemOrder(int quantity, ItemInventory itemInventory, 
             OrderPackage orderPackage) 
