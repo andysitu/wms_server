@@ -55,7 +55,10 @@ public class OrderPackage {
 
     @Getter private String transportName;
 
-    @Getter private boolean complete = false;
+    @Column(columnDefinition = "integer default 0")
+    @Getter private int complete;
+
+    public OrderPackage() {}
 
     public OrderPackage(OrderPackageRequest request) {
         this.orderName = request.orderName;
