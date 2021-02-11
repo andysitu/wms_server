@@ -43,5 +43,10 @@ public class OrderPackageController {
     @GetMapping("/create_order")
     public String viewCreateOrder() {
         return "items/create_order";
-    }       
+    }    
+
+    @GetMapping("/pickup_order")
+    public String viewPickupOrder() {
+        return "items/pickup_order";
+    }
 }
