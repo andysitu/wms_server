@@ -48,12 +48,15 @@ public class ItemOrder {
     @Getter private OrderPackage orderPackage;
 
     @Getter private int orderedQuantity;
-    @Getter private int quantity;
+    @Getter private int startQuantity;
+    @Getter private int pickedQuantity = 0;
+
+    @Getter private boolean complete = false;
 
     public ItemOrder(int quantity, ItemInventory itemInventory, 
             OrderPackage orderPackage) 
     {
-        this.orderedQuantity = this.quantity = quantity;
+        this.orderedQuantity = this.startQuantity = quantity;
         this.itemInventory = itemInventory;
         this.orderPackage = orderPackage;
     }
