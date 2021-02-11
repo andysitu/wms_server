@@ -9,6 +9,24 @@ export { ItemInfoMenu }
 class ItemInfoMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      categories: [],
+      data: {},
+    }
+    this.get_itemCategories();
+  }
+
+  get_itemCategories = () => {
+    var that = this;
+    $.ajax({
+      url: "../item_categories",
+      type: "GET",
+      success: function(data) {
+        that.setState({
+          categories: data,
+        });
+      },
+    })
   }
 
   onClick_add_itemCategory = () => {
@@ -46,6 +64,13 @@ class ItemInfoMenu extends React.Component {
       }
     });
   };
+
+  onChange_itemCategory = (e) => {
+    this.setState(prev_state => {
+      this.state.data.itemCategoryId = e.target.value;
+      return {data: this.state.data};
+      });
+  }
 
   render() {
     var edit_status = this.props.menu_type == "edit_item_info";
@@ -86,7 +111,7 @@ class ItemInfoMenu extends React.Component {
         <select className="form-control" size="4" name="itemCategory"
           value={itemCategoryId} onChange={this.onChange_itemCategory}>
           <option value="">None</option>
-          {this.props.categories.map((category) => {
+          {this.state.categories.map((category) => {
             return (
               <option key={category.id} value={category.id}>
                 {category.name}

@@ -12,7 +12,6 @@ class ModalMenu extends React.Component {
       menu_type: "none",
       submit_handler: null,
       data: {},
-      categories: [],
       title: null,
     };
   }
@@ -27,10 +26,6 @@ class ModalMenu extends React.Component {
   }
   
   show_menu = (menu_type, data, submit_handler=null) => {
-    // Get Item Categories for Item Info
-    if (menu_type == "create_item_info" || menu_type == "edit_item_info") {
-      this.get_itemCategories();
-    }
     // Create a blank form to reset it, and then create actual menu
     this.setState({
         menu_type: menu_type,
@@ -98,26 +93,6 @@ class ModalMenu extends React.Component {
       link.setAttribute("download", this.state.data.barcode_strings[index].replaceAll(".", "-") + ".png");
       link.click();
     }
-  }
-
-  get_itemCategories = () => {
-    var that = this;
-    $.ajax({
-      url: "../item_categories",
-      type: "GET",
-      success: function(data) {
-        that.setState({
-          categories: data,
-        });
-      },
-    })
-  }
-
-  onChange_itemCategory = (e) => {
-    this.setState(prev_state => {
-      this.state.data.itemCategoryId = e.target.value;
-      return {data: this.state.data};
-      });
   }
 
   create_warehouse_menu = () => {
@@ -200,7 +175,6 @@ class ModalMenu extends React.Component {
         <ItemInfoMenu 
           menu_type={this.state.menu_type}
           data={this.state.data}
-          categories={this.state.categories}
         />);
     } else if (this.state.menu_type == "create_barcode") {
       return (<div>
