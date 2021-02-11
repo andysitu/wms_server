@@ -9,7 +9,10 @@ export { ItemInfoMenu }
 class ItemInfoMenu extends React.Component {
   constructor(props) {
     super(props);
+    const selectedCategory = (this.props.menu_type == "edit_item_info") ?
+          this.props.data.itemCategoryId : "";
     this.state = {
+      selectedCategory: selectedCategory,
       categories: [],
       data: {},
     }
@@ -49,6 +52,7 @@ class ItemInfoMenu extends React.Component {
         name: category_name
       },
       success: function(category) {
+        console.log(category);
         that.setState(prev_state => {
           var categories = [...prev_state.categories, category],
               data = {
@@ -67,9 +71,9 @@ class ItemInfoMenu extends React.Component {
 
   onChange_itemCategory = (e) => {
     this.setState(prev_state => {
-      this.state.data.itemCategoryId = e.target.value;
+      this.state.selectedCategory = e.target.value;
       return {data: this.state.data};
-      });
+    });
   }
 
   render() {
@@ -79,8 +83,7 @@ class ItemInfoMenu extends React.Component {
         weight      = edit_status ? this.props.data.weight : "",
         width       = edit_status ? this.props.data.width : "",
         height      = edit_status ? this.props.data.height : "",
-        length      = edit_status ? this.props.data.length : "",
-        itemCategoryId    = this.props.data.itemCategoryId;
+        length      = edit_status ? this.props.data.length : "";
     return (<div>
       <div className="form-group">
         <label htmlFor="item-name-input">Item Name</label>
@@ -109,7 +112,7 @@ class ItemInfoMenu extends React.Component {
         <button type="button" className=""
           onClick={this.onClick_add_itemCategory}>+</button>
         <select className="form-control" size="4" name="itemCategory"
-          value={itemCategoryId} onChange={this.onChange_itemCategory}>
+          value={this.state.selectedCategory} onChange={this.onChange_itemCategory}>
           <option value="">None</option>
           {this.state.categories.map((category) => {
             return (
