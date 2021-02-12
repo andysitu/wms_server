@@ -6,6 +6,7 @@ public class ItemOrderResponse {
     public int orderedQuantity;
     public int startQuantity;
     public int pickedQuantity;
+    public int completeQuantity;
     public int complete;
 
     public ItemInventoryResponse itemInventoryReseponse;
