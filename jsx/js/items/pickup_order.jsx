@@ -3,6 +3,7 @@ class PickupOrderApp extends React.Component {
     super(props);
     this.state = {
       orders: [],
+      selectedOrderIndex: -1,
     }
     this.getOrders();
   }
@@ -16,9 +17,36 @@ class PickupOrderApp extends React.Component {
         console.log(orders);
         this.setState({
           orders: orders,
+          selectedOrderIndex: -1,
         });
       }
     });
+  };
+
+  createPickupItems = () => {
+    if  (this.state.selectedOrderIndex == -1) {
+      return (<tbody></tbody>);
+    } else {
+      const order = this.state.orders[this.state.selectedOrderIndex],
+            items = order.itemOrderResponses;
+      return (<tbody>
+        {items.map((itemOrder, index) => {
+          console.log(itemOrder);
+          return (
+            <tr>
+              <td>{itemOrder.itemInventoryResponse.itemName}</td>
+              <td>{itemOrder.itemInventoryResponse.itemSku}</td>
+            </tr>
+          );
+        })}
+      </tbody>);
+    }
+  };
+
+  onClick_selectOrder = (e) => {
+    this.setState({
+      selectedOrderIndex: parseInt(e.target.value),
+    })
   };
 
   render() {
@@ -50,13 +78,32 @@ class PickupOrderApp extends React.Component {
                   <td>{orderPackage.orderName}</td>
                   <td>{orderPackage.companyName}</td>
                   <td>{orderPackage.transportName}</td>
-                  <td>{numOpenItems}</td>
+                  <td>
+                    <button type="button"
+                      value={index} onClick={this.onClick_selectOrder}
+                      className="btn btn-sm btn-outline-primary"
+                    >{numOpenItems}</button>
+                    </td>
                   <td>{orderPackage.itemOrderResponses.length}</td>
                 </tr>)
             }))}
           </tbody>
         </table>
         
+      </div>
+      <div>
+        <h2>Pickup Items</h2>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">SKU</th>
+              </tr>
+            </thead>
+            {this.createPickupItems()}
+          </table>
+        </div>
       </div>
     </div>      
     );
