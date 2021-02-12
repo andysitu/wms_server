@@ -20,7 +20,7 @@ public class ItemOrderService {
         response.completeQuantity = itemOrder.getCompleteQuantity();
 
         response.complete = itemOrder.getComplete();
-        response.itemInventoryReseponse = itemInventoryService.convert_to_response(
+        response.itemInventoryResponse = itemInventoryService.convert_to_response(
             itemOrder.getItemInventory());
         return response;
     }
