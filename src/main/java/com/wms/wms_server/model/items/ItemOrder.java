@@ -49,7 +49,10 @@ public class ItemOrder {
 
     @Getter private int orderedQuantity;
     @Getter private int startQuantity;
+    @Column(columnDefinition = "integer default 0")
     @Getter private int pickedQuantity = 0;
+    @Column(columnDefinition = "integer default 0")
+    @Getter private int completeQuantity = 0;
 
     @Column(columnDefinition = "integer default 0")
     @Getter private int complete;
