@@ -1,5 +1,7 @@
 package com.wms.wms_server.model.response.items;
 
+import com.wms.wms_server.model.items.ItemOrder;
+
 public class OrderPackageResponse {
     public long id;
     public String orderName;
@@ -16,4 +18,6 @@ public class OrderPackageResponse {
     public String transportName;
 
     public int complete;
+
+    public ItemOrderResponse[] itemOrderResponses;
 }
