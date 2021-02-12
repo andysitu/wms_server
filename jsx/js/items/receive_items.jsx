@@ -77,9 +77,7 @@ class ReceiveItemApp extends React.Component {
         }
       });
     }
-    
-
-  }
+  };
 
   render() {
     return (<div>
