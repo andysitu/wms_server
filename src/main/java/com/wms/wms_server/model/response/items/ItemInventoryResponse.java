@@ -10,4 +10,5 @@ public class ItemInventoryResponse extends Response {
     public String locationCode;
     public String shipmentCode;
     public String itemSku;
+    public String itemDescription;
 }

@@ -74,6 +74,7 @@ public class ItemInventoryService {
         response.locationCode = itemInventory.getLocation().getLocationCode();
         response.shipmentCode = itemReceive.getShipmentCode();
         response.itemName = itemInventory.getItemInfo().getItemName();
+        response.itemDescription = itemInventory.getItemInfo().getDescription();
         response.itemSku = itemReceive.getSku();
         response.setCreatedDate(itemReceive.getCreatedDate());
         
