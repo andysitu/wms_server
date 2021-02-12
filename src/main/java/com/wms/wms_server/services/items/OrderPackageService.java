@@ -85,7 +85,7 @@ public class OrderPackageService {
 
     public List<OrderPackageResponse> getOrderResponses() {
         List<OrderPackageResponse> orderPackageResponses = new ArrayList<>();
-        for (OrderPackage orderPackage : orderPackageRepository.findAll()) {
+        for (OrderPackage orderPackage : orderPackageRepository.findByComplete(0)) {
             OrderPackageResponse orderResponse = convertOrderToResponse(orderPackage);
             List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(orderPackage.getId());
 
