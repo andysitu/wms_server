@@ -113,6 +113,27 @@ class PickupOrderApp extends React.Component {
           </table>
         </div>
       </div>
+
+      <div>
+        <form>
+          <div className="form-group">
+            <label htmlFor="location-input">Location</label>
+            <input type="text" name="locationCode" className="form-control" 
+            id="location-input" required></input>
+          </div>
+          <div className="form-group">
+            <label htmlFor="itemsku-input">SKU</label>
+            <input type="text" name="itemSku" className="form-control" 
+            id="itemsku-input" required></input>
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity-input">Quantity</label>
+            <input type="number" name="quantity" className="form-control" 
+            id="quantity-input" required></input>
+          </div>
+        </form>
+      </div>
+
     </div>      
     );
   }
