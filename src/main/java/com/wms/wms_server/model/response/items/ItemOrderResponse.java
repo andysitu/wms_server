@@ -9,5 +9,5 @@ public class ItemOrderResponse {
     public int completeQuantity;
     public int complete;
 
-    public ItemInventoryResponse itemInventoryReseponse;
+    public ItemInventoryResponse itemInventoryResponse;
 }
