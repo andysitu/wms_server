@@ -53,7 +53,7 @@ class PickupOrderApp extends React.Component {
   };
 
   render() {
-    let numOpenItems, i;
+    let numOpenItems, i, trClass;
     return (
     <div>
       <h2>Open Orders</h2>
@@ -76,8 +76,10 @@ class PickupOrderApp extends React.Component {
                   numOpenItems++;
                 }
               }
+              trClass = (index == this.state.selectedOrderIndex) ?
+                "selected" : "";
               return (
-                <tr key={orderPackage.id}>
+                <tr key={orderPackage.id} className={trClass}>
                   <td>{orderPackage.orderName}</td>
                   <td>{orderPackage.companyName}</td>
                   <td>{orderPackage.transportName}</td>
