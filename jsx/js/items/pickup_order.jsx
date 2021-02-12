@@ -6,6 +6,7 @@ class PickupOrderApp extends React.Component {
       selectedOrderIndex: -1,
     }
     this.getOrders();
+    this.locationInputId = "location-input"
   }
 
   getOrders = () => {
@@ -49,7 +50,8 @@ class PickupOrderApp extends React.Component {
   onClick_selectOrder = (e) => {
     this.setState({
       selectedOrderIndex: parseInt(e.target.value),
-    })
+    });
+    $("#" + this.locationInputId).focus();
   };
 
   render() {
@@ -117,9 +119,9 @@ class PickupOrderApp extends React.Component {
       <div>
         <form>
           <div className="form-group">
-            <label htmlFor="location-input">Location</label>
+            <label htmlFor={this.locationInputId}>Location</label>
             <input type="text" name="locationCode" className="form-control" 
-            id="location-input" required></input>
+            id={this.locationInputId} required></input>
           </div>
           <div className="form-group">
             <label htmlFor="itemsku-input">SKU</label>
@@ -131,6 +133,8 @@ class PickupOrderApp extends React.Component {
             <input type="number" name="quantity" className="form-control" 
             id="quantity-input" required></input>
           </div>
+
+          <button type="submit">Submit</button>
         </form>
       </div>
 
