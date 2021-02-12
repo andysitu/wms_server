@@ -7,6 +7,7 @@ import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
+import com.wms.wms_server.model.response.items.ItemOrderResponse;
 import com.wms.wms_server.model.response.items.OrderPackageResponse;
 import com.wms.wms_server.repository.items.ItemInventoryRepository;
 import com.wms.wms_server.repository.items.ItemOrderRepository;
@@ -25,6 +26,8 @@ public class OrderPackageService {
     private ItemOrderRepository itemOrderRepository;
     @Autowired
     private ItemInventoryRepository itemInventoryRepository;
+    @Autowired
+    private ItemOrderService itemOrderService;
 
     public Boolean isValidOrderPackageRequest(OrderPackageRequest request) {
         if (request.itemIds == null || request.itemIds.length == 0 ||
@@ -80,7 +83,21 @@ public class OrderPackageService {
         return response;
     }
 
-    public List<OrderPackage> getOrders() {
-        return orderPackageRepository.findAll();
+    public List<OrderPackageResponse> getOrderResponses() {
+        List<OrderPackageResponse> orderPackageResponses = new ArrayList<>();
+        for (OrderPackage orderPackage : orderPackageRepository.findAll()) {
+            OrderPackageResponse orderResponse = convertOrderToResponse(orderPackage);
+            List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(orderPackage.getId());
+
+            orderResponse.itemOrderResponses = new ItemOrderResponse[itemOrders.size()];
+            for (int i=0; i< itemOrders.size(); i++) {
+                orderResponse.itemOrderResponses[i] = itemOrderService.convertToResponse(
+                    itemOrders.get(i));
+            }
+
+            orderPackageResponses.add(orderResponse);
+        }
+
+        return orderPackageResponses;
     }
 }

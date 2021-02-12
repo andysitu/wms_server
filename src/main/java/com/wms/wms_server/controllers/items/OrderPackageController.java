@@ -46,10 +46,7 @@ public class OrderPackageController {
         produces="application/json;", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity getOrders() {
-        List<OrderPackageResponse> responses = new ArrayList<>();
-        for (OrderPackage order: orderPackageService.getOrders()) {
-            responses.add(orderPackageService.convertOrderToResponse(order));
-        }
+        List<OrderPackageResponse> responses = orderPackageService.getOrderResponses();
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
