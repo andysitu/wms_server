@@ -33,9 +33,12 @@ class PickupOrderApp extends React.Component {
         {items.map((itemOrder, index) => {
           console.log(itemOrder);
           return (
-            <tr>
+            <tr key={itemOrder.id}>
               <td>{itemOrder.itemInventoryResponse.itemName}</td>
+              <td>{itemOrder.itemInventoryResponse.itemDescription}</td>
               <td>{itemOrder.itemInventoryResponse.itemSku}</td>
+              <td>{itemOrder.pickedQuantity}</td>
+              <td>{itemOrder.itemInventoryResponse.locationCode}</td>
             </tr>
           );
         })}
@@ -97,8 +100,11 @@ class PickupOrderApp extends React.Component {
           <table>
             <thead>
               <tr>
-                <th scope="col">Item Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">SKU</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Location</th>
               </tr>
             </thead>
             {this.createPickupItems()}
