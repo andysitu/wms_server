@@ -1,3 +1,18 @@
 .selected {
     background-color: lightgrey;
 }
+
+#open-orders-container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+#open-orders-container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+#pickup-items-container {
+    max-height: 400px;
+    overflow: auto;
+}

@@ -38,7 +38,7 @@ class PickupOrderApp extends React.Component {
               <td>{itemOrder.itemInventoryResponse.itemName}</td>
               <td>{itemOrder.itemInventoryResponse.itemDescription}</td>
               <td>{itemOrder.itemInventoryResponse.itemSku}</td>
-              <td>{itemOrder.pickedQuantity}</td>
+              <td>{itemOrder.orderedQuantity}</td>
               <td>{itemOrder.itemInventoryResponse.locationCode}</td>
             </tr>
           );
@@ -50,8 +50,11 @@ class PickupOrderApp extends React.Component {
   onClick_selectOrder = (e) => {
     this.setState({
       selectedOrderIndex: parseInt(e.target.value),
+    }, 
+    ()=> {
+      $("#" + this.locationInputId).focus();
     });
-    $("#" + this.locationInputId).focus();
+    
   };
 
   render() {
@@ -61,7 +64,7 @@ class PickupOrderApp extends React.Component {
     return (
     <div>
       <h2>Open Orders</h2>
-      <div>
+      <div id="open-orders-container">
         <table>
           <thead>
             <tr>
@@ -98,11 +101,10 @@ class PickupOrderApp extends React.Component {
             }))}
           </tbody>
         </table>
-        
       </div>
       <div>
         <h2>Pickup Items</h2>
-        <div>
+        <div id="pickup-items-container">
           <table>
             <thead>
               <tr>
