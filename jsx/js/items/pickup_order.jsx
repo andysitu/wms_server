@@ -7,6 +7,7 @@ class PickupOrderApp extends React.Component {
     }
     this.getOrders();
     this.locationInputId = "location-input"
+    this.orderFormId = "order-form"
   }
 
   getOrders = () => {
@@ -36,8 +37,8 @@ class PickupOrderApp extends React.Component {
           return (
             <tr key={itemOrder.id}>
               <td>{itemOrder.itemInventoryResponse.itemName}</td>
-              <td>{itemOrder.itemInventoryResponse.itemDescription}</td>
               <td>{itemOrder.itemInventoryResponse.itemSku}</td>
+              <td>{itemOrder.itemInventoryResponse.itemDescription}</td>
               <td>{itemOrder.orderedQuantity}</td>
               <td>{itemOrder.itemInventoryResponse.locationCode}</td>
             </tr>
@@ -47,6 +48,19 @@ class PickupOrderApp extends React.Component {
     }
   };
 
+  // Check there are that many total items reserved at the location
+  checkItemQuantity = (data) => {
+    let total = 0;
+    const items = this.state.orders[this.state.selectedOrderIndex].itemOrderResponses;
+    items.forEach(item=> {
+      if (item.itemInventoryResponse.locationCode == data.locationCode &&
+          item.itemInventoryResponse.itemSku == data.itemSku) {
+            total += item.orderedQuantity;
+          }
+    });
+    return parseInt(data.quantity) <= total;
+  }
+
   onClick_selectOrder = (e) => {
     this.setState({
       selectedOrderIndex: parseInt(e.target.value),
@@ -55,6 +69,24 @@ class PickupOrderApp extends React.Component {
       $("#" + this.locationInputId).focus();
     });
     
+  };
+
+  getData = (formId) => {
+    var formData = new FormData($("#" + formId)[0]),
+        data = {};
+
+    for (var key of formData.keys()) {
+      data[key] = formData.get(key);
+    }
+    return data;
+  }
+
+  onSubmit_order = (e) => {
+    e.preventDefault();
+    const data = this.getData(this.orderFormId);
+    if (this.checkItemQuantity(data)) {
+      console.log(data);
+    }
   };
 
   render() {
@@ -121,7 +153,7 @@ class PickupOrderApp extends React.Component {
       </div>
 
       <div>
-        <form>
+        <form onSubmit={this.onSubmit_order} id={this.orderFormId}>
           <div className="form-group">
             <label htmlFor={this.locationInputId}>Location</label>
             <input type="text" name="locationCode" className="form-control" 
