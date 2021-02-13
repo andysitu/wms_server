@@ -56,6 +56,8 @@ class PickupOrderApp extends React.Component {
 
   render() {
     let numOpenItems, i, trClass;
+
+    const disabledInput = this.state.selectedOrderIndex ==  -1;
     return (
     <div>
       <h2>Open Orders</h2>
@@ -121,17 +123,17 @@ class PickupOrderApp extends React.Component {
           <div className="form-group">
             <label htmlFor={this.locationInputId}>Location</label>
             <input type="text" name="locationCode" className="form-control" 
-            id={this.locationInputId} required></input>
+            id={this.locationInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
             <label htmlFor="itemsku-input">SKU</label>
             <input type="text" name="itemSku" className="form-control" 
-            id="itemsku-input" required></input>
+            id="itemsku-input" disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
             <label htmlFor="quantity-input">Quantity</label>
             <input type="number" name="quantity" className="form-control" 
-            id="quantity-input" required></input>
+            id="quantity-input" disabled={disabledInput} required></input>
           </div>
 
           <button type="submit">Submit</button>
