@@ -3,6 +3,7 @@ class PickupOrderApp extends React.Component {
     super(props);
     this.state = {
       orders: [],
+      selectedItems: [],
       selectedOrderIndex: -1,
     }
     this.getOrders();
@@ -19,6 +20,7 @@ class PickupOrderApp extends React.Component {
         console.log(orders);
         this.setState({
           orders: orders,
+          selectedItems: [],
           selectedOrderIndex: -1,
         });
       }
@@ -29,18 +31,16 @@ class PickupOrderApp extends React.Component {
     if  (this.state.selectedOrderIndex == -1) {
       return (<tbody></tbody>);
     } else {
-      const order = this.state.orders[this.state.selectedOrderIndex],
-            items = order.itemOrderResponses;
+      const items = this.state.selectedItems;
       return (<tbody>
         {items.map((itemOrder, index) => {
-          console.log(itemOrder);
           return (
-            <tr key={itemOrder.id}>
-              <td>{itemOrder.itemInventoryResponse.itemName}</td>
-              <td>{itemOrder.itemInventoryResponse.itemSku}</td>
-              <td>{itemOrder.itemInventoryResponse.itemDescription}</td>
+            <tr key={"pickup-items-" + index}>
+              <td>{itemOrder.itemName}</td>
+              <td>{itemOrder.itemSku}</td>
+              <td>{itemOrder.itemDescription}</td>
               <td>{itemOrder.orderedQuantity}</td>
-              <td>{itemOrder.itemInventoryResponse.locationCode}</td>
+              <td>{itemOrder.locationCode}</td>
             </tr>
           );
         })}
@@ -62,8 +62,41 @@ class PickupOrderApp extends React.Component {
   }
 
   onClick_selectOrder = (e) => {
-    this.setState({
-      selectedOrderIndex: parseInt(e.target.value),
+    this.setState(state =>{
+      const selectedIndex = parseInt(e.target.value);
+      let itemResponses = state.orders[selectedIndex].itemOrderResponses;
+      console.log(itemResponses);
+
+      var selectedItems = [];
+
+      // {[locationCode] : { [itemSku]: [index in selectedItems]} }
+      const itemLocationIndexMap = {};
+      let locationCode, itemSku;
+      itemResponses.forEach(itemResponse => {
+        locationCode = itemResponse.itemInventoryResponse.locationCode;
+        itemSku = itemResponse.itemInventoryResponse.itemSku;
+        if (!(itemResponse.itemInventoryResponse.locationCode in itemLocationIndexMap)) {
+          itemLocationIndexMap[locationCode] = {};
+        }
+        if (!(itemSku in itemLocationIndexMap[locationCode])) {
+          itemLocationIndexMap[locationCode][itemSku] = selectedItems.length;
+          selectedItems.push({
+            itemName: itemResponse.itemInventoryResponse.itemName,
+            itemSku: itemResponse.itemInventoryResponse.itemSku,
+            locationCode: locationCode,
+            orderedQuantity: itemResponse.orderedQuantity,
+            description: itemResponse.itemInventoryResponse.itemDescription,
+          });
+        } else {
+          selectedItems[itemLocationIndexMap[locationCode][itemSku]].orderedQuantity
+            += itemResponse.orderedQuantity;
+        }
+      });
+      
+      return {
+        selectedOrderIndex: parseInt(selectedIndex),
+        selectedItems: selectedItems,
+      };      
     }, 
     ()=> {
       $("#" + this.locationInputId).focus();
