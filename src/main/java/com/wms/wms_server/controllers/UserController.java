@@ -28,10 +28,10 @@ public class UserController {
 		return new UserResponse(u.getSub(), u.getName(), u.getEmail());
 	}
 
-	@GetMapping("/view_users")
-	@PreAuthorize("hasAuthority('Admin')")
-	public String view_users(HttpServletRequest request) {
-		System.out.println(request.isUserInRole("ROLE_ADMIN"));
-		return "users/view_users";
-	}
+	// @GetMapping("/view_users")
+	// @PreAuthorize("hasAuthority('Admin')")
+	// public String view_users(HttpServletRequest request) {
+	// 	System.out.println(request.isUserInRole("ROLE_ADMIN"));
+	// 	return "users/view_users";
+	// }
 }
