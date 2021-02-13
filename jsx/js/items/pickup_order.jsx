@@ -50,17 +50,17 @@ class PickupOrderApp extends React.Component {
 
   // Check there are that many total items reserved at the location
   checkItemQuantity = (data) => {
-    let total = 0;
-    const items = this.state.orders[this.state.selectedOrderIndex].itemOrderResponses;
-    items.forEach(item=> {
-      if (item.itemInventoryResponse.locationCode == data.locationCode &&
-          item.itemInventoryResponse.itemSku == data.itemSku) {
-            total += item.orderedQuantity;
-          }
-    });
-    return parseInt(data.quantity) <= total;
-  }
-
+    const items = this.state.selectedItems;
+    for (let i=0, item; i<items.length; i++) {
+      item = items[i];
+      if (item.locationCode == data.locationCode && item.itemSku == data.itemSku) {
+        return parseInt(data.quantity) <= item.orderedQuantity;
+      }
+    }
+    return false;
+  };
+  // Group up items by locationCode & itemSku and put combined items
+  // into state.selectedItems;
   onClick_selectOrder = (e) => {
     this.setState(state =>{
       const selectedIndex = parseInt(e.target.value);
