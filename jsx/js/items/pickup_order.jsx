@@ -118,7 +118,10 @@ class PickupOrderApp extends React.Component {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
     if (this.checkItemQuantity(data)) {
+      // $("#" + this.orderFormId)[0].reset();
       console.log(data);
+    } else {
+      window.alert("Error: item / location not found or quantity is too high");
     }
   };
 
