@@ -35,7 +35,7 @@ class PickupOrderApp extends React.Component {
       return (<tbody>
         {items.map((itemOrder, index) => {
           return (
-            <tr key={"pickup-items-" + index}>
+            <tr key={"pickup-items-" + itemOrder.id}>
               <td>{itemOrder.itemName}</td>
               <td>{itemOrder.itemSku}</td>
               <td>{itemOrder.itemDescription}</td>
