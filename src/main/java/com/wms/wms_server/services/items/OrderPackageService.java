@@ -69,6 +69,7 @@ public class OrderPackageService {
 
     public OrderPackageResponse convertOrderToResponse(OrderPackage orderPackage) {
         OrderPackageResponse response = new OrderPackageResponse();
+        response.id = orderPackage.getId();
         response.orderName = orderPackage.getOrderName();
         response.description = orderPackage.getDescription();
         response.contactName = orderPackage.getContactName();
