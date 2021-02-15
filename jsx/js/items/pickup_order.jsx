@@ -114,12 +114,28 @@ class PickupOrderApp extends React.Component {
     return data;
   }
 
+  subtractItems = (itemData) => {
+    this.setState(state => {
+      const newItems = [...state.selectedItems];
+      for(let i=0; i<newItems.length; i++) {
+        if (newItems[i].locationCode == itemData.locationCode && 
+              newItems[i].itemSku == itemData.itemSku) 
+        {
+          newItems[i].orderedQuantity -= itemData.quantity;
+          break;
+        }
+      }
+      return {selectedItems: newItems };
+    });
+  };
+
   onSubmit_order = (e) => {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
     if (this.checkItemQuantity(data)) {
       // $("#" + this.orderFormId)[0].reset();
       console.log(data);
+      this.subtractItems(data);
     } else {
       window.alert("Error: item / location not found or quantity is too high");
     }
