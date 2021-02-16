@@ -7,6 +7,7 @@ import com.wms.wms_server.model.items.ItemInventory;
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
+import com.wms.wms_server.model.request.PickupOrderRequest;
 import com.wms.wms_server.model.response.items.ItemOrderResponse;
 import com.wms.wms_server.model.response.items.OrderPackageResponse;
 import com.wms.wms_server.repository.items.ItemInventoryRepository;
@@ -36,6 +37,26 @@ public class OrderPackageService {
             return false;
         }
         return true;
+    }
+
+    public void pickupOrder(long orderPackageId, PickupOrderRequest pickupOrderRequest) {
+        int currentQuantity = pickupOrderRequest.quantity;
+        List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(orderPackageId);
+        for (ItemOrder itemOrder : itemOrders) {
+            if (itemOrder.getItemInventory().getLocation().getLocationCode().equals(pickupOrderRequest.locationCode) &&
+                itemOrder.getItemInventory().getItemReceive().getSku().equals(pickupOrderRequest.itemSku) &&
+                itemOrder.getOrderedQuantity() > 0) {
+                int quantity = Math.min(itemOrder.getOrderedQuantity(), currentQuantity);
+                itemOrder.pickup(quantity);
+
+                itemOrderRepository.save(itemOrder);
+
+                currentQuantity -= quantity;
+                if (currentQuantity <= 0) {
+                    break;
+                }
+            }
+        }
     }
 
     public OrderPackage createOrderPackageAndItemOrder(OrderPackageRequest request) {
