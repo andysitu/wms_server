@@ -1,6 +1,5 @@
 package com.wms.wms_server.controllers.items;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.wms.wms_server.model.items.OrderPackage;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,10 +49,10 @@ public class OrderPackageController {
             @PathVariable("order_id") Long order_id,
             @Valid @RequestBody PickupOrderRequest pickOrderRequest) 
         {
-        orderPackageService.pickupOrder(order_id, pickOrderRequest);
-        // if (orderPackage == null) {
-        //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        // }
+        int newQuantity = orderPackageService.pickupOrder(order_id, pickOrderRequest);
+        if (newQuantity > 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
         
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

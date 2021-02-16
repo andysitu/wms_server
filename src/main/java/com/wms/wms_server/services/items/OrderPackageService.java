@@ -39,7 +39,7 @@ public class OrderPackageService {
         return true;
     }
 
-    public void pickupOrder(long orderPackageId, PickupOrderRequest pickupOrderRequest) {
+    public int pickupOrder(long orderPackageId, PickupOrderRequest pickupOrderRequest) {
         int currentQuantity = pickupOrderRequest.quantity;
         List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(orderPackageId);
         for (ItemOrder itemOrder : itemOrders) {
@@ -57,6 +57,7 @@ public class OrderPackageService {
                 }
             }
         }
+        return currentQuantity;
     }
 
     public OrderPackage createOrderPackageAndItemOrder(OrderPackageRequest request) {
