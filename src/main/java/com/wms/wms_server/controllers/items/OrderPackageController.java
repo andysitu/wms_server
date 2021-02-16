@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.OrderPackageRequest;
+import com.wms.wms_server.model.request.PickupOrderRequest;
 import com.wms.wms_server.model.response.items.OrderPackageResponse;
 import com.wms.wms_server.services.items.OrderPackageService;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
@@ -40,6 +42,21 @@ public class OrderPackageController {
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(orderPackage);
+    }
+
+    @RequestMapping(value="/orderpackages/{order_id}", 
+        produces="application/json;", method=RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity pickupOrder(
+            @PathVariable("order_id") Long order_id,
+            @Valid @RequestBody PickupOrderRequest pickOrderRequest) 
+        {
+        orderPackageService.pickupOrder(order_id, pickOrderRequest);
+        // if (orderPackage == null) {
+        //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        // }
+        
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @RequestMapping(value="/orderpackages", 
