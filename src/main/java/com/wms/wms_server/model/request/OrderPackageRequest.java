@@ -1,7 +1,5 @@
 package com.wms.wms_server.model.request;
 
-import com.wms.wms_server.model.items.OrderPackage;
-
 public class OrderPackageRequest {
     public int[] quantities;
     public long[] itemIds;
