@@ -122,8 +122,20 @@ class PickupOrderApp extends React.Component {
               newItems[i].itemSku == itemData.itemSku) 
         {
           newItems[i].orderedQuantity -= itemData.quantity;
+          if (newItems[i].orderedQuantity <= 0) {
+            newItems.splice(i, 1);
+          }
           break;
         }
+      }
+      if (newItems.length == 0) {
+        let orders = [...state.orders];
+        orders.splice(state.selectedOrderIndex, 1);
+        return {
+          orders: orders,
+          selectedItems: [],
+          selectedOrderIndex: -1,
+        };
       }
       return {selectedItems: newItems };
     });
@@ -133,9 +145,20 @@ class PickupOrderApp extends React.Component {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
     if (this.checkItemQuantity(data)) {
-      // $("#" + this.orderFormId)[0].reset();
       console.log(data);
-      this.subtractItems(data);
+      const order_id = this.state.orders[this.state.selectedOrderIndex].id;
+      data.orderPackageId = order_id;
+      $.ajax({
+        url: "/orderpackages/" + order_id,
+        context: this,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        type: "POST",
+        success: function(response) {
+          this.subtractItems(data);
+          $("#" + this.orderFormId)[0].reset();
+        }
+      });
     } else {
       window.alert("Error: item / location not found or quantity is too high");
     }
