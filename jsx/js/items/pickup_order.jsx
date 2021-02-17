@@ -11,6 +11,37 @@ class PickupOrderApp extends React.Component {
     this.orderFormId = "order-form"
   }
 
+  convertOrderItems = (order) => {
+    let itemResponses = order.itemOrderResponses;
+
+    let selectedItems = [];
+
+    // {[locationCode] : { [itemSku]: [index in selectedItems]} }
+    const itemLocationIndexMap = {};
+    let locationCode, itemSku;
+    itemResponses.forEach(itemResponse => {
+      locationCode = itemResponse.itemInventoryResponse.locationCode;
+      itemSku = itemResponse.itemInventoryResponse.itemSku;
+      if (!(itemResponse.itemInventoryResponse.locationCode in itemLocationIndexMap)) {
+        itemLocationIndexMap[locationCode] = {};
+      }
+      if (!(itemSku in itemLocationIndexMap[locationCode])) {
+        itemLocationIndexMap[locationCode][itemSku] = selectedItems.length;
+        selectedItems.push({
+          itemName: itemResponse.itemInventoryResponse.itemName,
+          itemSku: itemResponse.itemInventoryResponse.itemSku,
+          locationCode: locationCode,
+          orderedQuantity: itemResponse.orderedQuantity,
+          description: itemResponse.itemInventoryResponse.itemDescription,
+        });
+      } else {
+        selectedItems[itemLocationIndexMap[locationCode][itemSku]].orderedQuantity
+          += itemResponse.orderedQuantity;
+      }
+    });
+    return selectedItems;
+  }
+
   getOpenOrders = () => {
     $.ajax({
       url: "/orderpackages?type=open",
@@ -64,34 +95,8 @@ class PickupOrderApp extends React.Component {
   onClick_selectOrder = (e) => {
     this.setState(state =>{
       const selectedIndex = parseInt(e.target.value);
-      let itemResponses = state.orders[selectedIndex].itemOrderResponses;
-      console.log(itemResponses);
 
-      var selectedItems = [];
-
-      // {[locationCode] : { [itemSku]: [index in selectedItems]} }
-      const itemLocationIndexMap = {};
-      let locationCode, itemSku;
-      itemResponses.forEach(itemResponse => {
-        locationCode = itemResponse.itemInventoryResponse.locationCode;
-        itemSku = itemResponse.itemInventoryResponse.itemSku;
-        if (!(itemResponse.itemInventoryResponse.locationCode in itemLocationIndexMap)) {
-          itemLocationIndexMap[locationCode] = {};
-        }
-        if (!(itemSku in itemLocationIndexMap[locationCode])) {
-          itemLocationIndexMap[locationCode][itemSku] = selectedItems.length;
-          selectedItems.push({
-            itemName: itemResponse.itemInventoryResponse.itemName,
-            itemSku: itemResponse.itemInventoryResponse.itemSku,
-            locationCode: locationCode,
-            orderedQuantity: itemResponse.orderedQuantity,
-            description: itemResponse.itemInventoryResponse.itemDescription,
-          });
-        } else {
-          selectedItems[itemLocationIndexMap[locationCode][itemSku]].orderedQuantity
-            += itemResponse.orderedQuantity;
-        }
-      });
+      var selectedItems = this.convertOrderItems(state.orders[selectedIndex])
       
       return {
         selectedOrderIndex: parseInt(selectedIndex),
