@@ -165,7 +165,7 @@ class PickupOrderApp extends React.Component {
   };
 
   render() {
-    let numOpenItems, i, trClass;
+    let numOpenItems, totalItems, i, trClass;
 
     const disabledInput = this.state.selectedOrderIndex ==  -1;
     return (
@@ -178,18 +178,19 @@ class PickupOrderApp extends React.Component {
               <th scope="col">Order Name</th>
               <th scope="col">Company Name</th>
               <th scope="col">Transport</th>
-              <th scope="col">Open Item Rows</th>
-              <th scope="col">Total Item Row</th>
+              <th scope="col">Unpicked Items</th>
+              <th scope="col">Total Items</th>
               <th scope="col">Select</th>
             </tr>
           </thead>
           <tbody>
             {this.state.orders.map(((orderPackage, index) => {
               numOpenItems = 0;
+              totalItems = 0;
               for (i=0; i<orderPackage.itemOrderResponses.length; i++) {
-                if (orderPackage.itemOrderResponses[i].complete == 0) {
-                  numOpenItems++;
-                }
+                numOpenItems += orderPackage.itemOrderResponses[i].orderedQuantity;
+                
+                totalItems += orderPackage.itemOrderResponses[i].startQuantity;
               }
               trClass = (index == this.state.selectedOrderIndex) ?
                 "selected" : "";
@@ -199,7 +200,7 @@ class PickupOrderApp extends React.Component {
                   <td>{orderPackage.companyName}</td>
                   <td>{orderPackage.transportName}</td>
                   <td>{numOpenItems}</td>
-                  <td>{orderPackage.itemOrderResponses.length}</td>
+                  <td>{totalItems}</td>
                   <td>
                     <button type="button"
                       value={index} onClick={this.onClick_selectOrder}
