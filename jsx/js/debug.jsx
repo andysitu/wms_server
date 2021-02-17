@@ -16,8 +16,33 @@ class DebugApp extends React.Component {
     }
     return parseInt(s);
   }
+  showSuccess = () => {
+    window.alert("done");
+  }
   createDummyWarehouses = () => {
-    console.log(this.getRandomLetters(10));
+    let data = {
+      name: this.getRandomLetters(10),
+      description: this.getRandomLetters(10),
+      address1: this.getRandomLetters(10),
+      address2: this.getRandomLetters(10),
+      city: this.getRandomLetters(6),
+      state: this.getRandomLetters(2),
+      zip: String(this.getRandomInt(6)),
+      phone: String(this.getRandomInt(9)),
+      code: this.getRandomLetters(5),
+    };
+    $.ajax({
+      url: "./warehouses",
+      type: "POST",
+      // context: this,
+      contentType: "application/json;",
+      data: JSON.stringify(data),
+      context: this,
+      success: function(warehouse) {
+        console.log(warehouse);
+        this.showSuccess();
+      },
+    });
   };
 
   render() {
