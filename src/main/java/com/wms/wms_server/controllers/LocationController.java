@@ -92,4 +92,11 @@ public class LocationController {
         return locationService.convertLocations(
             locationService.getLocationsByArea(areaId));
     }
+
+    @GetMapping(path="/locations/warehouse/{warehouseId}", produces="application/json")
+    @ResponseBody
+    public List<LocationResponse> getLocationsByWarehouse(@PathVariable("warehouseId") Long warehouseId) {
+        return locationService.convertLocations(
+            locationRepository.findByWarehouseId(warehouseId));
+    }
 }
