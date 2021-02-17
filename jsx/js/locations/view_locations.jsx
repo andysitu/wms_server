@@ -240,7 +240,8 @@ class LocationTable extends React.Component {
     }
 
     var url = (area === "all" || area == "") ? 
-              "./locations" : "../locations/area/" + area;
+              "./locations/warehouse/" + this.state.selected_warehouse : "../locations/area/" + area;
+    console.log(area);
     $.ajax({
       type: "GET",
       url: url,
