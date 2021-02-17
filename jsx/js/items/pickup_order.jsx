@@ -172,7 +172,7 @@ class PickupOrderApp extends React.Component {
     <div>
       <h2>Open Orders</h2>
       <div id="open-orders-container">
-        <table>
+        <table className="table table-sm">
           <thead>
             <tr>
               <th scope="col">Order Name</th>
@@ -180,6 +180,7 @@ class PickupOrderApp extends React.Component {
               <th scope="col">Transport</th>
               <th scope="col">Open Item Rows</th>
               <th scope="col">Total Item Row</th>
+              <th scope="col">Select</th>
             </tr>
           </thead>
           <tbody>
@@ -197,13 +198,14 @@ class PickupOrderApp extends React.Component {
                   <td>{orderPackage.orderName}</td>
                   <td>{orderPackage.companyName}</td>
                   <td>{orderPackage.transportName}</td>
+                  <td>{numOpenItems}</td>
+                  <td>{orderPackage.itemOrderResponses.length}</td>
                   <td>
                     <button type="button"
                       value={index} onClick={this.onClick_selectOrder}
                       className="btn btn-sm btn-outline-primary"
-                    >{numOpenItems}</button>
-                    </td>
-                  <td>{orderPackage.itemOrderResponses.length}</td>
+                    >Select</button>
+                  </td>
                 </tr>)
             }))}
           </tbody>
@@ -212,7 +214,7 @@ class PickupOrderApp extends React.Component {
       <div>
         <h2>Pickup Items</h2>
         <div id="pickup-items-container">
-          <table>
+          <table className="table table-sm">
             <thead>
               <tr>
                 <th scope="col">Name</th>
