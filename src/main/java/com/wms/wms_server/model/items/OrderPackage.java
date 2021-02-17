@@ -14,12 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.wms.wms_server.model.request.OrderPackageRequest;
-
-import javax.persistence.FetchType;
 
 import java.util.Date;
 
