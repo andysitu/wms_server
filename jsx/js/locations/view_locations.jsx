@@ -262,6 +262,7 @@ class LocationTable extends React.Component {
       success: function(areas) {
         this.setState({
             areas: areas,
+            locations: [],
             selected_area: (areas.length>0) ? areas[0].id : "",
         });
       },
