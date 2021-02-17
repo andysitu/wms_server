@@ -30,6 +30,11 @@ public class OrderPackageService {
     @Autowired
     private ItemOrderService itemOrderService;
 
+    /***
+     * Checks if a orderPackageRequest is valid.
+     * @param request - OrderPackageRequest sent by user
+     * @return Boolean if valid
+     */
     public Boolean isValidOrderPackageRequest(OrderPackageRequest request) {
         if (request.itemIds == null || request.itemIds.length == 0 ||
             request.quantities.length != request.itemIds.length ) 
@@ -39,6 +44,14 @@ public class OrderPackageService {
         return true;
     }
 
+    /***
+     * Iterates through all ItemOrders and then uses pickup() to decrease its
+     * orderedQuantity and increases pickedQuantity until quantity amount is complete
+     * specified in pickupOrderRequest 
+     * @param orderPackageId ID of the OrderPackage
+     * @param pickupOrderRequest Request object containing quantity, sku, and location
+     * @return int value of how the leftover quantity (should be 0)
+     */
     public int pickupOrder(long orderPackageId, PickupOrderRequest pickupOrderRequest) {
         int currentQuantity = pickupOrderRequest.quantity;
         List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(orderPackageId);
@@ -60,6 +73,12 @@ public class OrderPackageService {
         return currentQuantity;
     }
 
+    /***
+     * Creates an OrderPackage with ItemOrders. The ItemOrders will also point to
+     *  the OrderPackage (ManyToOne relationship).
+     * @param request Requests object with information used in the creation
+     * @return OrderPackage created
+     */
     public OrderPackage createOrderPackageAndItemOrder(OrderPackageRequest request) {
         ArrayList<ItemInventory> itemInventories = new ArrayList<>();
         ArrayList<ItemOrder> itemOrders = new ArrayList<>();
@@ -89,6 +108,11 @@ public class OrderPackageService {
         return orderPackage;
     }
 
+    /**
+     * Converts OrderPackage into OrderPackageResponse. OrderPackage is unaffected
+     * @param orderPackage OrderPackage to be copied 
+     * @return OrderPackageResponse created
+     */
     public OrderPackageResponse convertOrderToResponse(OrderPackage orderPackage) {
         OrderPackageResponse response = new OrderPackageResponse();
         response.id = orderPackage.getId();
@@ -106,6 +130,12 @@ public class OrderPackageService {
         return response;
     }
 
+    /**
+     * Retrieves all orderPackages of a certain type and then returns a convert
+     * list of it in OrderPackageResponse form
+     * @param type String of orderPackage types: ["open",]
+     * @return List of OrderPackageResponses created
+     */
     public List<OrderPackageResponse> getOrderResponses(String type) {
         List<OrderPackageResponse> orderPackageResponses = new ArrayList<>();
         List<OrderPackage> orders;
