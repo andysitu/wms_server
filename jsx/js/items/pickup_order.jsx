@@ -3,7 +3,6 @@ class PickupOrderApp extends React.Component {
     super(props);
     this.state = {
       orders: [],
-      selectedItems: [],
       selectedOrderIndex: -1,
     }
     this.getOpenOrders();
@@ -32,22 +31,32 @@ class PickupOrderApp extends React.Component {
           itemSku: itemResponse.itemInventoryResponse.itemSku,
           locationCode: locationCode,
           orderedQuantity: itemResponse.orderedQuantity,
+          startQuantity: itemResponse.startQuantity,
           description: itemResponse.itemInventoryResponse.itemDescription,
         });
       } else {
         selectedItems[itemLocationIndexMap[locationCode][itemSku]].orderedQuantity
           += itemResponse.orderedQuantity;
+        selectedItems[itemLocationIndexMap[locationCode][itemSku]].startQuantity
+          += itemResponse.startQuantity;
       }
     });
     return selectedItems;
   }
-
+  /**
+   * Sends /GET/ to order packages to get open orders & then converts
+   * the items in each order using convertOrderItems a list of items
+   * combined with the same location & sku
+   */
   getOpenOrders = () => {
     $.ajax({
       url: "/orderpackages?type=open",
       type: "GET",
       context: this,
       success: function(orders) {
+        for (let i=0; i<orders.length; i++) {
+          orders[i].itemsList = this.convertOrderItems(orders[i]);
+        }
         console.log(orders);
         this.setState({
           orders: orders,
@@ -59,10 +68,10 @@ class PickupOrderApp extends React.Component {
   };
 
   createPickupItems = () => {
-    if  (this.state.selectedOrderIndex == -1) {
+    if (this.state.selectedOrderIndex == -1) {
       return (<tbody></tbody>);
     } else {
-      const items = this.state.selectedItems;
+      const items = this.state.orders[this.state.selectedOrderIndex].itemsList;
       return (<tbody>
         {items.map((itemOrder, index) => {
           return (
@@ -81,7 +90,7 @@ class PickupOrderApp extends React.Component {
 
   // Check there are that many total items reserved at the location
   checkItemQuantity = (data) => {
-    const items = this.state.selectedItems;
+    const items = this.state.orders[this.state.selectedOrderIndex].itemsList;
     for (let i=0, item; i<items.length; i++) {
       item = items[i];
       if (item.locationCode == data.locationCode && item.itemSku == data.itemSku) {
@@ -94,19 +103,14 @@ class PickupOrderApp extends React.Component {
   // into state.selectedItems;
   onClick_selectOrder = (e) => {
     this.setState(state =>{
-      const selectedIndex = parseInt(e.target.value);
-
-      var selectedItems = this.convertOrderItems(state.orders[selectedIndex])
-      
+      const selectedIndex = parseInt(e.target.value);      
       return {
         selectedOrderIndex: parseInt(selectedIndex),
-        selectedItems: selectedItems,
-      };      
+      };
     }, 
     ()=> {
       $("#" + this.locationInputId).focus();
     });
-    
   };
 
   getData = (formId) => {
@@ -121,7 +125,9 @@ class PickupOrderApp extends React.Component {
 
   subtractItems = (itemData) => {
     this.setState(state => {
-      const newItems = [...state.selectedItems];
+      const newOrders = [...state.orders];
+      console.log(state.orders[state.selectedOrderIndex]);
+      const newItems = [...state.orders[state.selectedOrderIndex].itemsList];
       for(let i=0; i<newItems.length; i++) {
         if (newItems[i].locationCode == itemData.locationCode && 
               newItems[i].itemSku == itemData.itemSku) 
@@ -133,16 +139,10 @@ class PickupOrderApp extends React.Component {
           break;
         }
       }
-      if (newItems.length == 0) {
-        let orders = [...state.orders];
-        orders.splice(state.selectedOrderIndex, 1);
-        return {
-          orders: orders,
-          selectedItems: [],
-          selectedOrderIndex: -1,
-        };
-      }
-      return {selectedItems: newItems };
+      newOrders[state.selectedOrderIndex].itemsList = newItems;
+      return {
+        orders: newOrders,
+      };
     });
   };
 
@@ -192,10 +192,10 @@ class PickupOrderApp extends React.Component {
             {this.state.orders.map(((orderPackage, index) => {
               numOpenItems = 0;
               totalItems = 0;
-              for (i=0; i<orderPackage.itemOrderResponses.length; i++) {
-                numOpenItems += orderPackage.itemOrderResponses[i].orderedQuantity;
+              for (i=0; i<orderPackage.itemsList.length; i++) {
+                numOpenItems += orderPackage.itemsList[i].orderedQuantity;
                 
-                totalItems += orderPackage.itemOrderResponses[i].startQuantity;
+                totalItems += orderPackage.itemsList[i].startQuantity;
               }
               trClass = (index == this.state.selectedOrderIndex) ?
                 "selected" : "";
