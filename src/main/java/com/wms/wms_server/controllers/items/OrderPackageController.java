@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,8 +61,10 @@ public class OrderPackageController {
     @RequestMapping(value="/orderpackages", 
         produces="application/json;", method=RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity getOrders() {
-        List<OrderPackageResponse> responses = orderPackageService.getOrderResponses();
+    public ResponseEntity getOrders(
+        @RequestParam(required = false) String type
+    ) {
+        List<OrderPackageResponse> responses = orderPackageService.getOrderResponses(type);
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 

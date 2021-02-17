@@ -6,14 +6,14 @@ class PickupOrderApp extends React.Component {
       selectedItems: [],
       selectedOrderIndex: -1,
     }
-    this.getOrders();
+    this.getOpenOrders();
     this.locationInputId = "location-input"
     this.orderFormId = "order-form"
   }
 
-  getOrders = () => {
+  getOpenOrders = () => {
     $.ajax({
-      url: "/orderpackages",
+      url: "/orderpackages?type=open",
       type: "GET",
       context: this,
       success: function(orders) {
