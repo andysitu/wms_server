@@ -19,7 +19,14 @@ class DebugApp extends React.Component {
   showSuccess = () => {
     window.alert("done");
   }
-  createDummyWarehouses = () => {
+
+  createWarehouseLocations = () => {
+    this.createDummyWarehouses((warehouse) => {
+      console.log("w", warehouse);
+      this.createDummyLocations(warehouse.id);
+    });
+  }
+  createDummyWarehouses = (callback) => {
     let data = {
       name: this.getRandomLetters(10),
       description: this.getRandomLetters(10),
@@ -39,16 +46,41 @@ class DebugApp extends React.Component {
       data: JSON.stringify(data),
       context: this,
       success: function(warehouse) {
-        console.log(warehouse);
-        this.showSuccess();
+        if (callback) {
+          console.log(callback);
+          callback(warehouse);
+        }
       },
     });
   };
+  createDummyLocations(warehouseId) {
+    let data = {
+      area: this.getRandomLetters(2),
+      row_start: 1,
+      row_end: 2,
+      bay_start: 1,
+      bay_end: 2,
+      level_start: 1,
+      level_end: 1,
+      shelf_start: 1,
+      shelf_end: 1,
+    };
+    $.ajax({
+      type: "POST",
+      url: "./warehouses/" + warehouseId + "/locations",
+      contentType: "application/json",
+      context: this,
+      data: JSON.stringify(data),
+      success: function(new_locations) {
+        this.showSuccess();
+      },
+    });
+  }
 
   render() {
     return (<div>
       <button type="button"
-        onClick={this.createDummyWarehouses}>Create Warehouses</button>
+        onClick={this.createWarehouseLocations}>Create Warehouse + Locations</button>
     </div>)
   }
 }
