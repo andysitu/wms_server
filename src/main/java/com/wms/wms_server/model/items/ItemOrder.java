@@ -54,6 +54,12 @@ public class ItemOrder {
     @Column(columnDefinition = "integer default 0")
     @Getter private int completeQuantity = 0;
 
+    /***
+     * Increases pickedQuantity and decreases orderedQuantity by
+     * amount specified by quantity.
+     * @param quantity Number of items picked up
+     * @return quantity
+     */
     public int pickup(int quantity) {
         this.pickedQuantity += quantity;
         this.orderedQuantity -= quantity;
