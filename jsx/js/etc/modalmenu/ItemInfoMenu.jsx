@@ -98,7 +98,7 @@ class ItemInfoMenu extends React.Component {
           <div className="col-6">
             <label htmlFor="item-itemSku-input">Item SKU</label>
             <input type="text" className="form-control" 
-              name="itemSku" id="item-itemSku-input" required
+              name="itemSku" id="item-itemSku-input"
             ></input>
           </div>
         </div>) :
