@@ -7,6 +7,7 @@ import com.wms.wms_server.model.response.items.ItemInfoResponse;
 import com.wms.wms_server.repository.items.ItemCategoryRepository;
 import com.wms.wms_server.repository.items.ItemInfoRepository;
 import com.wms.wms_server.repository.items.ItemSkuRepository;
+import com.wms.wms_server.services.items.ItemSkuService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,6 +31,9 @@ public class ItemInfoService {
     ItemSkuRepository itemSkuRepository;
     @Autowired
     ItemCategoryRepository itemCategoryRepository;
+
+    @Autowired
+    ItemSkuService itemSkuService;
 
     public ItemInfo createItemInfo(HttpServletRequest request) {
         try {
@@ -61,8 +65,15 @@ public class ItemInfoService {
                     builder.itemCategory(oItemCategory.get());
                 }
             }
+
             ItemInfo itemInfo = builder.build();
             itemInfoRepository.save(itemInfo);
+            // Create ItemSku if it sku was provided
+            String itemSku = request.getParameter("itemSku");
+            if (itemSku != null && itemSku.length() > 0 && 
+              !itemSkuService.checkIfSkuExists(itemSku)) {
+                itemSkuService.createItemSku(itemSku, itemInfo);
+            }
             return itemInfo;
         } catch(ConstraintViolationException | DataIntegrityViolationException e) {
             System.out.println("ERROREROERAR");
