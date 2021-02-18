@@ -123,6 +123,54 @@ class DebugApp extends React.Component {
     }
   }
 
+  createDummyItemReceive = () => {
+    $.ajax({
+      url: "/iteminfo",
+      type: "GET",
+      context: this,
+      success: function(iteminfos) {
+        let total = 5;
+        for (let i=1; i<=total; i++) {
+          setTimeout(()=>{
+            // Continue finding itemInfo until it has an SKU
+            let index;
+            let itemSku;
+            for (let j=0; j<20; j++) {
+              index = Math.floor(Math.random() * iteminfos.length);
+              if (!iteminfos[index].itemskus || 
+                  iteminfos[index].itemskus.length == 0) {
+                continue;
+              } else {
+                itemSku = iteminfos[index].itemskus[0].sku;
+                break;
+              }
+            }
+            if (itemSku == null) {
+              return;
+            }
+            // console.log(iteminfos[index]);
+            let data = {
+              shipmentCode: this.getRandomLetters(4),
+              quantity: this.getRandomInt(3),
+              itemSku: itemSku,
+            };
+            const count = i;
+            $.ajax({
+              url: "/itemreceive",
+              type: "POST",
+              data: data,
+              success: function() {
+                if (count == total) {
+                  window.alert("done");
+                }
+              }
+            });
+          }, i*200);
+        }
+      }
+    });
+  };
+
   render() {
     return (<div>
     <div>
@@ -135,6 +183,9 @@ class DebugApp extends React.Component {
       <div>
         <button type="button" onClick={this.createDummyItemInfos}>Create 5 ItemInfos</button>
       </div>      
+      <div>
+        <button type="button" onClick={this.createDummyItemReceive}>Create 5 ItemReceives</button>
+      </div>
     </div>)
   }
 }
