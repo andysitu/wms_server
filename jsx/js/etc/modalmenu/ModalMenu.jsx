@@ -291,34 +291,37 @@ class ModalMenu extends React.Component {
             parseInt(data.level_start) > parseInt(data.level_end) ||
             parseInt(data.row_start) > parseInt(data.row_end) || 
             parseInt(data.shelf_start) > parseInt(data.shelf_end));
-        resolve(result);
+        resolve(result ? 
+          "Please check the end values are greater than the start":
+          true);
       } else if (this.state.menu_type == "create_item_info") {
         // Check that the SKU doesn't exist
         $.ajax({
           url: "itemsku/check_sku/" + data.itemSku,
           type: "GET",
         }).then((exists  => {
-          resolve(!exists);
+          resolve(exists ? "Item SKU already exists.": true);
         }));
       } else {
         resolve(true);
       }
-    });
-    
+    });    
   };
 
   onSubmit = (e) => {
     e.preventDefault();
     var data = this.get_data();
 
-    this.complete_and_check_data(data).then(result => {
-      if (result) {
+    this.complete_and_check_data(data).then((result) => {
+      if (result === true) {
         if (this.state.submit_handler) {
           this.state.submit_handler(data);  
         }
         $("#modalMenu").modal("hide");
+      } else if (typeof result == "string") {
+        window.alert(result);
       } else {
-        window.alert("Please check that the end values are greater than the start values");
+        window.alert("Error found in the data");
       }
     });
   };
