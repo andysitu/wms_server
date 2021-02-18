@@ -62,4 +62,9 @@ public class ItemSku {
     public ItemSku(String sku) {
         setSku(sku);
     }
+
+    public ItemSku(String sku, ItemInfo itemInfo) {
+        setSku(sku);
+        this.itemInfo = itemInfo;
+    }
 }
