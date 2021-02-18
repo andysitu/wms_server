@@ -1,7 +1,15 @@
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const NUMSET = "0123456789";
+const CHARNUMSET = CHARSET + NUMSET;
 
 class DebugApp extends React.Component {
+  getRandomWordsInts(length) {
+    let s = ""
+    for(let  i=0; i< length; i++) {
+      s += CHARNUMSET.charAt(Math.floor(Math.random() * CHARNUMSET.length));
+    }
+    return s;
+  }
   getRandomLetters(length) {
     let s = ""
     for(let  i=0; i< length; i++) {
@@ -36,7 +44,7 @@ class DebugApp extends React.Component {
       state: this.getRandomLetters(2),
       zip: String(this.getRandomInt(6)),
       phone: String(this.getRandomInt(9)),
-      code: this.getRandomLetters(5),
+      code: this.getRandomWordsInts(3),
     };
     $.ajax({
       url: "./warehouses",
