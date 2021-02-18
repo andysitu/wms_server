@@ -33,7 +33,7 @@ public class ItemInfoAndBarcodeController {
         return "items/view_item_info";
     }
 
-    @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.POST)
+    @RequestMapping(path="/iteminfo", produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ResponseEntity createItemInfo(HttpServletRequest request) {
         ItemInfo itemInfo = itemInfoService.createItemInfo(request);
@@ -44,21 +44,21 @@ public class ItemInfoAndBarcodeController {
             itemInfoService.convert_to_response( itemInfo ));
     }
 
-    @RequestMapping(path="/item_info", produces="application/json;", method=RequestMethod.GET)
+    @RequestMapping(path="/iteminfo", produces="application/json;", method=RequestMethod.GET)
     @ResponseBody
     public List<ItemInfoResponse> search_itemInfos(@RequestParam String type, @RequestParam String value) {
         List<ItemInfo> items = itemInfoService.search_itemInfo(type, value);
         return itemInfoService.convert_list_to_responses(items);
     }
 
-    @RequestMapping(path="/item_info/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
+    @RequestMapping(path="/iteminfo/{iteminfo_id}", produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_itemInfo(@PathVariable("iteminfo_id") Long iteminfo_id) {
         itemInfoRepository.deleteById(iteminfo_id);
         return "OK";
     }
 
-    @RequestMapping(path="/item_info/{iteminfo_id}", produces="application/json;", method=RequestMethod.PATCH)
+    @RequestMapping(path="/iteminfo/{iteminfo_id}", produces="application/json;", method=RequestMethod.PATCH)
     @ResponseBody
     public ItemInfoResponse edit_itemInfo(@PathVariable("iteminfo_id") Long iteminfo_id,
             HttpServletRequest request) {
@@ -67,7 +67,7 @@ public class ItemInfoAndBarcodeController {
         return itemInfoService.convert_to_response(itemInfo);
     }
     
-    @RequestMapping(path="/item_info/{iteminfo_id}/itemskus", 
+    @RequestMapping(path="/iteminfo/{iteminfo_id}/itemskus", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, String> create_barcode(
@@ -78,7 +78,7 @@ public class ItemInfoAndBarcodeController {
         );
     }
 
-    @RequestMapping(path="/item_info/{iteminfo_id}/itemskus/{itemsku_id}", 
+    @RequestMapping(path="/iteminfo/{iteminfo_id}/itemskus/{itemsku_id}", 
         produces="text/plain;", method=RequestMethod.DELETE)
     @ResponseBody
     public String delete_barcode(
