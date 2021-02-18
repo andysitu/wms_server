@@ -311,12 +311,16 @@ class ModalMenu extends React.Component {
     e.preventDefault();
     var data = this.get_data();
 
-        this.state.submit_handler(data);  
+    this.complete_and_check_data(data).then(result => {
+      if (result) {
+        if (this.state.submit_handler) {
+          this.state.submit_handler(data);  
+        }
+        $("#modalMenu").modal("hide");
+      } else {
+        window.alert("Please check that the end values are greater than the start values");
       }
-      $("#modalMenu").modal("hide");
-    } else {
-      window.alert("Please check that the end values are greater than the start values");
-    }
+    });
   };
   
   render() {
