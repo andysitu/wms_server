@@ -110,7 +110,7 @@ class DebugApp extends React.Component {
         };
         const count = i;
         $.ajax({
-          url: "/item_info",
+          url: "/iteminfo",
           type: "POST",
           data: data,
           success: function() {

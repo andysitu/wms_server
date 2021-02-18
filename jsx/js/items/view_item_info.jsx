@@ -17,7 +17,7 @@ class ItemInfoApp extends React.Component {
 
   onSearch = (search_type, search_value) => {
     $.ajax({
-      url: "./item_info?type=" + search_type + "&value=" + search_value,
+      url: "./iteminfo?type=" + search_type + "&value=" + search_value,
       type: "GET",
       context: this,
       success: function(data) {
@@ -45,7 +45,7 @@ class ItemInfoApp extends React.Component {
       this.state.itemInfos[row_index],
       (data) => {
         $.ajax({
-          url: "/item_info/" + this.state.itemInfos[row_index].id,
+          url: "/iteminfo/" + this.state.itemInfos[row_index].id,
           type: "PATCH",
           data: data,
           context: this,
@@ -63,7 +63,7 @@ class ItemInfoApp extends React.Component {
   create_itemInfo = (data) => {
     console.log(data);
     $.ajax({
-      url: "/item_info",
+      url: "/iteminfo",
       type: "POST",
       data: data,
       context: this,
@@ -90,7 +90,7 @@ class ItemInfoApp extends React.Component {
 
   deleteItemInfo = (row_index, itemInfo_id) => {
     $.ajax({
-      url: "../item_info/" + itemInfo_id,
+      url: "/iteminfo/" + itemInfo_id,
       type: "DELETE",
       context: this,
       success: function(return_data) {

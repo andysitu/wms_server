@@ -25,7 +25,7 @@ class ItemInfoRow extends React.Component {
         that = this;
     if (sku != null && sku.length > 4) {
       $.ajax({
-        url: "../item_info/" + this.state.data.id + "/itemskus",
+        url: "/iteminfo/" + this.state.data.id + "/itemskus",
         type: "POST",
         data: {
           sku: sku,
@@ -53,7 +53,7 @@ class ItemInfoRow extends React.Component {
       let result = window.confirm("Are you sure you want to delete sku " + sku + "?");  
       if (result) {
         $.ajax({
-          url: "../item_info/" + this.state.data.id + "/itemskus/" + id,
+          url: "/iteminfo/" + this.state.data.id + "/itemskus/" + id,
           type: "DELETE",
           success: function(data) {
             that.setState(prev_state => {
