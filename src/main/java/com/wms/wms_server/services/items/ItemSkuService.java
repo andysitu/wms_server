@@ -14,9 +14,14 @@ public class ItemSkuService {
     @Autowired
     ItemSkuRepository itemSkuRepository;
 
+    /**
+     * Checks if an ItemSku exists by the String SKU, which is unique
+     * @param sku String item SKU
+     * @return True if it does; false it does not
+     */
     public boolean checkIfSkuExists(String sku) {
         List<ItemSku> skus = itemSkuRepository.findBySku(sku);
-        return skus.size() > 0;
+        return !skus.isEmpty();
     }
 
     /***
