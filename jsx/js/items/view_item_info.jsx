@@ -16,16 +16,16 @@ class ItemInfoApp extends React.Component {
   }
 
   onClick_search = (search_type, search_value) => {
-    var that = this;
     $.ajax({
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
+      context: this,
       success: function(data) {
         console.log(data);
         data.forEach((element) => {
-          that.add_ref(element);
+          this.add_ref(element);
         });
-        that.setState({itemInfos: data});
+        this.setState({itemInfos: data});
       }
     });
   };
@@ -40,7 +40,6 @@ class ItemInfoApp extends React.Component {
   };
 
   editItemInfo = (row_index) => {
-    var that = this;
     this.modalMenu.current.show_menu(
       "edit_item_info",
       this.state.itemInfos[row_index],
@@ -49,11 +48,12 @@ class ItemInfoApp extends React.Component {
           url: "/item_info/" + this.state.itemInfos[row_index].id,
           type: "PATCH",
           data: data,
+          context: this,
           success: function(new_data) {
-            that.setState(prevState => {
+            this.setState(prevState => {
               let new_itemInfos = prevState.itemInfos;
               Object.assign(new_itemInfos[row_index], new_data);
-            }, ()=>{that.update_itemInfoRow(row_index)});
+            }, ()=>{this.update_itemInfoRow(row_index)});
           },
         });
       }
@@ -61,16 +61,16 @@ class ItemInfoApp extends React.Component {
   };
 
   create_itemInfo = (data) => {
-    var that = this;
     console.log(data);
     $.ajax({
       url: "/item_info",
       type: "POST",
       data: data,
+      context: this,
       success: function(item_data) {
-        that.add_ref(item_data);
-        that.setState({
-          itemInfos: [...that.state.itemInfos, item_data],
+        this.add_ref(item_data);
+        this.setState({
+          itemInfos: [...this.state.itemInfos, item_data],
         })
       },
       error: function(xhr, textStatus, error) {
@@ -89,14 +89,14 @@ class ItemInfoApp extends React.Component {
   };
 
   deleteItemInfo = (row_index, itemInfo_id) => {
-    var that = this;
     $.ajax({
       url: "../item_info/" + itemInfo_id,
       type: "DELETE",
+      context: this,
       success: function(return_data) {
-        that.state.itemInfos.splice(row_index, 1)
-        that.setState({
-          itemInfos: that.state.itemInfos,
+        this.state.itemInfos.splice(row_index, 1)
+        this.setState({
+          itemInfos: this.state.itemInfos,
         });
       },
     });
