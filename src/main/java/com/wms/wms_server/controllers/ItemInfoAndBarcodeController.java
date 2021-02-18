@@ -46,7 +46,12 @@ public class ItemInfoAndBarcodeController {
 
     @RequestMapping(path="/iteminfo", produces="application/json;", method=RequestMethod.GET)
     @ResponseBody
-    public List<ItemInfoResponse> search_itemInfos(@RequestParam String type, @RequestParam String value) {
+    public List<ItemInfoResponse> search_itemInfos(
+      @RequestParam(required = false) String type, 
+      @RequestParam(required = false) String value) {
+        if (type == null || value == null) {
+            return itemInfoService.convert_list_to_responses(itemInfoRepository.findAll());
+        }
         List<ItemInfo> items = itemInfoService.search_itemInfo(type, value);
         return itemInfoService.convert_list_to_responses(items);
     }
