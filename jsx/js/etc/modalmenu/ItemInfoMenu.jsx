@@ -85,13 +85,32 @@ class ItemInfoMenu extends React.Component {
         height      = edit_status ? this.props.data.height : "",
         length      = edit_status ? this.props.data.length : "";
     return (<div>
-      <div className="form-group">
-        <label htmlFor="item-name-input">Item Name</label>
-        <input type="text" className="form-control" 
-          name="name" id="item-name-input"
-          defaultValue={item_name} required
-        ></input>
-      </div>
+      {!edit_status ? 
+      // Include SKU input for Item Info Creation, but not in editing
+        (<div className="form-group row">
+          <div className="col-6">
+            <label htmlFor="item-name-input">Item Name</label>
+            <input type="text" className="form-control" 
+              name="name" id="item-name-input"
+              defaultValue={item_name} required
+            ></input>
+          </div>
+          <div className="col-6">
+            <label htmlFor="item-itemSku-input">Item SKU</label>
+            <input type="text" className="form-control" 
+              name="itemSku" id="item-itemSku-input" required
+            ></input>
+          </div>
+        </div>) :
+        (<div className="form-group">
+          <label htmlFor="item-name-input">Item Name</label>
+          <input type="text" className="form-control" 
+            name="name" id="item-name-input"
+            defaultValue={item_name} required
+          ></input>
+        </div>)
+      }
+      
       <div className="form-group">
         <label htmlFor="item-description-input">Description</label>
         <input type="text" className="form-control" 
