@@ -271,6 +271,11 @@ class ModalMenu extends React.Component {
     }
     return data;
   };
+  /**
+   * Checks if data is valid & returns a promise with callback(result)
+   * with result being boolean.
+   * @param {Object} data Data object to be checked
+   */
   complete_and_check_data = (data) => {
     return new Promise((resolve, reject) => {
       let result;
@@ -287,6 +292,14 @@ class ModalMenu extends React.Component {
             parseInt(data.row_start) > parseInt(data.row_end) || 
             parseInt(data.shelf_start) > parseInt(data.shelf_end));
         resolve(result);
+      } else if (this.state.menu_type == "create_item_info") {
+        // Check that the SKU doesn't exist
+        $.ajax({
+          url: "itemsku/check_sku/" + data.itemSku,
+          type: "GET",
+        }).then((exists  => {
+          resolve(!exists);
+        }));
       } else {
         resolve(true);
       }
