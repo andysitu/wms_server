@@ -19,7 +19,7 @@ public class ItemSkuController {
     
     @RequestMapping(path="/itemsku/check_sku/{sku}", method=RequestMethod.GET)
     @ResponseBody
-    public Boolean checkIfSkuExists(@PathVariable("sku") String sku) {
+    public boolean checkIfSkuExists(@PathVariable("sku") String sku) {
         List<ItemSku> skus = itemSkuRepository.findBySku(sku);
         return !skus.isEmpty();
     }
