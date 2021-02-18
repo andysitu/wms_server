@@ -203,9 +203,7 @@ public class ItemInfoService {
         Optional<ItemInfo> oItemInfo = itemInfoRepository.findById(itemInfo_id);
         if (oItemInfo.isPresent()) {
             ItemInfo itemInfo = oItemInfo.get();
-            ItemSku itemSku = new ItemSku(sku);
-            itemSku.setItemInfo(itemInfo);
-            itemSkuRepository.save(itemSku);
+            ItemSku itemSku = itemSkuService.createItemSku(sku, itemInfo)
             return itemSku;
         } else {
             return null;
