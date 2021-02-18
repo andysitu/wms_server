@@ -46,7 +46,7 @@ class ItemInfoApp extends React.Component {
       this.state.itemInfos[row_index],
       (data) => {
         $.ajax({
-          url: "../item_info/" + this.state.itemInfos[row_index].id,
+          url: "/item_info/" + this.state.itemInfos[row_index].id,
           type: "PATCH",
           data: data,
           success: function(new_data) {
@@ -64,7 +64,7 @@ class ItemInfoApp extends React.Component {
     var that = this;
     console.log(data);
     $.ajax({
-      url: "../item_info",
+      url: "/item_info",
       type: "POST",
       data: data,
       success: function(item_data) {
