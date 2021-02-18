@@ -15,7 +15,7 @@ class ItemInfoApp extends React.Component {
     element.ref=React.createRef()
   }
 
-  onClick_search = (search_type, search_value) => {
+  onSearch = (search_type, search_value) => {
     $.ajax({
       url: "./item_info?type=" + search_type + "&value=" + search_value,
       type: "GET",
@@ -130,7 +130,7 @@ class ItemInfoApp extends React.Component {
         <div className="col-1">
           <button onClick={this.onClick_createItemInfo}>+</button>
         </div>
-        <TableSearchBar onClick_search={this.onClick_search} search_type="item_info"/>
+        <TableSearchBar onSearch={this.onSearch} search_type="item_info"/>
       </div>
       <table className="table table-sm">
         <thead>

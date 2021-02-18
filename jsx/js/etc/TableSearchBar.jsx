@@ -5,7 +5,7 @@ export {
 /**
  * Parameters:
  *  Props
-  *  onClick_search: onClick method,
+  *  onSearch: onClick method,
   *  search_type : "item_info"
  */
 class TableSearchBar extends React.Component {
@@ -39,7 +39,7 @@ class TableSearchBar extends React.Component {
   onClick_search = () => {
     var search_type = document.getElementById("item-search1-type-select").value,
         search_value = document.getElementById("search-bar1-input").value;
-    this.props.onClick_search(search_type, search_value);
+    this.props.onSearch(search_type, search_value);
   }
 
   render() {

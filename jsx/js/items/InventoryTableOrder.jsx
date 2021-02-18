@@ -34,7 +34,7 @@ class InventoryTableOrder extends React.Component {
       result_height + "px";
   }
 
-  onClick_search = (search_type, search_value) => {
+  onSearch = (search_type, search_value) => {
     $.ajax({
       url: `/iteminventory?property=${search_type}&value=${search_value}`,
       type: "GET",
@@ -225,7 +225,7 @@ class InventoryTableOrder extends React.Component {
     return (<div>
       <div id="inventory-wrapper">
         <h2>Inventory Items</h2>
-        <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
+        <TableSearchBar onSearch={this.onSearch} search_type={"item_inventory"}/>
         <div style={{height: "300px", overflow: "auto"}}>
           <table className="table table-sm">
             <thead>

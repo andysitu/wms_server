@@ -51,7 +51,7 @@ class InventoryTableView extends React.Component {
     });
   };
 
-  onClick_search = (search_type, search_value) => {
+  onSearch = (search_type, search_value) => {
     $.ajax({
       url: `/iteminventory?property=${search_type}&value=${search_value}`,
       type: "GET",
@@ -64,7 +64,7 @@ class InventoryTableView extends React.Component {
 
   render() {
     return (<div>
-      <TableSearchBar onClick_search={this.onClick_search} search_type={"item_inventory"}/>
+      <TableSearchBar onSearch={this.onSearch} search_type={"item_inventory"}/>
       <table className="table table-sm">
         <thead>
           <tr>

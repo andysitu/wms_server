@@ -46,7 +46,7 @@ class ItemReceiveApp extends React.Component {
     }
   };
 
-  onClick_search = (property, value) => {
+  onSearch = (property, value) => {
     $.ajax({
       url: `./itemreceive?property=${property}&value=${value}`, 
       type: "GET",
@@ -62,7 +62,7 @@ class ItemReceiveApp extends React.Component {
   render() {
     return (<div>
       <div>
-        <TableSearchBar onClick_search={this.onClick_search} search_type="item_receive"/>
+        <TableSearchBar onSearch={this.onSearch} search_type="item_receive"/>
       </div>
       <table className="table table-sm">
         <thead>
