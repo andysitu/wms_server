@@ -61,9 +61,8 @@ class ItemInfoApp extends React.Component {
   };
 
   create_itemInfo = (data) => {
-    console.log(data);
-    return;
     var that = this;
+    console.log(data);
     $.ajax({
       url: "../item_info",
       type: "POST",
