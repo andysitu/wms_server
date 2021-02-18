@@ -43,7 +43,7 @@ public class ItemSku {
     @Column(unique=true)
     @Getter private String sku;
 
-    public void setSku(String sku) {
+    private void setSku(String sku) {
         sku = sku.replaceAll("\\s", "").toLowerCase();
         this.sku = sku;
     }
@@ -58,10 +58,6 @@ public class ItemSku {
     }
 
     public ItemSku() {}
-    
-    public ItemSku(String sku) {
-        setSku(sku);
-    }
 
     public ItemSku(String sku, ItemInfo itemInfo) {
         setSku(sku);
