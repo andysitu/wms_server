@@ -53,25 +53,6 @@ class ModalMenu extends React.Component {
       this.setState({menu_type: "none", data: {}});
     });
   }
-
-  complete_and_check_data = (data) => {
-    if (this.state.menu_type == "create_location") {
-      // Complete the end values if they're blank
-      data.bay_end = data.bay_end ? data.bay_end : data.bay_start;
-      data.level_end = data.level_end ? data.level_end : data.level_start;
-      data.row_end = data.row_end ? data.row_end : data.row_start;
-      data.shelf_end = data.shelf_end ? data.shelf_end : data.shelf_start;
-
-      // Check that the end values are greater than then start values
-      return (parseInt(data.bay_start) > parseInt(data.bay_end) || 
-          parseInt(data.level_start) > parseInt(data.level_end) ||
-          parseInt(data.row_start) > parseInt(data.row_end) || 
-          parseInt(data.shelf_start) > parseInt(data.shelf_end)) 
-        ? false : true
-    } else {
-      return true;
-    }
-  };
   // Print all the barcodes shown in the menu in new window
   onClick_print_barcode = () => {
     var new_window = window.open('', 'Print Barcode', "_blank");
@@ -290,14 +271,33 @@ class ModalMenu extends React.Component {
     }
     return data;
   };
+  complete_and_check_data = (data) => {
+    return new Promise((resolve, reject) => {
+      let result;
+      if (this.state.menu_type == "create_location") {
+        // Complete the end values if they're blank
+        data.bay_end = data.bay_end ? data.bay_end : data.bay_start;
+        data.level_end = data.level_end ? data.level_end : data.level_start;
+        data.row_end = data.row_end ? data.row_end : data.row_start;
+        data.shelf_end = data.shelf_end ? data.shelf_end : data.shelf_start;
+  
+        // Check that the end values are greater than then start values
+        result = !(parseInt(data.bay_start) > parseInt(data.bay_end) || 
+            parseInt(data.level_start) > parseInt(data.level_end) ||
+            parseInt(data.row_start) > parseInt(data.row_end) || 
+            parseInt(data.shelf_start) > parseInt(data.shelf_end));
+        resolve(result);
+      } else {
+        resolve(true);
+      }
+    });
+    
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
     var data = this.get_data();
 
-    var result = this.complete_and_check_data(data);
-    if (result) {
-      if (this.state.submit_handler) {
         this.state.submit_handler(data);  
       }
       $("#modalMenu").modal("hide");
