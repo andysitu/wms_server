@@ -44,7 +44,7 @@ public class ItemSku {
     @Getter private String sku;
 
     public void setSku(String sku) {
-        sku = sku.replaceAll("\\s", "");
+        sku = sku.replaceAll("\\s", "").toLowerCase();
         this.sku = sku;
     }
 
