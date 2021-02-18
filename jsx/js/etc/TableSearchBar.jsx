@@ -6,7 +6,7 @@ export {
  * Parameters:
  *  Props
   *  onSearch: onClick method,
-  *  search_type : "item_info"
+  *  search_type : "item_info", "item_receive", "item_inventory"
  */
 class TableSearchBar extends React.Component {
   constructor(props) {
