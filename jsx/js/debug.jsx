@@ -194,9 +194,19 @@ class DebugApp extends React.Component {
               window.alert("There are no itemReceives");
               return;
             }
-            // Continue finding itemInfo until it has an SKU
-            const index = Math.floor(Math.random() * itemreceives.length);
-            const itemReceive = itemreceives[index];
+            let itemReceive, index;
+            // Continue finding itemReceive until quantity > 0
+            for (let i=0; i< 20; i++) {
+              index = Math.floor(Math.random() * itemreceives.length);
+              itemReceive = itemreceives[index];
+              if (itemReceive.quantity > 0)
+                break;
+            }
+            if (itemReceive.quantity == 0) {
+              window.alert("Create an item receive with quantity > 0");
+              return;
+            }
+            
             let data = {
               locationCode: locationCode,
               quantity: Math.floor(Math.random() * itemReceive.quantity) + 1,
@@ -214,7 +224,6 @@ class DebugApp extends React.Component {
         });
       }
     });
-    
   };
 
   render() {
