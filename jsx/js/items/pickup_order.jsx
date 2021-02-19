@@ -67,7 +67,7 @@ class PickupOrderApp extends React.Component {
     });
   };
 
-  createPickupItems = () => {
+  createPickupItemsTbody = () => {
     if (this.state.selectedOrderIndex == -1) {
       return (<tbody></tbody>);
     } else {
@@ -75,7 +75,8 @@ class PickupOrderApp extends React.Component {
       return (<tbody>
         {items.map((itemOrder, index) => {
           return (
-            <tr key={"pickup-items-" + itemOrder.id}>
+            // IDs don't exist since the items are combined by location & sku
+            <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
               <td>{itemOrder.itemSku}</td>
               <td>{itemOrder.itemDescription}</td>
@@ -230,7 +231,7 @@ class PickupOrderApp extends React.Component {
                 <th scope="col">Location</th>
               </tr>
             </thead>
-            {this.createPickupItems()}
+            {this.createPickupItemsTbody()}
           </table>
         </div>
       </div>
