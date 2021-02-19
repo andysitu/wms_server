@@ -227,22 +227,29 @@ class DebugApp extends React.Component {
   };
 
   render() {
-    return (<div>
+    return (
     <div>
-      <button type="button"
-        onClick={this.createWarehouseLocations}>Create Warehouse + Locations</button>
-      </div>
       <div>
-        <button type="button" onClick={this.viewLocations}>View Locations</button>
-      </div>
-      <div>
-        <button type="button" onClick={this.createDummyItemInfos}>Create 5 ItemInfos</button>
-      </div>      
-      <div>
-        <button type="button" onClick={this.createDummyItemReceive}>Create 5 ItemReceives</button>
-      </div>
-      <div>
-        <button type="button" onClick={this.createDummyItemInventory}>Create Item Inventory</button>
+        <p>
+          <button type="button" onClick={this.createWarehouseLocations}
+            className="btn btm- btn-outline-primary">Create Warehouse + Locations</button>
+          </p>
+        <p>
+          <button type="button" onClick={this.viewLocations}
+            className="btn btn-outline-primary" >View Locations</button>
+        </p>
+        <p>
+          <button type="button" onClick={this.createDummyItemInfos}
+          className="btn btn-outline-primary">Create 5 ItemInfos</button>
+        </p>      
+        <p>
+          <button type="button" onClick={this.createDummyItemReceive}
+            className="btn btn-outline-primary">Create 5 ItemReceives</button>
+        </p>
+        <p>
+          <button type="button" onClick={this.createDummyItemInventory}
+            className="btn btn-outline-primary">Create Item Inventory</button>
+        </p>
       </div>
     </div>)
   }
