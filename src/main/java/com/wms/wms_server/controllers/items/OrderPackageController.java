@@ -77,4 +77,9 @@ public class OrderPackageController {
     public String viewPickupOrder() {
         return "items/pickup_order";
     }
+
+    @GetMapping("/ship_order")
+    public String viewShipOrder() {
+        return "items/ship_order";
+    }
 }
