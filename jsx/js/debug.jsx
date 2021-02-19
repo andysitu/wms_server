@@ -276,6 +276,17 @@ class DebugApp extends React.Component {
     });
   };
 
+  pickupOrder = () => {
+    $.ajax({
+      url: "/orderpackages?type=open",
+      type: "GET",
+      context: this,
+      success: function(orders) {
+        console.log(orders);
+      }
+    });
+  };
+
   render() {
     return (
     <div>
@@ -303,6 +314,10 @@ class DebugApp extends React.Component {
         <p>
           <button type="button" onClick={this.createDummyItemOrder}
             className="btn btn-outline-primary">Create Order</button>
+        </p>
+        <p>
+          <button type="button" onClick={this.pickupOrder}
+            className="btn btn-outline-primary">Pickup Order</button>
         </p>
       </div>
     </div>);
