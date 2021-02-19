@@ -226,6 +226,56 @@ class DebugApp extends React.Component {
     });
   };
 
+  createDummyItemOrder = () => {
+    $.ajax({
+      url: "/iteminventory",
+      type: "GET",
+      context: this,
+      success: function(items) {
+        console.log(items);
+        // Random # of items to select
+        const num = Math.floor(Math.random() * items.length)+1;
+        const idSet = new Set();
+        let count = 0, index;
+        let ids = [],
+            quantities = [];
+        while (count < num) {
+          index = Math.floor(Math.random() * items.length);
+          if (!idSet.has(items[index].id)) {
+            count++;
+            ids.push(items[index].id);
+            quantities.push(Math.floor(Math.random() * items[index].quantity) + 1);
+            idSet.add(items[index].id);
+          }
+        }
+        const data = {
+          itemIds: ids,
+          quantities: quantities,
+          orderName: this.getRandomLetters(5),
+          description: this.getRandomLetters(10),
+          contactName: this.getRandomLetters(8),
+          companyName: this.getRandomLetters(8),
+          address1: this.getRandomLetters(10),
+          address2: this.getRandomLetters(5),
+          city: this.getRandomLetters(5),
+          state: this.getRandomLetters(2),
+          zip: this.getRandomInt(5),
+          transportName: this.getRandomLetters(8),
+        };
+        $.ajax({
+          url: "/orderpackage",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function(order) {
+            console.log(order)
+            window.alert("done");
+          }
+        });
+      }
+    });
+  };
+
   render() {
     return (
     <div>
@@ -250,8 +300,12 @@ class DebugApp extends React.Component {
           <button type="button" onClick={this.createDummyItemInventory}
             className="btn btn-outline-primary">Create Item Inventory</button>
         </p>
+        <p>
+          <button type="button" onClick={this.createDummyItemOrder}
+            className="btn btn-outline-primary">Create Order</button>
+        </p>
       </div>
-    </div>)
+    </div>);
   }
 }
 
