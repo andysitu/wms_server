@@ -146,6 +146,7 @@ class DebugApp extends React.Component {
               }
             }
             if (itemSku == null) {
+              window.alert("Need items with sku created");
               return;
             }
             // console.log(iteminfos[index]);
@@ -171,6 +172,51 @@ class DebugApp extends React.Component {
     });
   };
 
+  createDummyItemInventory = () => {
+    $.ajax({
+      type: "GET",
+      url: "/locations",
+      success: function(locations) {
+        if (locations.length == 0) {
+          window.alert("There are you locations");
+          return;
+        }
+        const locationCode = locations[
+          Math.floor(Math.random() * locations.length)
+        ].locationCode;
+
+        $.ajax({
+          url: "/itemreceive",
+          type: "GET",
+          context: this,
+          success: function(itemreceives) {
+            if (itemreceives.length == 0) {
+              window.alert("There are no itemReceives");
+              return;
+            }
+            // Continue finding itemInfo until it has an SKU
+            const index = Math.floor(Math.random() * itemreceives.length);
+            const itemReceive = itemreceives[index];
+            let data = {
+              locationCode: locationCode,
+              quantity: Math.floor(Math.random() * itemReceive.quantity) + 1,
+              itemReceiveId: itemReceive.id,
+            };
+            $.ajax({
+              url: "/iteminventory",
+              type: "POST",
+              data: data,
+              success: function() {
+                window.alert("done");
+              }
+            });
+          }
+        });
+      }
+    });
+    
+  };
+
   render() {
     return (<div>
     <div>
@@ -185,6 +231,9 @@ class DebugApp extends React.Component {
       </div>      
       <div>
         <button type="button" onClick={this.createDummyItemReceive}>Create 5 ItemReceives</button>
+      </div>
+      <div>
+        <button type="button" onClick={this.createDummyItemInventory}>Create Item Inventory</button>
       </div>
     </div>)
   }
