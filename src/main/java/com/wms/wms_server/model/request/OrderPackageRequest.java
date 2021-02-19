@@ -3,7 +3,6 @@ package com.wms.wms_server.model.request;
 public class OrderPackageRequest {
     public int[] quantities;
     public long[] itemIds;
-    public int test;
     public String orderName;
     public String description;
 
@@ -21,8 +20,7 @@ public class OrderPackageRequest {
         itemIds = new long[1];
     }
 
-    OrderPackageRequest(long[] itemIds, int test) {
+    OrderPackageRequest(long[] itemIds) {
         this.itemIds = itemIds;
-        this.test = test;
     }
 }
