@@ -139,7 +139,10 @@ public class OrderPackageService {
     public List<OrderPackageResponse> getOrderResponses(String type) {
         List<OrderPackageResponse> orderPackageResponses = new ArrayList<>();
         List<OrderPackage> orders;
-        if (type.equals("open")) {
+        if (type == null) {
+            orders = orderPackageRepository.findAll();
+        }
+        else if (type.equals("open")) {
             orders = orderPackageRepository.findByComplete(0);
         } else {
             return orderPackageResponses;
