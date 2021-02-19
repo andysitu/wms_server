@@ -27,7 +27,7 @@ public class OrderPackageController {
     @Autowired
     OrderPackageService orderPackageService;
 
-    @RequestMapping(value="/orderpackage", consumes = "application/json", 
+    @RequestMapping(value="/orderpackages", consumes = "application/json", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
     public ResponseEntity createOrderPackage(

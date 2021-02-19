@@ -25,7 +25,7 @@ class CreateOrderApp extends React.Component {
         data.itemIds = items;
         data.quantities = quantities;
         $.ajax({
-          url: "/orderpackage",
+          url: "/orderpackages",
           type: "POST",
           context: this,
           contentType: "application/json",

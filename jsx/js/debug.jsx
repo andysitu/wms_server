@@ -263,7 +263,7 @@ class DebugApp extends React.Component {
           transportName: this.getRandomLetters(8),
         };
         $.ajax({
-          url: "/orderpackage",
+          url: "/orderpackages",
           type: "POST",
           contentType: "application/json",
           data: JSON.stringify(data),
