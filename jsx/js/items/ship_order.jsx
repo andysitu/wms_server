@@ -19,6 +19,7 @@ class ShipOrderApp extends React.Component {
         itemsList[index].orderedQuantity += itemResponse.orderedQuantity;
         itemsList[index].startQuantity += itemResponse.startQuantity;
         itemsList[index].completeQuantity += itemResponse.completeQuantity;
+        itemsList[index].pickedQuantity += itemResponse.pickedQuantity;
       } else {
         itemIndexMap[itemSku] = itemsList.length;
         itemsList.push({
@@ -26,6 +27,7 @@ class ShipOrderApp extends React.Component {
           itemSku: itemResponse.itemInventoryResponse.itemSku,
           orderedQuantity: itemResponse.orderedQuantity,
           startQuantity: itemResponse.startQuantity,
+          pickedQuantity: itemResponse.pickedQuantity,
           completeQuantity: itemResponse.completeQuantity,
           description: itemResponse.itemInventoryResponse.itemDescription,
         });
@@ -48,6 +50,7 @@ class ShipOrderApp extends React.Component {
               <td>{itemOrder.itemSku}</td>
               <td>{itemOrder.description}</td>
               <td>{itemOrder.orderedQuantity}</td>
+              <td>{itemOrder.pickedQuantity}</td>
               <td>{itemOrder.completeQuantity}</td>
               <td>{itemOrder.startQuantity}</td>
             </tr>
@@ -144,7 +147,8 @@ class ShipOrderApp extends React.Component {
                 <th scope="col">Name</th>
                 <th scope="col">SKU</th>
                 <th scope="col">Description</th>
-                <th scope="col">Ordered Quantity</th>
+                <th scope="col">Unpicked Quantity</th>
+                <th scope="col">Picked Quantity</th>
                 <th scope="col">Completed Quantity</th>
                 <th scope="col">Total Quantity</th>
               </tr>
