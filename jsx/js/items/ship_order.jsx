@@ -3,9 +3,12 @@ class ShipOrderApp extends React.Component {
     super(props);
     this.state = {
       openOrders: [],
+      clearQuantity: false,
       selectedOrderIndex: -1,
     };
     this.loadOpenOrders();
+
+    this.itemCheckFormId = "item-check-form";
   }
 
   convertOrderItems = (order) => {
@@ -78,6 +81,14 @@ class ShipOrderApp extends React.Component {
     })
   };
 
+  onChangeClearQuantity = (e) => {
+    this.setState(state => {
+      return {
+        clearQuantity: !state.clearQuantity
+      };
+    });
+  }
+
   // Group up items by locationCode & itemSku and put combined items
   // into state.selectedItems;
   onClick_selectOrder = (e) => {
@@ -92,8 +103,13 @@ class ShipOrderApp extends React.Component {
     });
   };
 
+  onSubmit_itemCheck = (e) => {
+    e.preventDefault();
+  }
+
   render() {
     let numOpenItems, totalItems, i, trClass;
+    const disabledInput = this.state.selectedOrderIndex ==  -1;
     return (
     <div>
       <h2>Open Orders</h2>
@@ -156,6 +172,29 @@ class ShipOrderApp extends React.Component {
             {this.createPickupItemsTbody()}
           </table>
         </div>
+      </div>
+      <div>
+        <div className="form-check">
+          <input className="form-check-input" type="checkbox" 
+            onChange={this.onChangeClearQuantity} checked={this.state.clearQuantity}
+            id="clear-quantity-checkbox" disabled={disabledInput}></input>
+          <label className="form-check-label" htmlFor="clear-quantity-checkbox">
+            Clear Quantity
+          </label>
+        </div>
+        <form onSubmit={this.onSubmit_itemCheck} id={this.itemCheckFormId}>
+          <div className="form-group">
+            <label htmlFor="itemsku-input">SKU</label>
+            <input type="text" name="itemSku" className="form-control" 
+            id="itemsku-input" disabled={disabledInput} required></input>
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity-input">Quantity</label>
+            <input type="number" name="quantity" className="form-control" 
+            id="quantity-input" disabled={disabledInput} required></input>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
     );
