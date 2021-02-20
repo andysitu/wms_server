@@ -9,7 +9,7 @@ class PickupOrderApp extends React.Component {
     this.locationInputId = "location-input"
     this.orderFormId = "order-form"
   }
-
+  // Categorize items in an order by LocationCode & SKU
   convertOrderItems = (order) => {
     let itemResponses = order.itemOrderResponses;
 
