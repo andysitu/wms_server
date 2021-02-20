@@ -34,6 +34,29 @@ class ShipOrderApp extends React.Component {
     return itemsList;
   };
 
+  createPickupItemsTbody = () => {
+    if (this.state.selectedOrderIndex == -1) {
+      return (<tbody></tbody>);
+    } else {
+      const items = this.state.openOrders[this.state.selectedOrderIndex].itemsList;
+      return (<tbody>
+        {items.map((itemOrder, index) => {
+          return (
+            // IDs don't exist since the items are combined by location & sku
+            <tr key={"pickup-items-" + index}>
+              <td>{itemOrder.itemName}</td>
+              <td>{itemOrder.itemSku}</td>
+              <td>{itemOrder.description}</td>
+              <td>{itemOrder.orderedQuantity}</td>
+              <td>{itemOrder.completeQuantity}</td>
+              <td>{itemOrder.startQuantity}</td>
+            </tr>
+          );
+        })}
+      </tbody>);
+    }
+  };
+
   loadOpenOrders = () => {
     $.ajax({
       url: "/orderpackages?type=open",
@@ -52,50 +75,84 @@ class ShipOrderApp extends React.Component {
     })
   };
 
+  // Group up items by locationCode & itemSku and put combined items
+  // into state.selectedItems;
+  onClick_selectOrder = (e) => {
+    this.setState(state =>{
+      const selectedIndex = parseInt(e.target.value);      
+      return {
+        selectedOrderIndex: parseInt(selectedIndex),
+      };
+    }, 
+    ()=> {
+      $("#" + this.locationInputId).focus();
+    });
+  };
+
   render() {
     let numOpenItems, totalItems, i, trClass;
     return (
     <div>
       Ship Order
-      <table className="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Order Name</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Transport</th>
-            <th scope="col">Unpicked Items</th>
-            <th scope="col">Total Items</th>
-            <th scope="col">Select</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.openOrders.map(((orderPackage, index) => {
-            // numOpenItems = 0;
-            // totalItems = 0;
-            // for (i=0; i<orderPackage.itemsList.length; i++) {
-            //   numOpenItems += orderPackage.itemsList[i].orderedQuantity;
-              
-            //   totalItems += orderPackage.itemsList[i].startQuantity;
-            // }
-            trClass = (index == this.state.selectedOrderIndex) ?
-              "selected" : "";
-            return (
-              <tr key={orderPackage.id} className={trClass}>
-                <td>{orderPackage.orderName}</td>
-                <td>{orderPackage.companyName}</td>
-                <td>{orderPackage.transportName}</td>
-                <td>{numOpenItems}</td>
-                <td>{totalItems}</td>
-                <td>
-                  <button type="button"
-                    value={index} onClick={this.onClick_selectOrder}
-                    className="btn btn-sm btn-outline-primary"
-                  >Select</button>
-                </td>
-              </tr>)
-          }))}
-        </tbody>
-      </table>
+      <div id="open-orders-container">
+        <table className="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Order Name</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Transport</th>
+              <th scope="col">Unpicked Items</th>
+              <th scope="col">Total Items</th>
+              <th scope="col">Select</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.openOrders.map(((orderPackage, index) => {
+              numOpenItems = 0;
+              totalItems = 0;
+              for (i=0; i<orderPackage.itemsList.length; i++) {
+                numOpenItems += orderPackage.itemsList[i].orderedQuantity;
+                
+                totalItems += orderPackage.itemsList[i].startQuantity;
+              }
+              trClass = (index == this.state.selectedOrderIndex) ?
+                "selected" : "";
+              return (
+                <tr key={orderPackage.id} className={trClass}>
+                  <td>{orderPackage.orderName}</td>
+                  <td>{orderPackage.companyName}</td>
+                  <td>{orderPackage.transportName}</td>
+                  <td>{numOpenItems}</td>
+                  <td>{totalItems}</td>
+                  <td>
+                    <button type="button"
+                      value={index} onClick={this.onClick_selectOrder}
+                      className="btn btn-sm btn-outline-primary"
+                    >Select</button>
+                  </td>
+                </tr>)
+            }))}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2>Pickup Items</h2>
+        <div id="pickup-items-container">
+          <table className="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Description</th>
+                <th scope="col">Ordered Quantity</th>
+                <th scope="col">Completed Quantity</th>
+                <th scope="col">Total Quantity</th>
+              </tr>
+            </thead>
+            {this.createPickupItemsTbody()}
+          </table>
+        </div>
+      </div>
     </div>
     );
   }
