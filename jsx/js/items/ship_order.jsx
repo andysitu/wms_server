@@ -93,7 +93,7 @@ class ShipOrderApp extends React.Component {
     let numOpenItems, totalItems, i, trClass;
     return (
     <div>
-      Ship Order
+      <h2>Open Orders</h2>
       <div id="open-orders-container">
         <table className="table table-sm">
           <thead>
@@ -136,7 +136,7 @@ class ShipOrderApp extends React.Component {
         </table>
       </div>
       <div>
-        <h2>Pickup Items</h2>
+        <h2>Items in Order</h2>
         <div id="pickup-items-container">
           <table className="table table-sm">
             <thead>
