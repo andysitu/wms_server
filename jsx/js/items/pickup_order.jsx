@@ -79,7 +79,7 @@ class PickupOrderApp extends React.Component {
             <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
               <td>{itemOrder.itemSku}</td>
-              <td>{itemOrder.itemDescription}</td>
+              <td>{itemOrder.description}</td>
               <td>{itemOrder.orderedQuantity}</td>
               <td>{itemOrder.locationCode}</td>
             </tr>
