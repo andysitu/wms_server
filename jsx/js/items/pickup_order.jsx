@@ -90,7 +90,7 @@ class PickupOrderApp extends React.Component {
   };
 
   // Check there are that many total items reserved at the location
-  checkItemQuantity = (data) => {
+  checkItem = (data) => {
     const items = this.state.orders[this.state.selectedOrderIndex].itemsList;
     for (let i=0, item; i<items.length; i++) {
       item = items[i];
@@ -150,7 +150,7 @@ class PickupOrderApp extends React.Component {
   onSubmit_order = (e) => {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
-    if (this.checkItemQuantity(data)) {
+    if (this.checkItem(data)) {
       console.log(data);
       const order_id = this.state.orders[this.state.selectedOrderIndex].id;
       data.orderPackageId = order_id;
@@ -250,8 +250,8 @@ class PickupOrderApp extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="quantity-input">Quantity</label>
-            <input type="number" name="quantity" className="form-control" 
-            id="quantity-input" disabled={disabledInput} required></input>
+            <input type="number" name="quantity" className="form-control"
+              min="1" id="quantity-input" disabled={disabledInput} required></input>
           </div>
 
           <button type="submit">Submit</button>
