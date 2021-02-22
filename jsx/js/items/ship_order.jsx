@@ -10,6 +10,7 @@ class ShipOrderApp extends React.Component {
 
     this.itemCheckFormId = "item-check-form";
     this.skuInputId = "itemsku-input";
+    this.quantityInputId = "quantity-input";
   }
 
   convertOrderItems = (order) => {
@@ -40,6 +41,18 @@ class ShipOrderApp extends React.Component {
     return itemsList;
   };
 
+  itemFormReset = () => {
+    $("#" + this.itemCheckFormId)[0].reset();
+  };
+
+  selectItem = (e) => {
+    e.preventDefault();
+    const sku = e.target.textContent;
+    this.itemFormReset();
+    $("#" + this.skuInputId).val(sku);
+    $("#" + this.quantityInputId)[0].focus();
+  };
+
   createPickupItemsTbody = () => {
     if (this.state.selectedOrderIndex == -1) {
       return (<tbody></tbody>);
@@ -53,7 +66,8 @@ class ShipOrderApp extends React.Component {
             // IDs don't exist since the items are combined by location & sku
             <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
-              <td>{itemOrder.itemSku}</td>
+              <td>
+                <a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a></td>
               <td>{itemOrder.description}</td>
               <td className={orderedQuantityClass}>{itemOrder.orderedQuantity}</td>
               <td>{itemOrder.pickedQuantity}</td>
@@ -204,11 +218,12 @@ class ShipOrderApp extends React.Component {
             id={this.skuInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
-            <label htmlFor="quantity-input">Quantity</label>
+            <label htmlFor={this.quantityInputId}>Quantity</label>
             <input type="number" name="quantity" className="form-control" 
-            id="quantity-input" disabled={disabledInput} required></input>
+            id={this.quantityInputId} disabled={disabledInput} required></input>
           </div>
           <button type="submit">Submit</button>
+          <button type="button">Clear</button>
         </form>
       </div>
     </div>
