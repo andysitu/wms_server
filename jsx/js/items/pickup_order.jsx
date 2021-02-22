@@ -68,6 +68,14 @@ class PickupOrderApp extends React.Component {
     });
   };
 
+  selectItem = (e) => {
+    e.preventDefault();
+    const sku = e.target.textContent;
+    this.itemFormReset();
+    $("#" + this.skuInputId).val(sku);
+    $("#" + this.locationInputId)[0].focus();
+  };
+
   createPickupItemsTbody = () => {
     if (this.state.selectedOrderIndex == -1) {
       return (<tbody></tbody>);
@@ -79,7 +87,9 @@ class PickupOrderApp extends React.Component {
             // IDs don't exist since the items are combined by location & sku
             <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
-              <td>{itemOrder.itemSku}</td>
+              <td>
+                <a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>
+              </td>
               <td>{itemOrder.description}</td>
               <td>{itemOrder.orderedQuantity}</td>
               <td>{itemOrder.locationCode}</td>
@@ -263,7 +273,6 @@ class PickupOrderApp extends React.Component {
           <button type="button" onClick={this.itemFormReset}>Clear</button>
         </form>
       </div>
-
     </div>      
     );
   }
