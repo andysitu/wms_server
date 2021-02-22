@@ -148,6 +148,10 @@ class PickupOrderApp extends React.Component {
     });
   };
 
+  itemFormReset = () => {
+    $("#" + this.orderFormId)[0].reset();
+  };
+
   onSubmit_order = (e) => {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
@@ -163,7 +167,7 @@ class PickupOrderApp extends React.Component {
         type: "POST",
         success: function(response) {
           this.subtractItems(data);
-          $("#" + this.orderFormId)[0].reset();
+          this.itemFormReset();
         }
       });
     } else {
@@ -256,6 +260,7 @@ class PickupOrderApp extends React.Component {
           </div>
 
           <button type="submit">Submit</button>
+          <button type="button" onClick={this.itemFormReset}>Clear</button>
         </form>
       </div>
 
