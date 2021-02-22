@@ -9,6 +9,7 @@ class ShipOrderApp extends React.Component {
     this.loadOpenOrders();
 
     this.itemCheckFormId = "item-check-form";
+    this.skuInputId = "itemsku-input";
   }
 
   convertOrderItems = (order) => {
@@ -101,7 +102,7 @@ class ShipOrderApp extends React.Component {
       };
     }, 
     ()=> {
-      $("#" + this.locationInputId).focus();
+      $("#" + this.skuInputId)[0].focus();
     });
   };
 
@@ -198,9 +199,9 @@ class ShipOrderApp extends React.Component {
         </div>
         <form onSubmit={this.onSubmit_itemCheck} id={this.itemCheckFormId}>
           <div className="form-group">
-            <label htmlFor="itemsku-input">SKU</label>
+            <label htmlFor={this.skuInputId}>SKU</label>
             <input type="text" name="itemSku" className="form-control" 
-            id="itemsku-input" disabled={disabledInput} required></input>
+            id={this.skuInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
             <label htmlFor="quantity-input">Quantity</label>
