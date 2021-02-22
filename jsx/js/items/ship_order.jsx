@@ -54,12 +54,13 @@ class ShipOrderApp extends React.Component {
     $("#" + this.quantityInputId)[0].focus();
   };
 
-  createPickupItemsTbody = () => {
+  createPickupItemsTable = () => {
+    let tbody;
     if (this.state.selectedOrderIndex == -1) {
-      return (<tbody></tbody>);
+      tbody = (<tbody></tbody>);
     } else {
       const items = this.state.openOrders[this.state.selectedOrderIndex].itemsList;
-      return (<tbody>
+      tbody = (<tbody>
         {items.map((itemOrder, index) => {
           const orderedQuantityClass = (itemOrder.orderedQuantity > 0) ?
             "warn-order" : "done-order";
@@ -81,6 +82,21 @@ class ShipOrderApp extends React.Component {
         })}
       </tbody>);
     }
+    return (
+    <table className="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">SKU</th>
+          <th scope="col">Description</th>
+          <th scope="col">Unpicked Quantity</th>
+          <th scope="col">Picked Quantity</th>
+          <th scope="col">Completed Quantity</th>
+          <th scope="col">Total Quantity</th>
+        </tr>
+      </thead>
+      {tbody}
+    </table>)
   };
 
   loadOpenOrders = () => {
@@ -189,20 +205,7 @@ class ShipOrderApp extends React.Component {
       <div>
         <h2>Items in Order</h2>
         <div id="pickup-items-container">
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Description</th>
-                <th scope="col">Unpicked Quantity</th>
-                <th scope="col">Picked Quantity</th>
-                <th scope="col">Completed Quantity</th>
-                <th scope="col">Total Quantity</th>
-              </tr>
-            </thead>
-            {this.createPickupItemsTbody()}
-          </table>
+          {this.createPickupItemsTable()}
         </div>
       </div>
       <div>
