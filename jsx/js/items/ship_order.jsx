@@ -43,6 +43,7 @@ class ShipOrderApp extends React.Component {
 
   itemFormReset = () => {
     $("#" + this.itemCheckFormId)[0].reset();
+    $("#" + this.skuInputId)[0].focus();
   };
 
   selectItem = (e) => {
@@ -203,14 +204,6 @@ class ShipOrderApp extends React.Component {
         </div>
       </div>
       <div>
-        <div className="form-check">
-          <input className="form-check-input" type="checkbox" 
-            onChange={this.onChangeClearQuantity} checked={this.state.clearQuantity}
-            id="clear-quantity-checkbox" disabled={disabledInput}></input>
-          <label className="form-check-label" htmlFor="clear-quantity-checkbox">
-            Clear Quantity
-          </label>
-        </div>
         <form onSubmit={this.onSubmit_itemCheck} id={this.itemCheckFormId}>
           <div className="form-group">
             <label htmlFor={this.skuInputId}>SKU</label>
@@ -222,8 +215,16 @@ class ShipOrderApp extends React.Component {
             <input type="number" name="quantity" className="form-control" 
             id={this.quantityInputId} disabled={disabledInput} required></input>
           </div>
-          <button type="submit">Submit</button>
-          <button type="button">Clear</button>
+          <div className="form-check">
+            <input className="form-check-input" type="checkbox" 
+              onChange={this.onChangeClearQuantity} checked={this.state.clearQuantity}
+              id="clear-quantity-checkbox" disabled={disabledInput}></input>
+            <label className="form-check-label" htmlFor="clear-quantity-checkbox">
+              Clear Quantity
+            </label>
+          </div>
+          <button className="btn btn-outline-primary" type="submit">Submit</button>
+          <button className="btn btn-outline-secondary" type="button" onClick={this.itemFormReset}>Clear</button>
         </form>
       </div>
     </div>
