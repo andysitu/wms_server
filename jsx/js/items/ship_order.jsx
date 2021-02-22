@@ -105,8 +105,20 @@ class ShipOrderApp extends React.Component {
     });
   };
 
+  getData = (formId) => {
+    var formData = new FormData($("#" + formId)[0]),
+        data = {};
+
+    for (var key of formData.keys()) {
+      data[key] = formData.get(key);
+    }
+    return data;
+  }
+
   onSubmit_itemCheck = (e) => {
     e.preventDefault();
+    const itemData = this.getData(this.itemCheckFormId);
+    console.log(itemData);
   }
 
   render() {
