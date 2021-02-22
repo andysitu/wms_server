@@ -18,11 +18,12 @@
 }
 
 .warn-order{
-    background-color:  #ff4d4d;
+    background-color: #ffcccc
+    ;
     font-weight: bold;
 }
 
 .done-order {
-    background-color:  #80ff80;
+    background-color:  #ccffcc;
     font-weight: bold;
 }
