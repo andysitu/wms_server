@@ -6,8 +6,9 @@ class PickupOrderApp extends React.Component {
       selectedOrderIndex: -1,
     }
     this.getOpenOrders();
-    this.locationInputId = "location-input"
-    this.orderFormId = "order-form"
+    this.locationInputId = "location-input";
+    this.skuInputId = "itemsku-input";
+    this.orderFormId = "order-form";
   }
   // Categorize items in an order by LocationCode & SKU
   convertOrderItems = (order) => {
@@ -110,7 +111,7 @@ class PickupOrderApp extends React.Component {
       };
     }, 
     ()=> {
-      $("#" + this.locationInputId).focus();
+      $("#" + this.skuInputId).focus();
     });
   };
 
@@ -239,9 +240,9 @@ class PickupOrderApp extends React.Component {
       <div>
         <form onSubmit={this.onSubmit_order} id={this.orderFormId}>
           <div className="form-group">
-            <label htmlFor="itemsku-input">SKU</label>
+            <label htmlFor={this.skuInputId}>SKU</label>
             <input type="text" name="itemSku" className="form-control" 
-            id="itemsku-input" disabled={disabledInput} required></input>
+            id={this.skuInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
             <label htmlFor={this.locationInputId}>Location</label>
