@@ -239,14 +239,14 @@ class PickupOrderApp extends React.Component {
       <div>
         <form onSubmit={this.onSubmit_order} id={this.orderFormId}>
           <div className="form-group">
-            <label htmlFor={this.locationInputId}>Location</label>
-            <input type="text" name="locationCode" className="form-control" 
-            id={this.locationInputId} disabled={disabledInput} required></input>
-          </div>
-          <div className="form-group">
             <label htmlFor="itemsku-input">SKU</label>
             <input type="text" name="itemSku" className="form-control" 
             id="itemsku-input" disabled={disabledInput} required></input>
+          </div>
+          <div className="form-group">
+            <label htmlFor={this.locationInputId}>Location</label>
+            <input type="text" name="locationCode" className="form-control" 
+            id={this.locationInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
             <label htmlFor="quantity-input">Quantity</label>
