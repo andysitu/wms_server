@@ -16,3 +16,13 @@
     max-height: 400px;
     overflow: auto;
 }
+
+.warn-order{
+    background-color:  #ff4d4d;
+    font-weight: bold;
+}
+
+.done-order {
+    background-color:  #80ff80;
+    font-weight: bold;
+}
