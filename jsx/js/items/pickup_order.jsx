@@ -8,6 +8,7 @@ class PickupOrderApp extends React.Component {
     this.getOpenOrders();
     this.locationInputId = "location-input";
     this.skuInputId = "itemsku-input";
+    this.quantityInputId = "quantity-input";
     this.orderFormId = "order-form";
   }
   // Categorize items in an order by LocationCode & SKU
@@ -104,14 +105,37 @@ class PickupOrderApp extends React.Component {
     }
   };
 
-  // Check there are that many total items reserved at the location
+  // Check there are enough quantity for item & that the sku & locatio is correct
+  // Notifies the user if it's incorrect and focuses on the input to be changed
   checkItem = (data) => {
     const items = this.state.orders[this.state.selectedOrderIndex].itemsList;
+    let foundItem = false, foundLocation = false;
     for (let i=0, item; i<items.length; i++) {
       item = items[i];
-      if (item.locationCode == data.locationCode && item.itemSku == data.itemSku) {
-        return parseInt(data.quantity) <= item.orderedQuantity;
+      if (item.locationCode == data.locationCode) {
+        foundLocation = true;
       }
+      if (item.itemSku == data.itemSku) {
+        foundItem = true;
+      }
+      if (item.locationCode == data.locationCode && item.itemSku == data.itemSku) {
+        if (parseInt(data.quantity) > item.orderedQuantity) {
+          window.alert(`The quantity is too large. Please choose ${
+            item.orderedQuantity} or fewer`);
+          $("#" + this.quantityInputId).select();
+        }
+        return true;
+      }
+    }
+    // Select SKU Input if sku is incorrect
+    if (!foundItem) {
+      window.alert("The SKU is incorrect");
+      $("#" + this.skuInputId).select();
+    }
+    // Reset entire form if location is incorrect (force user to redo)
+    if (!foundLocation) {
+      window.alert("The location is incorrect");
+      this.itemFormReset();
     }
     return false;
   };
@@ -170,7 +194,6 @@ class PickupOrderApp extends React.Component {
     e.preventDefault();
     const data = this.getData(this.orderFormId);
     if (this.checkItem(data)) {
-      console.log(data);
       const order_id = this.state.orders[this.state.selectedOrderIndex].id;
       data.orderPackageId = order_id;
       $.ajax({
@@ -184,8 +207,6 @@ class PickupOrderApp extends React.Component {
           this.itemFormReset();
         }
       });
-    } else {
-      window.alert("Error: item / location not found or quantity is too high");
     }
   };
 
@@ -268,9 +289,9 @@ class PickupOrderApp extends React.Component {
             id={this.locationInputId} disabled={disabledInput} required></input>
           </div>
           <div className="form-group">
-            <label htmlFor="quantity-input">Quantity</label>
+            <label htmlFor={this.quantityInputId}>Quantity</label>
             <input type="number" name="quantity" className="form-control"
-              min="1" id="quantity-input" disabled={disabledInput} required></input>
+              min="1" id={this.quantityInputId} disabled={disabledInput} required></input>
           </div>
 
           <button type="submit">Submit</button>
