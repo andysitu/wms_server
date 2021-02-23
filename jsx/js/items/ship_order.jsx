@@ -200,6 +200,16 @@ class ShipOrderApp extends React.Component {
         openOrders: newOpenOrders,
       };
     });
+  };
+
+  createShipment = () => {
+    if (this.state.selectedOrderIndex < 0) {
+      return;
+    }
+    const result = window.confirm("Are you sure you want to create a shipment?");
+    if (result) {
+      console.log(this.state.openOrders[this.state.selectedOrderIndex].itemsList);
+    }
   }
 
   render() {
@@ -250,7 +260,12 @@ class ShipOrderApp extends React.Component {
         </table>
       </div>
       <div>
-        <h2>Items in Order</h2>
+        <h2>
+          Items in Order
+          <button className="btn btn-outline-primary"
+            id="ship-order-btn" onClick={this.createShipment}
+            type="button">Create Shipment</button>
+        </h2>
         <div id="pickup-items-container">
           {this.createPickupItemsTable()}
         </div>
