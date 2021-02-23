@@ -71,13 +71,18 @@ class ShipOrderApp extends React.Component {
             <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
               <td>
-                <a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a></td>
-              <td>{itemOrder.description}</td>
-              <td className={orderedQuantityClass}>{itemOrder.orderedQuantity}</td>
-              <td className={pickedQuantityClass}>{itemOrder.pickedQuantity}</td>
+                <a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>
+                </td>
+              <td className={orderedQuantityClass}>
+                {itemOrder.orderedQuantity}
+              </td>
+              <td className={pickedQuantityClass}>
+                {itemOrder.pickedQuantity}
+              </td>
               <td>{itemOrder.shippingQuantity}</td>
               <td>{itemOrder.completeQuantity}</td>
               <td>{itemOrder.startQuantity}</td>
+              <td>{itemOrder.description}</td>
             </tr>
           );
         })}
@@ -89,12 +94,12 @@ class ShipOrderApp extends React.Component {
         <tr>
           <th scope="col">Name</th>
           <th scope="col">SKU</th>
-          <th scope="col">Description</th>
           <th scope="col">Unpicked</th>
           <th scope="col">Picked</th>
           <th scope="col">Shipping</th>
           <th scope="col">Completed</th>
           <th scope="col">Total Quantity</th>
+          <th scope="col">Description</th>
         </tr>
       </thead>
       {tbody}
@@ -180,7 +185,19 @@ class ShipOrderApp extends React.Component {
       $("#" + this.quantityInputId).select();
       return;
     }
-    console.log(itemData);
+    this.setState(state => {
+      const selectedIndex = state.selectedOrderIndex;
+      let newOpenOrders = [...state.openOrders];
+      newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
+      newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
+
+      newOpenOrders[selectedIndex].itemsList[index].shippingQuantity = itemData.quantity;
+      
+      this.itemFormReset();
+      return {
+        openOrders: newOpenOrders,
+      };
+    });
   }
 
   render() {
