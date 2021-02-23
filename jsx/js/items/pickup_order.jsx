@@ -188,6 +188,7 @@ class PickupOrderApp extends React.Component {
 
   itemFormReset = () => {
     $("#" + this.orderFormId)[0].reset();
+    $("#" + this.skuInputId)[0].focus();
   };
 
   onSubmit_order = (e) => {
