@@ -162,6 +162,24 @@ class ShipOrderApp extends React.Component {
   onSubmit_itemCheck = (e) => {
     e.preventDefault();
     const itemData = this.getData(this.itemCheckFormId);
+    let itemsList = this.state.openOrders[this.state.selectedOrderIndex].itemsList,
+        index = -1;
+    for (let i=0; i<itemsList.length; i++) {
+      if (itemsList[i].itemSku == itemData.itemSku) {
+        index = i;
+        break;
+      }
+    }
+    if (index == -1) {
+      window.alert("An incorrect item SKU was entered.");
+      $("#" + this.skuInputId).select();
+      return;
+    }
+    if (itemsList[index].pickedQuantity < itemData.quantity) {
+      window.alert("The quantity is too large.");
+      $("#" + this.quantityInputId).select();
+      return;
+    }
     console.log(itemData);
   }
 
