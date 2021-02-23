@@ -64,8 +64,9 @@ class ShipOrderApp extends React.Component {
         {items.map((itemOrder, index) => {
           const orderedQuantityClass = (itemOrder.orderedQuantity > 0) ?
             "warn-order" : "done-order";
-          const pickedQuantityClass = (itemOrder.pickedQuantity > 0) ?
-          "warn-order" : "done-order";
+          const pickedQuantityClass = (
+            itemOrder.pickedQuantity - itemOrder.shippingQuantity > 0) ?
+            "warn-order" : "done-order";
           return (
             // IDs don't exist since the items are combined by location & sku
             <tr key={"pickup-items-" + index}>
