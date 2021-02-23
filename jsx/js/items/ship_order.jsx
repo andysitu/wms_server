@@ -75,6 +75,7 @@ class ShipOrderApp extends React.Component {
               <td>{itemOrder.description}</td>
               <td className={orderedQuantityClass}>{itemOrder.orderedQuantity}</td>
               <td className={pickedQuantityClass}>{itemOrder.pickedQuantity}</td>
+              <td>{itemOrder.shippingQuantity}</td>
               <td>{itemOrder.completeQuantity}</td>
               <td>{itemOrder.startQuantity}</td>
             </tr>
@@ -89,9 +90,10 @@ class ShipOrderApp extends React.Component {
           <th scope="col">Name</th>
           <th scope="col">SKU</th>
           <th scope="col">Description</th>
-          <th scope="col">Unpicked Quantity</th>
-          <th scope="col">Picked Quantity</th>
-          <th scope="col">Completed Quantity</th>
+          <th scope="col">Unpicked</th>
+          <th scope="col">Picked</th>
+          <th scope="col">Shipping</th>
+          <th scope="col">Completed</th>
           <th scope="col">Total Quantity</th>
         </tr>
       </thead>
@@ -129,9 +131,17 @@ class ShipOrderApp extends React.Component {
   // into state.selectedItems;
   onClick_selectOrder = (e) => {
     this.setState(state =>{
-      const selectedIndex = parseInt(e.target.value);      
+      const selectedIndex = parseInt(e.target.value);
+      let newOpenOrders = [...state.openOrders];
+      newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
+      newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
+      const itemsList = newOpenOrders[selectedIndex].itemsList;
+      for (let i=0; i<itemsList.length; i++) {
+        itemsList[i].shippingQuantity = 0;
+      }
       return {
         selectedOrderIndex: parseInt(selectedIndex),
+        openOrders: newOpenOrders,
       };
     }, 
     ()=> {
