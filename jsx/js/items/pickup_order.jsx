@@ -83,12 +83,16 @@ class PickupOrderApp extends React.Component {
       const items = this.state.orders[this.state.selectedOrderIndex].itemsList;
       return (<tbody>
         {items.map((itemOrder, index) => {
+          const pickedRemaining = itemOrder.orderedQuantity > 0;
           return (
             // IDs don't exist since the items are combined by location & sku
             <tr key={"pickup-items-" + index}>
               <td>{itemOrder.itemName}</td>
               <td>
-                <a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>
+                { pickedRemaining ?
+                (<a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>) :
+                itemOrder.itemSku
+                }
               </td>
               <td>{itemOrder.description}</td>
               <td>{itemOrder.orderedQuantity}</td>
