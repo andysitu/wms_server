@@ -211,14 +211,24 @@ class ShipOrderApp extends React.Component {
     if (this.state.selectedOrderIndex < 0) {
       return;
     }
+    let data = {...this.state.openOrders[this.state.selectedOrderIndex]};
+    let items = [], item;
+    for (let i=0; i<data.itemsList.length; i++) {
+      item = data.itemsList[i];
+      if (item.shippingQuantity > 0) {
+        items.push(item);
+      }
+    }
+    data.shippedItems = items;
+
     const result = window.confirm("Are you sure you want to create a shipment?");
     if (result) {
-      console.log(this.state.openOrders[this.state.selectedOrderIndex].itemsList);
+      console.log(data);
       this.modalmenu.current.show_menu(
         "shipOrder",
-        this.state.openOrders[this.state.selectedOrderIndex],
-        (data) => {
-          console.log(data);
+        data,
+        (submitData) => {
+          console.log(submitData);
         }
       );
     }
