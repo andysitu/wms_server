@@ -132,8 +132,9 @@ class ModalMenu extends React.Component {
     } else if (this.state.menu_type == "create_warehouse" ||
         this.state.menu_type == "edit_warehouse") {
       return (<WarehouseMenu menu_type={this.state.menu_type} data={this.state.data}/>)
-    } else if (this.state.menu_type == "createItemorder") {
-      return (<OrderMenu />);
+    } else if (this.state.menu_type == "createItemorder" || 
+        this.state.menu_type == "shipOrder") {
+      return (<OrderMenu menu_type={this.state.menu_type} data={this.state.data} />);
     } else {
       return ;
     }
