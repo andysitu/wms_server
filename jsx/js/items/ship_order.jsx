@@ -198,7 +198,7 @@ class ShipOrderApp extends React.Component {
       newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
       newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
 
-      newOpenOrders[selectedIndex].itemsList[index].shippingQuantity = itemData.quantity;
+      newOpenOrders[selectedIndex].itemsList[index].shippingQuantity = parseInt(itemData.quantity);
       
       this.itemFormReset();
       return {
