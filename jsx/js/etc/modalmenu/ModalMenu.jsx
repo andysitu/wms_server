@@ -26,6 +26,12 @@ class ModalMenu extends React.Component {
     return strings.join(" ");
   }
   
+  /**
+   * Main function to show the modal menu.
+   * @param {String} menu_type 
+   * @param {Object} data Object of specific data to pass onto the menu
+   * @param {*} submit_handler Submit handler given menu data in 1st arg
+   */
   show_menu = (menu_type, data, submit_handler=null) => {
     // Create a blank form to reset it, and then create actual menu
     this.setState({
@@ -48,13 +54,17 @@ class ModalMenu extends React.Component {
     });
   };
 
+  /**
+   * Set menu type to none which creates a blank modal menu for subsequent runs
+   */
   componentDidMount() {
-    // Blank out menu when it's hidden
     $("#modalMenu").on("hidden.bs.modal", () => {
       this.setState({menu_type: "none", data: {}});
     });
   }
-  // Print all the barcodes shown in the menu in new window
+  /**
+   * Print all the barcodes shown in the menu in new window
+   */
   onClick_print_barcode = () => {
     var new_window = window.open('', 'Print Barcode', "_blank");
     new_window.document.write('<html><head><title>Print</title></head><body>');
@@ -64,7 +74,9 @@ class ModalMenu extends React.Component {
     new_window.close();
     // new_window.onload = function() {window.print();}
   }
-  // Save multiple barcodes into png file
+  /**
+   * Save multiple barcodes into png file
+   */
   onClick_save_barcode = () => {
     let imgs = document.getElementsByClassName("barcode-img");
     var link, index;
@@ -144,6 +156,10 @@ class ModalMenu extends React.Component {
       </div>);
   };
 
+  /**
+   * Creates the menu element that is run by render(). The menu type is 
+   * defined by state.menu_type.
+   */
   create_menu = () => {
     if (this.state.menu_type == "none") {
       return (<div></div>);
@@ -189,6 +205,9 @@ class ModalMenu extends React.Component {
     }
   };
 
+  /**
+   * Gets the form/ modal menu data and then returns in as an object.
+   */
   get_data = () => {
     var data = {};
     if (this.state.additional_data) {
