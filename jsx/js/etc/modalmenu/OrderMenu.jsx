@@ -6,6 +6,7 @@ class OrderMenu extends React.Component {
   }
 
   createItemOrder() {
+    console.log(this.props.data);
     const shipStatus = this.props.menu_type == "shipOrder";
     const orderName = shipStatus ? this.props.data.orderName : "",
           description = shipStatus ? this.props.data.description : "",
@@ -83,6 +84,30 @@ class OrderMenu extends React.Component {
             <input type="text" name="transportName" id="mm-transport-input" 
               defaultValue={transportName} className="form-control" required />
           </div>
+        </div>
+
+        <div>
+          <div>Items</div>
+          <table className="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.data.shippedItems.map((item, index) => {
+                return (<tr key={item.id}>
+                  <td>{item.itemName}</td>
+                  <td>{item.itemSku}</td>
+                  <td>{item.description}</td>
+                  <td>{item.shippingQuantity}</td>
+                </tr>);
+              })}
+            </tbody>
+          </table>
         </div>
       </div>);
   }
