@@ -260,6 +260,7 @@ class DebugApp extends React.Component {
           city: this.getRandomLetters(5),
           state: this.getRandomLetters(2),
           zip: this.getRandomInt(5),
+          phone: this.getRandomInt(9),
           transportName: this.getRandomLetters(8),
         };
         $.ajax({
