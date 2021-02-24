@@ -1,3 +1,5 @@
+import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
+
 class ShipOrderApp extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,8 @@ class ShipOrderApp extends React.Component {
     this.itemCheckFormId = "item-check-form";
     this.skuInputId = "itemsku-input";
     this.quantityInputId = "quantity-input";
+
+    this.modalmenu = React.createRef();
   }
 
   convertOrderItems = (order) => {
@@ -146,6 +150,7 @@ class ShipOrderApp extends React.Component {
       for (let i=0; i<itemsList.length; i++) {
         itemsList[i].shippingQuantity = 0;
       }
+      console.log(newOpenOrders[selectedIndex])
       return {
         selectedOrderIndex: parseInt(selectedIndex),
         openOrders: newOpenOrders,
@@ -209,6 +214,13 @@ class ShipOrderApp extends React.Component {
     const result = window.confirm("Are you sure you want to create a shipment?");
     if (result) {
       console.log(this.state.openOrders[this.state.selectedOrderIndex].itemsList);
+      this.modalmenu.current.show_menu(
+        "shipOrder",
+        this.state.openOrders[this.state.selectedOrderIndex],
+        (data) => {
+          console.log(data);
+        }
+      );
     }
   }
 
@@ -294,6 +306,8 @@ class ShipOrderApp extends React.Component {
           <button className="btn btn-outline-secondary" type="button" onClick={this.itemFormReset}>Clear</button>
         </form>
       </div>
+
+      <ModalMenu ref={this.modalmenu} />
     </div>
     );
   }
