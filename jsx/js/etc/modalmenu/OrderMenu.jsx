@@ -5,6 +5,7 @@ class OrderMenu extends React.Component {
     super(props);
     this.state = {
       warehouses: [],
+      // Warehouse option selected
       selectedWarehouseId: null,
     }
     this.getWarehouses();
@@ -16,6 +17,8 @@ class OrderMenu extends React.Component {
       type: "GET",
       context: this,
       success: function(warehouses) {
+        // Check if warehouse Id settings is set under localstorage &
+        // set to state.selectedWarehouseId if so
         const wId = storage_obj.getWarehouseId()
         let found = false;
         for (let i=0; i< warehouses.length; i++) {
@@ -32,8 +35,8 @@ class OrderMenu extends React.Component {
     });
   };
 
-  createItemOrder() {
-    console.log(this.props.data);
+  // Item order 
+  CreateReceiverMenu() {
     const shipStatus = this.props.menu_type == "shipOrder";
     const orderName = shipStatus ? this.props.data.orderName : "",
           description = shipStatus ? this.props.data.description : "",
@@ -112,67 +115,73 @@ class OrderMenu extends React.Component {
               defaultValue={transportName} className="form-control" required />
           </div>
         </div>
-
-        <div>
-          <div>Items</div>
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.data.shippedItems.map((item, index) => {
-                return (<tr key={item.id}>
-                  <td>{item.itemName}</td>
-                  <td>{item.itemSku}</td>
-                  <td>{item.description}</td>
-                  <td>{item.shippingQuantity}</td>
-                </tr>);
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="mm-warehouse-select">Warehouse</label>
-          <select className="form-control" id="mm-warehouse-select" 
-              defaultValue={this.state.selectedWarehouseId}>
-            {this.state.warehouses.map(warehouse=> {
-              return (<option value={warehouse.id} key={warehouse.id}>
-                {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
-              </option>)
-            })}
-          </select>
-        </div>
-
-        <div>
-          Shipment
-          <div className="form-row">
-            <div className="form-group col-md-4">
-              <label htmlFor="ship-type-select">Shipment Type</label>
-              <select id="ship-type-select" className="form-control">
-                <option value="pallets">Pallets</option>
-                <option value="packages">Packages</option>
-              </select>
-            </div>
-            <div className="form-group col-md-4">
-              <label htmlFor="mm-desc-input">Shipment Amount</label>
-              <input type="number" name="shipment-amount" id="mm-desc-input" 
-                min="1" className="form-control" required />
-            </div>
-          </div>
-        </div>
       </div>);
   }
+
+  createShipmentMenu = () => {
+    return (
+    <div>
+      <div>
+        <div>Items</div>
+        <table className="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">SKU</th>
+              <th scope="col">Description</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.data.shippedItems.map((item, index) => {
+              return (<tr key={item.id}>
+                <td>{item.itemName}</td>
+                <td>{item.itemSku}</td>
+                <td>{item.description}</td>
+                <td>{item.shippingQuantity}</td>
+              </tr>);
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="mm-warehouse-select">Warehouse</label>
+        <select className="form-control" id="mm-warehouse-select" 
+            defaultValue={this.state.selectedWarehouseId}>
+          {this.state.warehouses.map(warehouse=> {
+            return (<option value={warehouse.id} key={warehouse.id}>
+              {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
+            </option>)
+          })}
+        </select>
+      </div>
+
+      <div>
+        Shipment
+        <div className="form-row">
+          <div className="form-group col-md-4">
+            <label htmlFor="ship-type-select">Shipment Type</label>
+            <select id="ship-type-select" className="form-control">
+              <option value="pallets">Pallets</option>
+              <option value="packages">Packages</option>
+            </select>
+          </div>
+          <div className="form-group col-md-4">
+            <label htmlFor="mm-desc-input">Shipment Amount</label>
+            <input type="number" name="shipment-amount" id="mm-desc-input" 
+              min="1" className="form-control" required />
+          </div>
+        </div>
+      </div>
+    </div>);
+  };
 
   render() {
     return(
     <div>
-      {this.createItemOrder()}
+      {this.CreateReceiverMenu()}
+      {this.createShipmentMenu()}
     </div>)
   }
 }
