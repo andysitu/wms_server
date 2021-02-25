@@ -73,7 +73,7 @@ class ShipmentItemMenu extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.data.shippedItems.map((item, index) => {
+              {this.props.shipmentItems.map((item, index) => {
                 return (<tr key={item.id}>
                   <td>{item.itemName}</td>
                   <td>{item.itemSku}</td>
