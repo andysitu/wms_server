@@ -2,14 +2,14 @@ var storage_obj = {
   warehouse_property: "default_warehouse_id",
   itemReceive_property: "itemReceive",
   itemPutaway_property: "itemPutaway",
-  get_warehouse() {
+  getWarehouseId() {
     return window.localStorage.getItem(this.warehouse_property);
   },
-  set_warehouse(warehouse_id) {
+  setWarehouseId(warehouse_id) {
     window.localStorage.setItem(this.warehouse_property, warehouse_id);
   },
   clear_warehouse_if_id(warehouse_id) {
-    var w_id = this.get_warehouse();
+    var w_id = this.getWarehouseId();
     if (warehouse_id == w_id) {
       window.localStorage.removeItem(this.warehouse_property);
     }

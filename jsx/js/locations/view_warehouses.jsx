@@ -5,7 +5,7 @@ class WarehouseApp extends React.Component {
     super(props);
     this.state = {
       warehouses: [],
-      default_warehouse: storage_obj.get_warehouse(),
+      default_warehouse: storage_obj.getWarehouseId(),
     };
     this.load_warehouses();
     this.modalMenu = React.createRef();
@@ -99,7 +99,7 @@ class WarehouseApp extends React.Component {
   };
   onClick_set_default_warehouse = (e) => {
     var warehouse_id = e.target.getAttribute('warehouse_id');
-    storage_obj.set_warehouse(warehouse_id);
+    storage_obj.setWarehouseId(warehouse_id);
     this.setState({
       default_warehouse: warehouse_id,
     })
