@@ -327,19 +327,18 @@ class ShipOrderApp extends React.Component {
   };
 
   render() {
-    let orderMenu;
     if (this.state.mode == "shipment") {
-      orderMenu = (<OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>)
+      return (<OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>);
+    } else {
+      return (
+        <div>
+          {this.createOpenOrdersMenu()}
+          {this.createAddItemsMenu()}
+        </div>
+        );
     }
     
-    return (
-    <div>
-      {this.createOpenOrdersMenu()}
-      {this.createAddItemsMenu()}
-
-      { orderMenu }      
-    </div>
-    );
+    
   }
 }
 
