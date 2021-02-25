@@ -222,17 +222,14 @@ class ShipOrderApp extends React.Component {
       }
     }
     data.shippedItems = items;
+    console.log("Ship Data", data);
 
     const result = window.confirm("Are you sure you want to create a shipment?");
     if (result) {
-      console.log(data);
-      this.modalmenu.current.show_menu(
-        "shipOrder",
-        data,
-        (submitData) => {
-          console.log(submitData);
-        }
-      );
+      this.setState({
+        mode: "shipment",
+        shippedData: data,
+      });
     }
   }
 
@@ -330,13 +327,17 @@ class ShipOrderApp extends React.Component {
   };
 
   render() {
+    let orderMenu;
+    if (this.state.mode == "shipment") {
+      orderMenu = (<OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>)
+    }
     
     return (
     <div>
       {this.createOpenOrdersMenu()}
       {this.createAddItemsMenu()}
 
-      {/* <ModalMenu ref={this.modalmenu} /> */}
+      { orderMenu }      
     </div>
     );
   }
