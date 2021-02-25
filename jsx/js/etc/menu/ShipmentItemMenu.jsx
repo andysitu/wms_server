@@ -106,34 +106,8 @@ class ShipmentItemMenu extends React.Component {
             })}
           </select>
         </div>
-  
-        <div>
-          Shipments
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Amount</th>
-                <th scope="col">Weight</th>
-                <th scope="col">L</th>
-                <th scope="col">W</th>
-                <th scope="col">H</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.pallets.map((p,index) => {
-                return (
-                <tr key={index}>
-                  <td>{p.amount}</td>
-                  <td>{p.weight}</td>
-                  <td>{p.length}</td>
-                  <td>{p.width}</td>
-                  <td>{p.height}</td>
-                </tr>)
-              })}
-            </tbody>
-          </table>
-  
-          <div className="form-row">
+        
+        <div className="form-row">
             <div className="form-group col-md-4">
               <label htmlFor="ship-type-select">Shipment Type</label>
               <select id="ship-type-select" className="form-control"
@@ -174,6 +148,32 @@ class ShipmentItemMenu extends React.Component {
             <button type="submit" className="btn btn-outline-primary">
               Add {this.state.shipmentType}</button>
           </form>
+  
+        <div>
+          Shipments
+          <table className="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">Weight</th>
+                <th scope="col">L</th>
+                <th scope="col">W</th>
+                <th scope="col">H</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.pallets.map((p,index) => {
+                return (
+                <tr key={index}>
+                  <td>{p.amount}</td>
+                  <td>{p.weight}</td>
+                  <td>{p.length}</td>
+                  <td>{p.width}</td>
+                  <td>{p.height}</td>
+                </tr>)
+              })}
+            </tbody>
+          </table>
         </div>
       </div>);
   }
