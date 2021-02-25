@@ -15,7 +15,8 @@ class WarehouseMenu extends React.Component {
           state       = edit_status ? this.props.data.state : "",
           zip         = edit_status ? this.props.data.zip : "",
           phone       = edit_status ? this.props.data.phone : "",
-          code        = edit_status ? this.props.data.code : "";
+          code        = edit_status ? this.props.data.code : "",
+          country     = edit_status ? this.props.data.country : "";
     return (
       <div>
         <div className="form-row">
@@ -58,12 +59,17 @@ class WarehouseMenu extends React.Component {
           </div>
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
+            <label htmlFor="mm-country-input">Country</label>
+            <input type="text" name="country" id="mm-country-input" 
+              className="form-control" defaultValue={country} />
+          </div>
+          <div className="form-group col-md-4">
             <label htmlFor="mm-phone-input">Phone</label>
             <input type="text" name="phone" id="mm-phone-input" 
               className="form-control" defaultValue={phone} />
           </div>
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
             <label htmlFor="mm-code-input">Warehouse Code</label>
             <input type="text" name="code" id="mm-code-input" 
               className="form-control" defaultValue={code} required />
