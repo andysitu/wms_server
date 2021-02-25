@@ -3,7 +3,22 @@ export { OrderMenu }
 class OrderMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      warehouses: [],
+    }
+    this.getWarehouses();
   }
+
+  getWarehouses = () => {
+    $.ajax({
+      url: "/warehouses",
+      type: "GET",
+      context: this,
+      success: function(data) {
+        this.setState({warehouses: data,});
+      }
+    });
+  };
 
   createItemOrder() {
     console.log(this.props.data);
@@ -108,6 +123,17 @@ class OrderMenu extends React.Component {
               })}
             </tbody>
           </table>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="mm-warehouse-select">Warehouse</label>
+          <select className="form-control" id="mm-warehouse-select">
+            {this.state.warehouses.map(warehouse=> {
+              return (<option value={warehouse.id} key={warehouse.id}>
+                {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
+              </option>)
+            })}
+          </select>
         </div>
 
         <div>
