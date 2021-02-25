@@ -214,7 +214,11 @@ class ShipOrderApp extends React.Component {
     if (this.state.selectedOrderIndex < 0) {
       return;
     }
-    let data = {...this.state.openOrders[this.state.selectedOrderIndex]};
+
+    const result = window.confirm("Are you sure you want to create a shipment?");
+    if (!result) 
+      return;
+    let data = this.state.openOrders[this.state.selectedOrderIndex];
     let items = [], item;
     for (let i=0; i<data.itemsList.length; i++) {
       item = data.itemsList[i];
@@ -222,16 +226,13 @@ class ShipOrderApp extends React.Component {
         items.push(item);
       }
     }
-    data.shippedItems = items;
     console.log("Ship Data", data);
+    console.log("Shipped Items", items);
 
-    const result = window.confirm("Are you sure you want to create a shipment?");
-    if (result) {
-      this.setState({
-        mode: "shipment",
-        shippedData: data,
-      });
-    }
+    this.setState({
+      mode: "shipment",
+      shipmentItems: items,
+    });
   }
 
   createOpenOrdersMenu = () => {
@@ -331,8 +332,8 @@ class ShipOrderApp extends React.Component {
     if (this.state.mode == "shipment") {
       return (
         <div>
-          <OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>
-          <ShipmentItemMenu data={this.state.shippedData}/>
+          <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
+          <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
         </div>
       );
     } else {
@@ -343,8 +344,6 @@ class ShipOrderApp extends React.Component {
         </div>
         );
     }
-    
-    
   }
 }
 
