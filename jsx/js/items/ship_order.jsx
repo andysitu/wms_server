@@ -1,5 +1,6 @@
 // import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
 import { OrderMenu } from "../etc/modalmenu/OrderMenu.js"
+import { ShipmentItemMenu } from "../etc/menu/ShipmentItemMenu.js"
 
 class ShipOrderApp extends React.Component {
   constructor(props) {
@@ -328,7 +329,12 @@ class ShipOrderApp extends React.Component {
 
   render() {
     if (this.state.mode == "shipment") {
-      return (<OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>);
+      return (
+        <div>
+          <OrderMenu menu_type={"shipOrder"} data={this.state.shippedData}/>
+          <ShipmentItemMenu data={this.state.shippedData}/>
+        </div>
+      );
     } else {
       return (
         <div>
