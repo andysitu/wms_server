@@ -32,7 +32,7 @@ public class WarehouseService {
         response.setId(warehouse.getId());
         response.setPhone(warehouse.getPhone());
         response.setCode(warehouse.getCode());
-
+        response.setCountry(warehouse.getCountry());
         return response;
     }
 
@@ -71,6 +71,9 @@ public class WarehouseService {
             }
             if (check_request(request, "code") == true) {
                 warehouse.setCode(request.getParameter("code"));
+            }
+            if (check_request(request, "country") == true) {
+                warehouse.setCountry(request.getParameter("country"));
             }
             warehouseRepository.save(warehouse);
             return warehouse;
