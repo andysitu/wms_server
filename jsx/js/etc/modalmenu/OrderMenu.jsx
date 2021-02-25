@@ -7,6 +7,9 @@ class OrderMenu extends React.Component {
       warehouses: [],
       // Warehouse option selected
       selectedWarehouseId: null,
+      shipmentType: "pallets",
+      // Packages reset when shipmentType is changed. Contains dimensions
+      packages: [],
     }
     this.getWarehouses();
   }
@@ -32,6 +35,13 @@ class OrderMenu extends React.Component {
           selectedWarehouseId: (found) ? wId : null,
         });
       }
+    });
+  };
+
+  onChange_shipmentType = (e) => {
+    this.setState({
+      shipmentType: e.target.value,
+      packages: [],
     });
   };
 
@@ -158,11 +168,12 @@ class OrderMenu extends React.Component {
       </div>
 
       <div>
-        Shipment
+        Shipments
         <div className="form-row">
           <div className="form-group col-md-4">
             <label htmlFor="ship-type-select">Shipment Type</label>
-            <select id="ship-type-select" className="form-control">
+            <select id="ship-type-select" className="form-control"
+                value={this.state.shipmentType} onChange={this.onChange_shipmentType}>
               <option value="pallets">Pallets</option>
               <option value="packages">Packages</option>
             </select>
