@@ -109,6 +109,24 @@ class OrderMenu extends React.Component {
             </tbody>
           </table>
         </div>
+
+        <div>
+          Shipment
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label htmlFor="ship-type-select">Shipment Type</label>
+              <select id="ship-type-select" className="form-control">
+                <option value="pallets">Pallets</option>
+                <option value="packages">Packages</option>
+              </select>
+            </div>
+            <div className="form-group col-md-4">
+              <label htmlFor="mm-desc-input">Shipment Amount</label>
+              <input type="number" name="shipment-amount" id="mm-desc-input" 
+                min="1" className="form-control" required />
+            </div>
+          </div>
+        </div>
       </div>);
   }
 
