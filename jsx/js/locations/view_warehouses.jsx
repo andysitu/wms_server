@@ -77,15 +77,15 @@ class WarehouseApp extends React.Component {
   };
 
   onClick_edit_warehouse = (e) => {
-    var index = e.target.getAttribute("index"),
+    let index = e.target.getAttribute("index"),
         warehouse_id = e.target.getAttribute("warehouse_id"),
         data = Object.assign({}, this.state.warehouses[index]);
         data.warehouse_id = warehouse_id;
-    this.modalMenu.current.show_menu("edit_warehouse", data, (data) => {
+    this.modalMenu.current.show_menu("edit_warehouse", data, (newData) => {
       $.ajax({
         url: "warehouses/" + warehouse_id,
         type: "PATCH",
-        data: data,
+        data: newData,
         context: this,
         success: function(new_warehouse) {
           this.setState((state) => {
