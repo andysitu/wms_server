@@ -5,16 +5,6 @@ class OrderMenu extends React.Component {
     super(props);
   }
 
-  getData = (formId) => {
-    var formData = new FormData($("#" + formId)[0]),
-        data = {};
-
-    for (var key of formData.keys()) {
-      data[key] = formData.get(key);
-    }
-    return data;
-  }
-
   // Item order 
   CreateReceiverMenu() {
     const shipStatus = this.props.menu_type == "shipOrder";
