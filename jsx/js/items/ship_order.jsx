@@ -4,6 +4,7 @@ class ShipOrderApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      mode: "orders", // "orders, items"
       openOrders: [],
       clearQuantity: false,
       selectedOrderIndex: -1,
@@ -234,9 +235,8 @@ class ShipOrderApp extends React.Component {
     }
   }
 
-  render() {
+  createOpenOrdersMenu = () => {
     let numOpenItems, totalItems, i, trClass;
-    const disabledInput = this.state.selectedOrderIndex ==  -1;
     return (
     <div>
       <h2>Open Orders</h2>
@@ -281,6 +281,14 @@ class ShipOrderApp extends React.Component {
           </tbody>
         </table>
       </div>
+    </div>
+    );
+  };
+
+  createAddItemsMenu = () => {
+    const disabledInput = this.state.selectedOrderIndex ==  -1;
+    return (
+    <div>
       <div>
         <h2>
           Items in Order
@@ -316,6 +324,16 @@ class ShipOrderApp extends React.Component {
           <button className="btn btn-outline-secondary" type="button" onClick={this.itemFormReset}>Clear</button>
         </form>
       </div>
+    </div>  
+    );
+  };
+
+  render() {
+    
+    return (
+    <div>
+      {this.createOpenOrdersMenu()}
+      {this.createAddItemsMenu()}
 
       <ModalMenu ref={this.modalmenu} />
     </div>
