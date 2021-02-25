@@ -1,10 +1,11 @@
-import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
+// import { ModalMenu } from "../etc/modalmenu/ModalMenu.js"
+import { OrderMenu } from "../etc/modalmenu/OrderMenu.js"
 
 class ShipOrderApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "orders", // "orders, items"
+      mode: "orders", // "orders, shipment"
       openOrders: [],
       clearQuantity: false,
       selectedOrderIndex: -1,
@@ -335,7 +336,7 @@ class ShipOrderApp extends React.Component {
       {this.createOpenOrdersMenu()}
       {this.createAddItemsMenu()}
 
-      <ModalMenu ref={this.modalmenu} />
+      {/* <ModalMenu ref={this.modalmenu} /> */}
     </div>
     );
   }
