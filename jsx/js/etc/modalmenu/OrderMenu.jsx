@@ -5,6 +5,7 @@ class OrderMenu extends React.Component {
     super(props);
     this.state = {
       warehouses: [],
+      selectedWarehouseId: null,
     }
     this.getWarehouses();
   }
@@ -14,8 +15,19 @@ class OrderMenu extends React.Component {
       url: "/warehouses",
       type: "GET",
       context: this,
-      success: function(data) {
-        this.setState({warehouses: data,});
+      success: function(warehouses) {
+        const wId = storage_obj.getWarehouseId()
+        let found = false;
+        for (let i=0; i< warehouses.length; i++) {
+          if (warehouses[i].id == wId) {
+            found = true;
+            break;
+          }
+        }
+        this.setState({
+          warehouses: warehouses,
+          selectedWarehouseId: (found) ? wId : null,
+        });
       }
     });
   };
@@ -127,7 +139,8 @@ class OrderMenu extends React.Component {
 
         <div className="form-group">
           <label htmlFor="mm-warehouse-select">Warehouse</label>
-          <select className="form-control" id="mm-warehouse-select">
+          <select className="form-control" id="mm-warehouse-select" 
+              defaultValue={this.state.selectedWarehouseId}>
             {this.state.warehouses.map(warehouse=> {
               return (<option value={warehouse.id} key={warehouse.id}>
                 {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
