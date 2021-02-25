@@ -178,12 +178,37 @@ class OrderMenu extends React.Component {
               <option value="packages">Packages</option>
             </select>
           </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="mm-desc-input">Shipment Amount</label>
-            <input type="number" name="shipment-amount" id="mm-desc-input" 
-              min="1" className="form-control" required />
-          </div>
         </div>
+        <form>
+          <div className="form-row">
+            <div className="form-group col-md-3">
+              <label htmlFor="mm-ship-amount">Amount</label>
+              <input type="number" name="shipmentAmount" id="mm-ship-amount" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-3">
+              <label htmlFor="mm-ship-weight">Weight</label>
+              <input type="number" name="shipmentWeight" id="mm-ship-weight" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-length">Length</label>
+              <input type="number" name="shipmentLength" id="mm-ship-length" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-width">Width</label>
+              <input type="number" name="shipmentWidth" id="mm-ship-width" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-height">Height</label>
+              <input type="number" name="shipmentHeight" id="mm-ship-height" 
+                min="1" className="form-control" required />
+            </div>
+          </div>
+          <button type="submit">Add {this.state.shipmentType}</button>
+        </form>
       </div>
     </div>);
   };
