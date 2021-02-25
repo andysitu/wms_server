@@ -109,7 +109,7 @@ class ShipmentItemMenu extends React.Component {
   
         <div>
           Shipments
-          <table>
+          <table className="table table-sm">
             <thead>
               <tr>
                 <th scope="col">Amount</th>
@@ -120,9 +120,9 @@ class ShipmentItemMenu extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.pallets.map(p => {
+              {this.state.pallets.map((p,index) => {
                 return (
-                <tr>
+                <tr key={index}>
                   <td>{p.amount}</td>
                   <td>{p.weight}</td>
                   <td>{p.length}</td>
@@ -143,7 +143,7 @@ class ShipmentItemMenu extends React.Component {
               </select>
             </div>
           </div>
-          <div id={this.packageFormId}>
+          <form id={this.packageFormId} onSubmit={this.onSubmit_createPackage}>
             <div className="form-row">
               <div className="form-group col-md-3">
                 <label htmlFor="mm-ship-amount">Amount</label>
@@ -171,9 +171,9 @@ class ShipmentItemMenu extends React.Component {
                   min="1" className="form-control" required />
               </div>
             </div>
-            <button type="submit" onClick={this.onSubmit_createPackage}>
+            <button type="submit" className="btn btn-outline-primary">
               Add {this.state.shipmentType}</button>
-          </div>
+          </form>
         </div>
       </div>);
   }
