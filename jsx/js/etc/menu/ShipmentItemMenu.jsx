@@ -94,60 +94,59 @@ class ShipmentItemMenu extends React.Component {
             </tbody>
           </table>
         </div>
-  
-        <div className="form-group">
-          <label htmlFor="mm-warehouse-select">Warehouse</label>
-          <select className="form-control" id="mm-warehouse-select" 
-              defaultValue={this.state.selectedWarehouseId}>
-            {this.state.warehouses.map(warehouse=> {
-              return (<option value={warehouse.id} key={warehouse.id}>
-                {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
-              </option>)
-            })}
-          </select>
-        </div>
-        
+
         <div className="form-row">
-            <div className="form-group col-md-4">
-              <label htmlFor="ship-type-select">Shipment Type</label>
-              <select id="ship-type-select" className="form-control"
-                  value={this.state.shipmentType} onChange={this.onChange_shipmentType}>
-                <option value="pallets">Pallets</option>
-                <option value="pallets">pallets</option>
-              </select>
+          <div className="form-group col-md-4">
+            <label htmlFor="ship-type-select">Shipment Type</label>
+            <select id="ship-type-select" className="form-control"
+                value={this.state.shipmentType} onChange={this.onChange_shipmentType}>
+              <option value="pallets">Pallets</option>
+              <option value="packages">Packages</option>
+            </select>
+          </div>
+          <div className="form-group col-md-8">
+            <label htmlFor="mm-warehouse-select">Warehouse</label>
+            <select className="form-control" id="mm-warehouse-select" 
+                defaultValue={this.state.selectedWarehouseId}>
+              {this.state.warehouses.map(warehouse=> {
+                return (<option value={warehouse.id} key={warehouse.id}>
+                  {warehouse.name} - {warehouse.code} - {warehouse.city}, {warehouse.state}
+                </option>)
+              })}
+            </select>
+          </div>
+        </div>
+        <form id={this.packageFormId} onSubmit={this.onSubmit_createPackage}>
+          <div className="form-row">
+            <div className="form-group col-md-3">
+              <label htmlFor="mm-ship-amount">Amount</label>
+              <input type="number" name="amount" id="mm-ship-amount" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-3">
+              <label htmlFor="mm-ship-weight">Weight</label>
+              <input type="number" name="weight" id="mm-ship-weight" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-length">Length</label>
+              <input type="number" name="length" id="mm-ship-length" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-width">Width</label>
+              <input type="number" name="width" id="mm-ship-width" 
+                min="1" className="form-control" required />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="mm-ship-height">Height</label>
+              <input type="number" name="height" id="mm-ship-height" 
+                min="1" className="form-control" required />
             </div>
           </div>
-          <form id={this.packageFormId} onSubmit={this.onSubmit_createPackage}>
-            <div className="form-row">
-              <div className="form-group col-md-3">
-                <label htmlFor="mm-ship-amount">Amount</label>
-                <input type="number" name="amount" id="mm-ship-amount" 
-                  min="1" className="form-control" required />
-              </div>
-              <div className="form-group col-md-3">
-                <label htmlFor="mm-ship-weight">Weight</label>
-                <input type="number" name="weight" id="mm-ship-weight" 
-                  min="1" className="form-control" required />
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="mm-ship-length">Length</label>
-                <input type="number" name="length" id="mm-ship-length" 
-                  min="1" className="form-control" required />
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="mm-ship-width">Width</label>
-                <input type="number" name="width" id="mm-ship-width" 
-                  min="1" className="form-control" required />
-              </div>
-              <div className="form-group col-md-2">
-                <label htmlFor="mm-ship-height">Height</label>
-                <input type="number" name="height" id="mm-ship-height" 
-                  min="1" className="form-control" required />
-              </div>
-            </div>
-            <button type="submit" className="btn btn-outline-primary">
-              Add {this.state.shipmentType}</button>
-          </form>
+          <button type="submit" className="btn btn-outline-primary">
+            Add {this.state.shipmentType}</button>
+        </form>
   
         <div>
           Shipments
