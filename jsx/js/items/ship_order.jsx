@@ -8,6 +8,7 @@ class ShipOrderApp extends React.Component {
     this.state = {
       mode: "orders", // "orders, shipment"
       openOrders: [],
+      shipmentItems: [],
       clearQuantity: false,
       selectedOrderIndex: -1,
     };
@@ -16,6 +17,13 @@ class ShipOrderApp extends React.Component {
     this.itemCheckFormId = "item-check-form";
     this.skuInputId = "itemsku-input";
     this.quantityInputId = "quantity-input";
+
+    // mode - orders
+    this.orderItemsId = "items-order-container";
+    this.ordersContainerId = "orders-container";
+    // mode - shipments
+    this.shipmentItemsId = "shipment-items-container"
+    this.orderMenuId = "order-menu-container";
 
     this.modalmenu = React.createRef();
   }
@@ -235,12 +243,12 @@ class ShipOrderApp extends React.Component {
     }, ()=>{
       this.setShipmentContainerHeights();
     });
-  }
+  };
 
   createOpenOrdersMenu = () => {
     let numOpenItems, totalItems, i, trClass;
     return (
-    <div>
+    <div id={this.ordersContainerId}>
       <h2>Open Orders</h2>
       <div id="open-orders-container">
         <table className="table table-sm">
@@ -290,7 +298,7 @@ class ShipOrderApp extends React.Component {
   createAddItemsMenu = () => {
     const disabledInput = this.state.selectedOrderIndex ==  -1;
     return (
-    <div>
+    <div id={this.orderItemsId}>
       <div>
         <h2>
           Items in Order
@@ -332,11 +340,16 @@ class ShipOrderApp extends React.Component {
 
   setShipmentContainerHeights = () => {
     const navbarHeight = $("#top-navbar-menu")[0].clientHeight;
-    console.log(navbarHeight);
     const h = window.innerHeight - navbarHeight;
-    console.log(h);
-    $("#shipment-items-container").height(h);
-    $("#order-menu-container").height(h);
+    if (this.state.mode == "shipments") {
+      $("#" + this.shipmentItemsId).height(h);
+      $("#" + this.orderMenuId).height(h);
+    } else {
+      $("#" + this.orderItemsId).height(parseInt(h/2));
+      $("#" + this.ordersContainerId).height(parseInt(h/2));
+    }
+  };
+
   onClick_cancelShipment = () => {
     this.setState({
       mode: "orders",
@@ -349,12 +362,14 @@ class ShipOrderApp extends React.Component {
     if (this.state.mode == "shipment") {
       return (
         <div className="row">
-          <div className="col-lg-6" id="shipment-items-container">
+          <div className="col-lg-6" id={this.shipmentItemsId}>
             <button typee="button" className="btn btn-outline-secondary"
               onClick={this.onClick_cancelShipment}>Cancel</button>
+            <button typee="button"className="btn btn-outline-primary">
+              Submit Shipment</button>
             <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
           </div>
-          <div className="col-lg-6" id="order-menu-container">
+          <div className="col-lg-6" id={this.orderMenuId}>
             <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
           </div>
         </div>
