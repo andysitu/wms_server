@@ -6,7 +6,7 @@ class ShipOrderApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "orders", // "orders, shipment"
+      mode: "orders", // "orders, items shipment"
       openOrders: [],
       shipmentItems: [],
       clearQuantity: false,
@@ -163,6 +163,7 @@ class ShipOrderApp extends React.Component {
       }
       console.log(newOpenOrders[selectedIndex])
       return {
+        mode: "items",
         selectedOrderIndex: parseInt(selectedIndex),
         openOrders: newOpenOrders,
       };
@@ -374,11 +375,16 @@ class ShipOrderApp extends React.Component {
           </div>
         </div>
       );
+    } else if (this.state.mode == "items") {
+      return (
+        <div>
+          {this.createAddItemsMenu()}
+        </div>
+      );
     } else {
       return (
         <div>
           {this.createOpenOrdersMenu()}
-          {this.createAddItemsMenu()}
         </div>
         );
     }
