@@ -127,6 +127,8 @@ public class OrderPackageService {
         response.zip = orderPackage.getZip();
         response.transportName = orderPackage.getTransportName();
         response.complete = orderPackage.getComplete();
+        response.phone = orderPackage.getPhone();
+        response.email = orderPackage.getEmail();
         return response;
     }
 
