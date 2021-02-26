@@ -337,6 +337,12 @@ class ShipOrderApp extends React.Component {
     console.log(h);
     $("#shipment-items-container").height(h);
     $("#order-menu-container").height(h);
+  onClick_cancelShipment = () => {
+    this.setState({
+      mode: "orders",
+    }, ()=>{
+      this.setShipmentContainerHeights();
+    });
   };
 
   render() {
@@ -344,6 +350,8 @@ class ShipOrderApp extends React.Component {
       return (
         <div className="row">
           <div className="col-lg-6" id="shipment-items-container">
+            <button typee="button" className="btn btn-outline-secondary"
+              onClick={this.onClick_cancelShipment}>Cancel</button>
             <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
           </div>
           <div className="col-lg-6" id="order-menu-container">
