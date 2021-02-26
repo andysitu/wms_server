@@ -331,9 +331,13 @@ class ShipOrderApp extends React.Component {
   render() {
     if (this.state.mode == "shipment") {
       return (
-        <div>
-          <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
-          <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
+        <div className="row">
+          <div className="col-lg-6" id="shipment-items-container">
+            <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
+          </div>
+          <div className="col-lg-6" id="order-menu-container">
+            <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
+          </div>
         </div>
       );
     } else {
