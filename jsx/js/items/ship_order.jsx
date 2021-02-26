@@ -232,6 +232,8 @@ class ShipOrderApp extends React.Component {
     this.setState({
       mode: "shipment",
       shipmentItems: items,
+    }, ()=>{
+      this.setShipmentContainerHeights();
     });
   }
 
@@ -326,6 +328,15 @@ class ShipOrderApp extends React.Component {
       </div>
     </div>  
     );
+  };
+
+  setShipmentContainerHeights = () => {
+    const navbarHeight = $("#top-navbar-menu")[0].clientHeight;
+    console.log(navbarHeight);
+    const h = window.innerHeight - navbarHeight;
+    console.log(h);
+    $("#shipment-items-container").height(h);
+    $("#order-menu-container").height(h);
   };
 
   render() {
