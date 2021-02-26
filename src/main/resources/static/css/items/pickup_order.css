@@ -31,3 +31,7 @@
 #ship-order-btn {
     margin-left: 15px;
 }
+
+#shipment-items-container, #order-menu-container {
+    overflow: auto;
+}
