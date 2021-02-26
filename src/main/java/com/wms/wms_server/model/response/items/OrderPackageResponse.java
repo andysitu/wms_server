@@ -15,6 +15,9 @@ public class OrderPackageResponse {
     public String state;
     public String zip;
 
+    public String phone;
+    public String email;
+
     public String transportName;
 
     public int complete;
