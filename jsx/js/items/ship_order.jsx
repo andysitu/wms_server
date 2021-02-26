@@ -249,40 +249,38 @@ class ShipOrderApp extends React.Component {
   };
 
   createPickupItemsTable = () => {
-    let tbody;
+    let itemsList;
     if (this.state.selectedOrderIndex == -1) {
-      tbody = (<tbody></tbody>);
+      itemsList = [];
     } else {
       const items = this.state.openOrders[this.state.selectedOrderIndex].itemsList;
-      tbody = (<tbody>
-        {items.map((itemOrder, index) => {
-          const orderedQuantityClass = (itemOrder.orderedQuantity > 0) ?
-            "warn-order" : "done-order";
-          const pickedRemaining = itemOrder.pickedQuantity - itemOrder.shippingQuantity > 0;
-          return (
-            // IDs don't exist since the items are combined by location & sku
-            <tr key={"pickup-items-" + index}>
-              <td>{itemOrder.itemName}</td>
-              <td>
-                {pickedRemaining ?
-                (<a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>) : 
-                itemOrder.itemSku
-                }
-                </td>
-              <td className={orderedQuantityClass}>
-                {itemOrder.orderedQuantity}
+      itemsList = items.map((itemOrder, index) => {
+        const orderedQuantityClass = (itemOrder.orderedQuantity > 0) ?
+          "warn-order" : "done-order";
+        const pickedRemaining = itemOrder.pickedQuantity - itemOrder.shippingQuantity > 0;
+        return (
+          // IDs don't exist since the items are combined by location & sku
+          <tr key={"pickup-items-" + index}>
+            <td>{itemOrder.itemName}</td>
+            <td>
+              {pickedRemaining ?
+              (<a href="" onClick={this.selectItem}>{itemOrder.itemSku}</a>) : 
+              itemOrder.itemSku
+              }
               </td>
-              <td className={pickedRemaining ? "warn-order" : "done-order"}>
-                {itemOrder.pickedQuantity}
-              </td>
-              <td>{itemOrder.shippingQuantity}</td>
-              <td>{itemOrder.completeQuantity}</td>
-              <td>{itemOrder.startQuantity}</td>
-              <td>{itemOrder.description}</td>
-            </tr>
-          );
-        })}
-      </tbody>);
+            <td className={orderedQuantityClass}>
+              {itemOrder.orderedQuantity}
+            </td>
+            <td className={pickedRemaining ? "warn-order" : "done-order"}>
+              {itemOrder.pickedQuantity}
+            </td>
+            <td>{itemOrder.shippingQuantity}</td>
+            <td>{itemOrder.completeQuantity}</td>
+            <td>{itemOrder.startQuantity}</td>
+            <td>{itemOrder.description}</td>
+          </tr>
+        );
+      })
     }
     return (
     <table className="table table-sm">
@@ -298,7 +296,9 @@ class ShipOrderApp extends React.Component {
           <th scope="col">Description</th>
         </tr>
       </thead>
-      {tbody}
+      <tbody>
+        { itemsList }
+      </tbody>
     </table>)
   };
 
