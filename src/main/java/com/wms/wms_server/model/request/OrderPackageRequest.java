@@ -13,6 +13,9 @@ public class OrderPackageRequest {
     public String city;
     public String state;
     public String zip;
+    
+    public String phone;
+    public String email;
 
     public String transportName;
 

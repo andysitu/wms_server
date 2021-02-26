@@ -48,6 +48,8 @@ public class OrderPackage {
     @Getter private String city;
     @Getter private String state;
     @Getter private String zip;
+    @Getter private String phone;
+    @Getter private String email;
 
     @Getter private String transportName;
 
