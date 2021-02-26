@@ -172,6 +172,12 @@ class ShipOrderApp extends React.Component {
       $("#" + this.skuInputId)[0].focus();
     });
   };
+  setOrdersMode = () => {
+    this.setState({
+      mode: "orders",
+      selectedOrderIndex: -1,
+    });
+  };
 
   getData = (formId) => {
     var formData = new FormData($("#" + formId)[0]),
@@ -305,7 +311,12 @@ class ShipOrderApp extends React.Component {
           Items in Order
           <button className="btn btn-outline-primary"
             id="ship-order-btn" onClick={this.createShipment}
-            type="button">Create Shipment</button>
+            type="button">Create Shipment
+          </button>
+          <button className="btn btn-outline-secondary"
+            onClick={this.setOrdersMode}>
+            Go Back
+          </button>
         </h2>
         <div id="pickup-items-container">
           {this.createPickupItemsTable()}
