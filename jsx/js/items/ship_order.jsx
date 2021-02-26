@@ -191,7 +191,7 @@ class ShipOrderApp extends React.Component {
     console.log("Shipped Items", items);
 
     this.setState({
-      mode: "shipment",
+      mode: "shipments",
       shipmentItems: items,
     }, ()=>{
       this.setShipmentContainerHeights();
@@ -357,8 +357,8 @@ class ShipOrderApp extends React.Component {
       $("#" + this.shipmentItemsId).height(h);
       $("#" + this.orderMenuId).height(h);
     } else {
-      $("#" + this.orderItemsId).height(parseInt(h/2));
-      $("#" + this.ordersContainerId).height(parseInt(h/2));
+      // $("#" + this.orderItemsId).height(parseInt(h/2));
+      // $("#" + this.ordersContainerId).height(parseInt(h/2));
     }
   };
 
@@ -371,7 +371,7 @@ class ShipOrderApp extends React.Component {
   };
 
   render() {
-    if (this.state.mode == "shipment") {
+    if (this.state.mode == "shipments") {
       return (
         <div className="row">
           <div className="col-lg-6" id={this.shipmentItemsId}>
