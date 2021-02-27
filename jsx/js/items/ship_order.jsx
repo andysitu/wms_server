@@ -383,6 +383,23 @@ class ShipOrderApp extends React.Component {
           </div>
           <div className="col-lg-6" id={this.orderMenuId}>
             <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="mm-cost-input">Transport Cost</label>
+                <input type="number" name="transportCost" id="mm-cost-input"
+                  step="0.01" min="0" className="form-control" />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="mm-pickup-date">Pickup Date</label>
+                <input type="date" name="pickupDate" id="mm-pickup-date"
+                className="form-control" required />
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="mm-arrival-date">Arrival Date</label>
+                <input type="date" name="arrivalDate" id="mm-arrival-date"
+                className="form-control" />
+              </div>
+            </div>
           </div>
         </div>
       );
