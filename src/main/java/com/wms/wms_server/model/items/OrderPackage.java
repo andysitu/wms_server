@@ -70,6 +70,9 @@ public class OrderPackage {
         this.state = request.state;
         this.zip = request.zip;
 
+        this.phone = request.phone;
+        this.email = request.email;
+
         this.transportName = request.transportName;
     }
 }
