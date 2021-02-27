@@ -23,7 +23,7 @@ class ShipmentItemMenu extends React.Component {
       context: this,
       success: function(warehouses) {
         // Check if warehouse Id settings is set under localstorage &
-        // set to state.selectedWarehouseId if so
+        // set to state.selectedWarehouseId if so. If not, set to first one
         const wId = storage_obj.getWarehouseId()
         let found = false;
         for (let i=0; i< warehouses.length; i++) {
@@ -32,9 +32,14 @@ class ShipmentItemMenu extends React.Component {
             break;
           }
         }
+        // Force user to go to warehouse page if there are no warehouses
+        if (warehouses.length == 0) {
+          window.alert("There are no warehouses created.");
+          window.location = "./view_warehouses";
+        }
         this.setState({
           warehouses: warehouses,
-          selectedWarehouseId: (found) ? wId : null,
+          selectedWarehouseId: (found) ? wId : warehousees[0].id,
         });
       }
     });
