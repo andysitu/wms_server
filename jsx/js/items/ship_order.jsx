@@ -371,6 +371,47 @@ class ShipOrderApp extends React.Component {
   };
 
   render() {
+    return (
+      <div>
+        <div>
+          {this.createOpenOrdersMenu()}
+        </div>
+        <div>
+          {this.createAddItemsMenu()}
+        </div>
+        <div className="row">
+          <div className="col-lg-6" id={this.shipmentItemsId}>
+            <button typee="button" className="btn btn-outline-secondary"
+              onClick={this.onClick_cancelShipment}>Cancel</button>
+            <button typee="button"className="btn btn-outline-primary">
+              Submit Shipment</button>
+            <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
+          </div>
+          {this.state.selectedOrderIndex >= 0 ?
+            (<div className="col-lg-6" id={this.orderMenuId}>
+              <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <label htmlFor="mm-cost-input">Transport Cost</label>
+                  <input type="number" name="transportCost" id="mm-cost-input"
+                    step="0.01" min="0" className="form-control" />
+                </div>
+                <div className="form-group col-md-4">
+                  <label htmlFor="mm-pickup-date">Pickup Date</label>
+                  <input type="date" name="pickupDate" id="mm-pickup-date"
+                  className="form-control" required />
+                </div>
+                <div className="form-group col-md-4">
+                  <label htmlFor="mm-arrival-date">Arrival Date</label>
+                  <input type="date" name="arrivalDate" id="mm-arrival-date"
+                  className="form-control" />
+                </div>
+              </div>
+            </div>) : null}
+        </div>
+      </div>);
+
+    
     if (this.state.mode == "shipments") {
       return (
         <div className="row">
