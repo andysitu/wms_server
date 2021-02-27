@@ -61,6 +61,9 @@ public class ItemOrder {
      * @return quantity
      */
     public int pickup(int quantity) {
+        if (quantity > this.orderedQuantity) {
+            return -1;
+        }
         this.pickedQuantity += quantity;
         this.orderedQuantity -= quantity;
         return quantity;
