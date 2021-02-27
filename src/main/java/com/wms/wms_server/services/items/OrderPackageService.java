@@ -61,8 +61,11 @@ public class OrderPackageService {
                 itemOrder.getOrderedQuantity() > 0) {
                 int quantity = Math.min(itemOrder.getOrderedQuantity(), currentQuantity);
                 itemOrder.pickup(quantity);
+                ItemInventory itemInventory = itemOrder.getItemInventory();
+                itemInventory.pickup(quantity);
 
                 itemOrderRepository.save(itemOrder);
+                itemInventoryRepository.save(itemInventory);
 
                 currentQuantity -= quantity;
                 if (currentQuantity <= 0) {
@@ -70,7 +73,7 @@ public class OrderPackageService {
                 }
             }
         }
-        return currentQuantity;
+        return currentQuantity; // Quantity remaining - should be 0
     }
 
     /***
