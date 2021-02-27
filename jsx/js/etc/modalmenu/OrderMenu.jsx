@@ -82,7 +82,7 @@ class OrderMenu extends React.Component {
           </div>
           <div className="form-group col-md-4">
             <label htmlFor="mm-phone-input">Email</label>
-            <input type="text" name="phone" id="mm-phone-input" 
+            <input type="text" name="email" id="mm-email-input" 
               defaultValue={email} className="form-control" required/>
           </div>
           <div className="form-group col-md-4">
