@@ -40,6 +40,14 @@ class ShipmentItemMenu extends React.Component {
     });
   };
 
+  getItemsData = () => {
+    return {
+      warehouseId: this.state.selectedWarehouseId,
+      items: this.state.pallets,
+      shipmentType: this.state.shipmentType,
+    };
+  };
+
   getData = (formId) => {
     var formData = new FormData($("#" + formId)[0]),
         data = {};
