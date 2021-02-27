@@ -3,6 +3,9 @@ package com.wms.wms_server.model.shipment;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.wms.wms_server.model.items.OrderPackage;
+
 import javax.persistence.FetchType;
 
 import org.hibernate.annotations.OnDelete;
@@ -41,10 +44,25 @@ public class Shipment {
     @LastModifiedBy
     private String modifiedBy;
 
+    @Getter private String contactName;
+    @Getter private String companyName;
+    @Getter private String address1;
+    @Getter private String address2;
+    @Getter private String city;
+    @Getter private String state;
+    @Getter private String zip;
+    @Getter private String phone;
+    @Getter private String email;
+
     @Getter private String tracking;
     @Getter private String transportName;
 
     @Getter private String shipmentType; // pallet, package
 
     @Getter private int shipmentAmount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Getter private OrderPackage orderPackage;
 }
