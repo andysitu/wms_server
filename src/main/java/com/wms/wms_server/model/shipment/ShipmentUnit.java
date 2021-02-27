@@ -30,7 +30,7 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class ShipmentPallet {
+public class ShipmentUnit {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Getter private Long id;
