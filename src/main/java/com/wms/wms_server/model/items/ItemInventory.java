@@ -55,6 +55,14 @@ public class ItemInventory {
         return amount;
     }
 
+    public int pickup(int amount) {
+        if (amount > reservedQuantity) {
+            return -1;
+        }
+        reservedQuantity -= amount;
+        return amount;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @Getter private Location location;
