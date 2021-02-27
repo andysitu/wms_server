@@ -27,6 +27,7 @@ class ShipOrderApp extends React.Component {
     this.orderMenuId = "order-menu-container";
 
     this.modalmenu = React.createRef();
+    this.shipmentItemMenu = React.createRef();
   }
 
   convertOrderItems = (order) => {
@@ -377,6 +378,7 @@ class ShipOrderApp extends React.Component {
       const order = this.state.openOrders[this.state.selectedOrderIndex];
       console.log(order);
       console.log(this.getData(this.orderInfoFormId));
+      console.log(this.shipmentItemMenu.current.getItemsData());
     }
   };
 
@@ -395,7 +397,7 @@ class ShipOrderApp extends React.Component {
               onClick={this.onClick_cancelShipment}>Cancel</button>
             <button typee="button"className="btn btn-outline-primary">
               Submit Shipment</button>
-            <ShipmentItemMenu shipmentItems={this.state.shipmentItems}/>
+            <ShipmentItemMenu ref={this.shipmentItemMenu} shipmentItems={this.state.shipmentItems}/>
           </div>
           {this.state.selectedOrderIndex >= 0 ?
             (<div className="col-lg-6" id={this.orderMenuId}>
