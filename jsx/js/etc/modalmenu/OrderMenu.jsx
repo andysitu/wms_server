@@ -17,6 +17,7 @@ class OrderMenu extends React.Component {
           zip = shipStatus ? this.props.data.zip : "",
           contactName = shipStatus ? this.props.data.contactName : "",
           phone = shipStatus ? this.props.data.phone : "",
+          email = shipStatus ? this.props.data.email : "",
           companyName = shipStatus ? this.props.data.companyName : "",
           transportName = shipStatus ? this.props.data.transportName : "";
     return (
@@ -74,15 +75,20 @@ class OrderMenu extends React.Component {
           </div>
         </div>
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
             <label htmlFor="mm-phone-input">Phone</label>
             <input type="text" name="phone" id="mm-phone-input" 
               defaultValue={phone} className="form-control" required/>
           </div>
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-4">
+            <label htmlFor="mm-phone-input">Email</label>
+            <input type="text" name="phone" id="mm-phone-input" 
+              defaultValue={email} className="form-control" required/>
+          </div>
+          <div className="form-group col-md-4">
             <label htmlFor="mm-transport-input">Transport Name</label>
             <input type="text" name="transportName" id="mm-transport-input" 
-              defaultValue={transportName} className="form-control" required />
+              defaultValue={transportName} className="form-control" />
           </div>
         </div>
       </div>);
