@@ -15,3 +15,23 @@ Run Spring Boot application with Java JAR file
 > java -jar target/gs-rest-service-0.1.0.jar
 
 Create JAR file
+
+## Item Process / Notes
+
+### Process
+* Create ItemInfo
+* Create ItemReceive
+* Receive Item -> Creates ItemInventory that points to ItemReceive & ItemInfo
+* Create Itemorder
+	* Increase orderedQuantity for ItemOrder
+	* ItemInventory -> reservedQuantity: decrease quantity, increase reservedQuantity
+* Pickup ItemOrder in OrderPackage
+	* ItemOrder -> pickup -> increased pickedQuantity & decrase orderedQuantity
+	* ItemInventory -> pickup: decrease reservedQuantity
+* Create Shipment & ship items
+	* Create Shipment
+	* Create ItemShipment and pull information from ItemOrder
+	* Create ShipmentUnit for the pallets/packages created in that order for the shipment
+	* ItemOrder: decrease pickedQuantity, increase completeQuantity
+
+Shipment, ShipmentItem, ShipmentUnit - represents the data used for each separate shipment
