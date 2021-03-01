@@ -388,9 +388,25 @@ class ShipOrderApp extends React.Component {
     e.preventDefault();
     if (this.state.selectedOrderIndex >= 0) {
       const order = this.state.openOrders[this.state.selectedOrderIndex];
-      console.log(order);
-      console.log(this.getData(this.orderInfoFormId));
-      console.log(this.shipmentItemMenu.current.getItemsData());
+      const shipmentInfo = this.shipmentItemMenu.current.getItemsData();
+      const data = {
+        orderPackageId: order.id,
+        items: this.getPickedItems(),
+        shipmentType: shipmentInfo.shipmentType,
+        units: shipmentInfo.items,
+        ...this.getData(this.orderInfoFormId)
+      };
+      console.log(data);
+      $.ajax({
+        url: "/shipments",
+        type: "POST",
+        context: this,
+        contentType: "application/json;",
+        data: JSON.stringify(data),
+        success: function(response) {
+          console.log(response);
+        }
+      });
     }
   };
 
