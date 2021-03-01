@@ -46,6 +46,10 @@ public class ShipmentItem {
 
     @Getter private int quantity;
 
+    @Getter private int length;
+    @Getter private int width;
+    @Getter private int height;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
