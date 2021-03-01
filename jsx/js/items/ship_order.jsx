@@ -372,6 +372,17 @@ class ShipOrderApp extends React.Component {
     });
   };
 
+  getPickedItems = () => {
+    const itemsList = this.state.openOrders[this.state.selectedOrderIndex].itemsList;
+    const items = [];
+    for (let i=0; i<itemsList.length; i++) {
+      if (itemsList[i].shippingQuantity > 0) {
+        items.push(itemsList[i])
+      }
+    }
+    return items;
+  };
+
   onSubmit_shipOrder = (e) =>  {
     e.preventDefault();
     if (this.state.selectedOrderIndex >= 0) {
