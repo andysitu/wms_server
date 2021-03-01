@@ -45,6 +45,7 @@ class ShipOrderApp extends React.Component {
       } else {
         itemIndexMap[itemSku] = itemsList.length;
         itemsList.push({
+          id: itemResponse.id,
           itemName: itemResponse.itemInventoryResponse.itemName,
           itemSku: itemResponse.itemInventoryResponse.itemSku,
           orderedQuantity: itemResponse.orderedQuantity,
