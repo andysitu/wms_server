@@ -9,13 +9,15 @@ $.ajaxSetup({
                 c, token;
             for (var i=0; i < cookies.length; i++) {
               c = cookies[i].split("=");
-              if (c[0] == "XSRF-TOKEN") {
+              if (c[0].replace(/ /g, '') == "XSRF-TOKEN") {
                 token = c[1];
                 break;
               }
             }
             if (token) {
               xhr.setRequestHeader("X-XSRF-TOKEN", token);
+            } else {
+              console.log("Token not found");
             }
           }
         }
