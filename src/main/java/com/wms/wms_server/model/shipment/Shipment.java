@@ -59,8 +59,6 @@ public class Shipment {
 
     @Getter private String shipmentType; // pallet, package
 
-    @Getter private int shipmentAmount;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
