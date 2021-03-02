@@ -28,9 +28,10 @@ Create JAR file
 * Pickup ItemOrder in OrderPackage
 	* ItemOrder -> pickup -> increased pickedQuantity & decrase orderedQuantity
 	* ItemInventory -> pickup: decrease reservedQuantity
+* ItemOrder is aggregated in ship order page 
 * Create Shipment & ship items
 	* Create Shipment
-	* Create ItemShipment and pull information from ItemOrder
+	* Create ShipmentItem and pull information from ItemOrder
 	* Create ShipmentUnit for the pallets/packages created in that order for the shipment
 	* ItemOrder: decrease pickedQuantity, increase completeQuantity
 
