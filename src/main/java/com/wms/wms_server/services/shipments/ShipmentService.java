@@ -23,7 +23,34 @@ public class ShipmentService {
     ShipmentUnitRepository shipmentUnitRepository;
     @Autowired
     OrderPackageRepository orderPackageRepository;
+
+    public Shipment createShipment(ShipmentRequest request) {
+        Optional<OrderPackage> opOrderPackage = orderPackageRepository.findById(
+            request.orderPackageId);
+        if (opOrderPackage.isEmpty()) {
+            return null;
+        }
+        OrderPackage orderPackage = opOrderPackage.get();
+        Shipment shipment = new Shipment(orderPackage);
+        shipment.setContactName(request.contactName);
+        shipment.setCompanyName(request.companyName);
+        shipment.setAddress1(request.address1);
+        shipment.setAddress2(request.address2);
+        shipment.setCity(request.city);
+        shipment.setState(request.state);
+        shipment.setZip(request.zip);
+        shipment.setPhone(request.phone);
+        shipment.setEmail(request.email);
+        shipment.setTracking(request.tracking);
+        shipment.setTransportName(request.transportName);
+        shipment.setShipmentType(request.shipmentType);
+        System.out.println(shipment.getId());
+
+        return shipment;
+    }
+
     public Shipment processShipment(ShipmentRequest request) {
+        createShipment(request);
         return null;
     }
 }
