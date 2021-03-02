@@ -44,23 +44,28 @@ public class Shipment {
     @LastModifiedBy
     private String modifiedBy;
 
-    @Getter private String contactName;
-    @Getter private String companyName;
-    @Getter private String address1;
-    @Getter private String address2;
-    @Getter private String city;
-    @Getter private String state;
-    @Getter private String zip;
-    @Getter private String phone;
-    @Getter private String email;
+    @Getter @Setter private String contactName;
+    @Getter @Setter private String companyName;
+    @Getter @Setter private String address1;
+    @Getter @Setter private String address2;
+    @Getter @Setter private String city;
+    @Getter @Setter private String state;
+    @Getter @Setter private String zip;
+    @Getter @Setter private String phone;
+    @Getter @Setter private String email;
 
-    @Getter private String tracking;
-    @Getter private String transportName;
+    @Getter @Setter private String tracking;
+    @Getter @Setter private String transportName;
 
-    @Getter private String shipmentType; // pallet, package
+    @Getter @Setter private String shipmentType; // pallet, package
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Getter private OrderPackage orderPackage;
+
+    public Shipment() {}
+    public Shipment(OrderPackage orderPackage) {
+        this.orderPackage = orderPackage;
+    }
 }
