@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .logout(l -> {
             l.logoutSuccessUrl("/").permitAll();})
         .authorizeRequests(a -> a
-            .antMatchers("/", "/error", "/login", "/js/**", "/css/**").permitAll()
+            .antMatchers("/", "/error", "/login", "/logout", "/js/**", "/css/**").permitAll()
             // .antMatchers("/view_users").permitAll()
             .anyRequest().authenticated()
             // .anyRequest().hasRole("ADMIN")
