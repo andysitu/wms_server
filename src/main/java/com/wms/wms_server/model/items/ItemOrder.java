@@ -72,6 +72,10 @@ public class ItemOrder {
     @Column(columnDefinition = "integer default 0")
     @Getter private int complete;
 
+    public String getItemSku() {
+        return this.itemInventory.getItemReceive().getSku();
+    }
+
     public ItemOrder() {}
 
     public ItemOrder(int quantity, ItemInventory itemInventory, 
