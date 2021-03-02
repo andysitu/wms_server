@@ -1,6 +1,6 @@
 package com.wms.wms_server.model.request;
 
-public class ShipmentOrderRequest {
+public class ShipmentRequest {
     public String contactName;
     public String companyName;
     public String address1;
