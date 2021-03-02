@@ -36,6 +36,15 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("/**").authorizeRequests()
+            .antMatchers("/").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+            .and()
+            .oauth2Login();
+        /*
         http
         .logout(l -> {
             l.logoutSuccessUrl("/").permitAll();})
@@ -57,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // );
         .oauth2Login();
         // .oauth2Login().userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper());
-        
+        */
     }
 
     // private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
