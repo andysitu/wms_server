@@ -52,10 +52,18 @@ public class ShipmentUnit {
     @Getter private int width;
     @Getter private int height;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = true)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Shipment shipment;
+
     public ShipmentUnit() {}
 
-    public ShipmentUnit(String shipmentType, int weight, 
-    int length, int width, int height) {
+    public ShipmentUnit(
+            Shipment shipment,
+            String shipmentType, int weight, 
+            int length, int width, int height) {
+        this.shipment = shipment;
         this.shipmentType = shipmentType;
         this.weight = weight;
         this.length = length;
