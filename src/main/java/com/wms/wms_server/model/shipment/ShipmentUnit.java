@@ -51,4 +51,15 @@ public class ShipmentUnit {
     @Getter private int length;
     @Getter private int width;
     @Getter private int height;
+
+    public ShipmentUnit() {}
+
+    public ShipmentUnit(String shipmentType, int weight, 
+    int length, int width, int height) {
+        this.shipmentType = shipmentType;
+        this.weight = weight;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
 }
