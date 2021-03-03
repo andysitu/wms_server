@@ -55,4 +55,11 @@ public class ShipmentItem {
     @JoinColumn(nullable = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private ItemOrder itemOrder;
+
+    public ShipmentItem() {}
+    public ShipmentItem(int quantity, Shipment shipment, ItemOrder itemorder) {
+        this.quantity = quantity;
+        this.shipment = shipment;
+        this.itemOrder = itemOrder;
+    }
 }
