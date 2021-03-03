@@ -36,3 +36,9 @@ Create JAR file
 	* ItemOrder: decrease pickedQuantity, increase completeQuantity
 
 Shipment, ShipmentItem, ShipmentUnit - represents the data used for each separate shipment
+
+
+## SQL
+
+\dt
+Alter table shipment drop column shipment_amount;
