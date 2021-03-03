@@ -8,7 +8,10 @@ import java.util.Optional;
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.ShipmentRequest;
+import com.wms.wms_server.model.request.ShipmentUnitRequest;
 import com.wms.wms_server.model.shipment.Shipment;
+import com.wms.wms_server.model.shipment.ShipmentItem;
+import com.wms.wms_server.model.shipment.ShipmentUnit;
 import com.wms.wms_server.repository.items.ItemOrderRepository;
 import com.wms.wms_server.repository.items.OrderPackageRepository;
 import com.wms.wms_server.repository.shipments.ShipmentItemRepository;
@@ -52,16 +55,17 @@ public class ShipmentService {
         shipment.setTransportName(request.transportName);
         shipment.setShipmentType(request.shipmentType);
 
+        shipmentRepository.save(shipment);
+
         return shipment;
     }
 
-    public Shipment processShipment(ShipmentRequest request) {
-        Shipment shipment = createShipment(request);
-
+    public void createShipmentItems(Shipment shipment, ShipmentRequest request) {
         List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(
             request.orderPackageId
         );
 
+        // Map out all item orders  with the orderPackage ID
         HashMap<String, List<ItemOrder>> itemOrderMap = new HashMap<>();
         ItemOrder itemOrder; 
         List<ItemOrder> searchedItemOrders;
@@ -78,9 +82,47 @@ public class ShipmentService {
             }
         }
 
+        ShipmentItem shipmentItem;
         for(int i=0; i<request.items.length; i++) {
-            System.out.println(request.items[i].itemSku);
+            String itemSku = request.items[i].itemSku;
+            int remaining = request.items[i].shippingQuantity;
+            searchedItemOrders = itemOrderMap.get(itemSku);
+            for (int j=0; j<searchedItemOrders.size(); j++) {
+                itemOrder = searchedItemOrders.get(j);
+                int count = Math.min(remaining, itemOrder.getPickedQuantity());
+                itemOrder.ship(count);
+                shipmentItem = new ShipmentItem(count, shipment, itemOrder);
+
+                itemOrderRepository.save(itemOrder);
+                shipmentItemRepository.save(shipmentItem);
+            }
         }
+    }
+
+    public void createShipmentUnits(Shipment shipment, ShipmentRequest request) {
+        ShipmentUnit shipmentUnit;
+        for (int i = 0; i < request.units.length; i++) {
+            ShipmentUnitRequest ur = request.units[i];
+            shipmentUnit = new ShipmentUnit(
+                shipment,
+                request.shipmentType,
+                ur.weight,
+                ur.length,
+                ur.width,
+                ur.height
+            );
+            shipmentUnitRepository.save(shipmentUnit);
+        }
+    }
+
+    public Shipment processShipment(ShipmentRequest request) {
+        Shipment shipment = createShipment(request);
+        if (shipment == null) {
+            return null;
+        }
+        createShipmentItems(shipment, request);
+        
+        createShipmentUnits(shipment, request);
 
         return shipment;
     }
