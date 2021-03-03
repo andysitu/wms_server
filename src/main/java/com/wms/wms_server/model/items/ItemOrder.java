@@ -69,6 +69,15 @@ public class ItemOrder {
         return quantity;
     }
 
+    public int ship(int quantity) {
+        if (quantity > this.orderedQuantity) {
+            return -1;
+        }
+        this.pickedQuantity -= quantity;
+        this.completeQuantity += quantity;
+        return quantity;
+    }
+
     @Column(columnDefinition = "integer default 0")
     @Getter private int complete;
 
