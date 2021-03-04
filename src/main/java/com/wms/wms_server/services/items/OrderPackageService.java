@@ -175,7 +175,7 @@ public class OrderPackageService {
     public boolean checkComplete(long  orderPackageId) {
         boolean complete = true;
         for (ItemOrder itemOrder : itemOrderRepository.findByOrderPackageId(orderPackageId)) {
-            if (itemOrder.getCompleteQuantity() > itemOrder.getQuantity()) {
+            if (!itemOrder.isComplete()) {
                 complete = false;
                 break;
             }
