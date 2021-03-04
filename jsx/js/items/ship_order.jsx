@@ -202,7 +202,8 @@ class ShipOrderApp extends React.Component {
   };
 
   createOpenOrdersMenu = () => {
-    let numOpenItems, totalItems, i, trClass;
+    let numOpenItems, totalItems, numPickedItems,
+        i, trClass;
     return (
     <div id={this.ordersContainerId}>
       <h2>Open Orders</h2>
@@ -214,6 +215,7 @@ class ShipOrderApp extends React.Component {
               <th scope="col">Company Name</th>
               <th scope="col">Transport</th>
               <th scope="col">Unpicked Items</th>
+              <th scope="col">Picked Items</th>
               <th scope="col">Total Items</th>
               <th scope="col">Select</th>
             </tr>
@@ -222,11 +224,12 @@ class ShipOrderApp extends React.Component {
             {this.state.openOrders.map(((orderPackage, index) => {
               numOpenItems = 0;
               totalItems = 0;
-              for (i=0; i<orderPackage.itemsList.length; i++) {
-                numOpenItems += orderPackage.itemsList[i].orderedQuantity;
-                
-                totalItems += orderPackage.itemsList[i].startQuantity;
-              }
+              numPickedItems = 0;
+              orderPackage.itemsList.forEach(item => {
+                numOpenItems += item.orderedQuantity;
+                totalItems += item.startQuantity;
+                numPickedItems += item.pickedQuantity;
+              });
               trClass = (index == this.state.selectedOrderIndex) ?
                 "selected" : "";
               return (
@@ -235,6 +238,7 @@ class ShipOrderApp extends React.Component {
                   <td>{orderPackage.companyName}</td>
                   <td>{orderPackage.transportName}</td>
                   <td>{numOpenItems}</td>
+                  <td>{numPickedItems}</td>
                   <td>{totalItems}</td>
                   <td>
                     <button type="button"
