@@ -181,7 +181,11 @@ public class OrderPackageService {
             }
         }
         if (complete) {
-            OrderPackage orderPackage = orderPackageRepository.findById(orderPackageId);
+            Optional<OrderPackage> opOrderPackage = orderPackageRepository.findById(orderPackageId);
+            if (opOrderPackage.isEmpty()) {
+                return false;
+            }
+            OrderPackage orderPackage = opOrderPackage.get();
             orderPackage.setComplete();
             orderPackageRepository.save(orderPackage);
         }
