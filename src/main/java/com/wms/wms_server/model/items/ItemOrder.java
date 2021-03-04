@@ -54,6 +54,10 @@ public class ItemOrder {
     @Column(columnDefinition = "integer default 0")
     @Getter private int completeQuantity = 0;
 
+    public boolean isComplete() {
+        return completeQuantity >= startQuantity;
+    }
+
     /***
      * Increases pickedQuantity and decreases orderedQuantity by
      * amount specified by quantity.
