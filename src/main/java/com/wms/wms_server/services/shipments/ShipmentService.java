@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
-import com.wms.wms_server.model.request.ShipmentRequest;
+import com.wms.wms_server.model.request.ShipmentData;
 import com.wms.wms_server.model.request.ShipmentUnitData;
 import com.wms.wms_server.model.shipment.Shipment;
 import com.wms.wms_server.model.shipment.ShipmentItem;
@@ -34,35 +34,35 @@ public class ShipmentService {
     @Autowired
     ItemOrderRepository itemOrderRepository;
 
-    public Shipment createShipment(ShipmentRequest request) {
+    public Shipment createShipment(ShipmentData shipmentData) {
         Optional<OrderPackage> opOrderPackage = orderPackageRepository.findById(
-            request.orderPackageId);
+            shipmentData.orderPackageId);
         if (opOrderPackage.isEmpty()) {
             return null;
         }
         OrderPackage orderPackage = opOrderPackage.get();
         Shipment shipment = new Shipment(orderPackage);
-        shipment.setContactName(request.contactName);
-        shipment.setCompanyName(request.companyName);
-        shipment.setAddress1(request.address1);
-        shipment.setAddress2(request.address2);
-        shipment.setCity(request.city);
-        shipment.setState(request.state);
-        shipment.setZip(request.zip);
-        shipment.setPhone(request.phone);
-        shipment.setEmail(request.email);
-        shipment.setTracking(request.tracking);
-        shipment.setTransportName(request.transportName);
-        shipment.setShipmentType(request.shipmentType);
+        shipment.setContactName(shipmentData.contactName);
+        shipment.setCompanyName(shipmentData.companyName);
+        shipment.setAddress1(shipmentData.address1);
+        shipment.setAddress2(shipmentData.address2);
+        shipment.setCity(shipmentData.city);
+        shipment.setState(shipmentData.state);
+        shipment.setZip(shipmentData.zip);
+        shipment.setPhone(shipmentData.phone);
+        shipment.setEmail(shipmentData.email);
+        shipment.setTracking(shipmentData.tracking);
+        shipment.setTransportName(shipmentData.transportName);
+        shipment.setShipmentType(shipmentData.shipmentType);
 
         shipmentRepository.save(shipment);
 
         return shipment;
     }
 
-    public void createShipmentItems(Shipment shipment, ShipmentRequest request) {
+    public void createShipmentItems(Shipment shipment, ShipmentData shipmentData) {
         List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(
-            request.orderPackageId
+            shipmentData.orderPackageId
         );
 
         // Map out all item orders  with the orderPackage ID
@@ -83,9 +83,9 @@ public class ShipmentService {
         }
 
         ShipmentItem shipmentItem;
-        for(int i=0; i<request.items.length; i++) {
-            String itemSku = request.items[i].itemSku;
-            int remaining = request.items[i].shippingQuantity;
+        for(int i=0; i<shipmentData.items.length; i++) {
+            String itemSku = shipmentData.items[i].itemSku;
+            int remaining = shipmentData.items[i].shippingQuantity;
             searchedItemOrders = itemOrderMap.get(itemSku);
             for (int j=0; j<searchedItemOrders.size(); j++) {
                 itemOrder = searchedItemOrders.get(j);
@@ -99,13 +99,13 @@ public class ShipmentService {
         }
     }
 
-    public void createShipmentUnits(Shipment shipment, ShipmentRequest request) {
+    public void createShipmentUnits(Shipment shipment, ShipmentData shipmentData) {
         ShipmentUnit shipmentUnit;
-        for (int i = 0; i < request.units.length; i++) {
-            ShipmentUnitData ur = request.units[i];
+        for (int i = 0; i < shipmentData.units.length; i++) {
+            ShipmentUnitData ur = shipmentData.units[i];
             shipmentUnit = new ShipmentUnit(
                 shipment,
-                request.shipmentType,
+                shipmentData.shipmentType,
                 ur.weight,
                 ur.length,
                 ur.width,
@@ -115,14 +115,14 @@ public class ShipmentService {
         }
     }
 
-    public Shipment processShipment(ShipmentRequest request) {
-        Shipment shipment = createShipment(request);
+    public Shipment processShipment(ShipmentData shipmentData) {
+        Shipment shipment = createShipment(shipmentData);
         if (shipment == null) {
             return null;
         }
-        createShipmentItems(shipment, request);
+        createShipmentItems(shipment, shipmentData);
         
-        createShipmentUnits(shipment, request);
+        createShipmentUnits(shipment, shipmentData);
 
         return shipment;
     }
