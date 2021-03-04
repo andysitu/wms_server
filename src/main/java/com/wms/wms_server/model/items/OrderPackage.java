@@ -53,8 +53,13 @@ public class OrderPackage {
 
     @Getter private String transportName;
 
+    // 0 for incomplete, 1 for complete
     @Column(columnDefinition = "integer default 0")
     @Getter private int complete;
+
+    public void setComplete() {
+        this.complete = 1;
+    }
 
     public OrderPackage() {}
 
