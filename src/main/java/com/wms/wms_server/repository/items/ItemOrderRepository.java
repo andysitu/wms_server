@@ -9,5 +9,5 @@ import com.wms.wms_server.model.items.ItemOrder;
 
 @Repository
 public interface ItemOrderRepository extends JpaRepository<ItemOrder, Long> {
-    List<ItemOrder> findByOrderPackageId(Long OrderPackageId);
+    List<ItemOrder> findByOrderPackageId(Long orderPackageId);
 }
