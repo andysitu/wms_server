@@ -17,6 +17,7 @@ import com.wms.wms_server.repository.items.OrderPackageRepository;
 import com.wms.wms_server.repository.shipments.ShipmentItemRepository;
 import com.wms.wms_server.repository.shipments.ShipmentRepository;
 import com.wms.wms_server.repository.shipments.ShipmentUnitRepository;
+import com.wms.wms_server.services.items.OrderPackageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,8 @@ public class ShipmentService {
     OrderPackageRepository orderPackageRepository;
     @Autowired
     ItemOrderRepository itemOrderRepository;
+    @Autowired
+    OrderPackageService orderPackageService;
 
     public Shipment createShipment(ShipmentData shipmentData) {
         Optional<OrderPackage> opOrderPackage = orderPackageRepository.findById(
@@ -65,12 +68,19 @@ public class ShipmentService {
             shipmentData.orderPackageId
         );
 
+        // status checker if orderPackage is complete
+        boolean completeOrder = true;
         // Map out all item orders  with the orderPackage ID
         HashMap<String, List<ItemOrder>> itemOrderMap = new HashMap<>();
         ItemOrder itemOrder; 
         List<ItemOrder> searchedItemOrders;
         for (int i=0; i< itemOrders.size(); i++) {
             itemOrder = itemOrders.get(i);
+            // mark completeOrder as false if an itemOrder isn't done
+            if (completeOrder && !itemOrder.isComplete()) {
+                completeOrder = false;
+            }
+
             String sku = itemOrder.getItemSku();
             if (itemOrderMap.containsKey(sku)) {
                 searchedItemOrders = itemOrderMap.get(sku);
@@ -96,6 +106,10 @@ public class ShipmentService {
                 itemOrderRepository.save(itemOrder);
                 shipmentItemRepository.save(shipmentItem);
             }
+        }
+
+        if (completeOrder) { // Complete the OrderPackage if done
+            orderPackageService.checkComplete(shipmentData.orderPackageId);
         }
     }
 
