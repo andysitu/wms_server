@@ -8,7 +8,7 @@ import java.util.Optional;
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.ShipmentRequest;
-import com.wms.wms_server.model.request.ShipmentUnitRequest;
+import com.wms.wms_server.model.request.ShipmentUnitData;
 import com.wms.wms_server.model.shipment.Shipment;
 import com.wms.wms_server.model.shipment.ShipmentItem;
 import com.wms.wms_server.model.shipment.ShipmentUnit;
@@ -102,7 +102,7 @@ public class ShipmentService {
     public void createShipmentUnits(Shipment shipment, ShipmentRequest request) {
         ShipmentUnit shipmentUnit;
         for (int i = 0; i < request.units.length; i++) {
-            ShipmentUnitRequest ur = request.units[i];
+            ShipmentUnitData ur = request.units[i];
             shipmentUnit = new ShipmentUnit(
                 shipment,
                 request.shipmentType,

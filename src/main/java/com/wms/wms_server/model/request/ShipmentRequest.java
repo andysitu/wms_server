@@ -18,5 +18,5 @@ public class ShipmentRequest {
     public String shipmentType;
 
     public ShipmentItemRequest[] items;
-    public ShipmentUnitRequest[] units;
+    public ShipmentUnitData[] units;
 }

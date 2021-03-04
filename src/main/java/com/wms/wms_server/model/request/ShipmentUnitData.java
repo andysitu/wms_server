@@ -1,6 +1,6 @@
 package com.wms.wms_server.model.request;
 
-public class ShipmentUnitRequest {
+public class ShipmentUnitData {
     public long id;
     public int quantity;
     public int weight;
