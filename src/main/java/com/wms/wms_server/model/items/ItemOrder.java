@@ -74,7 +74,7 @@ public class ItemOrder {
     }
 
     public int ship(int quantity) {
-        if (quantity > this.orderedQuantity) {
+        if (quantity > this.pickedQuantity) {
             return -1;
         }
         this.pickedQuantity -= quantity;
