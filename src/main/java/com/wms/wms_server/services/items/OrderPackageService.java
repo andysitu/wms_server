@@ -167,4 +167,24 @@ public class OrderPackageService {
 
         return orderPackageResponses;
     }
+
+    /**
+     * Checks if OrderPackage is complete by checking ItemOrders.
+     * @param orderPackageId
+     */
+    public boolean checkComplete(long  orderPackageId) {
+        boolean complete = true;
+        for (ItemOrder itemOrder : itemOrderRepository.findByOrderPackageId(orderPackageId)) {
+            if (itemOrder.getCompleteQuantity() > itemOrder.getQuantity()) {
+                complete = false;
+                break;
+            }
+        }
+        if (complete) {
+            OrderPackage orderPackage = orderPackageRepository.findById(orderPackageId);
+            orderPackage.setComplete();
+            orderPackageRepository.save(orderPackage);
+        }
+        return complete;
+    }
 }
