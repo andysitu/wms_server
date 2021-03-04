@@ -68,19 +68,10 @@ public class ShipmentService {
             shipmentData.orderPackageId
         );
 
-        // status checker if orderPackage is complete
-        boolean completeOrder = true;
         // Map out all item orders  with the orderPackage ID
         HashMap<String, List<ItemOrder>> itemOrderMap = new HashMap<>();
-        ItemOrder itemOrder; 
         List<ItemOrder> searchedItemOrders;
-        for (int i=0; i< itemOrders.size(); i++) {
-            itemOrder = itemOrders.get(i);
-            // mark completeOrder as false if an itemOrder isn't done
-            if (completeOrder && !itemOrder.isComplete()) {
-                completeOrder = false;
-            }
-
+        for (ItemOrder itemOrder: itemOrders) {
             String sku = itemOrder.getItemSku();
             if (itemOrderMap.containsKey(sku)) {
                 searchedItemOrders = itemOrderMap.get(sku);
@@ -90,6 +81,7 @@ public class ShipmentService {
                 searchedItemOrders.add(itemOrder);
                 itemOrderMap.put(sku, searchedItemOrders);
             }
+            
         }
 
         ShipmentItem shipmentItem;
@@ -98,14 +90,24 @@ public class ShipmentService {
             int remaining = shipmentData.items[i].shippingQuantity;
             searchedItemOrders = itemOrderMap.get(itemSku);
             for (int j=0; j<searchedItemOrders.size(); j++) {
-                itemOrder = searchedItemOrders.get(j);
+                ItemOrder itemOrder = searchedItemOrders.get(j);
                 int count = Math.min(remaining, itemOrder.getPickedQuantity());
+
                 itemOrder.ship(count);
                 shipmentItem = new ShipmentItem(count, shipment, itemOrder);
 
                 itemOrderRepository.save(itemOrder);
                 shipmentItemRepository.save(shipmentItem);
             }
+        }
+        // status checker if orderPackage is complete
+        boolean completeOrder = true;
+        for (ItemOrder itemOrder: itemOrders) {
+            // mark completeOrder as false if an itemOrder isn't done
+            if (!itemOrder.isComplete()) {
+                completeOrder = false;
+                break;
+            }         
         }
 
         if (completeOrder) { // Complete the OrderPackage if done
