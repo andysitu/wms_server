@@ -1,6 +1,6 @@
 package com.wms.wms_server.controllers.shipment;
 
-import com.wms.wms_server.model.request.ShipmentRequest;
+import com.wms.wms_server.model.request.ShipmentData;
 import com.wms.wms_server.services.shipments.ShipmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ShipmentController {
     @RequestMapping(path="/shipments", produces="application/json",
             method = RequestMethod.POST, consumes="application/json")
     @ResponseBody
-    public String createShipment(@RequestBody ShipmentRequest shipmentOrderRequest) {
+    public String createShipment(@RequestBody ShipmentData shipmentOrderRequest) {
         shipmentService.processShipment(shipmentOrderRequest);
         return "HEY";
     }
