@@ -1,6 +1,7 @@
 package com.wms.wms_server.model.request;
 
 public class ShipmentRequest {
+    public long id;
     public long orderPackageId;
     public String contactName;
     public String companyName;
