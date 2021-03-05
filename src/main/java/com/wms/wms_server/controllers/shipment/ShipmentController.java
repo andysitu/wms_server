@@ -1,5 +1,7 @@
 package com.wms.wms_server.controllers.shipment;
 
+import java.util.List;
+
 import com.wms.wms_server.model.request.ShipmentData;
 import com.wms.wms_server.services.shipments.ShipmentService;
 
@@ -17,7 +19,13 @@ public class ShipmentController {
     @Autowired
     ShipmentService shipmentService;
 
-    @RequestMapping(path="/", produces="application/json",
+    @RequestMapping(path="", method=RequestMethod.GET, produces="application/json")
+    @ResponseBody
+    public List<ShipmentData> getShipments() {
+        return shipmentService.getShipmentsData();
+    }
+
+    @RequestMapping(path="", produces="application/json",
             method = RequestMethod.POST, consumes="application/json")
     @ResponseBody
     public String createShipment(@RequestBody ShipmentData shipmentOrderRequest) {
@@ -29,4 +37,5 @@ public class ShipmentController {
     public String viewShipmentPage() {
         return "/shipments/view_shipments";
     }
+    
 }
