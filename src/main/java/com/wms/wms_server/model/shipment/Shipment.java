@@ -64,6 +64,10 @@ public class Shipment {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Getter private OrderPackage orderPackage;
 
+    public long getOrderPackageId() {
+        return orderPackage.getId();
+    }
+
     public Shipment() {}
     public Shipment(OrderPackage orderPackage) {
         this.orderPackage = orderPackage;
