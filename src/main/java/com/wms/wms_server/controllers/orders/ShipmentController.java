@@ -35,7 +35,7 @@ public class ShipmentController {
 
     @GetMapping("/view")
     public String viewShipmentPage() {
-        return "/shipments/view_shipments";
+        return "/orders/view_shipments";
     }
     
 }
