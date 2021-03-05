@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@RequestMapping("/shipments")
 @Controller
+@RequestMapping("/shipments")
 public class ShipmentController {
     @Autowired
     ShipmentService shipmentService;
@@ -22,7 +22,7 @@ public class ShipmentController {
     @ResponseBody
     public String createShipment(@RequestBody ShipmentData shipmentOrderRequest) {
         shipmentService.processShipment(shipmentOrderRequest);
-        return "HEY";
+        return "OK";
     }
 
     @GetMapping("/view")
