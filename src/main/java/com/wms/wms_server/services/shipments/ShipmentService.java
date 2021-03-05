@@ -142,4 +142,29 @@ public class ShipmentService {
 
         return shipment;
     }
+
+    public List<ShipmentData> getShipmentsData() {
+        List<ShipmentData> shipmentsData = new ArrayList<>();
+        ShipmentData shipmentData;
+        for (Shipment shipment : shipmentRepository.findAll()) {
+            shipmentData = new ShipmentData();
+            shipmentData.id = shipment.getId();
+            shipmentData.orderPackageId = shipment.getOrderPackageId();
+            shipmentData.contactName = shipment.getContactName();
+            shipmentData.companyName = shipment.getCompanyName();
+            shipmentData.address1 = shipment.getAddress1();
+            shipmentData.address2 = shipment.getAddress2();
+            shipmentData.city = shipment.getCity();
+            shipmentData.state = shipment.getState();
+            shipmentData.zip = shipment.getZip();
+            shipmentData.phone = shipment.getPhone();
+            shipmentData.email = shipment.getEmail();
+            shipmentData.tracking = shipment.getTracking();
+            shipmentData.transportName = shipment.getTransportName();
+            shipmentData.shipmentType = shipment.getShipmentType();
+
+            shipmentsData.add(shipmentData);
+        }
+        return shipmentsData;
+    }
 }
