@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@RequestMapping("/shipments")
 @Controller
 public class ShipmentController {
     @Autowired
     ShipmentService shipmentService;
 
-    @RequestMapping(path="/shipments", produces="application/json",
+    @RequestMapping(path="/", produces="application/json",
             method = RequestMethod.POST, consumes="application/json")
     @ResponseBody
     public String createShipment(@RequestBody ShipmentData shipmentOrderRequest) {
