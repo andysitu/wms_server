@@ -1,6 +1,6 @@
 package com.wms.wms_server.model.response.items;
 
-import com.wms.wms_server.model.items.ItemOrder;
+import com.wms.wms_server.model.request.ShipmentData;
 
 public class OrderPackageResponse {
     public long id;
@@ -23,4 +23,5 @@ public class OrderPackageResponse {
     public int complete;
 
     public ItemOrderResponse[] itemOrderResponses;
+    public ShipmentData[] shipments;
 }
