@@ -1,4 +1,4 @@
-package com.wms.wms_server.controllers.shipment;
+package com.wms.wms_server.controllers.orders;
 
 import java.util.List;
 
