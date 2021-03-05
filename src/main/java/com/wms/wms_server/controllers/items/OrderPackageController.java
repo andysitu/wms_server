@@ -80,6 +80,6 @@ public class OrderPackageController {
 
     @GetMapping("/ship_order")
     public String viewShipOrder() {
-        return "items/ship_order";
+        return "shipments/ship_order";
     }
 }
