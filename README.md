@@ -42,3 +42,9 @@ Shipment, ShipmentItem, ShipmentUnit - represents the data used for each separat
 
 \dt
 Alter table shipment drop column shipment_amount;
+
+## todo
+
+* Add Typescript
+	* View orders page & ship order pages: Define itemresponse
+	* Remove ItemsList
