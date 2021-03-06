@@ -3,6 +3,8 @@ class OrderShipmentApp extends React.Component {
     super(props);
     this.state = {
       orders: [],
+      // By OrderPackageId
+      shipmentMap: {},
     };
     this.loadShipments();
     this.loadOrders();
@@ -14,9 +16,23 @@ class OrderShipmentApp extends React.Component {
       type: "GET",
       context: this,
       success: function(shipments) {
-        console.log(shipments);
+        console.log("shipments", shipments)
+        this.setState(state => {
+          const shipMap = {};
+          shipments.forEach(shipment => {
+            let opid = shipment.orderPackageId;
+            if (opid in shipMap) {
+              shipMap[opid].push(shipment);
+            } else {
+              shipMap[opid] =[shipment,];
+            }
+          });
+          return {
+            shipmentMap: shipMap,
+          }
+        });
       }
-    })
+    });
   }
 
   convertOrderItems = (order) => {
@@ -72,7 +88,7 @@ class OrderShipmentApp extends React.Component {
 
   createOrdersMenu = () => {
     let numOpenItems, totalItems, numPickedItems,
-        i, trClass;
+        trClass;
     return (
     <div id={this.ordersContainerId}>
       <h2>Orders</h2>
@@ -88,6 +104,7 @@ class OrderShipmentApp extends React.Component {
               <th scope="col">Total Items</th>
               <th scope="col">Complete</th>
               <th scope="col">Select</th>
+              <th scope="col">Shipments</th>
             </tr>
           </thead>
           <tbody>
@@ -116,6 +133,11 @@ class OrderShipmentApp extends React.Component {
                       value={index} onClick={this.onClick_selectOrder}
                       className="btn btn-sm btn-outline-primary"
                     >Select</button>
+                  </td>
+                  <td>
+                    {(orderPackage.id in this.state.shipmentMap) ?
+                      (this.state.shipmentMap[orderPackage.id].length) : 0
+                    }
                   </td>
                 </tr>)
             }))}
