@@ -5,6 +5,7 @@ class OrderShipmentApp extends React.Component {
       orders: [],
       // By OrderPackageId
       shipmentMap: {},
+      selectedOrderIndex: -1,
     };
     this.loadShipments();
     this.loadOrders();
@@ -82,8 +83,14 @@ class OrderShipmentApp extends React.Component {
     })
   };
 
-  onClick_selectOrder = () => {
-
+  onClick_selectOrder = (e) => {
+    const index = e.target.value;
+    this.setState({
+      selectedOrderIndex: index,
+    });
+    let order = this.state.orders[index];
+    console.log(order);
+    console.log(this.state.shipmentMap[order.id]);
   }
 
   createOrdersMenu = () => {
