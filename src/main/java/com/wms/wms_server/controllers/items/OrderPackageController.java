@@ -27,6 +27,11 @@ public class OrderPackageController {
     @Autowired
     OrderPackageService orderPackageService;
 
+    @GetMapping("/orderpackages/view")
+    public String viewShipmentPage() {
+        return "/orders/view_orders";
+    }
+
     @RequestMapping(value="/orderpackages", consumes = "application/json", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody

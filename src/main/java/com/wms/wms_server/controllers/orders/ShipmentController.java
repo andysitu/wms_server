@@ -32,10 +32,4 @@ public class ShipmentController {
         shipmentService.processShipment(shipmentOrderRequest);
         return "OK";
     }
-
-    @GetMapping("/view")
-    public String viewShipmentPage() {
-        return "/orders/view_orders";
-    }
-    
 }
