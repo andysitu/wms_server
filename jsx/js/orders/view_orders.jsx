@@ -86,6 +86,7 @@ class OrderShipmentApp extends React.Component {
               <th scope="col">Unpicked Items</th>
               <th scope="col">Picked Items</th>
               <th scope="col">Total Items</th>
+              <th scope="col">Complete</th>
               <th scope="col">Select</th>
             </tr>
           </thead>
@@ -109,6 +110,7 @@ class OrderShipmentApp extends React.Component {
                   <td>{numOpenItems}</td>
                   <td>{numPickedItems}</td>
                   <td>{totalItems}</td>
+                  <td>{orderPackage.complete == 1 ? "Yes" : "No"}</td>
                   <td>
                     <button type="button"
                       value={index} onClick={this.onClick_selectOrder}
