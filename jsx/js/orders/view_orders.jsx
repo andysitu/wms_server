@@ -2,7 +2,8 @@ class OrderShipmentApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.loadShipments();
+    // this.loadShipments();
+    this.loadOrders();
   }
 
   loadShipments = () => {
@@ -15,6 +16,24 @@ class OrderShipmentApp extends React.Component {
       }
     })
   }
+
+  loadOrders = () => {
+    $.ajax({
+      url: "/orderpackages",
+      type: "GET",
+      context: this,
+      success: function(orders) {
+        console.log(orders);
+        // for(let i=0; i< orders.length; i++) {
+        //   orders[i].itemsList = this.convertOrderItems(orders[i]);
+        // }
+        // this.setState({
+        //   openOrders: orders,
+        //   selectedOrderIndex: -1,
+        // });
+      }
+    })
+  };
 
   render() {
     return (<div>
