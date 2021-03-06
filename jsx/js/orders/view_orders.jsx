@@ -103,8 +103,8 @@ class OrderShipmentApp extends React.Component {
               <th scope="col">Picked Items</th>
               <th scope="col">Total Items</th>
               <th scope="col">Complete</th>
-              <th scope="col">Select</th>
               <th scope="col">Shipments</th>
+              <th scope="col">View Order</th>
             </tr>
           </thead>
           <tbody>
@@ -129,21 +129,24 @@ class OrderShipmentApp extends React.Component {
                   <td>{totalItems}</td>
                   <td>{orderPackage.complete == 1 ? "Yes" : "No"}</td>
                   <td>
+                    {(orderPackage.id in this.state.shipmentMap) ?
+                      (this.state.shipmentMap[orderPackage.id].length) : 0
+                    }
+                  </td>
+                  <td>
                     <button type="button"
                       value={index} onClick={this.onClick_selectOrder}
                       className="btn btn-sm btn-outline-primary"
                     >Select</button>
-                  </td>
-                  <td>
-                    {(orderPackage.id in this.state.shipmentMap) ?
-                      (this.state.shipmentMap[orderPackage.id].length) : 0
-                    }
                   </td>
                 </tr>)
             }))}
           </tbody>
         </table>
       </div>
+      {this.state.selectedOrderIndex >= 0 ?
+        (<div></div>) : null
+      }
     </div>
     );
   };
