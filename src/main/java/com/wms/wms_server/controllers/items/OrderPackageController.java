@@ -49,7 +49,7 @@ public class OrderPackageController {
     public ResponseEntity pickupOrder(
             @PathVariable("order_id") Long order_id,
             @Valid @RequestBody PickupOrderRequest pickOrderRequest) 
-        {
+    {
         int newQuantity = orderPackageService.pickupOrder(order_id, pickOrderRequest);
         if (newQuantity > 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
