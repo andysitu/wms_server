@@ -101,25 +101,30 @@ class ShipOrderApp extends React.Component {
   // Group up items by locationCode & itemSku and put combined items
   // into state.selectedItems;
   onClick_selectOrder = (e) => {
-    this.setState(state =>{
-      const selectedIndex = parseInt(e.target.value);
-      let newOpenOrders = [...state.openOrders];
-      newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
-      newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
-      const itemsList = newOpenOrders[selectedIndex].itemsList;
-      for (let i=0; i<itemsList.length; i++) {
-        itemsList[i].shippingQuantity = 0;
-      }
-      console.log(newOpenOrders[selectedIndex])
-      return {
-        mode: "items",
-        selectedOrderIndex: parseInt(selectedIndex),
-        openOrders: newOpenOrders,
-      };
+    this.setState({
+      selectedOrderIndex: -1,
     }, 
-    ()=> {
-      $("#" + this.skuInputId)[0].focus();
+      ()=> {this.setState(state =>{
+        const selectedIndex = parseInt(e.target.value);
+        let newOpenOrders = [...state.openOrders];
+        newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
+        newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
+        const itemsList = newOpenOrders[selectedIndex].itemsList;
+        for (let i=0; i<itemsList.length; i++) {
+          itemsList[i].shippingQuantity = 0;
+        }
+        console.log(newOpenOrders[selectedIndex])
+        return {
+          mode: "items",
+          selectedOrderIndex: parseInt(selectedIndex),
+          openOrders: newOpenOrders,
+        };
+      }, 
+      ()=> {
+        $("#" + this.skuInputId)[0].focus();
+      })
     });
+    
   };
   setOrdersMode = () => {
     this.setState({
@@ -429,7 +434,8 @@ class ShipOrderApp extends React.Component {
               onClick={this.onClick_cancelShipment}>Cancel</button>
             <button typee="button"className="btn btn-outline-primary">
               Submit Shipment</button>
-            <ShipmentItemMenu ref={this.shipmentItemMenu} shipmentItems={this.state.shipmentItems}/>
+            <ShipmentItemMenu ref={this.shipmentItemMenu} 
+              shipmentItems={this.state.shipmentItems}/>
           </div>
           {this.state.selectedOrderIndex >= 0 ?
             (<div className="col-lg-6" id={this.orderMenuId}>
