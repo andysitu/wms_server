@@ -87,12 +87,27 @@ class OrderShipmentApp extends React.Component {
     });
     let order = this.state.orders[index];
     console.log(order);
+    console.log(this.state.shipmentMap);
     console.log(this.state.shipmentMap[order.id]);
+  }
+
+  createItemsMenu = () => {
+    if (this.state.selectedOrderIndex > -1) {
+      let order = this.state.orders[this.state.selectedOrderIndex],
+          shipments = this.state.shipmentMap[order.id];
+      console.log(order);
+      console.log(shipments);
+      return (
+      <div>
+      </div>)
+    } else {
+      return (<div></div>);
+    }
   }
 
   createOrdersMenu = () => {
     let numOpenItems, totalItems, numPickedItems,
-        trClass;
+        trClass, itemResponses;
     return (
     <div id={this.ordersContainerId}>
       <h2>Orders</h2>
@@ -162,6 +177,8 @@ class OrderShipmentApp extends React.Component {
     return (<div>
       Orders
       {this.createOrdersMenu()}
+
+      {this.createItemsMenu()}
     </div>);
   }
 }
