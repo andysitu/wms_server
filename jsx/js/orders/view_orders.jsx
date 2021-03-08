@@ -72,9 +72,6 @@ class OrderShipmentApp extends React.Component {
       context: this,
       success: function(orders) {
         console.log(orders);
-        for(let i=0; i< orders.length; i++) {
-          orders[i].itemsList = this.convertOrderItems(orders[i]);
-        }
         this.setState({
           orders: orders,
           selectedOrderIndex: -1,
