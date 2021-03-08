@@ -63,7 +63,9 @@ public class ShipmentService {
         return shipment;
     }
 
-    public void createShipmentItems(Shipment shipment, ShipmentData shipmentData) {
+    public List<ShipmentItem> createShipmentItems(
+            Shipment shipment, ShipmentData shipmentData) {
+        List<ShipmentItem> items = new ArrayList<>();
         List<ItemOrder> itemOrders = itemOrderRepository.findByOrderPackageId(
             shipmentData.orderPackageId
         );
@@ -98,6 +100,7 @@ public class ShipmentService {
 
                 itemOrderRepository.save(itemOrder);
                 shipmentItemRepository.save(shipmentItem);
+                items.add(shipmentItem);
             }
         }
         // status checker if orderPackage is complete
