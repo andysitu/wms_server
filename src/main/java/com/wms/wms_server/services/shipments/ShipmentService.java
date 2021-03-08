@@ -147,24 +147,28 @@ public class ShipmentService {
         List<ShipmentData> shipmentsData = new ArrayList<>();
         ShipmentData shipmentData;
         for (Shipment shipment : shipmentRepository.findAll()) {
-            shipmentData = new ShipmentData();
-            shipmentData.id = shipment.getId();
-            shipmentData.orderPackageId = shipment.getOrderPackageId();
-            shipmentData.contactName = shipment.getContactName();
-            shipmentData.companyName = shipment.getCompanyName();
-            shipmentData.address1 = shipment.getAddress1();
-            shipmentData.address2 = shipment.getAddress2();
-            shipmentData.city = shipment.getCity();
-            shipmentData.state = shipment.getState();
-            shipmentData.zip = shipment.getZip();
-            shipmentData.phone = shipment.getPhone();
-            shipmentData.email = shipment.getEmail();
-            shipmentData.tracking = shipment.getTracking();
-            shipmentData.transportName = shipment.getTransportName();
-            shipmentData.shipmentType = shipment.getShipmentType();
-
+            shipmentData = convertShipment(shipment);
             shipmentsData.add(shipmentData);
         }
         return shipmentsData;
+    }
+
+    public ShipmentData convertShipment(Shipment shipment) {
+        ShipmentData shipmentData = new ShipmentData();
+        shipmentData.id = shipment.getId();
+        shipmentData.orderPackageId = shipment.getOrderPackageId();
+        shipmentData.contactName = shipment.getContactName();
+        shipmentData.companyName = shipment.getCompanyName();
+        shipmentData.address1 = shipment.getAddress1();
+        shipmentData.address2 = shipment.getAddress2();
+        shipmentData.city = shipment.getCity();
+        shipmentData.state = shipment.getState();
+        shipmentData.zip = shipment.getZip();
+        shipmentData.phone = shipment.getPhone();
+        shipmentData.email = shipment.getEmail();
+        shipmentData.tracking = shipment.getTracking();
+        shipmentData.transportName = shipment.getTransportName();
+        shipmentData.shipmentType = shipment.getShipmentType();
+        return shipmentData;
     }
 }
