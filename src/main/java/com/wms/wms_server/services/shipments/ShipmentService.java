@@ -116,6 +116,8 @@ public class ShipmentService {
     }
 
     public void createShipmentUnits(Shipment shipment, ShipmentData shipmentData) {
+    public List<ShipmentUnit> createShipmentUnits(Shipment shipment, ShipmentData shipmentData) {
+        List<ShipmentUnit> units = new ArrayList<>();
         ShipmentUnit shipmentUnit;
         for (int i = 0; i < shipmentData.units.length; i++) {
             ShipmentUnitData ur = shipmentData.units[i];
@@ -128,7 +130,9 @@ public class ShipmentService {
                 ur.height
             );
             shipmentUnitRepository.save(shipmentUnit);
+            units.add(shipmentUnit);
         }
+        return units;
     }
 
     public Shipment processShipment(ShipmentData shipmentData) {
