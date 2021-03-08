@@ -119,11 +119,14 @@ class OrderShipmentApp extends React.Component {
               numOpenItems = 0;
               totalItems = 0;
               numPickedItems = 0;
-              orderPackage.itemsList.forEach(item => {
-                numOpenItems += item.orderedQuantity;
-                totalItems += item.startQuantity;
-                numPickedItems += item.pickedQuantity;
-              });
+              if (orderPackage.itemOrderResponses) {
+                itemResponses = orderPackage.itemOrderResponses;
+                for (let i=0; i< itemResponses.length; i++) {
+                  numOpenItems += itemResponses[i].orderedQuantity;
+                  totalItems += itemResponses[i].startQuantity;
+                  numPickedItems += itemResponses[i].pickedQuantity;
+                }
+              }
               trClass = (index == this.state.selectedOrderIndex) ?
                 "selected" : "";
               return (
