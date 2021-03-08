@@ -209,4 +209,16 @@ public class ShipmentService {
         shipmentData.shipmentType = shipment.getShipmentType();
         return shipmentData;
     }
+
+    public ShipmentData getShipmentData(long shipmentId) {
+        Optional<Shipment> opShipment = shipmentRepository.findById(shipmentId);
+        if (opShipment.isEmpty()) {
+            return null;
+        }
+        Shipment shipment = opShipment.get();
+        ShipmentData shipmentData = convertShipment(shipment);
+        shipmentData.items = shipmentItemRepository.findByShipmentId(shipment.getId());
+        shipmentData.units = shipmentUnitRepository.findByShipmentId(shipment.getId());
+        return shipmentData;
+    }
 }
