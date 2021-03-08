@@ -37,6 +37,11 @@ public class ShipmentService {
     @Autowired
     OrderPackageService orderPackageService;
 
+    /**
+     * Create Shipment from ShipmentData
+     * @param shipmentData
+     * @return Shipment that was created
+     */
     public Shipment createShipment(ShipmentData shipmentData) {
         Optional<OrderPackage> opOrderPackage = orderPackageRepository.findById(
             shipmentData.orderPackageId);
@@ -63,6 +68,12 @@ public class ShipmentService {
         return shipment;
     }
 
+    /**
+     * Creates ShipmentItems with ShipmentData. Items will point to Shipment.
+     * @param shipment
+     * @param shipmentData
+     * @return List of ShipmentItems created
+     */
     public List<ShipmentItem> createShipmentItems(
             Shipment shipment, ShipmentData shipmentData) {
         List<ShipmentItem> items = new ArrayList<>();
@@ -83,7 +94,6 @@ public class ShipmentService {
                 searchedItemOrders.add(itemOrder);
                 itemOrderMap.put(sku, searchedItemOrders);
             }
-            
         }
 
         ShipmentItem shipmentItem;
@@ -116,9 +126,16 @@ public class ShipmentService {
         if (completeOrder) { // Complete the OrderPackage if done
             orderPackageService.checkComplete(shipmentData.orderPackageId);
         }
+        return items;
     }
 
-    public void createShipmentUnits(Shipment shipment, ShipmentData shipmentData) {
+    /**
+     * Create all ShipmentUnits using ShipmentData for the data, while the
+     * ShipmentUnits will point to Shipment.
+     * @param shipment
+     * @param shipmentData
+     * @return list of ShipmentUnits created
+     */
     public List<ShipmentUnit> createShipmentUnits(Shipment shipment, ShipmentData shipmentData) {
         List<ShipmentUnit> units = new ArrayList<>();
         ShipmentUnit shipmentUnit;
@@ -138,6 +155,11 @@ public class ShipmentService {
         return units;
     }
 
+    /**
+     * Creates Shipment from ShipmentData
+     * @param {ShipmentData} shipmentData
+     * @return Shipment
+     */
     public Shipment processShipment(ShipmentData shipmentData) {
         Shipment shipment = createShipment(shipmentData);
         if (shipment == null) {
@@ -150,6 +172,10 @@ public class ShipmentService {
         return shipment;
     }
 
+    /**
+     * Gets all shipments and returns it converted to ShipmentData
+     * @return List<ShipmentData>
+     */
     public List<ShipmentData> getShipmentsData() {
         List<ShipmentData> shipmentsData = new ArrayList<>();
         ShipmentData shipmentData;
@@ -160,6 +186,11 @@ public class ShipmentService {
         return shipmentsData;
     }
 
+    /**
+     * Converts Shipment to ShipmentData
+     * @param shipment
+     * @return ShipmentData
+     */
     public ShipmentData convertShipment(Shipment shipment) {
         ShipmentData shipmentData = new ShipmentData();
         shipmentData.id = shipment.getId();
