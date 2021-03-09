@@ -47,12 +47,12 @@ public class ShipmentItem {
     @Getter private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Getter private Shipment shipment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Getter private ItemOrder itemOrder;
 
