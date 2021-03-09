@@ -218,13 +218,18 @@ public class ShipmentService {
         }
         Shipment shipment = opShipment.get();
         ShipmentData shipmentData = convertShipment(shipment);
+
         List<ShipmentItem> shipmentItems = shipmentItemRepository.findByShipmentId(shipment.getId());
         shipmentData.items = new ShipmentItemData[shipmentItems.size()];
         for (int i=0; i < shipmentItems.size(); i++) {
             shipmentData.items[i] = convertShipmentItem(shipmentItems.get(i));
         }
-        // shipmentData.items = shipmentItemRepository.findByShipmentId(shipment.getId());
-        // shipmentData.units = shipmentUnitRepository.findByShipmentId(shipment.getId());
+
+        List<ShipmentUnit> shipmentUnits = shipmentUnitRepository.findByShipmentId(shipment.getId());
+        shipmentData.units = new ShipmentUnitData[shipmentUnits.size()];
+        for (int i=0; i < shipmentUnits.size(); i++) {
+            shipmentData.units[i] = convertShipmentUnit(shipmentUnits.get(i));
+        }
         return shipmentData;
     }
 
@@ -234,6 +239,17 @@ public class ShipmentService {
         data.id = shipmentItem.getId();
         data.quantity = shipmentItem.getQuantity();
         data.itemSku = shipmentItem.getItemOrder().getItemSku();
+        return data;
+    }
+
+    public ShipmentUnitData convertShipmentUnit(ShipmentUnit shipmentUnit) {
+        ShipmentUnitData data = new ShipmentUnitData();
+        data.id = shipmentUnit.getId();
+        data.quantity = shipmentUnit.getQuantity();
+        data.weight = shipmentUnit.getWeight();
+        data.length = shipmentUnit.getLength();
+        data.height = shipmentUnit.getHeight();
+        data.width = shipmentUnit.getWidth();
         return data;
     }
 }
