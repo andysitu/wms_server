@@ -35,7 +35,7 @@ public class ShipmentController {
     }
 
     @RequestMapping(path="/{shipmentId}", produces="application/json",
-            method = RequestMethod.GET, consumes="application/json")
+            method = RequestMethod.GET)
     @ResponseBody
     public ShipmentData getShipment(@PathVariable("shipmentId") Long shipmentId) {
         ShipmentData data = shipmentService.getShipmentData(shipmentId);
