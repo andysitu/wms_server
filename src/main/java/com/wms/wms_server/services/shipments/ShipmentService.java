@@ -99,7 +99,7 @@ public class ShipmentService {
         ShipmentItem shipmentItem;
         for(int i=0; i<shipmentData.items.length; i++) {
             String itemSku = shipmentData.items[i].itemSku;
-            int remaining = shipmentData.items[i].shippingQuantity;
+            int remaining = shipmentData.items[i].quantity;
             searchedItemOrders = itemOrderMap.get(itemSku);
             for (int j=0; j<searchedItemOrders.size(); j++) {
                 ItemOrder itemOrder = searchedItemOrders.get(j);
