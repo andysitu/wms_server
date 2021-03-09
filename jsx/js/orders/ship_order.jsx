@@ -111,7 +111,7 @@ class ShipOrderApp extends React.Component {
         newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
         const itemsList = newOpenOrders[selectedIndex].itemsList;
         for (let i=0; i<itemsList.length; i++) {
-          itemsList[i].shippingQuantity = 0;
+          itemsList[i].quantity = 0;
         }
         console.log(newOpenOrders[selectedIndex])
         return {
@@ -170,7 +170,7 @@ class ShipOrderApp extends React.Component {
       newOpenOrders[selectedIndex] = {...state.openOrders[selectedIndex]};
       newOpenOrders[selectedIndex].itemsList = [...state.openOrders[selectedIndex].itemsList];
 
-      newOpenOrders[selectedIndex].itemsList[index].shippingQuantity = parseInt(itemData.quantity);
+      newOpenOrders[selectedIndex].itemsList[index].quantity = parseInt(itemData.quantity);
       
       this.itemFormReset();
       return {
@@ -191,7 +191,7 @@ class ShipOrderApp extends React.Component {
     let items = [], item;
     for (let i=0; i<data.itemsList.length; i++) {
       item = data.itemsList[i];
-      if (item.shippingQuantity > 0) {
+      if (item.quantity > 0) {
         items.push(item);
       }
     }
@@ -269,7 +269,7 @@ class ShipOrderApp extends React.Component {
       itemsList = items.map((itemOrder, index) => {
         const orderedQuantityClass = (itemOrder.orderedQuantity > 0) ?
           "warn-order" : "done-order";
-        const pickedRemaining = itemOrder.pickedQuantity - itemOrder.shippingQuantity > 0;
+        const pickedRemaining = itemOrder.pickedQuantity - itemOrder.quantity > 0;
         return (
           // IDs don't exist since the items are combined by location & sku
           <tr key={"pickup-items-" + index}>
@@ -286,7 +286,7 @@ class ShipOrderApp extends React.Component {
             <td className={pickedRemaining ? "warn-order" : "done-order"}>
               {itemOrder.pickedQuantity}
             </td>
-            <td>{itemOrder.shippingQuantity}</td>
+            <td>{itemOrder.quantity}</td>
             <td>{itemOrder.completeQuantity}</td>
             <td>{itemOrder.startQuantity}</td>
             <td>{itemOrder.description}</td>
@@ -386,7 +386,7 @@ class ShipOrderApp extends React.Component {
     const itemsList = this.state.openOrders[this.state.selectedOrderIndex].itemsList;
     const items = [];
     for (let i=0; i<itemsList.length; i++) {
-      if (itemsList[i].shippingQuantity > 0) {
+      if (itemsList[i].quantity > 0) {
         items.push(itemsList[i])
       }
     }
