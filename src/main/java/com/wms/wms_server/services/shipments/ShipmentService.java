@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.wms.wms_server.model.items.ItemOrder;
 import com.wms.wms_server.model.items.OrderPackage;
 import com.wms.wms_server.model.request.ShipmentData;
+import com.wms.wms_server.model.request.ShipmentItemData;
 import com.wms.wms_server.model.request.ShipmentUnitData;
 import com.wms.wms_server.model.shipment.Shipment;
 import com.wms.wms_server.model.shipment.ShipmentItem;
@@ -217,8 +218,22 @@ public class ShipmentService {
         }
         Shipment shipment = opShipment.get();
         ShipmentData shipmentData = convertShipment(shipment);
-        shipmentData.items = shipmentItemRepository.findByShipmentId(shipment.getId());
-        shipmentData.units = shipmentUnitRepository.findByShipmentId(shipment.getId());
+        List<ShipmentItem> shipmentItems = shipmentItemRepository.findByShipmentId(shipment.getId());
+        shipmentData.items = new ShipmentItemData[shipmentItems.size()];
+        for (int i=0; i < shipmentItems.size(); i++) {
+            shipmentData.items[i] = convertShipmentItem(shipmentItems.get(i));
+        }
+        // shipmentData.items = shipmentItemRepository.findByShipmentId(shipment.getId());
+        // shipmentData.units = shipmentUnitRepository.findByShipmentId(shipment.getId());
         return shipmentData;
+    }
+
+    public ShipmentItemData convertShipmentItem(ShipmentItem shipmentItem) {
+        ShipmentItemData data = new ShipmentItemData();
+        data.quantity = shipmentItem.getQuantity();
+        data.id = shipmentItem.getId();
+        data.quantity = shipmentItem.getQuantity();
+        data.itemSku = shipmentItem.getItemOrder().getItemSku();
+        return data;
     }
 }
