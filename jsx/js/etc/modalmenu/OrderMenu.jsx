@@ -16,6 +16,13 @@ class OrderMenu extends React.Component {
                 step="0.01" min="0" className="form-control" />
             </div>
             <div className="form-group col-md-4">
+              <label htmlFor="mm-tracking">Tracking</label>
+              <input type="text" name="tracking" id="mm-tracking"
+              className="form-control" />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-4">
               <label htmlFor="mm-pickup-date">Pickup Date</label>
               <input type="date" name="pickupDate" id="mm-pickup-date"
               className="form-control" />
