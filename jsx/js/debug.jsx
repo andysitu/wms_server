@@ -258,6 +258,7 @@ class DebugApp extends React.Component {
           address1: this.getRandomLetters(10),
           address2: this.getRandomLetters(5),
           city: this.getRandomLetters(5),
+          email: this.getRandomLetters(5),
           state: this.getRandomLetters(2),
           zip: this.getRandomInt(5),
           phone: this.getRandomInt(9),
@@ -318,7 +319,7 @@ class DebugApp extends React.Component {
         </p>
         <p>
           <button type="button" onClick={this.pickupOrder}
-            className="btn btn-outline-primary">Pickup Order</button>
+            className="btn btn-outline-primary">Pickup Order (Not Working)</button>
         </p>
       </div>
     </div>);
