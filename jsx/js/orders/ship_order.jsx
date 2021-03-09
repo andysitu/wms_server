@@ -440,7 +440,7 @@ class ShipOrderApp extends React.Component {
           {this.state.selectedOrderIndex >= 0 ?
             (<div className="col-lg-6" id={this.orderMenuId}>
               <form onSubmit={this.onSubmit_shipOrder} id={this.orderInfoFormId}>
-                <OrderMenu menu_type={"shipOrder"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
+                <OrderMenu menu_type={"createShipment"} data={this.state.openOrders[this.state.selectedOrderIndex]}/>
                 <button type="submit">Submit</button>
               </form>
             </div>
