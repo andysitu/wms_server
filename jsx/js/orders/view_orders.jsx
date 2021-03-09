@@ -85,20 +85,57 @@ class OrderShipmentApp extends React.Component {
     this.setState({
       selectedOrderIndex: index,
     });
-    let order = this.state.orders[index];
-    console.log(order);
-    console.log(this.state.shipmentMap);
-    console.log(this.state.shipmentMap[order.id]);
   }
 
-  createItemsMenu = () => {
+  createOrderInfosMenu = () => {
     if (this.state.selectedOrderIndex > -1) {
       let order = this.state.orders[this.state.selectedOrderIndex],
           shipments = this.state.shipmentMap[order.id];
       console.log(order);
+      if (shipments == null) {
+        shipments = [];
+      }
       console.log(shipments);
+      const address = `${order.address1} ${order.address2} 
+                      ${order.city}, ${order.state} ${order.zip}`;
       return (
-      <div>
+      <div className="row">
+        <div className="col-lg-6">
+          <div>
+            Description: {order.description}
+          </div>
+          <div>
+            Address: {address}
+          </div>
+          <div>
+            Company: {order.companyName}
+          </div>
+          <div>
+            Phone: {order.phone}
+          </div>
+          <div>
+            Email: {order.email}
+          </div>
+          <div>
+            Transport: {order.transportName}
+          </div>
+
+          <div>
+            {order.itemOrderResponses.map(item => {
+              return (<div key={item.id}>
+                {item.id}
+              </div>);
+            })}
+          </div>
+        </div>
+        <div className="col-lg-6">
+          {shipments.map(shipment => {
+            return (
+            <div key={shipment.id}>
+              {shipment.id}
+            </div>)
+          })}
+        </div>
       </div>)
     } else {
       return (<div></div>);
@@ -166,9 +203,6 @@ class OrderShipmentApp extends React.Component {
           </tbody>
         </table>
       </div>
-      {this.state.selectedOrderIndex >= 0 ?
-        (<div></div>) : null
-      }
     </div>
     );
   };
@@ -178,7 +212,7 @@ class OrderShipmentApp extends React.Component {
       Orders
       {this.createOrdersMenu()}
 
-      {this.createItemsMenu()}
+      {this.createOrderInfosMenu()}
     </div>);
   }
 }
