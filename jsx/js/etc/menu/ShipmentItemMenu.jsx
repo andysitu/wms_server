@@ -101,7 +101,7 @@ class ShipmentItemMenu extends React.Component {
                   <td>{item.itemName}</td>
                   <td>{item.itemSku}</td>
                   <td>{item.description}</td>
-                  <td>{item.shippingQuantity}</td>
+                  <td>{item.quantity}</td>
                 </tr>);
               })}
             </tbody>
