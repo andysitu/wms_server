@@ -132,7 +132,9 @@ class OrderShipmentApp extends React.Component {
           {shipments.map(shipment => {
             return (
             <div key={shipment.id}>
-              {shipment.id}
+              <button onClick={this.onClick_viewShipment} value={shipment.id}>
+                {shipment.id}
+              </button>
             </div>)
           })}
         </div>
@@ -140,6 +142,18 @@ class OrderShipmentApp extends React.Component {
     } else {
       return (<div></div>);
     }
+  }
+
+  onClick_viewShipment = (e) => {
+    const shipmentId = e.target.value;
+    $.ajax({
+      url: "/shipments/" + shipmentId,
+      type: "GET",
+      context: this,
+      success: function(data) {
+        console.log(data);
+      }
+    });
   }
 
   createOrdersMenu = () => {
