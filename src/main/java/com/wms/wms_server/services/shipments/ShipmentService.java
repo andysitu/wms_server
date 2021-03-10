@@ -107,9 +107,9 @@ public class ShipmentService {
                 int count = Math.min(remaining, itemOrder.getPickedQuantity());
 
                 itemOrder.ship(count);
-                shipmentItem = new ShipmentItem(count, shipment, itemOrder);
-
                 itemOrderRepository.save(itemOrder);
+
+                shipmentItem = new ShipmentItem(count, shipment, itemOrder);
                 shipmentItemRepository.save(shipmentItem);
                 items.add(shipmentItem);
             }
