@@ -395,6 +395,9 @@ class ShipOrderApp extends React.Component {
 
   onSubmit_shipOrder = (e) =>  {
     e.preventDefault();
+    const result = window.confirm("Are you sure you want to submit the shipment?");
+    if (!result)
+      return;
     if (this.state.selectedOrderIndex >= 0) {
       const order = this.state.openOrders[this.state.selectedOrderIndex];
       const shipmentInfo = this.shipmentItemMenu.current.getItemsData();
