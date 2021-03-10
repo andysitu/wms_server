@@ -57,7 +57,7 @@ public class ShipmentItem {
     @Getter private ItemOrder itemOrder;
 
     public ShipmentItem() {}
-    public ShipmentItem(int quantity, Shipment shipment, ItemOrder itemorder) {
+    public ShipmentItem(int quantity, Shipment shipment, ItemOrder itemOrder) {
         this.quantity = quantity;
         this.shipment = shipment;
         this.itemOrder = itemOrder;
