@@ -7,7 +7,8 @@ class OrderShipmentApp extends React.Component {
     super(props);
     this.state = {
       orders: [],
-      // By OrderPackageId
+      // By OrderPackageId as key.
+      // Used to see quickly reference shipments for orders table
       shipmentMap: {},
       shipment: {},
       selectedOrderIndex: -1,
@@ -16,7 +17,7 @@ class OrderShipmentApp extends React.Component {
     this.loadShipments();
     this.loadOrders();
   }
-
+  // Load shipments to state.shipmentMap
   loadShipments = () => {
     $.ajax({
       url: "/shipments",
@@ -70,7 +71,6 @@ class OrderShipmentApp extends React.Component {
     });
     return itemsList;
   };
-
   loadOrders = () => {
     $.ajax({
       url: "/orderpackages",
@@ -115,7 +115,7 @@ class OrderShipmentApp extends React.Component {
       }
     });
   }
-
+  // Creates Orders Menu, Item Orders table, and Shipments Table
   createOrderInfosMenu = () => {
     if (this.state.selectedOrderIndex > -1) {
       let order = this.state.orders[this.state.selectedOrderIndex],
@@ -142,7 +142,6 @@ class OrderShipmentApp extends React.Component {
               selectShipment={this.selectShipment}
             />
           </div>
-          
         </div>
       </div>)
     } else {
@@ -150,7 +149,7 @@ class OrderShipmentApp extends React.Component {
     }
   }
 
-  createOrdersMenu = () => {
+  createOrdersTable = () => {
     let numOpenItems, totalItems, numPickedItems,
         trClass, itemResponses;
     return (
@@ -218,7 +217,7 @@ class OrderShipmentApp extends React.Component {
   render() {
     return (<div>
       Orders
-      {this.createOrdersMenu()}
+      {this.createOrdersTable()}
 
       {this.createOrderInfosMenu()}
     </div>);
