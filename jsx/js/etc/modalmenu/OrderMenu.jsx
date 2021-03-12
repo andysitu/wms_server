@@ -6,7 +6,7 @@ class OrderMenu extends React.Component {
   }
 
   createShipmentRows = () => {
-    if (this.props.menu_type == "createShipment") {
+    if (this.props.menu_type == "createShipment" || this.props.menu_type == "editShipment") {
       return (
         <div>
           <div className="form-row">
@@ -42,7 +42,8 @@ class OrderMenu extends React.Component {
   // Item order 
   CreateReceiverMenu() {
     const shipStatus = this.props.menu_type == "shipOrder" ||
-                        this.props.menu_type == "createShipment";
+                        this.props.menu_type == "createShipment" ||
+                        this.props.menu_type == "editShipment";
     const orderName = shipStatus ? this.props.data.orderName : "",
           description = shipStatus ? this.props.data.description : "",
           address1 = shipStatus ? this.props.data.address1 : "",
