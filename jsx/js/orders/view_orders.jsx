@@ -94,6 +94,7 @@ class OrderShipmentApp extends React.Component {
       let order = this.state.orders[this.state.selectedOrderIndex],
           shipments = this.state.shipmentMap[order.id];
       console.log("order", order);
+      console.log("shipments", shipments);
       if (shipments == null) {
         shipments = [];
       }
@@ -103,44 +104,51 @@ class OrderShipmentApp extends React.Component {
           <OrderMenu menu_type="editOrder" data={order}/>        
         </div>
         <div className="col-lg-6">
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Unpicked</th>
-                <th scope="col">Picked</th>
-                <th scope="col">Completed</th>
-                <th scope="col">Complete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {order.itemOrderResponses.map(item => {
-                return (
-                <tr key={item.id}>
-                  <td>
-                    {item.itemInventoryResponse.itemName}
-                  </td>
-                  <td>
-                    {item.itemInventoryResponse.itemSku}
-                  </td>
-                  <td>
-                    {item.orderedQuantity}
-                  </td>
-                  <td>
-                    {item.pickedQuantity}
-                  </td>
-                  <td>
-                    {item.completeQuantity}
-                  </td>
-                  <td>
-                    {item.complete == 1 ? "Yes" : "No"}
-                  </td>
-                </tr>);
-              })}
-            </tbody>
-            
-          </table>
+          <div>
+            <h2>
+              Item Orders
+            </h2>
+            <table className="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Unpicked</th>
+                  <th scope="col">Picked</th>
+                  <th scope="col">Completed</th>
+                  <th scope="col">Complete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.itemOrderResponses.map(item => {
+                  return (
+                  <tr key={item.id}>
+                    <td>
+                      {item.itemInventoryResponse.itemName}
+                    </td>
+                    <td>
+                      {item.itemInventoryResponse.itemSku}
+                    </td>
+                    <td>
+                      {item.orderedQuantity}
+                    </td>
+                    <td>
+                      {item.pickedQuantity}
+                    </td>
+                    <td>
+                      {item.completeQuantity}
+                    </td>
+                    <td>
+                      {item.complete == 1 ? "Yes" : "No"}
+                    </td>
+                  </tr>);
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <h2>Shipments</h2>
 
           {shipments.map(shipment => {
             return (
