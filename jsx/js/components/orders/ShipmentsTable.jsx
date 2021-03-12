@@ -8,6 +8,18 @@ class ShipmentsTable extends React.Component {
     }
   }
 
+  onClick_viewShipment = (e) => {
+    const shipmentId = e.target.value;
+    $.ajax({
+      url: "/shipments/" + shipmentId,
+      type: "GET",
+      context: this,
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }
+
   render() {
     return (
       <table className="table table-sm">

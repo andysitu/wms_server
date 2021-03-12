@@ -134,18 +134,6 @@ class OrderShipmentApp extends React.Component {
     }
   }
 
-  onClick_viewShipment = (e) => {
-    const shipmentId = e.target.value;
-    $.ajax({
-      url: "/shipments/" + shipmentId,
-      type: "GET",
-      context: this,
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }
-
   createOrdersMenu = () => {
     let numOpenItems, totalItems, numPickedItems,
         trClass, itemResponses;
