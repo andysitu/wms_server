@@ -82,10 +82,19 @@ class OrderShipmentApp extends React.Component {
     })
   };
 
+  /**
+   * Sets state.selectedOrderIndex to the index selected by user.
+   * First, it sets it to -1 to destroy any previously created elements.
+   * @param {Event} e Use e.target.value for the index value selected
+   */
   onClick_selectOrder = (e) => {
     const index = e.target.value;
     this.setState({
-      selectedOrderIndex: index,
+      selectedOrderIndex: -1,
+    }, () => {
+      this.setState({
+        selectedOrderIndex: index,
+      });
     });
   }
 
@@ -101,7 +110,7 @@ class OrderShipmentApp extends React.Component {
       return (
       <div className="row">
         <div className="col-lg-6">
-          <OrderMenu menu_type="editOrder" data={order}/>        
+          <OrderMenu menu_type="editOrder" data={order}/>
         </div>
         <div className="col-lg-6">
           <div>
