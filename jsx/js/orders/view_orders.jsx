@@ -97,13 +97,10 @@ class OrderShipmentApp extends React.Component {
       if (shipments == null) {
         shipments = [];
       }
-      console.log(shipments);
-      const address = `${order.address1} ${order.address2} 
-                      ${order.city}, ${order.state} ${order.zip}`;
       return (
       <div className="row">
         <div className="col-lg-6">
-          <OrderMenu menu_type="editShipment" data={order}/>
+          <OrderMenu menu_type="editOrder" data={order}/>
 
           <div>
             {order.itemOrderResponses.map(item => {

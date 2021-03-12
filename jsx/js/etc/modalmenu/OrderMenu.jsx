@@ -43,7 +43,8 @@ class OrderMenu extends React.Component {
   CreateReceiverMenu() {
     const shipStatus = this.props.menu_type == "shipOrder" ||
                         this.props.menu_type == "createShipment" ||
-                        this.props.menu_type == "editShipment";
+                        this.props.menu_type == "editShipment" ||
+                        this.props.menu_type == "editOrder";
     const orderName = shipStatus ? this.props.data.orderName : "",
           description = shipStatus ? this.props.data.description : "",
           address1 = shipStatus ? this.props.data.address1 : "",
