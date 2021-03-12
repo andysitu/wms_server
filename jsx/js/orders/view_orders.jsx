@@ -1,4 +1,5 @@
 import { OrderMenu } from "../etc/modalmenu/OrderMenu.js"
+import { ItemOrdersTable } from "../components/orders/ItemOrdersTable.js"
 
 class OrderShipmentApp extends React.Component {
   constructor(props) {
@@ -117,43 +118,7 @@ class OrderShipmentApp extends React.Component {
             <h2>
               Item Orders
             </h2>
-            <table className="table table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">SKU</th>
-                  <th scope="col">Unpicked</th>
-                  <th scope="col">Picked</th>
-                  <th scope="col">Completed</th>
-                  <th scope="col">Complete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {order.itemOrderResponses.map(item => {
-                  return (
-                  <tr key={item.id}>
-                    <td>
-                      {item.itemInventoryResponse.itemName}
-                    </td>
-                    <td>
-                      {item.itemInventoryResponse.itemSku}
-                    </td>
-                    <td>
-                      {item.orderedQuantity}
-                    </td>
-                    <td>
-                      {item.pickedQuantity}
-                    </td>
-                    <td>
-                      {item.completeQuantity}
-                    </td>
-                    <td>
-                      {item.complete == 1 ? "Yes" : "No"}
-                    </td>
-                  </tr>);
-                })}
-              </tbody>
-            </table>
+            <ItemOrdersTable order={order} />
           </div>
 
           <div>
