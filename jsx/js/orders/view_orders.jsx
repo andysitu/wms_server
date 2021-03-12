@@ -10,6 +10,7 @@ class OrderShipmentApp extends React.Component {
       // By OrderPackageId
       shipmentMap: {},
       selectedOrderIndex: -1,
+      selectedShipmentIndex: -1,
     };
     this.loadShipments();
     this.loadOrders();
@@ -100,6 +101,17 @@ class OrderShipmentApp extends React.Component {
     });
   }
 
+  selectShipment = (shipmentId) => {
+    $.ajax({
+      url: "/shipments/" + shipmentId,
+      type: "GET",
+      context: this,
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }
+
   createOrderInfosMenu = () => {
     if (this.state.selectedOrderIndex > -1) {
       let order = this.state.orders[this.state.selectedOrderIndex],
@@ -124,7 +136,9 @@ class OrderShipmentApp extends React.Component {
 
           <div>
             <h2>Shipments</h2>
-            <ShipmentsTable shipments={shipments} />
+            <ShipmentsTable shipments={shipments} 
+              selectShipment={this.selectShipment}
+            />
           </div>
           
         </div>
