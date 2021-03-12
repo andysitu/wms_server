@@ -189,6 +189,7 @@ class PutawayApp extends React.Component {
 
     return (
     <div>
+      <h1>Putaway Items</h1>
       <form onSubmit={this.onSubmit_searchForm} id={this.receiveFormId}>
         <div className="form-group row">
           <div className="col-6">

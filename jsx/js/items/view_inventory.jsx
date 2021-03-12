@@ -1,9 +1,13 @@
 import { InventoryTableView } from "./InventoryTableView.js";
 
 class InventoryApp extends React.Component {
-  
   render() {
-    return (<InventoryTableView type={"view_items"}/>);
+    return (
+      <div>
+        <h1>Item Inventory</h1>
+        <InventoryTableView type={"view_items"}/>
+      </div>
+    );
   }
 }
 

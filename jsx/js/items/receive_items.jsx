@@ -81,6 +81,7 @@ class ReceiveItemApp extends React.Component {
 
   render() {
     return (<div>
+      <h1>Receive Items</h1>
       <form onSubmit={this.onSubmit_item}>
         <div className="form-group">
           <label htmlFor="shipment-input">Shipment</label>
