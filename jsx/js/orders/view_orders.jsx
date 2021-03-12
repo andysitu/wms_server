@@ -9,6 +9,7 @@ class OrderShipmentApp extends React.Component {
       orders: [],
       // By OrderPackageId
       shipmentMap: {},
+      shipment: {},
       selectedOrderIndex: -1,
       selectedShipmentIndex: -1,
     };
@@ -106,8 +107,11 @@ class OrderShipmentApp extends React.Component {
       url: "/shipments/" + shipmentId,
       type: "GET",
       context: this,
-      success: function(data) {
-        console.log(data);
+      success: function(shipment) {
+        console.log(shipment);
+        this.setState({
+          shipment: shipment,
+        });
       }
     });
   }
@@ -116,8 +120,6 @@ class OrderShipmentApp extends React.Component {
     if (this.state.selectedOrderIndex > -1) {
       let order = this.state.orders[this.state.selectedOrderIndex],
           shipments = this.state.shipmentMap[order.id];
-      console.log("order", order);
-      console.log("shipments", shipments);
       if (shipments == null) {
         shipments = [];
       }
