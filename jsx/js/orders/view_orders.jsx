@@ -1,3 +1,5 @@
+import { OrderMenu } from "../etc/modalmenu/OrderMenu.js"
+
 class OrderShipmentApp extends React.Component {
   constructor(props) {
     super(props);
@@ -91,7 +93,7 @@ class OrderShipmentApp extends React.Component {
     if (this.state.selectedOrderIndex > -1) {
       let order = this.state.orders[this.state.selectedOrderIndex],
           shipments = this.state.shipmentMap[order.id];
-      console.log(order);
+      console.log("order", order);
       if (shipments == null) {
         shipments = [];
       }
@@ -101,24 +103,7 @@ class OrderShipmentApp extends React.Component {
       return (
       <div className="row">
         <div className="col-lg-6">
-          <div>
-            Description: {order.description}
-          </div>
-          <div>
-            Address: {address}
-          </div>
-          <div>
-            Company: {order.companyName}
-          </div>
-          <div>
-            Phone: {order.phone}
-          </div>
-          <div>
-            Email: {order.email}
-          </div>
-          <div>
-            Transport: {order.transportName}
-          </div>
+          <OrderMenu menu_type="editShipment" data={order}/>
 
           <div>
             {order.itemOrderResponses.map(item => {
