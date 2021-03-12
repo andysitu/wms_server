@@ -42,8 +42,9 @@ class ShipmentsTable extends React.Component {
                 {shipment.tracking}
               </td>
               <td>
-                <button onClick={this.onClick_viewShipment} value={shipment.id}>
-                  {shipment.id}
+                <button className="btn btn-sm btn-outline-primary"
+                  onClick={this.onClick_viewShipment} value={shipment.id}>
+                  Select
                 </button>
               </td>
             </tr>)
