@@ -242,9 +242,16 @@ class DebugApp extends React.Component {
         while (count < num) {
           index = Math.floor(Math.random() * items.length);
           if (!idSet.has(items[index].id)) {
+            if (items[index].quantity <= 0) {
+              continue;
+            }
             count++;
             ids.push(items[index].id);
-            quantities.push(Math.floor(Math.random() * items[index].quantity) + 1);
+            quantities.push(
+              Math.min(
+                Math.floor(Math.random() * items[index].quantity) + 1,
+                items[index].quantity
+              ));
             idSet.add(items[index].id);
           }
         }
@@ -264,6 +271,7 @@ class DebugApp extends React.Component {
           phone: this.getRandomInt(9),
           transportName: this.getRandomLetters(8),
         };
+        console.log(data);
         $.ajax({
           url: "/orderpackages",
           type: "POST",
