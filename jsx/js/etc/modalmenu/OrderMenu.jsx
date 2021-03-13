@@ -7,18 +7,25 @@ class OrderMenu extends React.Component {
 
   createShipmentRows = () => {
     if (this.props.menu_type == "createShipment" || this.props.menu_type == "editShipment") {
+      let editStatus = (this.props.menu_type == "editShipment");
+      let tracking, transportCost, pickupDate, arrivalDate;
+      if (editStatus) {
+        tracking = this.props.data.tracking;
+        transportCost = this.props.data.transportcost;
+      }
       return (
         <div>
           <div className="form-row">
             <div className="form-group col-md-4">
               <label htmlFor="mm-cost-input">Transport Cost</label>
               <input type="number" name="transportCost" id="mm-cost-input"
+                defaultValue={transportCost}
                 step="0.01" min="0" className="form-control" />
             </div>
             <div className="form-group col-md-4">
               <label htmlFor="mm-tracking">Tracking</label>
               <input type="text" name="tracking" id="mm-tracking"
-              className="form-control" />
+                defaultValue={tracking} className="form-control" />
             </div>
           </div>
           <div className="form-row">
