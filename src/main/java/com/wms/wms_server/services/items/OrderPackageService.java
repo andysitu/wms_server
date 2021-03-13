@@ -98,8 +98,9 @@ public class OrderPackageService {
             }
             itemInventory = oItemInventory.get();
             int reservedAmount = itemInventory.reserveQuantity(request.quantities[i]);
-            if (reservedAmount < 0)
+            if (reservedAmount < 0) {
                 return null;
+            }
             itemInventories.add(itemInventory);
             itemOrder = new ItemOrder(request.quantities[i], itemInventory, orderPackage);
             itemOrders.add(itemOrder);
