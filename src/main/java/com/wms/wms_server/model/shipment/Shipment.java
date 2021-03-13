@@ -56,6 +56,7 @@ public class Shipment {
 
     @Getter @Setter private String tracking;
     @Getter @Setter private String transportName;
+    @Column(columnDefinition = "float default 0.0")
     @Getter @Setter private float transportCost;
 
     @Getter @Setter private String shipmentType; // pallet, package
