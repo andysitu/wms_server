@@ -10,7 +10,7 @@ class OrderShipmentApp extends React.Component {
       // By OrderPackageId as key.
       // Used to see quickly reference shipments for orders table
       shipmentMap: {},
-      shipment: {},
+      shipment: null,
       selectedOrderIndex: -1,
       selectedShipmentIndex: -1,
     };
@@ -220,6 +220,12 @@ class OrderShipmentApp extends React.Component {
       {this.createOrdersTable()}
 
       {this.createOrderInfosMenu()}
+
+      {this.state.shipment != null ?
+      (<div>
+        <OrderMenu menu_type="editShipment" data={this.state.shipment}/>
+      </div>) : null
+      }
     </div>);
   }
 }
