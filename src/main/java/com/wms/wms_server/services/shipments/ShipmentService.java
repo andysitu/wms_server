@@ -62,6 +62,7 @@ public class ShipmentService {
         shipment.setEmail(shipmentData.email);
         shipment.setTracking(shipmentData.tracking);
         shipment.setTransportName(shipmentData.transportName);
+        shipment.setTransportCost(shipmentData.transportCost);
         shipment.setShipmentType(shipmentData.shipmentType);
 
         shipmentRepository.save(shipment);
@@ -207,6 +208,7 @@ public class ShipmentService {
         shipmentData.email = shipment.getEmail();
         shipmentData.tracking = shipment.getTracking();
         shipmentData.transportName = shipment.getTransportName();
+        shipmentData.transportCost = shipment.getTransportCost();
         shipmentData.shipmentType = shipment.getShipmentType();
         return shipmentData;
     }
