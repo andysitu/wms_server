@@ -15,6 +15,7 @@ public class ShipmentData {
 
     public String tracking;
     public String transportName;
+    public float transportCost;
     public String shipmentType;
 
     public ShipmentItemData[] items;
