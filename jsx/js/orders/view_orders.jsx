@@ -230,6 +230,7 @@ class OrderShipmentApp extends React.Component {
             <table className="table table-sm">
               <thead>
                 <tr>
+                <th scope="col">ItemName</th>
                   <th scope="col">SKU</th>
                   <th scope="col">Quantity</th>
                 </tr>
@@ -238,6 +239,7 @@ class OrderShipmentApp extends React.Component {
                 {this.state.shipment.items.map(item => {
                   return (
                     <tr key={item.id}>
+                      <td>{item.itemName}</td>
                       <td>{item.itemSku}</td>
                       <td>{item.quantity}</td>
                     </tr>)
