@@ -239,7 +239,7 @@ public class ShipmentService {
         ShipmentItemData data = new ShipmentItemData();
         data.quantity = shipmentItem.getQuantity();
         data.id = shipmentItem.getId();
-        data.quantity = shipmentItem.getQuantity();
+        data.itemName = shipmentItem.getItemName();
         data.itemSku = shipmentItem.getItemOrder().getItemSku();
         return data;
     }
