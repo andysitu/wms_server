@@ -215,46 +215,73 @@ class OrderShipmentApp extends React.Component {
   };
 
   render() {
-    return (<div>
-      Orders
-      {this.createOrdersTable()}
+    return (
+      <div>
+        Orders
+        {this.createOrdersTable()}
 
-      {this.createOrderInfosMenu()}
+        {this.createOrderInfosMenu()}
 
-      {this.state.shipment != null ?
-      (<div>
-        <OrderMenu menu_type="editShipment" data={this.state.shipment}/>
-        <div className="row">
-          <div className="col-lg-6">
-            <h3>Shipment Items</h3>
-            <table className="table table-sm">
-              <thead>
-                <tr>
-                <th scope="col">ItemName</th>
-                  <th scope="col">SKU</th>
-                  <th scope="col">Quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.shipment.items.map(item => {
-                  return (
-                    <tr key={item.id}>
-                      <td>{item.itemName}</td>
-                      <td>{item.itemSku}</td>
-                      <td>{item.quantity}</td>
+        {this.state.shipment != null ?
+        (<div>
+          <OrderMenu menu_type="editShipment" data={this.state.shipment}/>
+
+          <div className="row">
+            <div className="col-lg-6">
+              <h3>Shipment Items</h3>
+              <table className="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">ItemName</th>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.shipment.items.map(item => {
+                    return (
+                      <tr key={item.id}>
+                        <td>{item.itemName}</td>
+                        <td>{item.itemSku}</td>
+                        <td>{item.quantity}</td>
+                      </tr>)
+                  })}
+                </tbody>
+              </table>
+
+            </div>
+            <div className="col-lg-6">
+              <h3>Units</h3>
+              <div>
+                Type: {this.state.shipment.shipmentType}
+              <table className="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Length</th>
+                    <th scope="col">Width</th>
+                    <th scope="col">Height</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.shipment.units.map(unit => {
+                    return (<tr key={unit.id}>
+                      <td>{unit.quantity}</td>
+                      <td>{unit.weight}</td>
+                      <td>{unit.length}</td>
+                      <td>{unit.width}</td>
+                      <td>{unit.height}</td>
                     </tr>)
-                })}
-              </tbody>
-            </table>
-
-          </div>
-          <div className="col-lg-6">
-            Units
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>) : null
-      }
-    </div>);
+
+      </div>) : null}
+    </div>)
   }
 }
 
