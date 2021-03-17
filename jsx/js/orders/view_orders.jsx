@@ -226,7 +226,25 @@ class OrderShipmentApp extends React.Component {
         <OrderMenu menu_type="editShipment" data={this.state.shipment}/>
         <div className="row">
           <div className="col-lg-6">
-            Items
+            <h3>Shipment Items</h3>
+            <table className="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.shipment.items.map(item => {
+                  return (
+                    <tr key={item.id}>
+                      <td>{item.itemSku}</td>
+                      <td>{item.quantity}</td>
+                    </tr>)
+                })}
+              </tbody>
+            </table>
+
           </div>
           <div className="col-lg-6">
             Units
