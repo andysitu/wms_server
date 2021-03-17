@@ -4,4 +4,5 @@ public class ShipmentItemData {
     public long id;
     public String itemSku;
     public int quantity;
+    public String itemName;
 }
