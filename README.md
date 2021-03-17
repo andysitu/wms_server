@@ -38,8 +38,7 @@ Create JAR file
 Shipment, ShipmentItem, ShipmentUnit - represents the data used for each separate shipment
 
 ### Diagram
-![Items Diagram](/docs/shipment_item_diagram.png)
-<img src="//docs/shipment_item_diagram.png" />
+<img src="./docs/shipment_item_diagram.png" width="400"/>
 
 
 ## SQL
