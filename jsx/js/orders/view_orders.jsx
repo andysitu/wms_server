@@ -224,6 +224,14 @@ class OrderShipmentApp extends React.Component {
       {this.state.shipment != null ?
       (<div>
         <OrderMenu menu_type="editShipment" data={this.state.shipment}/>
+        <div className="row">
+          <div className="col-lg-6">
+            Items
+          </div>
+          <div className="col-lg-6">
+            Units
+          </div>
+        </div>
       </div>) : null
       }
     </div>);
