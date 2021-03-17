@@ -56,6 +56,10 @@ public class ShipmentItem {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @Getter private ItemOrder itemOrder;
 
+    public String getItemName() {
+        return this.itemOrder.getItemName();
+    }
+
     public ShipmentItem() {}
     public ShipmentItem(int quantity, Shipment shipment, ItemOrder itemOrder) {
         this.quantity = quantity;

@@ -56,6 +56,10 @@ public class ItemReceive {
         return this.shipmentReceive.getCode();
     }
 
+    public String getItemName() {
+        return this.itemInfo.getItemName();
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="item_info_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

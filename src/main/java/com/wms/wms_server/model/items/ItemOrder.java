@@ -89,6 +89,10 @@ public class ItemOrder {
         return this.itemInventory.getItemReceive().getSku();
     }
 
+    public String getItemName() {
+        return this.itemInventory.getItemName();
+    }
+
     public ItemOrder() {}
 
     public ItemOrder(int quantity, ItemInventory itemInventory, 

@@ -75,6 +75,10 @@ public class ItemInventory {
     @JoinColumn(nullable = false)
     @Getter private ItemReceive itemReceive;
 
+    public String getItemName() {
+        return this.itemReceive.getItemName();
+    }
+
     // Default constructor needed for JPA
     public ItemInventory() {}
 
