@@ -1,4 +1,4 @@
-package com.wms.wms_server.controllers.items;
+package com.wms.wms_server.controllers.orders;
 
 import javax.validation.Valid;
 
