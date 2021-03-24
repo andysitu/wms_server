@@ -48,6 +48,19 @@ public class OrderPackageController {
         return ResponseEntity.status(HttpStatus.OK).body(orderPackage);
     }
 
+    @RequestMapping(value="/orderpackages", consumes = "application/json", 
+        produces="application/json;", method=RequestMethod.PATCH)
+    @ResponseBody
+    public ResponseEntity updateOrderPackage(
+            @Valid @RequestBody OrderPackageRequest orderPackageRequest) {
+        OrderPackage orderPackage = orderPackageService.updateOrderPackage(orderPackageRequest);
+        if (orderPackage == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body(orderPackage);
+    }
+
     @RequestMapping(value="/orderpackages/{order_id}", 
         produces="application/json;", method=RequestMethod.POST)
     @ResponseBody
