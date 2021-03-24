@@ -119,9 +119,40 @@ class OrderShipmentApp extends React.Component {
     });
   }
 
+  getData = (formId) => {
+    var formData = new FormData($("#" + formId)[0]),
+        data = {};
+
+    for (var key of formData.keys()) {
+      data[key] = formData.get(key);
+    }
+    return data;
+  };
+
   onSubmit_updateOrder = (e) => {
     e.preventDefault();
-    console.log("order");
+    const data = this.getData(this.orderFormId);
+    data.id = this.state.orders[this.state.selectedOrderIndex].id;
+    $.ajax({
+      url: "/orderpackages",
+      type: "PATCH",
+      context: this,
+      contentType: "application/json;",
+      data: JSON.stringify(data),
+      success: function(returnData) {
+        this.setState(state => {
+          const orders = [...state.orders];
+          orders[state.selectedOrderIndex] = {...state.orders[state.selectedOrderIndex]};
+          const order = orders[state.selectedOrderIndex];
+          for (let key in data) {
+            order[key] = data[key];
+          }
+          return {
+            orders: orders,
+          };
+        });
+      }
+    });
   };
 
   // Creates Orders Menu, Item Orders table, and Shipments Table
