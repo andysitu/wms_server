@@ -64,6 +64,10 @@ public class OrderPackage {
     public OrderPackage() {}
 
     public OrderPackage(OrderPackageRequest request) {
+        update(request);
+    }
+
+    public void update(OrderPackageRequest request) {
         this.orderName = request.orderName;
         this.description = request.description;
         this.contactName = request.contactName;
