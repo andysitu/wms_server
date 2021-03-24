@@ -16,6 +16,7 @@ class OrderShipmentApp extends React.Component {
     };
     this.loadShipments();
     this.loadOrders();
+    this.orderFormId = "order-form";
   }
   // Load shipments to state.shipmentMap
   loadShipments = () => {
@@ -117,6 +118,12 @@ class OrderShipmentApp extends React.Component {
       }
     });
   }
+
+  onSubmit_updateOrder = (e) => {
+    e.preventDefault();
+    console.log("order");
+  };
+
   // Creates Orders Menu, Item Orders table, and Shipments Table
   createOrderInfosMenu = () => {
     if (this.state.selectedOrderIndex > -1) {
@@ -128,7 +135,10 @@ class OrderShipmentApp extends React.Component {
       return (
       <div className="row">
         <div className="col-lg-6">
-          <OrderMenu menu_type="editOrder" data={order}/>
+          <form onSubmit={this.onSubmit_updateOrder} id={this.orderFormId}>
+            <OrderMenu menu_type="editOrder" data={order}/>
+            <button type="submit">Update</button>
+          </form>
         </div>
         <div className="col-lg-6">
           <div>
