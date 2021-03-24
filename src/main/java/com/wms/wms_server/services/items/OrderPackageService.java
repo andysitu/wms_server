@@ -112,6 +112,17 @@ public class OrderPackageService {
         return orderPackage;
     }
 
+    public OrderPackage updateOrderPackage(OrderPackageRequest request) {
+        Optional<OrderPackage> oOrderPackage = orderPackageRepository.findById(request.id);
+        if (oOrderPackage.isEmpty()) {
+            return null;
+        }
+        OrderPackage orderPackage = oOrderPackage.get();
+        orderPackage.update(request);
+        orderPackageRepository.save(orderPackage);
+        return orderPackage;
+    }
+
     /**
      * Converts OrderPackage into OrderPackageResponse. OrderPackage is unaffected
      * @param orderPackage OrderPackage to be copied 
