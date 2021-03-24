@@ -1,6 +1,7 @@
 package com.wms.wms_server.model.request;
 
 public class OrderPackageRequest {
+    public long id;
     public int[] quantities;
     public long[] itemIds;
     public String orderName;
