@@ -1,4 +1,4 @@
-package com.wms.wms_server.controllers;
+package com.wms.wms_server.controllers.items;
 
 import javax.servlet.http.HttpServletRequest;
 
