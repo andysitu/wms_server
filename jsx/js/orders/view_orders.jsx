@@ -133,29 +133,28 @@ class OrderShipmentApp extends React.Component {
         shipments = [];
       }
       return (
-      <div className="row">
-        <div className="col-lg-6">
-          <form onSubmit={this.onSubmit_updateOrder} id={this.orderFormId}>
-            <OrderMenu menu_type="editOrder" data={order}/>
-            <button type="submit">Update</button>
-          </form>
-        </div>
-        <div className="col-lg-6">
-          <div>
-            <h2>
-              Item Orders
-            </h2>
-            <ItemOrdersTable order={order} />
+        <div className="row">
+          <div className="col-lg-6">
+            <form onSubmit={this.onSubmit_updateOrder} id={this.orderFormId}>
+              <OrderMenu menu_type="editOrder" data={order}/>
+              <button type="submit">Update</button>
+            </form>
           </div>
-
-          <div>
-            <h2>Shipments</h2>
-            <ShipmentsTable shipments={shipments} 
-              selectShipment={this.selectShipment}
-            />
+          <div className="col-lg-6">
+            <div>
+              <h2>
+                Item Orders
+              </h2>
+              <ItemOrdersTable order={order} />
+            </div>
+            <div>
+              <h2>Shipments</h2>
+              <ShipmentsTable shipments={shipments} 
+                selectShipment={this.selectShipment}
+              />
+            </div>
           </div>
-        </div>
-      </div>)
+        </div>)
     } else {
       return (<div></div>);
     }
