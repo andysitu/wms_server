@@ -98,6 +98,8 @@ class OrderShipmentApp extends React.Component {
     }, () => {
       this.setState({
         selectedOrderIndex: index,
+        selectedShipmentIndex: -1,
+        shipment: null,
       });
     });
   }
