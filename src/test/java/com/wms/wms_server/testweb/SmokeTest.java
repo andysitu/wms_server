@@ -2,7 +2,7 @@ package com.wms.wms_server.testweb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wms.wms_server.controllers.ItemInfoAndBarcodeController;
+import com.wms.wms_server.controllers.items.ItemInfoAndBarcodeController;
 import com.wms.wms_server.controllers.LocationController;
 
 import org.junit.jupiter.api.Test;
